@@ -1,0 +1,185 @@
+\documentclass{article}
+\usepackage{latexsym}
+\usepackage[UTF8]{ctex}
+\usepackage{geometry}\geometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
+\setlength{\parindent}{0pt}
+\title{Physics}\author{LiGu 梨菇}\date{}
+\begin{document}
+\maketitle
+
+\section{Mechanics力学}
+
+\subsection{运动方程}
+
+\subsubsection{广义坐标}
+对于s个自由度的系统,\\
+广义坐标: 完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$\\
+广义速度: $\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$\\
+经验表明, 同时给定广义坐标、广义速度, 就可确定系统状态, 原则上可预测以后动作.\\
+加速度$\ddot q$, 可由$\dot q,q$唯一确定.\\
+运动方程: 加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)
+
+
+\subsubsection{Lagrange函数,最小作用量原理}
+Lagrange函数: 每一个力学系统可以用一个确定函数L()表征.
+\[L(q_{1},q_{2},\cdots,q_{s},\dot q_{1},\dot q_{2},\cdots,\dot q_{s},t)\]
+最小作用量原理: 系统在两个时刻的, 位置之间的运动, 使得Lagrange函数积分(作用量S)取最小值.
+\[S = \int_{t1}^{t2} L(q,\dot q,t)dt\]
+\[\delta S = \delta \int_{t1}^{t2} L(q,\dot q,t)dt
+ = \int_{t1}^{t2} (\frac{\partial L}{\partial q}\delta q + \frac{\partial L}{\partial \dot q}\delta \dot q) dt
+ = \frac{\partial L}{\partial \dot q} \delta q \arrowvert_{t1}^{t2}
+ + \int_{t1}^{t2} (\frac{\partial L}{\partial q} + \frac{\partial L}{\partial \dot q}) \delta q dt
+ = 0\]
+Lagrange方程: 运动微分方程. 
+\[\Rightarrow \frac{d}{dt}\frac{\partial L}{\partial \dot q_{i}} - \frac{\partial L}{\partial q_{i}} = 0\quad(i=1,\dots,s)\]
+
+
+\subsubsection{惯性参考系,惯性定律}
+*研究力学现象必须选择参考系.\\
+惯性参考系:空间相对它均匀且各向同性,时间相对它均匀.(特别的,某时刻静止的自由物体将永远保持静止.)\\
+$\Rightarrow$Lagrange函数不显含$\vec r,t$,不依赖$\vec v$的矢量方向,即
+\[L = L(v^{2})\]
+Lagrange方程有$\frac{d}{dt}\frac{\partial L}{\partial \vec v} = -\frac{\partial L}{\partial \vec r} = 0\Rightarrow\frac{\partial L}{\partial \vec v}=const$\\
+惯性定律: 在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.
+\[\Rightarrow \vec v = const\]
+
+
+\subsubsection{Galilean相对性原理,Galilean变换}
+Galilean相对性原理: 存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.\\
+(今后不特别声明,默认惯性参考系.)\\
+Galilean变换: 两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).\\
+绝对时间假设: 我们认为两个参考系的时间相同.
+\begin{displaymath}
+    \left\{ \begin{array}{ll}
+    \vec r = \vec r' + \vec V t\\
+    t = t'
+    \end{array} \right.
+\end{displaymath}
+Galilean相对性原理: 力学系统在Galilean变换下具有不变性.
+
+
+\subsubsection{自由质点、质点系的Lagrange函数,Newton方程,力}
+自由质点Lagrange函数:
+\[L = \sum \frac{m_{i}v_{i}^{2}}{2}\]
+T: 质点系动能: $T = \sum \frac{m_{i}v_{i}^{2}}{2}$\\
+封闭质点系: 质点之间有相互作用,但不受外部任何物体作用.\\
+U: 质点系势能: 描述质点间相互作用,而增加的关于坐标的函数(由相互作用性质确定).\\
+质点系的Lagrange函数:
+\[L = \sum \frac{m_{i}v_{i}^{2}}{2} - U(\vec r_{1}, \vec r_{2}, \dots)\]
+质点系的Lagrange函数代入Lagrange方程:\\
+Newton方程: \quad(表明加速度只是坐标的函数)
+\[m_{i} \frac{d\vec v_{i}}{dt} = - \frac{\partial U}{\partial \vec r_{i}}\]
+$\vec F$: 力: \quad(只是坐标的函数)
+\[\vec F_{i} = - \frac{\partial U}{\partial \vec r_{i}}\]
+\\
+(* 超距作用疑难):
+势能仅依赖所有质点在同一时刻的位置,这意味其中任何质点位置的改变立刻影响到所有其它质点,可以说相互作用瞬间传递.
+这个相互作用的性质在经典力学中是必然的,它紧密联系经典力学的基本前提,即绝对时间假设和伽利略相对性原理.
+如果相互作用不是瞬间传递的，即以一个有限速度传递,而时间的绝对性意味着通常的速度相加法则适用于所有现象，
+因此在有相对运动的不同参考系中传递速度不相同.
+于是相互作用的物体的运动规律在不同惯性参考系中也不相同,这就违背了伽利略相对性原理.\\
+\\
+(* 时间可逆性):
+质点系Lagrange函数表明,时间不仅均匀,且各向同性,即时间的性质在两个方向上相同.
+用-t替换t不会改变Lagrange函数,进而也不会改变运动方程.
+即,若在参考系中某种运动可能,则逆运动也可能,即,可以按照相反顺序经历前述运动中相同的状态.
+在这个意义下,遵循经典力学定律的所有运动都是可逆的.\\
+
+
+
+\subsection{守恒定律}
+运动积分: $\exists$关于$\vec q,\dot \vec q$的某些函数,其值在运动过程中保持恒定,且仅由初始条件决定.\\
+对于s个自由度的系统, 独立运动积分数等于2s-1.\\
+
+
+\subsubsection{能量守恒 : 时间均匀性}
+时间均匀性: 封闭系统Lagrange函数不显含时间.\quad$L(\vec q,\dot \vec q)$\\
+\[\frac{dL}{dt}
+ = \sum \frac{\partial L}{\partial q_{i}} \dot q_{i} + \sum \frac{\partial L}{\partial \dot q_{i}} \ddot q_{i}
+ = \sum \frac{d}{dt}(\frac{L}{\dot q_{i}}\dot q_{i})
+\Rightarrow \frac{d}{dt}(\sum \dot q_{i} \frac{\partial L}{\partial \dot q_{i}} - L) = 0\]
+E: 能量
+\[\Rightarrow E = \sum \dot q_{i} \frac{\partial L}{\partial \dot q_{i}} - L
+ = T(q,\dot q) + U(q)   \qquad \frac{d}{dt} E = 0\]
+保守系统: 能量守恒的力学系统.\\
+
+
+\subsubsection{动量守恒 : 空间均匀性}
+空间均匀性: 空间平移不变性.\\
+\[\delta L = \sum \frac{\partial L}{\partial \vec r_{i}}\cdot \delta \vec r_{i}
+ = \vec \epsilon \cdot \sum \frac{\partial L}{\partial \vec r_{i}} = 0\quad(\forall \vec \epsilon)
+\Rightarrow \sum \frac{\partial L}{\partial \vec r_{i}}
+ = \sum \frac{d}{dt} \frac{L}{\vec v_{i}}
+ = \frac{d}{dt} \sum \frac{\partial L}{\partial \vec v_{i}} = 0\]
+$\vec p$: 动量
+\[\Rightarrow \vec p = \sum \frac{\partial L}{\partial \vec v_{i}} = \sum m_{i} \vec v_{i}  \qquad \frac{d}{dt}\vec p = 0\]
+
+
+\subsubsection{角动量守恒 : 空间各向同性}
+空间各向同性: 空间旋转不变性.
+\begin{displaymath}
+\begin{array}{ll}
+\delta L = \sum (\frac{\partial L}{\partial \vec r_{i}} \cdot \delta \vec r_{i}] + \frac{\partial L}{\partial \vec v_{i}} \cdot \delta \vec v_{i})
+ = \sum [\dot{\vec p_{i}} \cdot (\delta \vec \varphi \times \vec r_{i}) + \vec p_{i} \cdot ( \delta \vec \varphi \times \vec v_{i} )]
+ = \delta \vec \varphi \cdot \sum (\vec r_{i} \tims \dot{\vec p_{i}} + \vec v_{i} \tims \vec p_{i}) \\
+ \quad\  = \delta \vec \varphi \cdot \frac{d}{dt} \sum \vec r_{i} \times \vec p_{i}
+ = 0\quad(\forall \vec \varphi)
+ \Rightarrow \frac{d}{dt}\sum \vec r_{i} \times \vec p_{i} = 0
+\end{array}
+\end{displaymath}
+$\vec M$: 角动量
+\[\Rightarrow \vec M = \sum \vec r_{i} \times \vec p_{i} \qquad \frac{d}{dt}\vec M = 0\]
+
+
+\subsubsection{质心}
+不同惯性参考系中,$\vec p$的变换(K'相对K以速度$\vec V$运动):
+\[\vec p = \sum m_{i} \vec v_{i} = \sum m_{i} \vec v'_{i} + \vec V \sum m_{i}
+ = \vec p' + \vec V \sum m_{i}\]
+不同惯性参考系中,$\vec M$的变换(K'相对K以速度$\vec V$运动):
+\[\vec M = \sum m_{i} \vec r_{i} \times \v_{i} = \sum m_{i} \vec r_{i} \times (\vec v'_{i} + \vec V) = \vec M' + m_{c} \vec r_{c} \times \vec V\]
+
+存在使得K'中$\vec p = 0$的速度$\vec V = 0$,在该速度下系统相对K'静止:
+\[\vec V = \frac{\vec p}{\sum m_{i}} = \frac{\sum m_{i} \vec v_{i}}{m_{i}}\]
+质心: 
+\begin{displaymath}
+    \left\{ \begin{array}{ll}
+    m_{c} = \sum m_{i}\\
+    \vec v_{c} = \frac{\sum m_{i} \vec v_{i}}{\sum m_{i}}\\
+    \vec r_{c} = \frac{\sum m_{i} \vec r_{i}}{\sum m_{i}}
+    \end{array} \right.
+\end{displaymath}
+动量守恒定律:(封闭)系统质心作匀速直线运动.\\
+内能$E_{in}$: 整体静止的力学系统的能量,包括系统内相对运动动能 + 相互作用势能.
+\[E_{in} = \frac{m_{c} V^2}{2} + E_{int}\]
+
+
+\section{相对论力学}
+
+\subsection{相对性原理}
+
+
+
+
+\section{Electromagnetics电磁学}
+
+$A^{i}=(\varphi,\vec A)$ \quad$\varphi$:标势 \quad$\vec A$:矢势
+\[\frac{d\vec p}{dt} = - \frac{e}{c} \frac{\partial\vec A}{\partial t} - e \nabla \varphi + \frac{e}{c} \vec v \times \nabla \times \vec A\]
+$\vec E$: 电场强度\quad $\vec H$: 磁场强度
+\begin{displaymath}
+    \left\{ \begin{array}{ll}
+    \vec E = -\frac{1}{c} \frac{\partial \vec A}{\partial t} - \nabla \varphi\\
+    \vec H = \nabla \times \vec A
+    \end{array} \right.
+\end{displaymath}
+\[\Rightarrow \frac{d\vec p}{dt} = e \vec E + \frac{e}{c} \vec v \times \vec H\]
+对$\vec E,\vec H$取旋散度, 有
+\begin{displaymath}
+    \left\{ \begin{array}{ll}
+    \nabla \cdot \vec E = 4\pi\rho\\
+    \nabla \cdot \vec H = 0\\
+    \nabla \times \vec E = - \frac{1}{c} \frac{\partial \vec H}{\partial t}\\
+    \nabla \times \vec H = - \frac{1}{c} \frac{\partial \vec E}{\partial t} + \frac{4\pi}{c}\vec j
+    \end{array} \right.
+\end{displaymath}
+
+\end{document}
