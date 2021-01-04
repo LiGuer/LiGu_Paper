@@ -54,7 +54,7 @@ $\Rightarrow$ Lagrange方程有$\frac{d}{dt}\frac{\partial L}{\partial \vec v} =
 
 \subsection{守恒定律}
 \subsubsection{能量守恒 : 时间均匀性}
-时间均匀性: 封闭系统Lagrange函数不显含时间.\quad$\Rightarrow L(\vec q,\dot \vec q)$\\
+时间均匀性: 封闭系统Lagrange函数不显含时间.\quad $\Rightarrow L(\vec q,\dot \vec q)$\\
 \[\frac{dL}{dt}
  = \sum \frac{\partial L}{\partial q_i} \dot q_i + \sum \frac{\partial L}{\partial \dot q_i} \ddot q_i
  = \sum \frac{d}{dt}(\frac{L}{\dot q_i}\dot q_i)
@@ -79,7 +79,7 @@ $\Rightarrow$ Lagrange方程有$\frac{d}{dt}\frac{\partial L}{\partial \vec v} =
 空间各向同性: 空间旋转不变性.
 \begin{displaymath}
 \begin{array}{ll}
-\delta L = \sum (\frac{\partial L}{\partial \vec r_i} \cdot \delta \vec r_i] + \frac{\partial L}{\partial \vec v_i} \cdot \delta \vec v_i)
+\delta L = \sum (\frac{\partial L}{\partial \vec r_i} \cdot \delta \vec r_i + \frac{\partial L}{\partial \vec v_i} \cdot \delta \vec v_i)
  = \sum [\dot{\vec p_i} \cdot (\delta \vec \varphi \times \vec r_i) + \vec p_i \cdot ( \delta \vec \varphi \times \vec v_i )]
  = \delta \vec \varphi \cdot \sum (\vec r_i \tims \dot{\vec p_i} + \vec v_i \tims \vec p_i) \\
  \quad\  = \delta \vec \varphi \cdot \frac{d}{dt} \sum \vec r_i \times \vec p_i
@@ -146,12 +146,32 @@ $\vec M$的变换(K'相对K以速度$\vec V$运动且坐标原点相差$\vec R$)
 
 
 \section{相对论力学}
+\subsection{相对性原理,相互作用传播速度}
+\textbf{相对性原理}: 所有物理定律,在所有惯性参考系中都相同.\\
+· 实验表明, 相对性原理是有效的.\\
+· 实验表明, 瞬时相互作用在自然界不存在.\\
+\textbf{相互作用的传播速度},(相对性原理可推断)在所有惯性参考系中都一样.\quad 电动力学中证明,这个速度是光在真空中的速度.
+\[c = 2.998 \times 10^8 m/s\]
+(取$c\to \infty$,即可过渡到经典力学.)\\
+
+
+\subsection{相对时间}
+· <1881年Michelson-Morley干涉实验>表明, 光速与其传播方向无关.\\
+(而按经典力学,光应在地球速度同方向(v+c),比反方向(v-c)更快一点.)\\
+$\Rightarrow$Galilean变换的绝对时间假设(t=t')错了.\quad  $\Rightarrow$不同参考系,时间流逝的速度不同.\\
+\\
+\textbf{事件}:由三维的位置和事件发生的时间决定.
+
+
+\subsection{参考系间相对性}
 
 
 
 \section{Electromagnetics电磁学}
 
-\textbf{标势$\varphi$: \quad 矢势$\vec A$:}
+
+· 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.
+\textbf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\vec A$:}
 \[A^{i}=(\varphi,\vec A)\]
 运动方程:
 \[\frac{d\vec p}{dt} = - \frac{e}{c} \frac{\partial\vec A}{\partial t} - e \nabla \varphi + \frac{e}{c} \vec v \times \nabla \times \vec A\]
