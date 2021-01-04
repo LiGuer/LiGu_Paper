@@ -149,8 +149,8 @@ $\vec M$的变换(K'相对K以速度$\vec V$运动且坐标原点相差$\vec R$)
 \subsection{相对性原理,相互作用传播速度}
 \textbf{相对性原理}: 所有物理定律,在所有惯性参考系中都相同.\\
 · 实验表明, 相对性原理是有效的.\\
-· 实验表明, 瞬时相互作用在自然界不存在.\\
-\textbf{相互作用的传播速度},(相对性原理可推断)在所有惯性参考系中都一样.\quad 电动力学中证明,这个速度是光在真空中的速度.
+· 实验表明, 瞬时相互作用在自然界不存在,相互作用的传播需要时间.\\
+\textbf{相互作用的传播速度},在所有惯性参考系中都一样(相对性原理可得).\quad 电动力学中证明,这个速度是光在真空中的速度.
 \[c = 2.998 \times 10^8 m/s\]
 (取$c\to \infty$,即可过渡到经典力学.)\\
 
@@ -160,17 +160,47 @@ $\vec M$的变换(K'相对K以速度$\vec V$运动且坐标原点相差$\vec R$)
 (而按经典力学,光应在地球速度同方向(v+c),比反方向(v-c)更快一点.)\\
 $\Rightarrow$Galilean变换的绝对时间假设(t=t')错了.\quad  $\Rightarrow$不同参考系,时间流逝的速度不同.\\
 \\
-\textbf{事件}:由三维的位置和事件发生的时间决定.
+\textbf{事件}:由事件发生的位置(x,y,z)和时间(t)决定.\\
+\textbf{事件间隔}:
+\[S_{12} = [(ct_2-ct_1)^2 - (x_2-x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2]^{1/2}\]
+$\Rightarrow$ 两个事件的间隔在所有参考系中都一样.\quad 这个不变性,就是光速不变的数学表示.\\
+\textbf{固有时}:与物体一同运动的钟所指示的时间.\\
+\textbf{固有长度}:物体在相对静止参考系内的长度.
 
 
-\subsection{参考系间相对性}
+\subsection{参考系间变换}
+\textbf{Lorentz变换}: 参考系间变换
+\[ x = \frac{x' + V t'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad y=y',\quad z=z'
+, \quad t = \frac{t'+ \frac{V}{c^2}x'}{\sqrt{1 - \frac{V^2}{c^2}}}\]
+\[ \Rightarrow dx = \frac{dx' + V dt'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad dy=dy',\quad dz=dz'
+, \quad dt = \frac{dt'+ \frac{V}{c^2}dx'}{\sqrt{1 - \frac{V^2}{c^2}}}\]
+\textbf{速度变换}: $\vec v = \frac{d\vec r}{dt},\quad v' = \frac{d\vec r'}{dt}$
+\[\Rightarrow v_x = \frac{v'_x + V}{1 + v'_x \frac{V}{c^2}}, \quad v_y = \frac{v'_y \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}},\quad v_z = \frac{v'_z \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}}\]\\
+· 例1: \textbf{钟慢}:\\
+· 例2: \textbf{尺缩}:\\
+
+
+\subsection{四维矢量}
+
+
+\subsection{Lagrange函数、动量、能量}
+\textbf{Lagrange函数}:
+\[L = -m c^2 \sqrt{1 - \frac{v^2}{c^2}}\]
+\textbf{动量$\vec p$}:
+\[\vec p = \frac{\partial L}{\partial \vec v} = \frac{m \vec v}{\sqrt{1 - \frac{v^2}{c^2}}}\]
+\textbf{力$\vec F$}:
+\[\vec F = \frac{d\vec p}{dt} \to \frac{m}{\sqrt{1 - \frac{v^2}{c^2}}} \frac{d\vec v}{dt}(\vec F \perp \vec v) 
+\quad or\quad  \frac{m}{(1 - \frac{v^2}{c^2})^{3/2}} \frac{d\vec v}{dt} (\vec F \parallel \vec v)\]
+\textbf{能量E}:
+\[E = \vec p \cdot \vec v - L = \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}}\]
+\textbf{静能}:\quad $E(v=0) = mc^2$\\
 
 
 
 \section{Electromagnetics电磁学}
 
 
-· 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.
+· 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.\\
 \textbf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\vec A$:}
 \[A^{i}=(\varphi,\vec A)\]
 运动方程:
@@ -193,5 +223,19 @@ $\Rightarrow$Galilean变换的绝对时间假设(t=t')错了.\quad  $\Rightarrow
     \nabla \times \vec H = - \frac{1}{c} \frac{\partial \vec E}{\partial t} + \frac{4\pi}{c}\vec j
     \end{array} \right.
 \end{displaymath}
+
+
+
+\section{Gravitational Field 引力场}
+
+
+
+\section{Quantum Mechanics 量子力学}
+
+
+
+\section{Statistical Mechanics 统计力学}
+
+
 
 \end{document}
