@@ -1,5 +1,3 @@
-# LiGu's Database
+# LiGu's Paper
 
-* Artist
-* Philosopher
-* History
+Remember Myself.
