@@ -1,0 +1,324 @@
+\documentclass{article} 
+\usepackage{amsmath}
+\usepackage[UTF8]{ctex}
+\title{强化学习}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
+\usepackage{ntheorem}\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
+\begin{document}
+\tableofcontents
+
+\section{强化学习-核心}
+    \subsection{定义}
+        \textbf{定义}: 在交互中学习, 以实现一个目标的计算性方法. 即, 让\textbf{智能体}去和未知的\textbf{环境}互动, 学习如何动作, 来获得最大累计奖励.
+        
+    \subsection{智能体 \& 环境}
+        \begin{itemize}
+            \item \textbf{智能体}: 学习和决策者.
+            \item \textbf{环境}: 与智能体交互的, 除智能体之外的一切事物.
+        \end{itemize}
+        
+        \subsubsection{智能体-环境的边界如何确定?}
+            界限并没有确定性的定义, 而是根据实际问题来.遵循的一般规则是, 任何不能由智能体任意更改的内容, 都被视为是环境的一部分.
+            
+            \textbf{eg.} 奖励可能在智能体内计算, 但被认为是环境的, 因为奖励定义了智能体面临的任务, 因此必须超出智能体任意改变的能力.
+
+
+    \subsection{状态, 动作, 奖励 $S, A, R$}
+    3类信号:
+        \begin{displaymath} \left\{ \begin{array}{l}
+            \text{状态}\ S\\
+            \text{动作}\ A\\
+            \text{奖励}\ R
+        \end{array} \right. \end{displaymath}
+        
+        \subsubsection{累计奖励 $\sum R$}
+            累积奖励: 获得最大的累积奖励是智能体的唯一目标.
+                $$G_t= \sum_{i = t+1}^{T} R_i$$
+            为了避免$T \to \infty, G_t \to \infty$, 引入折扣$\gamma \in [0,1]$, 期望折扣回报:
+                $$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}$$
+        
+        \textbf{核心要素}:
+        \begin{displaymath} \left\{ \begin{array}{llll}
+            S \to A & \text{策略} & \text{定义了智能体的行为方式, 智能体在当前状态如何动作}\\
+            A \to S & \text{环境模型}(A_t,S_t\to S_{t+1}) & \text{环境对于动作的反应, 如何转移到下一状态.(可选)}\\
+            S \to R & \text{奖励函数} & \text{定义了智能体的目标, 当前环境对智能体反馈的奖励.}\\
+            S \to \sum R & \text{价值函数} & \text{当前状态下的长期累计收益的期望.}
+        \end{array} \right. \end{displaymath}
+
+        \begin{displaymath} \left\{ \begin{array}{lllll}
+            S \leftrightarrow A: \quad & A = F(S) & (\text{策略函数})    & S = F(A) & (\text{环境更新})\\
+            S \leftrightarrow R: \quad & R = F(S) & (\text{价值函数})    & S = F(R) & (\text{无})\\
+            A \leftrightarrow R: \quad & A = F(R) & (\text{无})    & R = F(A) & (\text{无})
+        \end{array} \right. \end{displaymath}
+        
+    \subsection{强化学习\&有/无监督学习}
+        强化学习是学习的第三类范式, 其与有/无监督学习不相同.
+    
+        \subsubsection{与有监督学习的异同}
+            \textbf{监督学习},是从外部监督者提供的"样本-标记对"的训练集中学习的一种方式. 目的是学习如何推断和概括, 以拥有泛化(即, 对未见过的样本也能正确判断)的能力.
+        
+            \begin{displaymath} \left\{ \begin{array}{l}
+                \text{状态 --- 样本}\\
+                \text{动作 --- 标记}\\
+                \text{策略 --- 分类/回归器}
+            \end{array} \right. \end{displaymath}
+            
+            \textbf{异同点}: 相似之处,如上式, 但强化学习并没有明确的"样本---标记"对来提供训练. 在交互问题的未知场景中, 不能即时获得当前"状态S---动作A"关联的答案, 也无法即时获得"状态S---动作A"选择的好坏, 其产生的影响只能在未来长期累积奖励中反映出来.因此, 单靠监督学习不足以实现"从互动中学习". 强化学习, 可以看作是一种具有延迟标记信息的监督学习.
+            
+            
+        
+        \subsubsection{与无监督学习的异同}
+            \textbf{无监督学习}, 是寻找蕴藏在未标记的数据里的结构特征.
+
+            \textbf{异同点}: 强化学习是最大化累计奖励, 而非寻找隐藏的结构, 因此, 无监督学习不包含强化学习.
+
+        
+        
+    \subsection{多臂赌博机问题 $S = \{s_0\}$}
+        \subsubsection{探索-利用\ 平衡}
+        
+        \textbf{平稳问题}: 奖励概率不随时间变化.
+        
+        参数更新的递推形式:
+        \begin{align*}
+            Q_{n+1} 
+            &= \frac{1}{n} \sum_{i = 0}^n R_i\\
+            &= \frac{1}{n} (R_n + \sum_{i = 0}^{n-1} R_i)\\
+            &= \frac{1}{n} (R_n + (n-1) Q_n)\\
+            &= Q_n + \frac{1}{n} (R_n - Q_n)
+        \end{align*}
+        \begin{align*}
+            Estimate_{New} 
+            &\gets Estimate_{Old} + StepSize\cdot (Target - Estimate_{Old})\\
+            &= Estimate_{Old} + StepSize\cdot Error
+        \end{align*}
+        
+        \textbf{非平稳问题}: 奖励概率随时间变化. 对最近的奖励给予更多的重视比对很久以前的奖励给予更多的重视是有道理的。最常用的方法之一是使用恒定步长参数。
+            $$Q_{n+1} = Q_n + \alpha (R_n - Q_n)$$
+            
+        \subsubsection{算法1: $\epsilon$贪心}
+            \begin{displaymath} A = \left\{ \begin{array}{ll}
+                \arg\max_a\ Q(a) & \mathbb{P}(\text{贪心}) = \epsilon\\
+                \text{a random action} & \mathbb{P}(\text{随机}) = 1 - \epsilon
+            \end{array} \right. \end{displaymath}
+            
+        \subsubsection{算法2: 上置信界算法}
+            始终选择置信度上界最大的动作作为选择策略.
+            $$A_{t} = \underset{a}{\operatorname{argmax}}\left[Q_{t}(a)+c \sqrt{\frac{\ln t}{N_{t}(a)}}\right]$$
+            \textbf{Proof}:\\
+                Gauss分布下的Chernoff边界:
+                    $$\mathbb{P}(\mu \geq \bar{\mu}+\epsilon) \leq \exp \left(\frac{-n \epsilon^{2}}{2}\right)$$
+                令$\delta = e^{-n \epsilon / 2}$, 即 $\epsilon = \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}$
+                \begin{align*}
+                    \Rightarrow & \mathbb{P}\left(\mu \ge \bar{\mu} + \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}} \right) \le \sigma\\
+                    \Rightarrow & \mathbb{P}\left(\bar{\mu} \in \left[\mu - \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}, \mu +  \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}} \right] \right) \ge 1 - 2 \sigma
+                \end{align*}
+                
+        \subsubsection{算法3: Softmax算法}
+            \textbf{soft-max分布}:
+                $$\operatorname{Pr}\left\{A_{t}=a\right\} = \frac{e^{H_{t}(a)}}{\sum_{b=1}^{k} e^{H_{t}(b)}} = \mathbb{P}_{\pi,t}(a)$$
+    
+    \subsection{Markov决策过程 $S_t \to S_{t+1}$}
+        Markov性质: 当前状态$S_t$只与上一时刻状态$S_{t-1}$有关, 与上一时刻之前的任何状态$S_{t-k \mid_{k > 1}}$无关.
+            $$\mathbb{P}\left(S_{t+1}=s \mid S_{1}=s_{1}, \ldots, S_{t}=s_{t}\right)=\mathbb{P}\left(S_{t+1}=s \mid S_{t}=s_{t}\right)$$
+        四元组:
+            $$<S, A, P, R>$$
+            \begin{displaymath} \left\{ \begin{array}{l}
+                S: \text{状态集.}\\
+                A: \text{动作集.}\\
+                P: \text{状态转移概率.}\\
+                R: \text{奖励函数}.
+            \end{array} \right. \end{displaymath}
+            
+        动态概率:
+            $$\mathbb{P}(s', r \mid s, a)$$
+            $$\sum_{s' \in S} \sum_{r \in R} \mathbb{P}(s', r \mid s, a) = 1$$
+        可导出,\\
+        状态转移概率:
+            $$\mathbb{P}(s' \mid s,a) = \sum_{r \in R} \mathbb{P}(s', r \mid s, a)$$
+        奖励分布:
+            $$r(s, a) = \sum_{r \in R} r \sum_{s \in S} \mathbb{P}(s', r \mid s, a)$$
+            $$r(s, a, s') = \sum_{r \in R} r \frac{\mathbb{P}(s', r \mid s, a)}{\mathbb{P}(s' \mid s, a)}$$
+            
+        \textbf{预测问题}：对给定策略的评估过程。已知一个Markov决策过程以及策略, 目标是求解基于该策略的价值函数, 即处于每个状态下能够获得的奖励是多少。
+        
+        \textbf{控制问题}：寻找一个最优策略的过程。已知一个Markov决策过程但是策略未知, 求解最优价值函数和最优策略。
+
+        
+    \subsection{价值\&策略函数 $S-A-R$}
+        \subsubsection{价值函数 $R = V(S)$}
+            价值函数: 评价智能体在给定状态$S_t$下的好坏程度. (Bellman方程)
+            \begin{align*}
+                V(s) 
+                &= \mathbb{E} \left[G_t \mid S_t=s\right] \tag{定义}\\
+                &= \mathbb{E} \left[R_{t+1} + \gamma G_{t+1} \mid S_t=s\right] \tag{代换}\\
+                &= \sum_{a \in A} \mathbb{P}_\pi(a \mid s) \left( \sum_{s' \in S} \sum_{r \in R} \mathbb{P}(s', r | s, a)\cdot \left(r + \gamma \mathbb{E} \left[G_{t+1} \mid S_{t+1} = s'\right]\right) \right) \tag{期望公式}\\
+                &= \sum_{a \in A} \mathbb{P}_\pi(a \mid s) \left( \sum_{s' \in S} \sum_{r \in R} \mathbb{P}(s', r | s, a)\cdot \left(r + \gamma V(s') \right) \right) \tag{代换}\\
+                &= \mathbb{E} \left[R_{t+1} + \gamma V(S_{t+1}) \mid S_t=s\right]
+            \end{align*}
+
+            (1) 立即回报$R_{t+1}$\\
+        	(2) 后继状态的折扣价值函数$\gamma \cdot V(S_{t+1})$
+        
+        \subsubsection{动作-价值函数 $R_A = Q(S,A)$}
+            \begin{align*}
+                Q(s,a) 
+                &= \mathbb{E}\left[G_t \mid S_t=s, A_t = a\right]\\
+                &= \mathbb{E}\left[\sum_{k=0}^\infty \gamma^k R_{t+k+1} \mid S_t = s, A_t = a\right]\\
+                &= \mathbb{E}_{s^{\prime}}\left[r+\gamma Q\left(s^{\prime}, a^{\prime}\right) \mid s, a\right]
+            \end{align*}
+            
+        \subsubsection{策略函数 $A = \Pi(S)$}
+            \begin{itemize}
+                \item 确定性策略: $a = \pi(s)$
+                \item 随机性策略: $\mathbb{P}_\pi(a \mid s)$
+            \end{itemize}
+            
+        \subsubsection{优化}
+    
+\section{基于价值函数}
+    
+    \subsection{动态规划}
+        \subsubsection{策略迭代 = 策略评估$V_{\pi}$ + 策略改进$\pi \to \pi'$}
+            \textbf{策略评估}: 求当前策略下的累计奖励$V_{\pi}$.
+            
+                解析解: (计算复杂度$|S|^3$)
+                \begin{align*}
+                    V_{\pi}(s)
+                    &=\mathbb{E}_{\pia}\left[R_{t+1}+\gamma V_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
+                    &= \sum_{a} \pi(a \mid s) \sum_{s',r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V_{\pi}\left(s^{\prime}\right)\right]\\
+                    \Rightarrow V_{\pi} &= R_{\pi} + \gamma P_{\pi}V_{\pi} \tag{矩阵式}\\
+                    \Rightarrow V_{\pi} &= (I - \gamma P_{\pi})^{-1} R_{\pi} \tag{解析解})
+                \end{align*}
+                
+                迭代计算数值解: $\lim\limits_{k \to \infty} V_k = V_{\pi}$
+                \begin{align*}
+                    V_{k+1}(s) & = \mathbb{E}_{\pi}\left[R_{t+1}+\gamma V_{k}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
+                    &= \sum_{a} \pi(a \mid s) \sum_{s^{\prime} r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V_{k}\left(s^{\prime}\right)\right]
+                \end{align*}
+                
+            \textbf{策略改进}: 找到累计奖励更多的策略$\pi'$.
+                $$\forall s \in S,\ V_\pi(s) \le Q(s, \pi'(s)) \quad \Rightarrow \quad V_\pi(s) \le V_{\pi'}(s)$$
+                贪心策略: $\forall s \in S,\ \pi' = \arg\max_a\ q_\pi (s,a)$
+                
+            \textbf{策略迭代} = 策略评估$V_{\pi}$ + 策略改进$\pi \to \pi'$
+                $$V_{\pi} \Rightarrow (\pi \to \pi') \Rightarrow V_{\pi} \Rightarrow (\pi \to \pi') \Rightarrow ... \Rightarrow \{\pi^*, V^*\}$$
+        
+        \subsubsection{广义策略迭代}
+            让策略评估和策略提升进行交互, 且独立于间隔和其他二者的细节。
+    
+    \subsection{Monte Carlo方法}
+        \textbf{深度优先搜索}.
+    
+        我们不假设对环境有完全了解。蒙特卡罗方法只需要从与环境的实际或模拟交互中体验状态、动作和奖励的样本序列。只有在一个片段结束后, 价值评估和策略才会更新。因此, Monte Carlo方法是逐段递增的, 而不是一步一步在线的.
+        
+        对值函数的估计:
+            $$V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\alpha\left(G_{t}-V\left(S_{t}\right)\right)$$
+
+    \subsection{时序差分学习}
+        时序差分学习是蒙特卡罗思想和动态规划思想的结合。与蒙特卡罗方法一样, 时序差分方法可以直接从原始经验中学习, 而无需环境动力学模型。与动态规划一样, 时序差分方法部分基于其他学习的估计更新估计, 而无需等待最终结果（它们是自举的）.
+            $$V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\alpha\left(R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)\right)$$
+        
+        \subsubsection{时间差分预测}
+    
+    	\subsubsection{Q-Learning}
+    	    $$\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$$
+    	    
+    	\subsubsection{Sarsa}
+    	    $$\Delta Q(S_{t},A_{t}) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$$
+    	
+    	\subsubsection{Deep Q Networks = Q-Learning + 神经网络}
+    	    记忆库 (用于重复学习)
+            神经网络计算 Q 值
+    	
+            损失函数:
+                $$L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot)}\left[\left(y_{i}-Q\left(s, a ; \theta_{i}\right)\right)^{2}\right]$$
+                $$\nabla_{\theta_{i}} L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot) ; s^{\prime} \sim \mathcal{E}}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{i-1}\right)-Q\left(s, a ; \theta_{i}\right)\right) \nabla_{\theta_{i}} Q\left(s, a ; \theta_{i}\right)\right]$$
+
+\section{基于策略函数}
+    \subsection{策略梯度}
+        $$\mathbb{P}_\pi (a \mid s, \theta)$$
+        $$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$$
+        \begin{align*}
+            \nabla_\theta V(s)
+            &= \nabla_\theta \left[\sum_{a \in A} \mathbb{P}_\pi (a \mid s)\ Q(s,a) \right] \tag{期望公式}\\
+            &= \sum_{a \in A} \nabla_\theta \left[ \mathbb{P}_\pi (a \mid s)\ Q(s,a) \right] \tag{分配律}\\
+            &= \sum_{a \in A} \left[ \nabla_\theta \mathbb{P}_\pi (a \mid s)\ Q(s,a) + \mathbb{P}_\pi (a \mid s)\ \nabla_\theta Q(s,a) \right] \tag{微分乘法法则}\\
+            &= \sum_{a \in A} \left[ \nabla_\theta \mathbb{P}_\pi (a \mid s)\ Q(s,a) + \mathbb{P}_\pi (a \mid s)\ \nabla_\theta \sum_{s', r} \mathbb{P}(s', r | s, a)\cdot \left(r + \gamma V(s') \right) \right] \tag{代入}\\
+            &= \sum_{a \in A} \left[ \nabla_\theta \mathbb{P}_\pi (a \mid s)\ Q(s,a) + \mathbb{P}_\pi (a \mid s)\ \sum_{s', r} \mathbb{P}(s', r | s, a)\cdot \nabla_\theta \gamma V(s') \right] \tag{分配律}
+        \end{align*}
+        $$\nabla J(\boldsymbol{\theta}) \propto \sum_{s} \mu(s) \sum_{a} q_{\pi}(s, a) \nabla \mathbb{P}_\pi(a \mid s, \boldsymbol{\theta})$$
+        \begin{align*}
+            \nabla J(\boldsymbol{\theta}) 
+            & \propto \mathbb{E}_{\pi}\left[\sum_{a} \pi\left(a \mid S_{t}, \boldsymbol{\theta}\right) q_{\pi}\left(S_{t}, a\right) \frac{\nabla \mathbb{P}_\pi\left(a \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(a \mid S_{t}, \boldsymbol{\theta}\right)}\right] \\
+            &= \mathbb{E}_{\pi}\left[q_{\pi}\left(S_{t}, A_{t}\right) \frac{\nabla \mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}\right] \\
+            &= \mathbb{E}_{\pi}\left[G_{t} \frac{\nabla \mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}\right]\\
+            &= \mathbb{E}_{\pi}\left[G_{t} \nabla \ln \mathbb{P}_\pi \left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)\right]
+        \end{align*}
+        大好处就是, 它能在一个连续区间内挑选动作
+        损失函数:
+            \begin{align*}
+                \nabla_{\theta} E_{x}[f(x)] &=\nabla_{\theta} \sum_{x} p(x) f(x) \\
+                &=\sum_{x} \nabla_{\theta} p(x) f(x) \\
+                &=\sum_{x} p(x) \frac{\nabla_{\theta} p(x)}{p(x)} f(x) \\
+                &=\sum_{x} p(x) \nabla_{\theta} \log p(x) f(x) \\
+                &=E_{x}\left[f(x) \nabla_{\theta} \log p(x)\right]
+            \end{align*}
+        缺点:
+            即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的；\\
+            在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
+            
+        \textbf{with 基线方法}:
+            $$\nabla J(\boldsymbol{\theta}) \propto \sum_{s} \mu(s) \sum_{a}\left(q_{\pi}(s, a)-b(s)\right) \nabla \pi(a \mid s, \boldsymbol{\theta})$$
+            $$\sum_{a} b(s) \nabla \pi(a \mid s, \boldsymbol{\theta})=b(s) \nabla \sum_{a} \pi(a \mid s, \boldsymbol{\theta})=b(s) \nabla 1=0$$
+            $$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_{t}+\alpha\left(G_{t}-b\left(S_{t}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}$$
+
+
+\section{基于策略+价值}
+        \subsubsection{Actor-Critic}
+            结合了 Policy Gradient (Actor) 和 Function Approximation (Critic) 的方法. 
+        
+            \begin{align*}
+                \boldsymbol{\theta}_{t+1} 
+                &= \boldsymbol{\theta}_{t}+\alpha\left(G_{t: t+1}-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} \\
+                &= \boldsymbol{\theta}_{t}+\alpha\left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} 
+            \end{align*}
+            
+            Actor 基于概率选行为
+            Critic 基于 Actor 的行为评判行为的得分
+            Actor 根据 Critic 的评分修改选行为的概率
+            
+            \textbf{优势}: 可以进行单步更新, 比传统的 Policy Gradient 要快.
+            
+            \textbf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题. 
+            
+            Actor 在运用 Policy Gradient 的方法进行 Gradient ascent 的时候, 由 Critic 来告诉他, 这次的 Gradient ascent 是不是一次正确的 ascent, 如果这次的得分不好, 那么就不要 ascent 那么多. Actor 想要最大化期望的 reward, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做 reward.Critic 的更新很简单, 就是像 Q learning 那样更新现实和估计的误差 (TD error) 就好了.
+            
+        \subsubsection{Deep Deterministic Policy Gradient}
+            \textbf{思想}: Deep: Actor Critic + Deep Q Networks;\quad Deterministic: 策略函数采用"确定性策略函数";
+            
+            Policy gradient 在连续动作上进行动作的筛选 . 一种使用 Actor Critic 结构, 但是输出的不是行为的概率, 而是具体的行为, 用于连续动作 (continuous action) 的预测. DDPG 结合了之前获得成功的 DQN 结构, 提高了 Actor Critic 的稳定性和收敛性.
+            
+            \textbf{深度学习的作用, 对于DPG的关键改进}:
+            \begin{enumerate}
+                \item 使用卷积神经网络来模拟策略函数和Q函数, 并用深度学习的方法来训练, 证明了在RL方法中, 非线性模拟函数的准确性和高性能、可收敛；而DPG中, 可以看成使用线性回归的机器学习方法：使用带参数的线性函数来模拟策略函数和Q函数, 然后使用线性回归的方法进行训练。
+                \item experience replay memory的使用：actor同环境交互时, 产生的transition数据序列是在时间上高度关联(correlated)的, 如果这些数据序列直接用于训练, 会导致神经网络的overfit, 不易收敛。DDPG的actor将transition数据先存入experience replay buffer, 然后在训练时, 从experience replay buffer中随机采样mini-batch数据, 这样采样得到的数据可以认为是无关联的。
+                \item target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
+            \end{enumerate}
+            
+        \subsubsection{异步优势Actor-Critic}
+            DQN中很重要的一点是他具有经验池, 可以降低数据之间的相关性, 而A3C则提出降低数据之间的相关性的另一种方法：异步, 即创建多个并行的环境。A3C的算法实际上就是将Actor-Critic放在了多个线程中进行同步训练. 
+        
+        
+-------------------------------------------------------------------
+            
+    \subsection{On-Policy \& Off-Policy}
+        \begin{itemize}
+            \item On-Policy: 目标策略和行为策略是同一个策略.
+            \item Off-Policy: 目标策略和行为策略分开.
+        \end{itemize}
+
+
+    
+\end{document}

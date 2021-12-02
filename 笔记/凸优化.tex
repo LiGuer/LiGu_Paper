@@ -1,0 +1,72 @@
+\documentclass{article} 
+\usepackage{amsmath}
+\usepackage[UTF8]{ctex}
+\title{}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
+\usepackage{ntheorem}\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
+
+\begin{document}
+\tableofcontents
+
+\section{凸优化}
+    \subsection{仿射、凸、锥}
+        \begin{enumerate}
+            \item \textbf{仿射集} : C是仿射集 $\Leftrightarrow$ 任意两点间直线仍在C内.
+                $$\forall \vec x_i \in C,\ \theta_i \in R, \sum \theta_i = 1 , then\ \sum \theta_i x_i \in C $$
+            \item \textbf{仿射包} : 
+                $$ \text{aff}\ C = \left \{\sum \theta_i x_i\ |\ x_i\in C,\theta_i \in R, \sum \theta_i = 1 \right\}$$
+            \item \textbf{凸集} : C是凸集 $\Leftrightarrow$ 任意两点间线段仍在C内.
+                $$\forall \vec x_i \in C, \theta_i \in [0,1], \sum \theta_i = 1 , then\ \sum \theta_i x_i \in C $$
+            \item \textbf{凸包} : $$ \text{conv}\ C = \left \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1\right \}$$
+            \item \textbf{锥}: C是锥 $\Leftrightarrow \forall \vec x \in C,\ \theta > 0,\ then\ \theta \vec x \in$ C.
+            \item \textbf{凸锥} : C是凸锥 $\Leftrightarrow \forall \vec x_1, \vec x_2 \in C,\ \theta_1,\theta_2 \ge 0,\ then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in$ C.
+        \end{enumerate}
+    \subsection{凸函数}
+        \textbf{凸函数}: 函数$f: \mathbf{R}^n \to \mathbf{R}$是凸的$\Leftrightarrow$ 若 $\mathbf{dom} f$是凸集, 对$\forall x,y \in \mathbf{dom} f, \forall \theta \in [0,1]$有
+            $$f(\theta x + (1 - \theta) y) \leqslant \theta f(x) + (1 - \theta)f(y)$$
+            
+        \textbf{证明条件}:
+        \begin{enumerate}
+            \item \textbf{一阶条件}: $f(y) \geqslant f(x)+\nabla f(x)^{T}(y-x)$
+            \item \textbf{二阶条件}: $\nabla^{2} f(x) \succeq 0$
+        \end{enumerate}
+        
+        \textbf{拟凸函数}: 函数$f: \mathbf{R}^n \to \mathbf{R}$是拟凸函数$\Leftrightarrow$ 对$\forall \alpha \in R ,\ \{x \in \mathbf{dom} f \mid f(x) \leqslant \alpha\}$都是凸集.
+        
+    \subsection{凸优化}
+        \textbf{优化问题}: 目标函数$f_0(x)$, 不等式约束$f_i(x)$, 等式约束$h_i(x)$.
+            \begin{align*}
+                min &\quad f_0(x) \\
+                s.t.&\quad f_i(x) \leqslant 0\\
+                    &\quad h_i(x) = 0
+            \end{align*}
+            \quad 最优解$p^{\star}=\inf \left\{f_{0}(x) \mid f_{i}(x) \leqslant 0, h_{i}(x) = 0\right\}$
+            
+        \textbf{可行性问题}: 如果目标函数恒等于零，则最优解是0或∞ (若可行集非空或空集).
+            \begin{align*}
+                min &\quad x \\
+                s.t.&\quad f_i(x) \leqslant 0\\
+                    &\quad h_i(x) = 0
+            \end{align*}
+
+        \textbf{凸优化问题}: 对凸函数$f_0, f_i$
+            \begin{align*}
+                min &\quad x \\
+                s.t.&\quad f_i(x) \leqslant 0\\
+                    &\quad a_i^T x = b_i
+            \end{align*}
+            \begin{enumerate}
+                \item 目标函数必须是凸.
+                \item 不等式约束函数必须是凸.
+                \item 等式约束函数$h_i(x)= a_i^T x- b_i$必须是仿射.
+            \end{enumerate}
+            
+    \subsection{对偶}
+        \textbf{Lagrange函数}: 
+            $$L(x, \lambda, \nu) = f_0(x) + \sum_{i} \lambda_i f_i(x) + \sum_i \nu_i h_i(x)$$
+            
+        \textbf{Lagrange对偶函数}: 
+            $$g(\lambda, \nu)=\inf _{x \in \mathcal{D}} L(x, \lambda, \nu)=\inf _{x \in \mathcal{D}}\left(f_{0}(x)+\sum_{i=1}^{m} \lambda_{i} f_{i}(x)+\sum_{i=1}^{p} \nu_{i} h_{i}(x)\right)$$
+        
+\end{document}
