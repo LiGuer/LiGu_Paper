@@ -1,15 +1,19 @@
 \documentclass{article} 
 \usepackage{amsmath}
 \usepackage[UTF8]{ctex}
-\title{}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
+\title{信息论}\date{} \linespread{1.25}
 \usepackage{ntheorem}\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
+\usepackage{paralist}
+\let\itemize\compactitem
+\let\enumerate\compactenum
 
 \begin{document}
+\maketitle
 \tableofcontents
 
-\section{信息论}
+\section{信息的度量}
     \subsection{离散信息的度量}
         \subsubsection{自信息}
             \begin{enumerate}
@@ -120,27 +124,83 @@
             \end{enumerate}
             
             
-    \subsection{信源: 离散信源 \& 连续信源}
-        \subsubsection{离散无记忆信源}
-            \textbf{离散无记忆信源}: $ \left(\begin{array}{l} X \\ P \end{array}\right)
-                     = \left(\begin{array}{lll}
-                        a_{1} & \cdots & a_{n} \\ p\left(a_{1}\right) & \cdots & p\left(a_{n}\right)
-                    \end{array}\right) \quad;
-                    p\left(a_{i}\right) \geqslant 0, \sum_{i=1}^{n} p\left(a_{i}\right)=1$
+\section{信源}
+
+    \textbf{信源性质}:
+        \begin{itemize}
+            \item \textbf{记忆}: 输出符号之间相互独立, 称无记忆; 输出符号之间具有相关性, 称有记忆.
+        \end{itemize}
+    
+    \subsection{离散无记忆信源}
+        \textbf{离散无记忆信源}:  $ \left(\begin{array}{l} X \\ P \end{array}\right)
+                 = \left(\begin{array}{lll}
+                    a_{1} & \cdots & a_{n} \\ p\left(a_{1}\right) & \cdots & p\left(a_{n}\right)
+                \end{array}\right) \quad;
+                p\left(a_{i}\right) \geqslant 0, \sum_{i=1}^{n} p\left(a_{i}\right)=1$
                 
-            \textbf{离散无记忆信源的熵}: $H(X) = -\sum p \log p$
-
-            \textbf{离散无记忆信源N次扩展源的熵}: $H(X^N) = N\ H(X)$
             
-        \subsubsection{离散有记忆信源}
+        \textbf{离散无记忆信源的熵}: $H(X) = -\sum p \log p$
+        
+        \textbf{离散无记忆信源N次扩展源}: X构成的N维随机矢量集 $X^N = X_1 X_2...X_N$, 且$X_i$ 独立同分布.
 
-            \textbf{离散平稳有记忆信源的熵}: $H(X^N) = H(X_1 X_2 ... X_N) = H(X_1) + H(X_2 | X_1) + ... + H(X_N | X_1 ... X_{N-1}) \le N\ X(X_1)$
+        \textbf{离散无记忆信源N次扩展源的熵}: $H(X^N) = \sum_{i=1}^N = N\ H(X)$. ($X_i$ 独立同分布)
+            \begin{align*}
+                H(X^N) 
+                &= \sum_{i=1}^N H(X_i)  \tag{$X_i$ 独立}\\
+                &= N\ H(X)  \tag{$X_i$ 同分布}
+            \end{align*}
+        
+    \subsection{离散有记忆信源}
+    
+        \subsubsection{离散Markov信源}
+        
+        \subsubsection{离散平稳信源}
+            
+            \textbf{平稳}: 统计特性不随随时间推移而改变. \textit{$\left(x_{t_{1}}, \ldots, x_{t_{n}}\right)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
+                $$ \mathbb P\left(x_{t_{1}}, \ldots, x_{t_{n}}\right) = \mathbb P\left(x_{t_{1}+\tau}, \ldots, x_{t_{n}+\tau}\right) \quad \text { for all } \tau, t_{1}, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}$$
+                
+                \qquad \textbf{性质}: 
+                    对于平稳信源，条件概率和熵与时间下标无关.
+                        \begin{align*}
+                            \mathbb P\left(x_{i+N} \mid x_{i}, x_{i+1}, \cdots, x_{i+N-1}\right) &= \mathbb P\left(x_{j+N} \mid x_{j}, x_{j+1}, \cdots, x_{j+N-1}\right) \tag{条件概率}\\
+                            H\left(x_{i}, x_{i+1}, \cdots, x_{i+N}\right) &= H\left(x_{j}, x_{j+1}, \cdots, x_{j+N}\right) \tag{熵}\\
+                            H\left(x_{i+N} \mid x_{i}, x_{i+1}, \cdots, x_{i+N-1}\right) &= H\left(x_{j+N} \mid x_{j}, x_{j+1}, \cdots, x_{j+N-1}\right) \tag{条件熵}
+                        \end{align*}
+                        
+            \textbf{离散平稳有记忆信源}:
+                
+                \qquad \textbf{熵}:
+                    \begin{align*}
+                        H(\boldsymbol X^N) 
+                        &= H(X_1 X_2 ... X_N) \tag{定义}\\
+                        &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_1 ... X_{N-1}) \tag{条件熵展开}\\
+                        &\le N\ H(X_1) \tag{熵的不增原理}
+                    \end{align*}
+                    
+                \qquad \textbf{平均符号熵}: $H_N(\boldsymbol X^N) = \frac{H(\boldsymbol X^N)}{N}$
+                
+                \qquad \textbf{极限符号熵}: $H_\infty(\boldsymbol X^N) = \lim\limits_{N \to \infty} \frac{H(\boldsymbol X^N)}{N}$
+                
+                    \qquad.\qquad \textbf{性质}: 
+                        \begin{itemize}
+                        \item $H(X_N | X_1 ... X_{N-1})$ 和 $H_N(\boldsymbol X^N)$ 不随N而增加.
+                        \item $H(X_N | X_1 ... X_{N-1}) \le H_N(\boldsymbol X^N)$
+                        \item $H_\infty(\boldsymbol X^N)$存在, 且$H_\infty(\boldsymbol X^N) = \lim\limits_{N \to \infty} H(X_N | X_1 ... X_{N-1})$. $H_\infty(\boldsymbol X^N)$是最小的平均符号熵.
+                        \end{itemize}
+                
 
-            \textbf{信源的极限符号熵}: $H_\infty (X) = \lim\limits_{x \to \infty} \frac{1}{N} H(X^N)$
+        \textbf{离散Markov信源}:
+        
+            \textbf{Markov平稳分布}: 其中, $\boldsymbol \pi = \{\mathbb P(x = S_1), ..., \mathbb P(x = S_n)\}$是平稳分布.
+                $$\boldsymbol \pi^T = \boldsymbol \pi^T \boldsymbol P$$
+                
+                对于有限状态马氏链，稳态分布恒存在; 如果马氏链中仅存在一个常返类，则方程(3.4.11)的解是唯一的；如果存在r个常返类，则具有r个线性独立的矢量解; 如果马氏链中仅存在一个常返类而且是非周期的（即遍历的），则(3.4.12)式成立；如果有多个常返类，但都是非周期的，则       也收敛，但矩阵的每行可能不同；如果马氏链具有一个或多个周期常返类，则      不收敛
 
-        \subsubsection{相关性 \& 剩余度}
-            \textbf{信源效率}: $\eta = \frac{H_\infty}{H_0}$
-            \textbf{信源剩余度}: $\eta = 1 - \frac{H_\infty}{H_0}$
+        \textbf{m阶离散Markov信源}:
+
+    \subsection{相关性 \& 剩余度}
+        \textbf{信源效率}: $\eta = \frac{H_\infty}{H_0}$
+        \textbf{信源剩余度}: $\eta = 1 - \frac{H_\infty}{H_0}$
             
     \subsection{信源编码}
         \textbf{定长码}
@@ -160,17 +220,22 @@
             \textbf{例子}:
                 \textbf{Haffman编码}:
                     \textbf{编码方法}:
-                        (1)将信源概率分布按大小依递减次序排列;合并两概率最小者，得到新信源:并分配0，1符号。
+                        (1)将信源概率分布按大小依递减次序排列, 合并两概率最小者, 得到新信源:并分配0，1符号。
                         (2)新信源若包含两个以上符号返回(1)， 否则到(3)。
-                        (3)从最后- -级向前， 按顺序写出每个信源符号所对应的码字。
+                        (3)从最后一级向前， 按顺序写出每个信源符号所对应的码字。
                     \textbf{特点}:
                         最优码, 编码结果不唯一.
                     
-                    
-
+        \textbf{无失真信源编码}: 只要信源编码的码率不小于信源的熵就存在无失真信源编码，否则就不存在无失真信源编码，简记为: $ R \ge H \quad \Leftrightarrow  \quad \exists \text{无失真信源编码}$.
         
-    \subsection{信道: 信道容量}
-    
+
+\section{信道}
+    \textbf{信道容量}: 输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max\limits_{p(x)} I(X ; Y)$
+        \textbf{性质}:
+            (1) 信道容量仅与$p(y|x)$有关, 与$p(x)$无关.
+
+    \textbf{波形信道}: 
+
     \subsection{信道编码}
         
 \end{document}

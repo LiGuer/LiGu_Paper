@@ -9,64 +9,65 @@
 \begin{document}
 \tableofcontents
 
-\section{Í¹ÓÅ»¯}
-    \subsection{·ÂÉä¡¢Í¹¡¢×¶}
+\section{å‡¸ä¼˜åŒ–}
+    \subsection{ä»¿å°„ã€å‡¸ã€é”¥}
         \begin{enumerate}
-            \item \textbf{·ÂÉä¼¯} : CÊÇ·ÂÉä¼¯ $\Leftrightarrow$ ÈÎÒâÁ½µã¼äÖ±ÏßÈÔÔÚCÄÚ.
+            \item \textbf{ä»¿å°„é›†} : Cæ˜¯ä»¿å°„é›† $\Leftrightarrow$ ä»»æ„ä¸¤ç‚¹é—´ç›´çº¿ä»åœ¨Cå†….
                 $$\forall \vec x_i \in C,\ \theta_i \in R, \sum \theta_i = 1 , then\ \sum \theta_i x_i \in C $$
-            \item \textbf{·ÂÉä°ü} : 
+            \item \textbf{ä»¿å°„åŒ…} : 
                 $$ \text{aff}\ C = \left \{\sum \theta_i x_i\ |\ x_i\in C,\theta_i \in R, \sum \theta_i = 1 \right\}$$
-            \item \textbf{Í¹¼¯} : CÊÇÍ¹¼¯ $\Leftrightarrow$ ÈÎÒâÁ½µã¼äÏß¶ÎÈÔÔÚCÄÚ.
+            \item \textbf{å‡¸é›†} : Cæ˜¯å‡¸é›† $\Leftrightarrow$ ä»»æ„ä¸¤ç‚¹é—´çº¿æ®µä»åœ¨Cå†….
                 $$\forall \vec x_i \in C, \theta_i \in [0,1], \sum \theta_i = 1 , then\ \sum \theta_i x_i \in C $$
-            \item \textbf{Í¹°ü} : $$ \text{conv}\ C = \left \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1\right \}$$
-            \item \textbf{×¶}: CÊÇ×¶ $\Leftrightarrow \forall \vec x \in C,\ \theta > 0,\ then\ \theta \vec x \in$ C.
-            \item \textbf{Í¹×¶} : CÊÇÍ¹×¶ $\Leftrightarrow \forall \vec x_1, \vec x_2 \in C,\ \theta_1,\theta_2 \ge 0,\ then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in$ C.
+            \item \textbf{å‡¸åŒ…} : $$ \text{conv}\ C = \left \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1\right \}$$
+            \item \textbf{é”¥}: Cæ˜¯é”¥ $\Leftrightarrow \forall \vec x \in C,\ \theta > 0,\ then\ \theta \vec x \in$ C.
+            \item \textbf{å‡¸é”¥} : Cæ˜¯å‡¸é”¥ $\Leftrightarrow \forall \vec x_1, \vec x_2 \in C,\ \theta_1,\theta_2 \ge 0,\ then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in$ C.
         \end{enumerate}
-    \subsection{Í¹º¯Êı}
-        \textbf{Í¹º¯Êı}: º¯Êı$f: \mathbf{R}^n \to \mathbf{R}$ÊÇÍ¹µÄ$\Leftrightarrow$ Èô $\mathbf{dom} f$ÊÇÍ¹¼¯, ¶Ô$\forall x,y \in \mathbf{dom} f, \forall \theta \in [0,1]$ÓĞ
+        
+    \subsection{å‡¸å‡½æ•°}
+        \textbf{å‡¸å‡½æ•°}: å‡½æ•°$f: \mathbf{R}^n \to \mathbf{R}$æ˜¯å‡¸çš„$\Leftrightarrow$ è‹¥ $\mathbf{dom} f$æ˜¯å‡¸é›†, å¯¹$\forall x,y \in \mathbf{dom} f, \forall \theta \in [0,1]$æœ‰
             $$f(\theta x + (1 - \theta) y) \leqslant \theta f(x) + (1 - \theta)f(y)$$
             
-        \textbf{Ö¤Ã÷Ìõ¼ş}:
+        \textbf{è¯æ˜æ¡ä»¶}:
         \begin{enumerate}
-            \item \textbf{Ò»½×Ìõ¼ş}: $f(y) \geqslant f(x)+\nabla f(x)^{T}(y-x)$
-            \item \textbf{¶ş½×Ìõ¼ş}: $\nabla^{2} f(x) \succeq 0$
+            \item \textbf{ä¸€é˜¶æ¡ä»¶}: $f(y) \geqslant f(x)+\nabla f(x)^{T}(y-x)$
+            \item \textbf{äºŒé˜¶æ¡ä»¶}: $\nabla^{2} f(x) \succeq 0$
         \end{enumerate}
         
-        \textbf{ÄâÍ¹º¯Êı}: º¯Êı$f: \mathbf{R}^n \to \mathbf{R}$ÊÇÄâÍ¹º¯Êı$\Leftrightarrow$ ¶Ô$\forall \alpha \in R ,\ \{x \in \mathbf{dom} f \mid f(x) \leqslant \alpha\}$¶¼ÊÇÍ¹¼¯.
+        \textbf{æ‹Ÿå‡¸å‡½æ•°}: å‡½æ•°$f: \mathbf{R}^n \to \mathbf{R}$æ˜¯æ‹Ÿå‡¸å‡½æ•°$\Leftrightarrow$ å¯¹$\forall \alpha \in R ,\ \{x \in \mathbf{dom} f \mid f(x) \leqslant \alpha\}$éƒ½æ˜¯å‡¸é›†.
         
-    \subsection{Í¹ÓÅ»¯}
-        \textbf{ÓÅ»¯ÎÊÌâ}: Ä¿±êº¯Êı$f_0(x)$, ²»µÈÊ½Ô¼Êø$f_i(x)$, µÈÊ½Ô¼Êø$h_i(x)$.
+    \subsection{å‡¸ä¼˜åŒ–}
+        \textbf{ä¼˜åŒ–é—®é¢˜}: ç›®æ ‡å‡½æ•°$f_0(x)$, ä¸ç­‰å¼çº¦æŸ$f_i(x)$, ç­‰å¼çº¦æŸ$h_i(x)$.
             \begin{align*}
                 min &\quad f_0(x) \\
                 s.t.&\quad f_i(x) \leqslant 0\\
                     &\quad h_i(x) = 0
             \end{align*}
-            \quad ×îÓÅ½â$p^{\star}=\inf \left\{f_{0}(x) \mid f_{i}(x) \leqslant 0, h_{i}(x) = 0\right\}$
+            \quad æœ€ä¼˜è§£$p^{\star}=\inf \left\{f_{0}(x) \mid f_{i}(x) \leqslant 0, h_{i}(x) = 0\right\}$
             
-        \textbf{¿ÉĞĞĞÔÎÊÌâ}: Èç¹ûÄ¿±êº¯ÊıºãµÈÓÚÁã£¬Ôò×îÓÅ½âÊÇ0»ò¡Ş (Èô¿ÉĞĞ¼¯·Ç¿Õ»ò¿Õ¼¯).
+        \textbf{å¯è¡Œæ€§é—®é¢˜}: å¦‚æœç›®æ ‡å‡½æ•°æ’ç­‰äºé›¶ï¼Œåˆ™æœ€ä¼˜è§£æ˜¯0æˆ–âˆ (è‹¥å¯è¡Œé›†éç©ºæˆ–ç©ºé›†).
             \begin{align*}
                 min &\quad x \\
                 s.t.&\quad f_i(x) \leqslant 0\\
                     &\quad h_i(x) = 0
             \end{align*}
 
-        \textbf{Í¹ÓÅ»¯ÎÊÌâ}: ¶ÔÍ¹º¯Êı$f_0, f_i$
+        \textbf{å‡¸ä¼˜åŒ–é—®é¢˜}: å¯¹å‡¸å‡½æ•°$f_0, f_i$
             \begin{align*}
                 min &\quad x \\
                 s.t.&\quad f_i(x) \leqslant 0\\
                     &\quad a_i^T x = b_i
             \end{align*}
             \begin{enumerate}
-                \item Ä¿±êº¯Êı±ØĞëÊÇÍ¹.
-                \item ²»µÈÊ½Ô¼Êøº¯Êı±ØĞëÊÇÍ¹.
-                \item µÈÊ½Ô¼Êøº¯Êı$h_i(x)= a_i^T x- b_i$±ØĞëÊÇ·ÂÉä.
+                \item ç›®æ ‡å‡½æ•°å¿…é¡»æ˜¯å‡¸.
+                \item ä¸ç­‰å¼çº¦æŸå‡½æ•°å¿…é¡»æ˜¯å‡¸.
+                \item ç­‰å¼çº¦æŸå‡½æ•°$h_i(x)= a_i^T x- b_i$å¿…é¡»æ˜¯ä»¿å°„.
             \end{enumerate}
             
-    \subsection{¶ÔÅ¼}
-        \textbf{Lagrangeº¯Êı}: 
+    \subsection{å¯¹å¶}
+        \textbf{Lagrangeå‡½æ•°}: 
             $$L(x, \lambda, \nu) = f_0(x) + \sum_{i} \lambda_i f_i(x) + \sum_i \nu_i h_i(x)$$
             
-        \textbf{Lagrange¶ÔÅ¼º¯Êı}: 
+        \textbf{Lagrangeå¯¹å¶å‡½æ•°}: 
             $$g(\lambda, \nu)=\inf _{x \in \mathcal{D}} L(x, \lambda, \nu)=\inf _{x \in \mathcal{D}}\left(f_{0}(x)+\sum_{i=1}^{m} \lambda_{i} f_{i}(x)+\sum_{i=1}^{p} \nu_{i} h_{i}(x)\right)$$
         
 \end{document}

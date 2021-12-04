@@ -10,6 +10,8 @@
 \tableofcontents
 
 \section{矩阵论}
+    \subsection{矩阵}
+
     \subsection{线性空间}
         \textbf{线性空间}: 一个非空集合, 带有加法和数乘, 且满足下列几项条件.
             \begin{enumerate}
@@ -31,23 +33,21 @@
             \textbf{性质}:
 
 
-        \textbf{线性组合}: $x = a_1 x_1 +a_2 x_2+ ...+a_m x_m, \text{且}\ x \in V$
+        \textbf{线性组合}: $x = a_1 x_1 +a_2 x_2+ ... +a_m x_m = [x_1 ... x_n] \begin{bmatrix} a_1 = \boldsymbol X \boldsymbol a\\ \vdots \\ a_3 \end{bmatrix}, \text{且}\ x \in V$
 
             \textbf{性质}: 
-                \textbf{线性无关/线性相关}: $\nexists / \exists\ \boldsymbol c \neq \boldsymbol 0, let x = a_1 x_1 + a_2 x_2+ ...+a_m x_m = 0$ 
+                \textbf{线性无关/线性相关}: $\nexists / \exists\ \boldsymbol a \neq \boldsymbol 0, let x = \sum\limits_{i=1}^n a_i x_i = 0$ 
 
         \textbf{维数}: 线性空间中, 线性无关向量组所含向量最大的个数.
         
-        \textbf{基}: 一个向量组, 且 (1) 线性无关; (2) 线性空间中$\forall x \in V$都是该向量组的线性组合. $\forall x \in V, and x = \sum\limits_{i=1}^{D} a_i x_i$
-            \textbf{基向量}: 基中的一个向量. $x_i$
-            \textbf{坐标}: 向量在基中线性表示的系数. $a_i \in \boldsymbol a$
+        \textbf{基}: 一个向量组, 且 (1) 线性无关; (2) 线性空间中$\forall x \in V$都是该向量组的线性组合. $\forall x \in V, and x = \sum\limits_{i=1}^{D} a_i x_i$. 其中, $x_i$称\textbf{基向量}, $a_i \in \boldsymbol a$称\textbf{坐标}.
 
-        \textbf{性质}: 
-            \textbf{基变换}: 新旧基之间的变换矩阵. $\boldsymbol y = \boldsymbol x \boldsymbol C$
-                \textbf{性质}: 基变换矩阵是非奇异矩阵.
+            \textbf{性质}: 
+                \textbf{基变换}: 新旧基之间的变换矩阵. $\boldsymbol Y = \boldsymbol X \boldsymbol C$
+                    \textbf{性质}: 基变换矩阵是非奇异矩阵.
 
-            \textbf{坐标变换}: $\boldsymbol a = \boldsymbol C \boldsymbol b$.
-                \textbf{证明}: $v = \boldsymbol x \boldsymbol a = \boldsymbol y \boldsymbol b = \boldsymbol x \boldsymbol C \boldsymbol a \quad \Rightarrow \quad \boldsymbol a = \boldsymbol C \boldsymbol b$
+                \textbf{坐标变换}: $\boldsymbol a = \boldsymbol C \boldsymbol b$.
+                    \textbf{证明}: $v = \boldsymbol x \boldsymbol a = \boldsymbol y \boldsymbol b = \boldsymbol x \boldsymbol C \boldsymbol a \quad \Rightarrow \quad \boldsymbol a = \boldsymbol C \boldsymbol b$
 
             
         \textbf{线性子空间}: 线性空间中的一个非空集合, 且 (1)加法 $x,y\in V_1 ,\quad x+y \in V_1$; (2)数乘 $x \in V_1, k x \in V_1$
@@ -101,5 +101,13 @@
 
         \textbf{特征值 \& 特征向量}: $T \boldsymbol x = \lambda_0 \boldsymbol x$
         
+
+        \textbf{Jordan标准型}
+            $\boldsymbol{J}=\left[\begin{array}{llll}
+                \boldsymbol{J}_{1}\left(\lambda_{1}\right) & & & \\
+                & \boldsymbol{J}_{2}\left(\lambda_{2}\right) & & \\
+                & & \ddots & \\
+                & & & \boldsymbol{J}_{s}\left(\lambda_{s}\right)
+                \end{array}\right]$
 
 \end{document}
