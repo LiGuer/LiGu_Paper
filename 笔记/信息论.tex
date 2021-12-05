@@ -191,12 +191,30 @@
 
         \textbf{离散Markov信源}:
         
-            \textbf{Markov平稳分布}: 其中, $\boldsymbol \pi = \{\mathbb P(x = S_1), ..., \mathbb P(x = S_n)\}$是平稳分布.
+            \textbf{Markov平稳分布}: 其中, $\boldsymbol \pi = (\pi_1 = \mathbb P(x = S_1), ..., \pi_n = \mathbb P(x = S_n))^T, \text{且} \sum\limits_{i=1}^N \pi_i = 1$是平稳分布.
                 $$\boldsymbol \pi^T = \boldsymbol \pi^T \boldsymbol P$$
                 
-                对于有限状态马氏链，稳态分布恒存在; 如果马氏链中仅存在一个常返类，则方程(3.4.11)的解是唯一的；如果存在r个常返类，则具有r个线性独立的矢量解; 如果马氏链中仅存在一个常返类而且是非周期的（即遍历的），则(3.4.12)式成立；如果有多个常返类，但都是非周期的，则       也收敛，但矩阵的每行可能不同；如果马氏链具有一个或多个周期常返类，则      不收敛
+                \textbf{性质}: \textit{对于有限状态马氏链，稳态分布恒存在; 如果马氏链中仅存在一个常返类，则方程(3.4.11)的解是唯一的；如果存在r个常返类，则具有r个线性独立的矢量解; 如果马氏链中仅存在一个常返类而且是非周期的（即遍历的），则(3.4.12)式成立；如果有多个常返类，但都是非周期的，则       也收敛，但矩阵的每行可能不同；如果马氏链具有一个或多个周期常返类，则      不收敛}
 
         \textbf{m阶离散Markov信源}:
+        
+            \textbf{信源的熵}
+            \begin{align*}
+                H(\boldsymbol X^N) &= H(X_1 ... X_N)\\
+                &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_{N-1} ... X_{1}) \tag{条件熵展开}\\
+                &= H(X_1) + \sum\limits_{t=2}^N H(X_t | X_{t-1}) \tag{Markov性}\\
+                &= H(X_1) + (N-1) H(X_t | X_{t-1}) \tag{平稳性}\\
+                &= H(X_1) + (N-1) \sum p(X_{t-1}) \sum - \mathbb P(X_t | X_{t-1}) \log \mathbb P(X_t | X_{t-1}) \tag{条件熵代入}\\
+                &= H(\boldsymbol \pi) + (N-1)  \boldsymbol \pi^T \boldsymbol h \tag{平稳分布$\boldsymbol \pi$代入}
+            \end{align*}
+            
+            \textbf{极限符号熵}
+            \begin{align*}
+                H_\infty(\boldsymbol X^N) &= \lim\limits_{N \to \infty}\frac{H(\boldsymbol X^N)}{N} \tag{定义}\\
+                &= \lim\limits_{N \to \infty} \frac{H(\boldsymbol \pi) + (N-1)  \boldsymbol \pi^T \boldsymbol h}{N} \tag{代入}\\
+                &= \lim\limits_{N \to \infty} \frac{N \boldsymbol \pi^T \boldsymbol h}{N} \tag{省略$\to 0$量}\\
+                &= \boldsymbol \pi^T \boldsymbol h
+            \end{align*}
 
     \subsection{相关性 \& 剩余度}
         \textbf{信源效率}: $\eta = \frac{H_\infty}{H_0}$

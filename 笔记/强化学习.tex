@@ -237,18 +237,44 @@
                 $$\nabla_{\theta_{i}} L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot) ; s^{\prime} \sim \mathcal{E}}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{i-1}\right)-Q\left(s, a ; \theta_{i}\right)\right) \nabla_{\theta_{i}} Q\left(s, a ; \theta_{i}\right)\right]$$
 
 \section{基于策略函数}
+    \subsection{策略函数 $A = \Pi(S)$}
+        \begin{itemize}
+            \item 随机性策略: $\mathbb{P}_\pi(a \mid s)$
+            \item 确定性策略: $a = \pi(s)$
+        \end{itemize}
+
     \subsection{策略梯度}
+        \textbf{策略梯度}, 是一种参数化策略的学习框架, 通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
+        
         $$\mathbb{P}_\pi (a \mid s, \theta)$$
         $$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$$
-        \begin{align*}
-            \nabla_\theta V(s)
-            &= \nabla_\theta \left[\sum_{a \in A} \mathbb{P}_\pi (a \mid s)\ Q(s,a) \right] \tag{期望公式}\\
-            &= \sum_{a \in A} \nabla_\theta \left[ \mathbb{P}_\pi (a \mid s)\ Q(s,a) \right] \tag{分配律}\\
-            &= \sum_{a \in A} \left[ \nabla_\theta \mathbb{P}_\pi (a \mid s)\ Q(s,a) + \mathbb{P}_\pi (a \mid s)\ \nabla_\theta Q(s,a) \right] \tag{微分乘法法则}\\
-            &= \sum_{a \in A} \left[ \nabla_\theta \mathbb{P}_\pi (a \mid s)\ Q(s,a) + \mathbb{P}_\pi (a \mid s)\ \nabla_\theta \sum_{s', r} \mathbb{P}(s', r | s, a)\cdot \left(r + \gamma V(s') \right) \right] \tag{代入}\\
-            &= \sum_{a \in A} \left[ \nabla_\theta \mathbb{P}_\pi (a \mid s)\ Q(s,a) + \mathbb{P}_\pi (a \mid s)\ \sum_{s', r} \mathbb{P}(s', r | s, a)\cdot \nabla_\theta \gamma V(s') \right] \tag{分配律}
-        \end{align*}
-        $$\nabla J(\boldsymbol{\theta}) \propto \sum_{s} \mu(s) \sum_{a} q_{\pi}(s, a) \nabla \mathbb{P}_\pi(a \mid s, \boldsymbol{\theta})$$
+        
+        \textbf{性能度量函数}, .设性能度量函数即是价值函数$J(\boldsymbol{\theta}) = V(s)$, 则梯度有:
+            $$\left\{ \begin{array}{l} \nabla J(\boldsymbol{\theta}) = \nabla_\theta V(s) \propto \sum\limits_{s' \in S} \mathbb P_{\mu, \pi}(s') \sum\limits_{a \in A} Q_{\pi}(s', a) \nabla_{\theta} \mathbb{P}_\pi(a \mid s', \boldsymbol{\theta}) \\ 
+            \mathbb P_{\mu, \pi}(s') = \frac{\sum\limits_{k=0}^{\infty} \mathbb P_\pi^{(k)}\left(s'| s\right)}{\sum\limits_{s''\in S} \left(\sum\limits_{k=0}^{\infty} \mathbb P_\pi^{(k)}\left(s''| s\right)\right)} \end{array} \right.$$
+        
+        \textbf{证明}:
+            \begin{align*}
+                \nabla_\theta V(s)
+                &= \nabla_\theta\ \mathbb E[G_t|S_t = s] \tag{价值函数定义}\\
+                &= \nabla_\theta \left(\sum_{a \in A} \mathbb{P}_\pi (a \mid s)\ Q(s,a) \right) \tag{期望公式}\\
+                &= \sum_{a \in A} \nabla_\theta \left( \mathbb{P}_\pi (a \mid s)\ Q(s,a) \right) \tag{分配律}\\
+                &= \sum_{a \in A} \left( Q(s,a)\ \nabla_\theta \mathbb{P}_\pi (a \mid s) + \mathbb{P}_\pi (a \mid s)\ \nabla_\theta Q(s,a) \right) \tag{微分乘法法则}\\
+                &= \sum_{a \in A} \left( Q(s,a)\ \nabla_\theta \mathbb{P}_\pi (a \mid s) + \mathbb{P}_\pi (a \mid s)\ \nabla_\theta \sum_{s', r} \mathbb{P}(s', r | s, a) \left(r + \gamma V(s') \right) \right) \tag{代入}\\
+                &= \sum_{a \in A} \left( Q(s,a)\ \nabla_\theta \mathbb{P}_\pi (a \mid s)+ \mathbb{P}_\pi (a \mid s)\ \sum_{s', r} \mathbb{P}(s', r | s, a) \gamma \nabla_\theta V(s') \right) \tag{分配律}\\
+                &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \mathbb{P}_\pi (a \mid s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \mathbb{P}_\pi (a \mid s)\sum_{r} \mathbb{P}(s', r | s, a)  \tag{加法性质}\\
+                &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \mathbb{P}_\pi (a \mid s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \mathbb{P}(s', a| s)  \tag{条件概率公式}\\
+                &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \mathbb{P}_\pi (a \mid s) + \sum_{s'} \gamma \mathbb{P}(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
+                &= \sum_{s' \in S} \sum_{t=0}^{\infty} 
+                \gamma^t \mathbb P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_{\pi}(s', a) \nabla_\theta \mathbb{P}_\pi (a \mid s')  \tag{递推$ \nabla_\theta V(s')$展开, $\mathbb P^{(t)}$是t步转移概率}\\
+                &= \left(\sum_{s''\in S} \sum\limits_{t=0}^{\infty} \gamma^t \mathbb P_\pi^{(t)}(s''| s)\right) \cdot \sum\limits_{s' \in S} \frac{\sum\limits_{t=0}^{\infty} \gamma^t \mathbb P_\pi^{(t)}\left(s'| s\right)}{\sum\limits_{s''\in S} \left(\sum\limits_{t=0}^{\infty} \gamma^t \mathbb P_\pi^{(t)}\left(s''| s\right)\right)} \sum_{a \in A} Q_{\pi}(s', a) \nabla_\theta \mathbb{P}_\pi (a \mid s')  \tag{提项, 目的是将$\sum\limits_{t=0}^{\infty} \mathbb P_\pi^{(t)}\left(s'| s\right)$归一化}\\
+                &= \alpha \sum\limits_{s' \in S} \mathbb P_{\mu, \pi}(s') \sum_{a \in A} Q_{\pi}(s', a) \nabla_\theta \mathbb{P}_\pi (a \mid s')  \tag{\small 简写,$\left(\sum\limits_{s''\in S} \sum\limits_{t=0}^{\infty} \gamma^t \mathbb P_\pi^{(t)}(s''| s)\right)$简为系数, $\mathbb P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
+                &= \alpha \underset{s' \sim \mathbb P_{\mu, \pi}}{\mathbb E} \left[ \sum_{a \in A} Q_{\pi}(s', a) \nabla_\theta \mathbb{P}_\pi (a \mid s') \right] \tag{期望形式}\\
+                &= \alpha \underset{s' \sim \mathbb P_{\mu, \pi}}{\mathbb E} \left[ \sum_{a \in A} \mathbb{P}_\pi (a \mid s') Q_{\pi}(s', a) \frac{\nabla_\theta \mathbb{P}_\pi (a \mid s')}{\mathbb{P}_\pi (a \mid s')} \right] \tag{提项$\mathbb{P}_\pi (a \mid s')$, 方便后面对$a$写期望}\\
+                &= \alpha \underset{s' \sim \mathbb P_{\mu, \pi} \atop a \sim \pi}{\mathbb E} \left[Q_{\pi}(s', a)\  \nabla_\theta \ln \mathbb{P}_\pi (a \mid s') \right] \tag{期望形式, 微分公式}\\
+            \end{align*}
+            (证毕.)
+            
         \begin{align*}
             \nabla J(\boldsymbol{\theta}) 
             & \propto \mathbb{E}_{\pi}\left[\sum_{a} \pi\left(a \mid S_{t}, \boldsymbol{\theta}\right) q_{\pi}\left(S_{t}, a\right) \frac{\nabla \mathbb{P}_\pi\left(a \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(a \mid S_{t}, \boldsymbol{\theta}\right)}\right] \\
@@ -269,51 +295,96 @@
             即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的；\\
             在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
             
-        \textbf{with 基线方法}:
-            $$\nabla J(\boldsymbol{\theta}) \propto \sum_{s} \mu(s) \sum_{a}\left(q_{\pi}(s, a)-b(s)\right) \nabla \pi(a \mid s, \boldsymbol{\theta})$$
-            $$\sum_{a} b(s) \nabla \pi(a \mid s, \boldsymbol{\theta})=b(s) \nabla \sum_{a} \pi(a \mid s, \boldsymbol{\theta})=b(s) \nabla 1=0$$
-            $$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_{t}+\alpha\left(G_{t}-b\left(S_{t}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}$$
-
+    \subsubsection{随机策略梯度}
+        \textbf{随机策略梯度}, \textit{主要解决连续动作空间的强化学习问题. 算法的基本思想是按照性能梯度的方向调整策略的参数$\nabla_{\theta} J\left(\pi_{\theta}\right)$。这些算法的基本结果是策略梯度定理, 如下.策略梯度出人意料地简单。特别是，尽管状态分布$\rho_\pi(s)$依赖于策略参数，但策略梯度并不依赖于状态分布的梯度。该定理将性能梯度的计算简化为一个简单的期望，具有重要的实用价值。这些算法必须解决的一个问题是如何估计作用值函数$Q_\pi(s, a)$。}
+            $$\begin{aligned}
+                \nabla_{\theta} J\left(\pi_{\theta}\right) &=\int_{\mathcal{S}} \rho^{\pi}(s) \int_{\mathcal{A}} \nabla_{\theta} \pi_{\theta}(a \mid s) Q^{\pi}(s, a) \mathrm{d} a \mathrm{~d} s \\
+                &=\mathbb{E}_{s \sim \rho_{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(a \mid s) Q^{\pi}(s, a)\right]
+            \end{aligned}$$
+            
+    \subsubsection{确定策略梯度} 
+        \textbf{确定策略梯度}: 采用确定性策略函数.
+        
+        \textbf{eg.} 策略函数常用形式
+        \begin{displaymath} a = \pi(s) = \left\{ \begin{array}{lr}
+            \underset{a}{\operatorname{argmax}}\ Q_\pi(s, a)    & (\text{max})\\
+            \underset{a}{\operatorname{argmax}}\ \frac{e^{h(s, a, \theta)}}{\sum_{b} e^{h(s, b, \theta)}}    & (\text{soft-max})
+        \end{array} \right. \end{displaymath}
+        
+        \textbf{确定策略梯度定理}: 确定性策略梯度定理乍一看不像随机版本（方程式2）。然而，我们现在证明，对于一大类随机策略，包括许多凸点函数，确定性策略梯度确实是随机策略梯度的一个特殊（极限）情况。我们通过确定性策略πθ：S来参数化随机策略πθ，σ→ A和方差参数σ，使得对于σ=0，随机策略等价于确定性策略πμθ，0≡ µθ. 然后我们将其表示为σ→ 0随机策略梯度收敛于确定性梯度（证明和技术条件见附录C）。
+            $$\nabla_{\theta} J\left(\mu_{\theta}\right) =\left.\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_{\theta} \mu_{\theta}(s) \nabla_{a} Q^{\mu}(s, a)\right|_{a=\mu_{\theta}(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}}\left[\left.\nabla_{\theta} \mu_{\theta}(s) \nabla_{a} Q^{\mu}(s, a)\right|_{a=\mu_{\theta}(s)}\right]$$ 
+            
+            $$\lim _{\sigma \downarrow 0} \nabla_{\theta} J\left(\pi_{\mu_{\theta}, \sigma}\right)=\nabla_{\theta} J\left(\mu_{\theta}\right)$$
 
 \section{基于策略+价值}
-        \subsection{On-Policy \& Off-Policy}
-            \begin{itemize}
-                \item On-Policy: 目标策略和行为策略是同一个策略.
-                \item Off-Policy: 目标策略和行为策略分开.
-            \end{itemize}
-        \subsubsection{Actor-Critic}
-            结合了 Policy Gradient (Actor) 和 Function Approximation (Critic) 的方法. 
+    \subsection{Actor-Critic}
+        \textbf{Actor-Critic}, \textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了 策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
+    
+        \begin{itemize}
+            \item \textbf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 根据 Critic 的评分更新随机策略函数. \\ \textit{通过$\nabla_{\theta} J\left(\pi_{\theta}\right)$的随机梯度上升调整随机策略$\pi_\theta(s)$ 的参数$\theta$。代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
+            
+            \item \textbf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样。通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差。然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_{\theta} J\left(\pi_{\theta}\right)=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(a \mid s) Q^{w}(s, a)\right]$. 更直观地说，条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的，$\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解，该线性回归问题根据这些特征估计$Q_\pi(s，a)$。在实践中，条件(2)通常被放宽，以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上，如果同时满足近似值(1)和(2)，则整个算法相当于根本不使用批评家. }
+        \end{itemize}
+    
+        \begin{align*}
+            \boldsymbol{\theta}_{t+1} 
+            &= \boldsymbol{\theta}_{t}+\alpha\left(G_{t: t+1}-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} \\
+            &=\boldsymbol{\theta}_{t}+\alpha\left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} \\
+            &=\boldsymbol{\theta}_{t}+\alpha \delta_{t} \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}
+        \end{align*}
         
+        \textbf{优势}: 引入了时序差分算法, 因此可以进行单步更新, 比传统 Policy Gradient 训练更快.
+        
+        \textbf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题.  
+        
+        Actor 在运用 随机梯度算法 进行 梯度上升 时, 由 Critic 来告诉他, 这次的 梯度上升 是不是一次正确的上升, 如果这次的得分不好, 那么就不要上升那么多. Actor 想要最大化期望的奖励, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做奖励. Critic 的更新很简单, 就是像 Q-learning 那样更新现实和估计的误差 (TD error) 就好了.
+        
+    \subsection{确定性 Actor-Critic}
+        \textit{现在我们考虑如何将策略梯度框架扩展到确定性策略。我们的主要结果是一个确定性策略梯度定理，类似于前一节中介绍的随机策略梯度定理。我们提供了几种方法来推导和理解这个结果。首先，我们在确定性策略梯度的形式背后提供了一种非正式的直觉。然后从第一性原理出发，给出了确定性策略梯度定理的形式化证明。最后，我们证明了确定性策略梯度定理实际上是随机策略梯度定理的一个极限情况。证据的细节将推迟到附录中。}
+    
+    
+        \textit{现在，我们使用确定性策略梯度定理来推导策略上和策略下的参与者批评算法。我们从最简单的案例开始——关于策略更新，使用一个简单的Sarsa批评者——以便尽可能清楚地说明想法。然后，我们考虑关闭策略的情况下，这一次使用一个简单的Q-学习批评家来说明关键思想。由于函数逼近器引入的偏差以及非策略学习引起的不稳定性，这些简单算法在实践中可能存在收敛问题。然后，我们转向一种更具原则性的方法，使用兼容函数近似和梯度时间差分学习}
+        
+        \subsubsection{On-Policy Deterministic Actor-Critic}
             \begin{align*}
-                \boldsymbol{\theta}_{t+1} 
-                &= \boldsymbol{\theta}_{t}+\alpha\left(G_{t: t+1}-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} \\
-                &= \boldsymbol{\theta}_{t}+\alpha\left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} 
+                \delta_{t} &=r_{t}+\gamma Q^{w}\left(s_{t+1}, a_{t+1}\right)-Q^{w}\left(s_{t}, a_{t}\right) \\
+                w_{t+1} &=w_{t}+\alpha_{w} \delta_{t} \nabla_{w} Q^{w}\left(s_{t}, a_{t}\right) \\
+                \theta_{t+1} &=\theta_{t}+\left.\alpha_{\theta} \nabla_{\theta} \mu_{\theta}\left(s_{t}\right) \nabla_{a} Q^{w}\left(s_{t}, a_{t}\right)\right|_{a=\mu_{\theta}(s)}
             \end{align*}
             
-            Actor 基于概率选行为
-            Critic 基于 Actor 的行为评判行为的得分
-            Actor 根据 Critic 的评分修改选行为的概率
+
+        
+        \subsubsection{Off-Policy Deterministic Actor-Critic}
+            \begin{align*}
+                \delta_{t} &=r_{t}+\gamma Q^{w}\left(s_{t+1}, \mu_{\theta}\left(s_{t+1}\right)\right)-Q^{w}\left(s_{t}, a_{t}\right) \\
+                w_{t+1} &=w_{t}+\alpha_{w} \delta_{t} \nabla_{w} Q^{w}\left(s_{t}, a_{t}\right) \\
+                \theta_{t+1} &=\theta_{t}+\left.\alpha_{\theta} \nabla_{\theta} \mu_{\theta}\left(s_{t}\right) \nabla_{a} Q^{w}\left(s_{t}, a_{t}\right)\right|_{a=\mu_{\theta}(s)}
+            \end{align*}
             
-            \textbf{优势}: 可以进行单步更新, 比传统的 Policy Gradient 要快.
+            随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
             
-            \textbf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题. 
+        \textbf{参考文献}: [1] Author A , Address A . Deterministic Policy Gradient Algorithms. 2002.
             
-            Actor 在运用 Policy Gradient 的方法进行 Gradient ascent 的时候, 由 Critic 来告诉他, 这次的 Gradient ascent 是不是一次正确的 ascent, 如果这次的得分不好, 那么就不要 ascent 那么多. Actor 想要最大化期望的 reward, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做 reward.Critic 的更新很简单, 就是像 Q learning 那样更新现实和估计的误差 (TD error) 就好了.
-            
-        \subsubsection{Deep Deterministic Policy Gradient}
-            \textbf{思想}: Deep: Actor Critic + Deep Q Networks;\quad Deterministic: 策略函数采用"确定性策略函数";
-            
-            Policy gradient 在连续动作上进行动作的筛选 . 一种使用 Actor Critic 结构, 但是输出的不是行为的概率, 而是具体的行为, 用于连续动作 (continuous action) 的预测. DDPG 结合了之前获得成功的 DQN 结构, 提高了 Actor Critic 的稳定性和收敛性.
-            
-            \textbf{深度学习的作用, 对于DPG的关键改进}:
-            \begin{enumerate}
-                \item 使用卷积神经网络来模拟策略函数和Q函数, 并用深度学习的方法来训练, 证明了在RL方法中, 非线性模拟函数的准确性和高性能、可收敛；而DPG中, 可以看成使用线性回归的机器学习方法：使用带参数的线性函数来模拟策略函数和Q函数, 然后使用线性回归的方法进行训练。
-                \item experience replay memory的使用：actor同环境交互时, 产生的transition数据序列是在时间上高度关联(correlated)的, 如果这些数据序列直接用于训练, 会导致神经网络的overfit, 不易收敛。DDPG的actor将transition数据先存入experience replay buffer, 然后在训练时, 从experience replay buffer中随机采样mini-batch数据, 这样采样得到的数据可以认为是无关联的。
-                \item target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
-            \end{enumerate}
-            
-        \subsubsection{异步优势Actor-Critic}
-            DQN中很重要的一点是他具有经验池, 可以降低数据之间的相关性, 而A3C则提出降低数据之间的相关性的另一种方法：异步, 即创建多个并行的环境。A3C的算法实际上就是将Actor-Critic放在了多个线程中进行同步训练. 
+    \subsection{相容函数逼近}
+        
+    \subsection{Deep Deterministic Policy Gradient}
+        \textbf{Deep Deterministic Policy Gradient}: Deep: Actor Critic + Deep Q Networks;\quad Deterministic: 策略函数采用"确定性策略函数";
+    
+        \textit{将深度Q学习成功背后的理念应用于持续行动领域。提出了一种基于确定性策略梯度的 Actor批评、无模型算法，该算法可以在连续动作空间上运行。使用相同的学习算法、网络结构和超参数，我们的算法稳健地解决了20多个模拟物理任务，包括经典问题，如手推车摆动、灵巧操作、腿部运动和汽车驾驶。我们的算法能够找到性能与规划算法相比具有竞争力的策略，并且能够完全访问域及其派生的动态。我们进一步证明，对于许多任务，该算法可以“端到端”学习策略：直接从原始像素输入。}
+
+        
+        Policy gradient 在连续动作上进行动作的筛选 . 一种使用 Actor Critic 结构, 但是输出的不是行为的概率, 而是具体的行为, 用于连续动作 (continuous action) 的预测. DDPG 结合了之前获得成功的 DQN 结构, 提高了 Actor Critic 的稳定性和收敛性.
+        
+        \textbf{深度学习的作用, 对于DPG的关键改进}:
+        \begin{enumerate}
+            \item 使用卷积神经网络来模拟策略函数和Q函数, 并用深度学习的方法来训练, 证明了在RL方法中, 非线性模拟函数的准确性和高性能、可收敛；而DPG中, 可以看成使用线性回归的机器学习方法：使用带参数的线性函数来模拟策略函数和Q函数, 然后使用线性回归的方法进行训练。
+            \item experience replay memory的使用：actor同环境交互时, 产生的transition数据序列是在时间上高度关联(correlated)的, 如果这些数据序列直接用于训练, 会导致神经网络的overfit, 不易收敛。DDPG的actor将transition数据先存入experience replay buffer, 然后在训练时, 从experience replay buffer中随机采样mini-batch数据, 这样采样得到的数据可以认为是无关联的。
+            \item target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
+        \end{enumerate}
+    
+        \textbf{参考文献}: [1] Lillicrap T P ,  Hunt J J ,  Pritzel A , et al. Continuous control with deep reinforcement learning[J]. Computer ence, 2015.
+        
+        
         
 \section{例子}
     \subsection{围棋}
