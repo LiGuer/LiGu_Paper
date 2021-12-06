@@ -1,10 +1,14 @@
 \documentclass{article} 
 \usepackage{amsmath}
 \usepackage[UTF8]{ctex}
-\title{强化学习}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
+\title{强化学习}\date{} \linespread{1.25}
 \usepackage{ntheorem}\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
+\usepackage{paralist}
+\let\itemize\compactitem
+\let\enumerate\compactenum
+
 \begin{document}
 \tableofcontents
 
@@ -236,6 +240,7 @@
                 $$L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot)}\left[\left(y_{i}-Q\left(s, a ; \theta_{i}\right)\right)^{2}\right]$$
                 $$\nabla_{\theta_{i}} L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot) ; s^{\prime} \sim \mathcal{E}}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{i-1}\right)-Q\left(s, a ; \theta_{i}\right)\right) \nabla_{\theta_{i}} Q\left(s, a ; \theta_{i}\right)\right]$$
 
+
 \section{基于策略函数}
     \subsection{策略函数 $A = \Pi(S)$}
         \begin{itemize}
@@ -244,14 +249,16 @@
         \end{itemize}
 
     \subsection{策略梯度}
-        \textbf{策略梯度}, 是一种参数化策略的学习框架, 通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
-        
-        $$\mathbb{P}_\pi (a \mid s, \theta)$$
-        $$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$$
+        \textbf{策略梯度}, 是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
+            $$\mathbb{P}_\pi (a \mid s, \theta)$$
+            $$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$$
         
         \textbf{性能度量函数}, .设性能度量函数即是价值函数$J(\boldsymbol{\theta}) = V(s)$, 则梯度有:
-            $$\left\{ \begin{array}{l} \nabla J(\boldsymbol{\theta}) = \nabla_\theta V(s) \propto \sum\limits_{s' \in S} \mathbb P_{\mu, \pi}(s') \sum\limits_{a \in A} Q_{\pi}(s', a) \nabla_{\theta} \mathbb{P}_\pi(a \mid s', \boldsymbol{\theta}) \\ 
-            \mathbb P_{\mu, \pi}(s') = \frac{\sum\limits_{k=0}^{\infty} \mathbb P_\pi^{(k)}\left(s'| s\right)}{\sum\limits_{s''\in S} \left(\sum\limits_{k=0}^{\infty} \mathbb P_\pi^{(k)}\left(s''| s\right)\right)} \end{array} \right.$$
+            \begin{align*}
+                \nabla J(\boldsymbol{\theta}) &= \nabla_\theta V(s) \\
+                &\propto \sum\limits_{s' \in S} \mathbb P_{\mu, \pi}(s') \sum\limits_{a \in A} Q_{\pi}(s', a) \nabla_{\theta} \mathbb{P}_\pi(a \mid s', \boldsymbol{\theta}) \\
+                & \propto \underset{s' \sim \mathbb P_{\mu, \pi} \atop a \sim \pi}{\mathbb E} \left[Q_{\pi}(s', a)\  \nabla_\theta \ln \mathbb{P}_\pi (a \mid s') \right]
+            \end{align*}
         
         \textbf{证明}:
             \begin{align*}
@@ -275,35 +282,14 @@
             \end{align*}
             (证毕.)
             
-        \begin{align*}
-            \nabla J(\boldsymbol{\theta}) 
-            & \propto \mathbb{E}_{\pi}\left[\sum_{a} \pi\left(a \mid S_{t}, \boldsymbol{\theta}\right) q_{\pi}\left(S_{t}, a\right) \frac{\nabla \mathbb{P}_\pi\left(a \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(a \mid S_{t}, \boldsymbol{\theta}\right)}\right] \\
-            &= \mathbb{E}_{\pi}\left[q_{\pi}\left(S_{t}, A_{t}\right) \frac{\nabla \mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}\right] \\
-            &= \mathbb{E}_{\pi}\left[G_{t} \frac{\nabla \mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}{\mathbb{P}_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)}\right]\\
-            &= \mathbb{E}_{\pi}\left[G_{t} \nabla \ln \mathbb{P}_\pi \left(A_{t} \mid S_{t}, \boldsymbol{\theta}\right)\right]
-        \end{align*}
-        大好处就是, 它能在一个连续区间内挑选动作
-        损失函数:
-            \begin{align*}
-                \nabla_{\theta} E_{x}[f(x)] &=\nabla_{\theta} \sum_{x} p(x) f(x) \\
-                &=\sum_{x} \nabla_{\theta} p(x) f(x) \\
-                &=\sum_{x} p(x) \frac{\nabla_{\theta} p(x)}{p(x)} f(x) \\
-                &=\sum_{x} p(x) \nabla_{\theta} \log p(x) f(x) \\
-                &=E_{x}\left[f(x) \nabla_{\theta} \log p(x)\right]
-            \end{align*}
-        缺点:
-            即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的；\\
-            在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
+        \textbf{优点}, 能在一个连续区间内挑选动作
+        
+        \textbf{缺点}:
+            即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的； 在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
+
             
-    \subsubsection{随机策略梯度}
-        \textbf{随机策略梯度}, \textit{主要解决连续动作空间的强化学习问题. 算法的基本思想是按照性能梯度的方向调整策略的参数$\nabla_{\theta} J\left(\pi_{\theta}\right)$。这些算法的基本结果是策略梯度定理, 如下.策略梯度出人意料地简单。特别是，尽管状态分布$\rho_\pi(s)$依赖于策略参数，但策略梯度并不依赖于状态分布的梯度。该定理将性能梯度的计算简化为一个简单的期望，具有重要的实用价值。这些算法必须解决的一个问题是如何估计作用值函数$Q_\pi(s, a)$。}
-            $$\begin{aligned}
-                \nabla_{\theta} J\left(\pi_{\theta}\right) &=\int_{\mathcal{S}} \rho^{\pi}(s) \int_{\mathcal{A}} \nabla_{\theta} \pi_{\theta}(a \mid s) Q^{\pi}(s, a) \mathrm{d} a \mathrm{~d} s \\
-                &=\mathbb{E}_{s \sim \rho_{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(a \mid s) Q^{\pi}(s, a)\right]
-            \end{aligned}$$
-            
-    \subsubsection{确定策略梯度} 
-        \textbf{确定策略梯度}: 采用确定性策略函数.
+    \subsubsection{确定性策略梯度} 
+        \textbf{确定性策略梯度}: 采用确定性策略函数.
         
         \textbf{eg.} 策略函数常用形式
         \begin{displaymath} a = \pi(s) = \left\{ \begin{array}{lr}
@@ -384,8 +370,7 @@
     
         \textbf{参考文献}: [1] Lillicrap T P ,  Hunt J J ,  Pritzel A , et al. Continuous control with deep reinforcement learning[J]. Computer ence, 2015.
         
-        
-        
+   
 \section{例子}
     \subsection{围棋}
         \subsubsection{规则}
