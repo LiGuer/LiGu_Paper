@@ -11,8 +11,10 @@
 \section{主成分分析}
 		[目标]:
 			数据降维，提取数据的主要特征分量, 满足：
-			(1) 最近重构性: 样本点到该超平面的距离都足够近。
-			(2) 最大可分性: 样本点在该超平面的投影尽可能分开。
+    			\begin{enumerate}
+    			    \item 最近重构性: 样本点到该超平面的距离都足够近。
+    			    \item 最大可分性: 样本点在该超平面的投影尽可能分开。
+    			\end{enumerate}
 			
 		[优化问题]:
     		\begin{align*}
@@ -21,7 +23,7 @@
     		\end{align*}
 			
 		[流程]:
-			(1) 数据中心化, Σ \vec x_i = 0
+			(1) 数据中心化, \sum \vec x_i = 0
 			(2) 计算协方差矩阵 C = X X^T
 			(3) 对协方差矩阵C 特征值分解
 			(4) 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
@@ -29,19 +31,18 @@
 			
 		[原理]:
 				分别从目标(1, 2)可以推得同样的结果
-			(3)	目标函数: 样本点到超空间投影 y = WT x 尽可能分开
-				即.方差最大:max Σ WT x xT W
+			(3)	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
 				协方差矩阵:
-					D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T
+					$D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T$
 				协方差矩阵对角化
 			(4) 优化问题构造:
 					min_W		tr( W^T x x^T W )
 					s.t.		W^T W = I
 			(5) 计算最优点:
-				Lagrange函数 L(W,λ) = W^T x x^T W + λ( W^T W - I )
-				Lagrange对偶 G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))
+				Lagrange函数 $L(W,λ) = W^T x x^T W + λ( W^T W - I )$
+				Lagrange对偶 $G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))$
 				L(W,λ)求导, 当导数为0时, 取得极值
-				=>	X X^T ω_i = λ_i ω_i,
+				=>	$X X^T ω_i = λ_i ω_i$
 				即.对协方差X XT, 特征值求解
 			()	取特征值最大的yDim个特征向量, 即目标投影矩阵W
 
@@ -65,30 +66,41 @@
 		[目标]:
 			求一条直线，使得所有样本点到该直线的Euclid距离最小.
 			
-		[优化问题]:
+		[优化问题]: 最小化均方误差
     		\begin{align*}
-    			\min_w  &\quad	MSE(\tilde y) · n = \sum (\tilde y - y)^2 = \sum (w^T x - y)^2
+    			\min_w  &\quad	MSE(\tilde{\boldsymbol y}) · n = \sum (\tilde {\boldsymbol y} -\boldsymbol y)^2 = \sum (\boldsymbol w^T \boldsymbol x - \boldsymbol y)^2
     		\end{align*}
+    		
 		[原理]:
-			(1) 直线方程: f(x) = w^T x + b = w^T x'		(x' = [1, x], w_0 = b)
+			(1) 直线方程: $$f(x) = \boldsymbol w^T \boldsymbol x	\quad (\boldsymbol x = [1, \boldsymbol x_0])$$
 			(2) 均方误差:
-					MSE(y~)*n = Σ (y~ - y)²
-					= Σ (w^T x - y)² = (X w - y)^T (X w - y)
+					$$MSE(\tilde y) · n = \sum (\tilde {\boldsymbol y} -\boldsymbol y)^2 = \sum (\boldsymbol w^T \boldsymbol x - \boldsymbol y)^2 = (X w - y)^T (X w - y)$$
+					
 			(3) 优化问题构造: 无约束凸优化问题
-					min_W	Σ (w^T x - y)² = (X w - y)^T (X w - y)
+					$$\min_W	\sum (\boldsymbol w^T \boldsymbol x - y)^2 = (X w - y)^T (X w - y)$$
+					
 			(4) 计算最优点: 求导, 导数为0时取得极值
-					∂MSE / ∂W = 2·X^T·(w^T x - y) = 0
-				=>	w* = (X^T X)^-1 X^T y
-					f(x) = x^T (X^T X)^-1 X^T y
+				\begin{align*}
+					\frac{\partial MSE}{\partial w} &= 2·X^T·(\boldsymbol w^T \boldsymbol x - y) = 0\\
+				\Rightarrow	w^* &= (X^T X)^-1 X^T y\\
+					f(x) &= x^T (X^T X)^-1 X^T y
+				\end{align*}
+				
 			(5) 一维场景:
 				优化问题:
-					min_{w,b}	Σ (w^T x_i + b - y_i)²
-				=>	∂E/∂w = 2( w^T Σx_i² + Σ(x_i(b - y_i)) )	= 0
-					∂E/∂b = 2( n b + Σ(y_i - w x_i) )			= 0
+				\begin{align*}
+					min_{w,b}	\sum (\boldsymbol w^T \boldsymbol x_i + b - y_i)^2\\
+				    \Rightarrow	\frac{\partial E}{\partial w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
+					\frac{\partial E}{\partial b} = 2( n b + \sum(y_i - w x_i) ) = 0
+				\end{align*}
+				
 				最优点:
-				=>	wΣx_i² = Σ_i x_i y_i - 1/n (Σ_i x_i)(Σ_i y_i) + w/n (Σ_i x_i)²
-					w* = (Σ y_i(x_i - x¯)) / (Σ x_i² - 1/n (Σ x_i)²)
-					b* = 1/n·Σ(y_i - w x_i)
+				\begin{align*}
+				    \Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} \left(\sum_i x_i \right) \left(\sum_i y_i\right) + \frac{w}{n} \left(\sum_i x_i\right)^2\\
+					w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}\\
+					b^* &= \frac{1}{n}·\sum(y_i - w x_i)\\
+				\end{align*}
+
 					
 \section{支持向量机}
 		[目标]: 找到目标超平面, 使得所有样本点间隔最小值$\gamma_{min} = \min \gamma_i$最大.
@@ -96,7 +108,7 @@
 		[优化问题]: 凸二次规划问题
 		    \begin{align*}
 		        min     &\quad	\frac{||w||^2}{2}\\
-				s.t.    &\quad	y_i (w^T x_i + b) \le 1
+				s.t.    &\quad	y_i (\boldsymbol w^T \boldsymbol x_i + b) \le 1
 		    \end{align*}
 
 		[步骤]:
@@ -114,53 +126,53 @@
             \end{enumerate}
 
 		[原理]:
-			(1) 超平面方程: $w^T x + b = 0$\\
-				点面距: $d = \frac{|w^T x + b|}{||w||}$
+			(1) 超平面方程: $\boldsymbol w^T \boldsymbol x + b = 0$\\
+				点面距: $d = \frac{|\boldsymbol w^T \boldsymbol x + b|}{||w||}$
 				
 			(2) 分类
 			\begin{align*}\left \{ \begin{array}{cc}
-				w^T x_i + b \ge +1    &\quad (y_i = +1)\\
-				w^T x_i + b \le -1	&\quad (y_i = -1)\\
+				\boldsymbol w^T \boldsymbol x_i + b \ge +1    &\quad (y_i = +1)\\
+				\boldsymbol w^T \boldsymbol x_i + b \le -1	&\quad (y_i = -1)\\
 			    \end{array} \right.
-				\quad\Rightarrow\quad y_i (w^T x_i + b) \ge 1
+				\quad\Rightarrow\quad y_i (\boldsymbol w^T \boldsymbol x_i + b) \ge 1
 			\end{align*}
 
 			(3) 间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
 					$$\Delta = \frac{2}{||w||}$$
 					
 			(4) 优化问题构造: 使间隔最大化. 凸二次规划问题
-					max  2 / ||w||    <=>    min  ||w||² / 2
-				=>	min		||w||² / 2
-					s.t.	y_i (w^T x_i + b) ≥ 1
+					max  2 / ||w||    <=>    min  ||w||^2 / 2
+				=>	min		||w||^2 / 2
+					s.t.	y_i (\boldsymbol w^T \boldsymbol x_i + b) ≥ 1
 			(5) 计算最优点:
 				Lagrange函数
-					L(w, b,λ) = ||w||² / 2 + Σλ_i (1 - y_i (w^T x_i + b))
+					L(w, b,λ) = ||w||^2 / 2 + \sumλ_i (1 - y_i (\boldsymbol w^T \boldsymbol x_i + b))
 					L(w, b,λ)求导, 当导数为0时, 取得极值
-					=>	w* = Σ λ_i y_i x_i		0 = Σ λ_i y_i
+					=>	w* = \sum λ_i y_i x_i		0 = \sum λ_i y_i
 				Lagrange对偶
-					G(λ) = Lx(w*, b*, λ) = Σλ_i - 1/2 Σ_i Σ_j λ_i λ_j y_i y_j x_i^T x_j
+					G(λ) = Lx(w*, b*, λ) = \sum λ_i - 1/2 \sum_i \sum_j λ_i λ_j y_i y_j x_i^T x_j
 				对偶问题: 二次规划问题
 					max		G(λ)
-					s.t.	λ≥0		Σ λ_i y_i = 0
+					s.t.	λ≥0		\sum λ_i y_i = 0
 					=>	Sequential Minimal Optimization算法求解λ*
 				KKT条件
-					λ≥0    y_i (w^T x_i + b) - 1 ≥ 0    λ_i(y_i(w^T x_i + b) - 1) = 0
+					λ≥0    y_i (\boldsymbol w^T \boldsymbol x_i + b) - 1 ≥ 0    λ_i(y_i(\boldsymbol w^T \boldsymbol x_i + b) - 1) = 0
 			(6) 核函数:将样本从原始空间映射到更高维特征空间,使得其线性可分.
 				=>	超平面方程: w^T Φ(x) + b = 0
-					min		||w||² / 2
+					min		||w||^2 / 2
 					s.t.	y_i (w^T Φ(x_i) + b) ≥ 1
-					G(λ) = Σλ_i - 1/2 Σ_i Σ_j λ_i λ_j y_i y_j Φ(x_i)^T Φ(x_j)
+					G(λ) = \sumλ_i - 1/2 \sum_i \sum_j λ_i λ_j y_i y_j Φ(x_i)^T Φ(x_j)
 				=>	设 核函数к(x_i, x_j) = Φ(x_i)^T Φ(x_j)
-					f(x) = w*^T x + b = Σ λ_i y_i к(x, x_i) + b
+					f(x) = w*^T x + b = \sum λ_i y_i к(x, x_i) + b
 				*	к是核函数 <=> 核矩阵[a_ij = к(x_i, x_j)]总是半正定
 			(7) Sequential Minimal Optimization算法
-				∵	λ是n-1自由度, 确定前n-1个量, 则第n个由Σ λ_i y_i = 0自动确定.
+				∵	λ是n-1自由度, 确定前n-1个量, 则第n个由\sum λ_i y_i = 0自动确定.
 				∴	每次选2个λ_i λ_j, 固定其他λ_k不变, 优化λ_i λ_j, 更新b
 				优化λ_i λ_j:
-				=>	λ_i = (-Σ_{k≠i≠j} λ_k y_k)·y_1 - λ_j y_i y_j = ζ y_1 - λ_j y_i y_j
+				=>	λ_i = (-\sum_{k≠i≠j} λ_k y_k)·y_1 - λ_j y_i y_j = ζ y_1 - λ_j y_i y_j
 					G(λ_j) = (λ_j + ζ y_1 - λ_j y_i y_j) + C - v_i (ζ-λ_j y_j) - v_j λ_j y_j
-							- 1/2 к_ii (ζ-λ_j y_j)² - 1/2 к_jj λ_j² - к_ij λ_j y_j (ζ-λ_j y_j)²
-					其中 v_i = Σ_{k≠i≠j} λ_i y_i к_ki = f(x_i) - λ_i y_i к_ii -λ_j y_j к_ij - b, v_j同理
+							- 1/2 к_ii (ζ-λ_j y_j)^2 - 1/2 к_jj λ_j^2 - к_ij λ_j y_j (ζ-λ_j y_j)^2
+					其中 v_i = \sum_{k≠i≠j} λ_i y_i к_ki = f(x_i) - λ_i y_i к_ii -λ_j y_j к_ij - b, v_j同理
 					∂G/∂λ_j = -(к_ii+к_jj-2к_ij)(λ_j^old - λ_j^new) + y_j(y_j-y_i+f(x_i)-f(x_j)) = 0
 				=>	λ_j^new = λ_j^old + y_j (E_i - E_j)/(к_ii+к_jj-2к_ij)		其中E_i = f(x_i) - y_i
 				修剪: 使得λ_j* 满足约束条件, λ_j应当∈[L,H]:
@@ -225,4 +237,6 @@
         		        sigmoid(x) &= \frac{1}{1+e^{-x}}\\
         		        sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
         		    \end{align*}
+
+ 
 \end{document}

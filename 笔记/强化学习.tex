@@ -223,36 +223,45 @@
     \subsection{时序差分学习}
         时序差分学习是蒙特卡罗思想和动态规划思想的结合。与蒙特卡罗方法一样, 时序差分方法可以直接从原始经验中学习, 而无需环境动力学模型。与动态规划一样, 时序差分方法部分基于其他学习的估计更新估计, 而无需等待最终结果（它们是自举的）.
             $$V\left(S_{t}\right) \leftarrow V\left(S_{t}\right)+\alpha\left(R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)\right)$$
-        
-        \subsubsection{时间差分预测}
     
-    	\subsubsection{Q-Learning}
+    	\subsubsection{off-policy --- Q-Learning}
     	    $$\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$$
     	    
-    	\subsubsection{Sarsa}
+    	\subsubsection{on-policy --- Sarsa}
     	    $$\Delta Q(S_{t},A_{t}) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$$
     	
     	\subsubsection{Deep Q Networks = Q-Learning + 神经网络}
-    	    记忆库 (用于重复学习)
-            神经网络计算 Q 值
-    	
-            损失函数:
-                $$L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot)}\left[\left(y_{i}-Q\left(s, a ; \theta_{i}\right)\right)^{2}\right]$$
-                $$\nabla_{\theta_{i}} L_{i}\left(\theta_{i}\right)=\mathbb{E}_{s, a \sim \rho(\cdot) ; s^{\prime} \sim \mathcal{E}}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{i-1}\right)-Q\left(s, a ; \theta_{i}\right)\right) \nabla_{\theta_{i}} Q\left(s, a ; \theta_{i}\right)\right]$$
+            \textbf{论文}: \textit{Playing Atari with Deep Reinforcement Learning (2013)}
+        
+            \textbf{优势}:
+            \begin{enumerate}
+                \item 利用神经网络的深度学习对强化学习进行提升, Q-Learning + 卷积神经网络. 深度学习的进展使得直接从视觉和语音等高维感官输入的端到端学习成为可能 (eg,直接从电脑屏幕学习到游戏手柄动作), 解决了Q-Learning的Q表中状态、动作数量无法做大的问题.
+                \item 经验库回放机制, 解决深度学习训练所需样本独立，但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
+                \item 随机小批量更新
+            \end{enumerate}
+
+            \textbf{劣势}: 只能处理离散和低维的动作空间.
+        
+            \textbf{更新函数}: 神经网络(Q 网络)对于更新函数, 主要表现在参数$\theta$上
+                $$\theta_{t+1} = \theta_{t} + \alpha \nabla_{\theta_{t}} J\left(\theta_{t}\right)$$
+                $$J\left(\theta_{t}\right)=\underset{s, a \sim \rho(\cdot)}{\mathbb{E}} \left[\left(y_{t}-Q\left(s, a ; \theta_{t}\right)\right)^{2}\right]$$
+                $$\nabla_{\theta_{t}} J\left(\theta_{t}\right)=\underset{s, a \sim \rho(\cdot) \atop s^{\prime} \sim \mathcal{E}}{\mathbb{E}}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{t-1}\right)-Q\left(s, a ; \theta_{t}\right)\right) \nabla_{\theta_{t}} Q\left(s, a ; \theta_{t}\right)\right]$$
 
 
 \section{基于策略函数}
-    \subsection{策略函数 $A = \Pi(S)$}
-        \begin{itemize}
-            \item 随机性策略: $\mathbb{P}_\pi(a \mid s)$
-            \item 确定性策略: $a = \pi(s)$
-        \end{itemize}
 
     \subsection{策略梯度}
+        \textbf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
+
         \textbf{策略梯度}, 是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
             $$\mathbb{P}_\pi (a \mid s, \theta)$$
             $$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$$
         
+        \textbf{优势}: 解决连续动作空间的强化学习问题.
+
+        \textbf{劣势}:
+            即使通过策略梯度学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得动作的具体值；而动作通常是高维的向量, 在高维的动作空间的频繁采样很耗费计算能力. 在策略梯度学习过程中, 每一步计算策略梯度都需要在整个动作空间进行积分,这个积分我们一般通过Monte Carlo采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。 (这在确定性策略梯度方法中得到解决.)
+
         \textbf{性能度量函数}, .设性能度量函数即是价值函数$J(\boldsymbol{\theta}) = V(s)$, 则梯度有:
             \begin{align*}
                 \nabla J(\boldsymbol{\theta}) &= \nabla_\theta V(s) \\
@@ -282,14 +291,18 @@
             \end{align*}
             (证毕.)
             
-        \textbf{优点}, 能在一个连续区间内挑选动作
+        \textbf{优点}, 解决连续动作空间的强化学习问题
         
         \textbf{缺点}:
             即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的； 在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
 
             
     \subsubsection{确定性策略梯度} 
-        \textbf{确定性策略梯度}: 采用确定性策略函数.
+        \textbf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
+
+        \textbf{确定性策略梯度}: 采用确定性策略函数, 将原来\textbf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
+
+        \textbf{优势}: 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。
         
         \textbf{eg.} 策略函数常用形式
         \begin{displaymath} a = \pi(s) = \left\{ \begin{array}{lr}
@@ -297,40 +310,41 @@
             \underset{a}{\operatorname{argmax}}\ \frac{e^{h(s, a, \theta)}}{\sum_{b} e^{h(s, b, \theta)}}    & (\text{soft-max})
         \end{array} \right. \end{displaymath}
         
-        \textbf{确定策略梯度定理}: 确定性策略梯度定理乍一看不像随机版本（方程式2）。然而，我们现在证明，对于一大类随机策略，包括许多凸点函数，确定性策略梯度确实是随机策略梯度的一个特殊（极限）情况。我们通过确定性策略πθ：S来参数化随机策略πθ，σ→ A和方差参数σ，使得对于σ=0，随机策略等价于确定性策略πμθ，0≡ µθ. 然后我们将其表示为σ→ 0随机策略梯度收敛于确定性梯度（证明和技术条件见附录C）。
+        \textbf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\mathbb P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\mathbb P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
             $$\nabla_{\theta} J\left(\mu_{\theta}\right) =\left.\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_{\theta} \mu_{\theta}(s) \nabla_{a} Q^{\mu}(s, a)\right|_{a=\mu_{\theta}(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}}\left[\left.\nabla_{\theta} \mu_{\theta}(s) \nabla_{a} Q^{\mu}(s, a)\right|_{a=\mu_{\theta}(s)}\right]$$ 
             
             $$\lim _{\sigma \downarrow 0} \nabla_{\theta} J\left(\pi_{\mu_{\theta}, \sigma}\right)=\nabla_{\theta} J\left(\mu_{\theta}\right)$$
 
-\section{基于策略+价值}
     \subsection{Actor-Critic}
-        \textbf{Actor-Critic}, \textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了 策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
+        \textbf{Actor-Critic}, \textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
     
         \begin{itemize}
-            \item \textbf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 根据 Critic 的评分更新随机策略函数. \\ \textit{通过$\nabla_{\theta} J\left(\pi_{\theta}\right)$的随机梯度上升调整随机策略$\pi_\theta(s)$ 的参数$\theta$。代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
+            \item \textbf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_{\theta} J\left(\pi_{\theta}\right)$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
             
             \item \textbf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样。通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差。然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_{\theta} J\left(\pi_{\theta}\right)=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(a \mid s) Q^{w}(s, a)\right]$. 更直观地说，条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的，$\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解，该线性回归问题根据这些特征估计$Q_\pi(s，a)$。在实践中，条件(2)通常被放宽，以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上，如果同时满足近似值(1)和(2)，则整个算法相当于根本不使用批评家. }
         \end{itemize}
-    
-        \begin{align*}
-            \boldsymbol{\theta}_{t+1} 
-            &= \boldsymbol{\theta}_{t}+\alpha\left(G_{t: t+1}-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} \\
-            &=\boldsymbol{\theta}_{t}+\alpha\left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)-\hat{v}\left(S_{t}, \mathbf{w}\right)\right) \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)} \\
-            &=\boldsymbol{\theta}_{t}+\alpha \delta_{t} \frac{\nabla \pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}{\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right)}
-        \end{align*}
-        
+
         \textbf{优势}: 引入了时序差分算法, 因此可以进行单步更新, 比传统 Policy Gradient 训练更快.
         
         \textbf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题.  
         
         Actor 在运用 随机梯度算法 进行 梯度上升 时, 由 Critic 来告诉他, 这次的 梯度上升 是不是一次正确的上升, 如果这次的得分不好, 那么就不要上升那么多. Actor 想要最大化期望的奖励, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做奖励. Critic 的更新很简单, 就是像 Q-learning 那样更新现实和估计的误差 (TD error) 就好了.
+    
+        \textbf{更新函数}
+        $$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_{t}+\alpha \nabla_\theta J(\theta)$$
+        \begin{align*}
+            \nabla_\theta J(\theta)
+            &= \left(G_{t: t+1}-\hat{v}\left(S_{t}, \mathbf{w}\right)\right)\  \nabla_\theta \ln \mathbb P_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right) \\
+            &= \left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)-\hat{v}\left(S_{t}, \mathbf{w}\right)\right)\ \nabla_\theta \ln \mathbb P_\pi\left(A_{t} \mid S_{t}, \boldsymbol{\theta}_{t}\right) 
+        \end{align*}
+        
+            \textbf{Off-Policy Actor Critic}: 
+                \begin{align*}
+                    \nabla J(\theta) &= \sum_S  \mathbb P_\beta (s) \sum_A Q(s, a)\ \nabla_\theta \mathbb P_\pi (a | s) \\
+                    &= \underset{s \sim \mathbb P_\beta \atop a \sim \beta}{\mathbb E} \left[ \frac{\mathbb P_{\pi,\theta}(a|s)}{\mathbb P_{\beta,\theta}(a|s)} Q(s, a)\ \nabla_\theta \mathbb P_\pi (a | s)\right]
+                \end{align*}
         
     \subsection{确定性 Actor-Critic}
-        \textit{现在我们考虑如何将策略梯度框架扩展到确定性策略。我们的主要结果是一个确定性策略梯度定理，类似于前一节中介绍的随机策略梯度定理。我们提供了几种方法来推导和理解这个结果。首先，我们在确定性策略梯度的形式背后提供了一种非正式的直觉。然后从第一性原理出发，给出了确定性策略梯度定理的形式化证明。最后，我们证明了确定性策略梯度定理实际上是随机策略梯度定理的一个极限情况。证据的细节将推迟到附录中。}
-    
-    
-        \textit{现在，我们使用确定性策略梯度定理来推导策略上和策略下的参与者批评算法。我们从最简单的案例开始——关于策略更新，使用一个简单的Sarsa批评者——以便尽可能清楚地说明想法。然后，我们考虑关闭策略的情况下，这一次使用一个简单的Q-学习批评家来说明关键思想。由于函数逼近器引入的偏差以及非策略学习引起的不稳定性，这些简单算法在实践中可能存在收敛问题。然后，我们转向一种更具原则性的方法，使用兼容函数近似和梯度时间差分学习}
-        
         \subsubsection{On-Policy Deterministic Actor-Critic}
             \begin{align*}
                 \delta_{t} &=r_{t}+\gamma Q^{w}\left(s_{t+1}, a_{t+1}\right)-Q^{w}\left(s_{t}, a_{t}\right) \\
@@ -349,27 +363,19 @@
             
             随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
             
-        \textbf{参考文献}: [1] Author A , Address A . Deterministic Policy Gradient Algorithms. 2002.
-            
-    \subsection{相容函数逼近}
         
     \subsection{Deep Deterministic Policy Gradient}
-        \textbf{Deep Deterministic Policy Gradient}: Deep: Actor Critic + Deep Q Networks;\quad Deterministic: 策略函数采用"确定性策略函数";
-    
-        \textit{将深度Q学习成功背后的理念应用于持续行动领域。提出了一种基于确定性策略梯度的 Actor批评、无模型算法，该算法可以在连续动作空间上运行。使用相同的学习算法、网络结构和超参数，我们的算法稳健地解决了20多个模拟物理任务，包括经典问题，如手推车摆动、灵巧操作、腿部运动和汽车驾驶。我们的算法能够找到性能与规划算法相比具有竞争力的策略，并且能够完全访问域及其派生的动态。我们进一步证明，对于许多任务，该算法可以“端到端”学习策略：直接从原始像素输入。}
-
+        \textbf{论文}: \textit{Continuous Control With Deep Reinforcement Learning(2015)}这篇论文, 
         
-        Policy gradient 在连续动作上进行动作的筛选 . 一种使用 Actor Critic 结构, 但是输出的不是行为的概率, 而是具体的行为, 用于连续动作 (continuous action) 的预测. DDPG 结合了之前获得成功的 DQN 结构, 提高了 Actor Critic 的稳定性和收敛性.
+        \textbf{Deep Deterministic Policy Gradient}: \textbf{DDPG = 确定性Actor-Critic + Deep Q-Networks}, 结合了两者的优点, 既能借助策略梯度优势帮DQN应用于连续动作空间, 又能利用DQN优势实现端到端的视觉、语音高维感官输入学习, 且提高了 Actor Critic 的稳定性和收敛性.
         
-        \textbf{深度学习的作用, 对于DPG的关键改进}:
+        \textbf{改进}:
         \begin{enumerate}
             \item 使用卷积神经网络来模拟策略函数和Q函数, 并用深度学习的方法来训练, 证明了在RL方法中, 非线性模拟函数的准确性和高性能、可收敛；而DPG中, 可以看成使用线性回归的机器学习方法：使用带参数的线性函数来模拟策略函数和Q函数, 然后使用线性回归的方法进行训练。
             \item experience replay memory的使用：actor同环境交互时, 产生的transition数据序列是在时间上高度关联(correlated)的, 如果这些数据序列直接用于训练, 会导致神经网络的overfit, 不易收敛。DDPG的actor将transition数据先存入experience replay buffer, 然后在训练时, 从experience replay buffer中随机采样mini-batch数据, 这样采样得到的数据可以认为是无关联的。
             \item target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
         \end{enumerate}
     
-        \textbf{参考文献}: [1] Lillicrap T P ,  Hunt J J ,  Pritzel A , et al. Continuous control with deep reinforcement learning[J]. Computer ence, 2015.
-        
    
 \section{例子}
     \subsection{围棋}
