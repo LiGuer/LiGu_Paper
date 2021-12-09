@@ -9,42 +9,67 @@
 \let\itemize\compactitem
 \let\enumerate\compactenum
 
+\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
+\newcommand{\defi}[2]{\textbf{#1}, #2}
+\newcommand{\proof}[1]{\textbf{证明} #1}
+
 \begin{document}
 \maketitle
 \tableofcontents
 
+\section{信息 \& 通信}
+    \defi{信息}{信息是认识主体所感受的和所表达的事物运动状态及运动状态变化的方式. \textit{构成客观世界的三大基本物质之一(物质,能量,信息).}}
+    
+    \textbf{通信基本问题}: 在一点精确/近似地   恢复另一点所选择的信息.
+    
+    \textbf{通信基本模型}:
+        $$(\text{信源}) \to (\text{编码器}) \to (\text{信道})_{(+\text{噪声})} \to (\text{译码器}) \to (\text{信宿})$$
+        
+        \env{enumerate}{
+            \item 信源/信宿
+            \item 编码/译码: 信源编码, 信道编码
+            \item 信道
+        }
+    
+    \textbf{通信性能指标}: 
+        \env{enumerate}{
+            \item \textbf{有效性}: 资源利用率和速率应当高.
+            \item \textbf{可靠性}: 信息传输差错应当小.
+            \item \textbf{安全性}: 信息传输中不应泄露.
+        }
+
 \section{信息的度量}
     \subsection{离散信息的度量}
         \subsubsection{自信息}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{自信息}: $I_X(a_i) = - \log\ \mathbb P_X(a_i)$
                 \item \textbf{联合自信息}: $I_{XY}(a_i, b_i) = -\usepackage{}log\ \mathbb P_{XY}(a_i, b_j)$
                 \item \textbf{条件自信息}: $I_{X|Y}(a_i|b_i) = -\log\ \mathbb P_{X|Y}(a_i|b_j)$
-            \end{enumerate}
+            }
             \textbf{关系}: $I(xy) = I(x) + I(y|x) = I(y) + I(x|y)$
     
             \textbf{意义}: \textbf{自信息}, (1)表示事件发生前, 事件发生的不确定性; (2)表示事件发生后, 事件所包含的信息量, 是提供给信宿的信息量, 也是解除这种不确定性所需要的信息量. 
 
         \subsubsection{互信息}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{互信息}: $I_{X;Y}(a_i;b_i) = log\frac{\mathbb P_{X|Y}(a_i|b_j)}{\mathbb P_X(a_i)}$
                 \item \textbf{条件互信息}: $I_{X;Y|Z}(a_i;b_i|c_i) = -log\frac{\mathbb P_{X|Y,Z}(a_i|b_j, c_i)}{\mathbb P_{X|Z}(a_i|c_i)}$
-            \end{enumerate}
+            }
 
             \textbf{意义}: \textbf{互信息}, 反映了两个不同的随机变量集合中两个随机事件之间的统计关联程度, 表示当y发生后x不确定性的变化，表示由y得到的关于x的信息量;
 
         \subsubsection{信息熵}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{信息熵}: $H(X) = \underset{\mathbb P(x)}{E}[I(x)] = -\sum\limits_x \mathbb P(x)\log \mathbb P(x)$
                 \item \textbf{联合信息熵}: $H(XY) = \underset{\mathbb P(xy)}{E}[I(xy)] = -\sum\limits_x \sum\limits_y \mathbb P(xy) \log \mathbb P(xy)$
                 \item \textbf{条件信息熵}: $H(Y|X) = \underset{\mathbb P(xy)}{E}[I(y|x)] = -\sum\limits_x \sum\limits_y \mathbb P(xy) \log \mathbb P(y|x) = \sum\limits_x \mathbb P(x) H(Y|x)$
-            \end{enumerate}
+            }
             
             \textbf{关联}: (当且仅当$X_i$相互独立, 则等式成立.)
-            \begin{itemize}
+            \env{itemize}{
                 \item $H(Y|X) \le H(Y)$: 信息处理中, 条件越多, 熵越小.
                 \item $H(X_1...X_n) \le \sum\limits_{i=0}^n H(X_i)$
-            \end{itemize}
+            }
             
             \textbf{意义}: \textbf{信息熵}: 平均自信息, \\
             (1)在信源输出前，表示信源的平均不确定性;\\
@@ -53,13 +78,13 @@
             (4)当信源输出后，不确定性就解除，熵可看成解除信源不确定性平均所需的信息量。
             
             \textbf{性质}: \textbf{信息熵}, 
-            \begin{itemize}
+            \env{itemize}{
                 \item 对称性, $H(p_1, p_2, ..., p_n) = H(p_n, p_{n-1}, ..., p_1)$
                 \item 非负性, $H(\boldsymbol p) \ge 0$
                 \item $H(XY) = H(x) + H(Y|X) \\ H(X_1 X_2 ... X_n) = H(X) + H(X_2|X_1) + ... + H(X_n|X_1...X_{n-1})$
                 \item 有限离散随机变量集合中事件等概率发生时, 熵达到最大.
                 \item 随机变量集合中任一事件概率为1, 则熵为0.
-            \end{itemize}
+            }
             
         \subsubsection{交叉熵}
             \textbf{交叉熵}, 若P和Q为定义在同一概率空间的两个概率测度，定义P相对于Q的散度为: $D(\mathbb P || \mathbb Q)=\sum\limits_x \mathbb P(x) \log \frac{\mathbb P(x)}{\mathbb Q(x)}$
@@ -68,68 +93,80 @@
                 (1)$D(\mathbb P || \mathbb Q) \ge 0$
 
         \subsubsection{平均互信息}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{集合&事件互信息}: $I(x ; Y)=\sum\limits_{y} \mathbb P(y \mid x) \log \frac{\mathbb P(y \mid x)}{\mathbb P(y)}$
                 \item \textbf{平均互信息}: $I(X ; Y) = \underset{\mathbb P(x)}{E}[I(x ; y)] = \sum\limits_{x} \mathbb P(x) I(x ; Y)=\sum\limits_{x, y} \mathbb P(x) \mathbb P(y \mid x) \log \frac{\mathbb P(y \mid x)}{\sum\limits_{x} \mathbb P(x) \mathbb P(y \mid x)}$
                 \item \textbf{平均条件互信息}: $I(X ; Y \mid Z)=\underset{\mathbb P(x y z)}{E}[I(x ; y \mid z)]=\sum\limits_{x, y, z} \mathbb P(x y z) \log \frac{p(x \mid y z)}{p(x \mid z)}$
-            \end{enumerate}
+            }
             
             \textbf{意义}: \textbf{集合&事件互信息}: 表示由事件x提供的关于集合Y的信息量. \textbf{平均互信息}: 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.
             
             \textbf{性质}: $I(x ; Y) \ge 0$
             
             \textbf{关联}: 
-                \begin{align*}
+                \env{align*}{
                     I(X ; Y) &= H(X)-H(X \mid Y) \\
                     I(X ; Y) &= H(Y)-H(Y \mid X) \\
                     I(X ; Y) &= H(X)+H(Y)-H(X Y)
-                \end{align*}
+                }
              
     \subsection{连续信息的度量}
         \subsubsection{信息熵}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{熵(差熵)}: $h(X)=-\underset{\mathbb P(x)}{E}[\log \mathbb P(x)]=-\int \mathbb P(x) \log \mathbb P(x) \mathrm{d} x$
                 \item \textbf{联合差熵}: $h\left(\boldsymbol{X}^{N}\right)=-\underset{\mathbb P(\boldsymbol{x})}{E}[\log \mathbb P(\boldsymbol{x})]=-\int_{\boldsymbol{x}} \mathbb P(\boldsymbol{x}) \log \mathbb P(\boldsymbol{x}) \mathrm{d} \boldsymbol{x}$
                 \item \textbf{条件差熵}: $h(X \mid Y)=-\underset{\mathbb P(x y)}{E}[\log \mathbb P(x \mid y)]=-\iint \mathbb P(x y) \log \mathbb P(x \mid y) \mathrm{d} x \mathrm{~d} y$
                 \item \textbf{交叉熵}: $D(\mathbb P || \mathbb Q)=\int \mathbb P(x) \log \frac{\mathbb P(x)}{\mathbb Q(x)} \mathrm{d} x$
-            \end{enumerate}
+            }
             
             \textbf{连续最大熵定理}:
-                \begin{itemize}
+                \env{itemize}{
                     \item 限峰值最大熵: 幅度受限的随机变量，当均匀分布时有最大的熵.
                     \item 限功率最大熵: 平均功率受限的随机变量，当高斯分布时有最大的熵.
-                \end{itemize}
+                }
             
         \subsubsection{\textbf{eg.}离散时间Gauss信源的熵}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{1维Gauss随机变量集的熵}: $h(X)=\frac{1}{2} \log \left(2 \pi e \sigma^{2}\right)$
                 \item \textbf{多维独立Gauss随机变量集的熵}: $h\left(\boldsymbol{X}^{N}\right)=\frac{N}{2} \log \left[2 \pi \mathrm{e}\left(\sigma_{1}^{2} \sigma_{2}^{2} \cdots \sigma_{n}^{2}\right)^{\frac{1}{N}}\right]$
                 \item \textbf{多维相关Gauss随机变量集的熵}: $h\left(\boldsymbol{X}^{N}\right)=\frac{N}{2} \log \left[2 \pi \mathrm{e} |\boldsymbol \Sigma|^{\frac{1}{N}}\right]$
-            \end{enumerate}
+            }
+
+            \proof{\par
+                \textbf{1维Gauss随机变量集的熵}: 
+                \env{align*}{
+                    h(x) 
+                    &= -\underset{\mathbb P(x)}{E}[\log \mathbb P(x)]\\
+                    &= -\underset{\mathbb P(x)}{E}\left[-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}  \right]\\
+                    &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\underset{\mathbb P(x)}{E}\left[(x-\mu)^2\right]}{2\sigma ^2}\\
+                    &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}\\
+                    &= \frac{1}{2}\log(2\pi e\sigma^2)
+                }
+            }
             
         \subsubsection{平均互信息}
             \textbf{平均互信息}: $I(X ; Y)=\operatorname{Sup}_{P, Q} I\left([X]_{P} ;[Y]_{Q}\right)$
             
             \textbf{关联}:
-                \begin{align*}
+                \env{align*}{
                     I(X ; Y) &= h(X)-h(X \mid Y) \\
                     I(X ; Y) &= h(Y)-h(Y \mid X) \\
                     I(X ; Y) &= h(X)+h(Y)-h(X Y)
-                \end{align*}
+                }
                 
         \subsubsection{离散集 \& 连续集的互信息}
-            \begin{enumerate}
+            \env{enumerate}{
                 \item \textbf{离散集 \& 连续集的互信息}: $I(x ; y)=\log \frac{q(x \mid y)}{p(x)}=\log \frac{p(y \mid x)}{q(y)}$
                 \item \textbf{离散集 \& 连续集的平均互信息}: $I(X ; Y)=\underset{p(x) p(y \mid x)}{E}\left[\log \frac{p(y \mid x)}{q(y)}\right]=\sum_{x} p(x) \int p(y \mid x) \log \frac{p(y \mid x)}{q(y)} \mathrm{d} y$
-            \end{enumerate}
+            }
             
             
 \section{信源}
 
     \textbf{信源性质}:
-        \begin{itemize}
+        \env{itemize}{
             \item \textbf{记忆}: 输出符号之间相互独立, 称无记忆; 输出符号之间具有相关性, 称有记忆.
-        \end{itemize}
+        }
     
     \subsection{离散无记忆信源}
         \textbf{离散无记忆信源}:  $ \left(\begin{array}{l} X \\ P \end{array}\right)
@@ -144,11 +181,11 @@
         \textbf{离散无记忆信源N次扩展源}: X构成的N维随机矢量集 $X^N = X_1 X_2...X_N$, 且$X_i$ 独立同分布.
 
         \textbf{离散无记忆信源N次扩展源的熵}: $H(X^N) = \sum_{i=1}^N = N\ H(X)$. ($X_i$ 独立同分布)
-            \begin{align*}
+            \env{align*}{
                 H(X^N) 
                 &= \sum_{i=1}^N H(X_i)  \tag{$X_i$ 独立}\\
                 &= N\ H(X)  \tag{$X_i$ 同分布}
-            \end{align*}
+            }
         
     \subsection{离散有记忆信源}
     
@@ -156,37 +193,38 @@
         
         \subsubsection{离散平稳信源}
             
-            \textbf{平稳}: 统计特性不随随时间推移而改变. \textit{$\left(x_{t_{1}}, \ldots, x_{t_{n}}\right)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
+            \defi{平稳}{统计特性不随随时间推移而改变. \textit{$\left(x_{t_{1}}, \ldots, x_{t_{n}}\right)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
                 $$ \mathbb P\left(x_{t_{1}}, \ldots, x_{t_{n}}\right) = \mathbb P\left(x_{t_{1}+\tau}, \ldots, x_{t_{n}+\tau}\right) \quad \text { for all } \tau, t_{1}, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}$$
+            }
                 
                 \qquad \textbf{性质}: 
                     对于平稳信源，条件概率和熵与时间下标无关.
-                        \begin{align*}
+                        \env{align*}{
                             \mathbb P\left(x_{i+N} \mid x_{i}, x_{i+1}, \cdots, x_{i+N-1}\right) &= \mathbb P\left(x_{j+N} \mid x_{j}, x_{j+1}, \cdots, x_{j+N-1}\right) \tag{条件概率}\\
                             H\left(x_{i}, x_{i+1}, \cdots, x_{i+N}\right) &= H\left(x_{j}, x_{j+1}, \cdots, x_{j+N}\right) \tag{熵}\\
                             H\left(x_{i+N} \mid x_{i}, x_{i+1}, \cdots, x_{i+N-1}\right) &= H\left(x_{j+N} \mid x_{j}, x_{j+1}, \cdots, x_{j+N-1}\right) \tag{条件熵}
-                        \end{align*}
+                        }
                         
             \textbf{离散平稳有记忆信源}:
                 
                 \qquad \textbf{熵}:
-                    \begin{align*}
+                    \env{align*}{
                         H(\boldsymbol X^N) 
                         &= H(X_1 X_2 ... X_N) \tag{定义}\\
                         &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_1 ... X_{N-1}) \tag{条件熵展开}\\
                         &\le N\ H(X_1) \tag{熵的不增原理}
-                    \end{align*}
+                    }
                     
                 \qquad \textbf{平均符号熵}: $H_N(\boldsymbol X^N) = \frac{H(\boldsymbol X^N)}{N}$
                 
                 \qquad \textbf{极限符号熵}: $H_\infty(\boldsymbol X^N) = \lim\limits_{N \to \infty} \frac{H(\boldsymbol X^N)}{N}$
                 
                     \qquad.\qquad \textbf{性质}: 
-                        \begin{itemize}
+                        \env{itemize}{
                         \item $H(X_N | X_1 ... X_{N-1})$ 和 $H_N(\boldsymbol X^N)$ 不随N而增加.
                         \item $H(X_N | X_1 ... X_{N-1}) \le H_N(\boldsymbol X^N)$
                         \item $H_\infty(\boldsymbol X^N)$存在, 且$H_\infty(\boldsymbol X^N) = \lim\limits_{N \to \infty} H(X_N | X_1 ... X_{N-1})$. $H_\infty(\boldsymbol X^N)$是最小的平均符号熵.
-                        \end{itemize}
+                        }
                 
 
         \textbf{离散Markov信源}:
@@ -199,22 +237,22 @@
         \textbf{m阶离散Markov信源}:
         
             \textbf{信源的熵}
-            \begin{align*}
+            \env{align*}{
                 H(\boldsymbol X^N) &= H(X_1 ... X_N)\\
                 &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_{N-1} ... X_{1}) \tag{条件熵展开}\\
                 &= H(X_1) + \sum\limits_{t=2}^N H(X_t | X_{t-1}) \tag{Markov性}\\
                 &= H(X_1) + (N-1) H(X_t | X_{t-1}) \tag{平稳性}\\
                 &= H(X_1) + (N-1) \sum p(X_{t-1}) \sum - \mathbb P(X_t | X_{t-1}) \log \mathbb P(X_t | X_{t-1}) \tag{条件熵代入}\\
                 &= H(\boldsymbol \pi) + (N-1)  \boldsymbol \pi^T \boldsymbol h \tag{平稳分布$\boldsymbol \pi$代入}
-            \end{align*}
+            }
             
             \textbf{极限符号熵}
-            \begin{align*}
+            \env{align*}{
                 H_\infty(\boldsymbol X^N) &= \lim\limits_{N \to \infty}\frac{H(\boldsymbol X^N)}{N} \tag{定义}\\
                 &= \lim\limits_{N \to \infty} \frac{H(\boldsymbol \pi) + (N-1)  \boldsymbol \pi^T \boldsymbol h}{N} \tag{代入}\\
                 &= \lim\limits_{N \to \infty} \frac{N \boldsymbol \pi^T \boldsymbol h}{N} \tag{省略$\to 0$量}\\
                 &= \boldsymbol \pi^T \boldsymbol h
-            \end{align*}
+            }
 
     \subsection{相关性 \& 剩余度}
         \textbf{信源效率}: $\eta = \frac{H_\infty}{H_0}$
@@ -248,7 +286,10 @@
         
 
 \section{信道}
-    \textbf{信道容量}: 输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max\limits_{p(x)} I(X ; Y)$
+    \defi{信道}{信号传输的通道.}
+
+    \defi{信道容量}{输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max\limits_{p(x)} I(X ; Y)$}
+    
         \textbf{性质}:
             (1) 信道容量仅与$p(y|x)$有关, 与$p(x)$无关.
 
