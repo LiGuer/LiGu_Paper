@@ -17,6 +17,14 @@ limitations under the License.
 \usepackage{geometry}\geometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
 \setlength{\parindent}{0pt}
 \title{Physics 物理}\author{}\date{}
+\usepackage{paralist}
+\let\itemize\compactitem
+\let\enumerate\compactenum
+
+\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
+\newcommand{\defi}[2]{\textbf{#1}, #2}
+\newcommand{\proof}[1]{\textbf{证明} #1}
+
 \begin{document}
 \maketitle
 \tableofcontents
@@ -26,24 +34,26 @@ limitations under the License.
     \subsection{力学之描述——运动方程}
         (对于s个自由度的系统,)
         
-        \textbf{广义坐标}: 完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$
+        \defi{广义坐标}{完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$}
         
-        \textbf{广义速度}: 广义坐标对时间的一阶导$\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$
+        \defi{广义速度}{广义坐标对时间的一阶导$\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$}
         
         · 经验表明, 同时给定广义坐标、广义速度, 就可确定系统状态, 原则上可预测以后动作.(其中,加速度$\ddot q$, 可由$\dot q,q$唯一确定.)
         
-        \textbf{运动方程}: 加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)
+        \defi{运动方程}{加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)}
         
-        \textbf{Lagrange函数}: 每一个力学系统可以用一个确定函数L()表征.
+        \defi{Lagrange函数}{每一个力学系统可以用一个确定函数L()表征.}
         
         $$L(q_{1},q_{2},\cdots,q_{s},\dot q_{1},\dot q_{2},\cdots,\dot q_{s},t)$$
         
-        \textbf{最小作用量原理}: 系统在两个时刻的, 位置之间的运动, 使得Lagrange函数积分(作用量S)取最小值.
-        $$S = \int_{t1}^{t2} L(q,\dot q,t)dt$$
-        $$\delta S = \delta \int_{t1}^{t2} L(q,\dot q,t)dt = \int_{t1}^{t2} (\frac{\partial L}{\partial q}\delta q + \frac{\partial L}{\partial \dot q}\delta \dot q) dt = \frac{\partial L}{\partial \dot q} \delta q \arrowvert_{t1}^{t2} + \int_{t1}^{t2} (\frac{\partial L}{\partial q} - \frac{d}{dt} \frac{\partial L}{\partial \dot q}) \delta q dt = 0$$
+        \defi{最小作用量原理}{系统在两个时刻的, 位置之间的运动, 使得Lagrange函数积分(作用量S)取最小值.
+            $$S = \int_{t1}^{t2} L(q,\dot q,t)dt$$
+            $$\delta S = \delta \int_{t1}^{t2} L(q,\dot q,t)dt = \int_{t1}^{t2} (\frac{\partial L}{\partial q}\delta q + \frac{\partial L}{\partial \dot q}\delta \dot q) dt = \frac{\partial L}{\partial \dot q} \delta q \arrowvert_{t1}^{t2} + \int_{t1}^{t2} (\frac{\partial L}{\partial q} - \frac{d}{dt} \frac{\partial L}{\partial \dot q}) \delta q dt = 0$$
+        }
         
-        \textbf{Lagrange方程}: 运动微分方程. 
-        $$\Rightarrow \frac{d}{dt}\frac{\partial L}{\partial \dot q_i} - \frac{\partial L}{\partial q_i} = 0\quad(i=1,\dots,s)$$
+        \defi{Lagrange方程}{运动微分方程.
+            $$\Rightarrow \frac{d}{dt}\frac{\partial L}{\partial \dot q_i} - \frac{\partial L}{\partial q_i} = 0\quad(i=1,\dots,s)$$
+        }
 
 
     \subsection{力学之框架——参考系}
@@ -55,18 +65,18 @@ limitations under the License.
         
         $\Rightarrow$ Lagrange方程有$\frac{d}{dt}\frac{\partial L}{\partial \vec v} = -\frac{\partial L}{\partial \vec r} = 0 \Rightarrow \frac{\partial L}{\partial \vec v}=const$
         
-        \textbf{惯性定律}: 在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.
+        \defi{惯性定律}{在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.}
             $$\Rightarrow \vec v = const$$
 
 
     \subsection{力学之框架——参考系间相对性}
-        \textbf{Galilean相对性原理}: 存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.
+        \defi{Galilean相对性原理}{存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.}
         
         (今后不特别声明,默认惯性参考系.)
         
-        \textbf{Galilean变换}: 两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).
+        \defi{Galilean变换}{两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).}
         
-        \textbf{绝对时间假设}: 我们认为两个参考系的时间相同.
+        \defi{绝对时间假设}{我们认为两个参考系的时间相同.}
             \begin{displaymath}
                 \left\{ \begin{array}{ll}
                 \vec r = \vec r' + \vec V t\\
@@ -74,7 +84,7 @@ limitations under the License.
                 \end{array} \right.
             \end{displaymath}
         
-        \textbf{Galilean相对性原理}: 力学系统在Galilean变换下具有不变性.
+        \defi{Galilean相对性原理}{力学系统在Galilean变换下具有不变性.}
     
     
     \subsection{力学之对象——质点、质点系}
