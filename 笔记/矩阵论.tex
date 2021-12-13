@@ -1,13 +1,65 @@
 \documentclass{article} 
 \usepackage{amsmath}
 \usepackage[UTF8]{ctex}
-\title{}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
+\title{信息论}\date{} \linespread{1.25}
 \usepackage{ntheorem}\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
+\usepackage{paralist}
+\let\itemize\compactitem
+\let\enumerate\compactenum
 
+\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
+\newcommand{\defi}[2]{\textbf{#1}, #2}
+\newcommand{\proof}[1]{\textbf{证明} #1}
 \begin{document}
 \tableofcontents
+
+
+
+
+\section{线性空间}
+    \defi{线性空间}{一个非空集合, 带有加法和数乘, 且满足下列几项条件.}
+        \begin{enumerate}
+            \item 加法   $x+y \in V$
+            \item 数乘   $k x \in V$
+            \item 存在零元 $x+0=x$
+            \item 存在负元 $x+(-x) = 0$
+            \item $1x = x$
+            \item 交换律 $x+y = y+x$
+            \item 分配律 $(k+l)x = kx+lx$
+            \item 加法结合律 $x+(y+z) = (x+y) +z$
+            \item 数乘结合律 $k(Lx) = (kl)x$
+        \end{enumerate}
+
+    \textbf{例子}:
+        (1) 一个平面 $\mathbb R^2 = {(x,y): x, y\in \mathbb R}$
+        (2) 一个三维空间 $\mathbb R^3 = {(x,y,z): x, y, z\in \mathbb R}$
+
+    \defi{线性子空间}{线性空间中的一个非空集合, 且 (1)加法 $x,y\in V_1 ,\quad x+y \in V_1$; (2)数乘 $x \in V_1, k x \in V_1$}
+
+        \textbf{性质}: 
+            (1) 线性子空间也是线性空间.这是因为$V_1$是V的子集合,所以$V_1$中的向量不仅对线性空间V已定义的线性运算封闭,而且还满足相应的8条运算律.
+            (2) 每个非零线性空间至少有两个子空间，一个是自身,另一个是仅由零向量所构成的子集合,称后者为零子空间.             
+            (3) $dim\ V_1 \le dim\ V$
+
+
+\defi{最小多项式}
+
+\defi{特征值 \& 特征向量}{线性变换前后, 方向不改变的向量, 称特征向量$\lambda$, 特征向量在线性变换后长度变化的倍率, 称特征值$\boldsymbol x$. $$T \boldsymbol x = \lambda \boldsymbol x$$.}
+
+Hamilton-Cayley定理 $$\varphi(\lambda)=\operatorname{det}(\lambda-\boldsymbol{A})=\lambda^{n}+a_{1} \lambda^{n-1}+\cdots+a_{n-1} \lambda+a_{n}$$ $$\varphi(\boldsymbol{A})=\boldsymbol{A}^{n}+a_{1} \boldsymbol{A}^{n-1}+\cdots+a_{n-1} \boldsymbol{A}+a_{n} \boldsymbol{I}=\boldsymbol{O}$$
+
+
+
+
+
+
+
+
+
+
+
 
 \section{矩阵论}
     \subsection{矩阵}

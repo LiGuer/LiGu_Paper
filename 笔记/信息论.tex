@@ -19,18 +19,15 @@
 
 \section{信息 \& 通信}
     \defi{信息}{信息是认识主体所感受的和所表达的事物运动状态及运动状态变化的方式. \textit{构成客观世界的三大基本物质之一(物质,能量,信息).}}
-    
     \defi{通信}
         \textbf{通信基本问题}: 在一点精确/近似地   恢复另一点所选择的信息.
         \textbf{通信基本模型}:
             $$(\text{信源}) \to (\text{编码器}) \to (\text{信道})_{(+\text{噪声})} \to (\text{译码器}) \to (\text{信宿})$$
-            
             \env{enumerate}{
                 \item 信源/信宿
                 \item 编码/译码: 信源编码, 信道编码
                 \item 信道
             }
-        
         \textbf{通信性能指标}: 
             \env{enumerate}{
                 \item \textbf{有效性}: 资源利用率和速率应当高.
@@ -152,7 +149,7 @@
 
     \textbf{记忆}: 输出符号之间相互独立, 称无记忆; 输出符号之间具有相关性, 称有记忆.
     
-    \subsection{离散无记忆信源}
+    \section{离散无记忆信源}
         \textbf{离散无记忆信源}:  $ \left(\begin{array}{l} X \\ P \end{array}\right)
                  = \left(\begin{array}{lll}
                     a_{1} & \cdots & a_{n} \\ p\left(a_{1}\right) & \cdots & p\left(a_{n}\right)
@@ -171,7 +168,7 @@
                 &= N\ H(X)  \tag{$X_i$ 同分布}
             }
         
-    \subsection{离散有记忆信源}
+    \section{离散有记忆信源}
             
             \defi{平稳}{统计特性不随随时间推移而改变. \textit{$\left(x_{t_{1}}, \ldots, x_{t_{n}}\right)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
                 $$ \mathbb P\left(x_{t_{1}}, \ldots, x_{t_{n}}\right) = \mathbb P\left(x_{t_{1}+\tau}, \ldots, x_{t_{n}+\tau}\right) \quad \text { for all } \tau, t_{1}, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}$$
@@ -234,11 +231,11 @@
             }
 
 
-    \subsection{相关性 \& 剩余度}
+    \section{相关性 \& 剩余度}
         \defi{信源效率}{$\eta = \frac{H_\infty}{H_0}$}
         \defi{信源剩余度}{$\eta = 1 - \frac{H_\infty}{H_0}$}
             
-    \subsection{信源编码}
+    \section{信源编码}
         \textbf{定长码}
             \textbf{典型序列}: 序列中所有符号出现的次数满足大数定律的序列称为典型序列，否则为非典型序列。
 
@@ -276,6 +273,9 @@
 
     \textbf{波形信道}: 
 
-    \subsection{信道编码}
+    \textbf{离散时间连续信道}
+
+
+    \section{信道编码}
         
 \end{document}

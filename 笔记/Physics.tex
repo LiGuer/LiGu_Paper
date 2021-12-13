@@ -513,4 +513,35 @@ limitations under the License.
 \section{Statistical Mechanics 统计力学}
 
 
+
+
+
+
+\section{狭义相对论-参考系变换}
+    \textbf{核心}: 
+        \env{enumerate}{
+        \item 若新旧两个参考系相对速度不变, 则之间的参考系变换是一种线性变换.
+            \[\begin{bmatrix}t' \\ x'\end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ x\end{bmatrix}\]
+        \item \text{运动相对性}, 参考系变换可完成旧$\to$新、新$\to$旧的变换, 即新系相对于旧系沿$x$方向以速度$v$运动$\Leftrightarrow$新系相对于旧系沿$-x$方向以速度$v$运动
+            \[\begin{bmatrix}t \\ -x\end{bmatrix} = \boldsymbol A \begin{bmatrix}t' \\ -x'\end{bmatrix} \quad \Rightarrow \quad \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} = \boldsymbol A \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \boldsymbol A\]
+        \item 新参考系原点, 坐标恒为零, 且在旧坐标系中为速度$v$.\quad $(t,vt)^T \Rightarrow (t',0)^T$. 
+            \[\begin{bmatrix}t' \\ 0 \end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ v t\end{bmatrix}\]
+        \item \textbf{光速不变原理}, 光速矢量$(1, c)^T$是参考系变换前后方向不变的矢量. 
+            \[\begin{bmatrix}t' \\ ct' \end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ ct\end{bmatrix}\]
+        }
+    联立解得.
+        \[\left\{\begin{array}{rll}
+            a_{11}^2 + a_{12}a_{21} &= 1 &\quad (\text{运动相对性})\\
+            a_{11} &= a_{22}  &\quad (\text{运动相对性})\\
+            a_{21} + v·a_{22} &= 0 &\quad (\text{原点})\\
+            a_{21} + c·a_{22} &= c(a_{11} + c·a_{12} ) &\quad (\text{光速不变})\\
+        \end{array}\right.\]
+        \[\Rightarrow \begin{bmatrix}t' \\ x'\end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ x\end{bmatrix} = \begin{bmatrix}
+            \frac{1}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}} & \frac{v}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}}\\
+            \frac{\frac{v}{c^{2}}}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}} & \frac{1}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}}
+        \end{bmatrix} \begin{bmatrix}t \\ x\end{bmatrix}\]
+
+
+
+
 \end{document}

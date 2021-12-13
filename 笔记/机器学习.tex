@@ -6,11 +6,18 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{geometry} \geometry{a4paper,left=1cm,right=1cm,top=1cm,bottom=1.5cm}
+\usepackage{paralist}
+\let\itemize\compactitem
+\let\enumerate\compactenum
+
+\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
+\newcommand{\defi}[2]{\textbf{#1}, #2}
+\newcommand{\proof}[1]{\textbf{证明} #1}
 \begin{document}
 
 \section{主成分分析}
 		[目标]:
-			数据降维，提取数据的主要特征分量, 满足：
+			数据降维，提取数据的主要特征分量, 满足:
     			\begin{enumerate}
     			    \item 最近重构性: 样本点到该超平面的距离都足够近。
     			    \item 最大可分性: 样本点在该超平面的投影尽可能分开。
@@ -102,34 +109,43 @@
 				\end{align*}
 
 					
-\section{支持向量机}
-		[目标]: 找到目标超平面, 使得所有样本点间隔最小值$\gamma_{min} = \min \gamma_i$最大.
+\section{核方法}
+    \defi{核方法}{将样本从原始空间映射到更高维特征空间,使得其线性可分.}
+        \[\mathbf{K}=\left[\begin{array}{ccccc}
+            \kappa\left(\boldsymbol{x}_{1}, \boldsymbol{x}_{1}\right) & \cdots & \kappa\left(\boldsymbol{x}_{1}, \boldsymbol{x}_{j}\right) & \cdots & \kappa\left(\boldsymbol{x}_{1}, \boldsymbol{x}_{m}\right) \\
+            \vdots & \ddots & \vdots & \ddots & \vdots \\
+            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{1}\right) & \cdots & \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) & \cdots & \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{m}\right) \\
+            \vdots & \ddots & \vdots & \ddots & \vdots \\
+            \kappa\left(\boldsymbol{x}_{m}, \boldsymbol{x}_{1}\right) & \cdots & \kappa\left(\boldsymbol{x}_{m}, \boldsymbol{x}_{j}\right) & \cdots & \kappa\left(\boldsymbol{x}_{m}, \boldsymbol{x}_{m}\right)
+        \end{array}\right]\]
+        
+        \[\begin{array}{l}
+            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \\
+            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d} \\
+            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\exp \left(-\frac{\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|^{2}}{2 \sigma^{2}}\right) \\
+            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\exp \left(-\frac{\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|}{\sigma}\right) \\
+            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)
+        \end{array}\]
 		
-		[优化问题]: 凸二次规划问题
-		    \begin{align*}
-		        min     &\quad	\frac{||w||^2}{2}\\
-				s.t.    &\quad	y_i (\boldsymbol w^T \boldsymbol x_i + b) \le 1
-		    \end{align*}
 
-		[步骤]:
-            \begin{enumerate}
-                \item 计算核矩阵
-                \item 计算$\lambda^*$
-                \begin{enumerate}
-                    \item 选择 i
-                    \item 选择 j
-                    \item 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
-                    \item 更新 $\lambda_j, \lambda_i$
-                    \item 更新 b
-                \end{enumerate}
-                \item 计算 w*, b*
-            \end{enumerate}
-
-		[原理]:
-			(1) 超平面方程: $\boldsymbol w^T \boldsymbol x + b = 0$\\
-				点面距: $d = \frac{|\boldsymbol w^T \boldsymbol x + b|}{||w||}$
-				
-			(2) 分类
+\section{支持向量机}
+    \defi{支持向量机}{
+        是一种二分类模型，目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
+        \[\begin{align*}
+           \underset{\boldsymbol w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\boldsymbol w^T \boldsymbol x_i + b |}{||\boldsymbol w||}\\
+           s.t. &\quad y_i (\boldsymbol w^T \boldsymbol x_i + b) \le 1
+        \end{align*}
+        \qquad \Rightarrow \qquad 
+	    \begin{align*}
+	        \underset{\boldsymbol w, b}{\arg\min}     &\quad	\frac{||\boldsymbol w||^2}{2}\\
+			s.t.    &\quad	y_i (\boldsymbol w^T \boldsymbol x_i + b) \le 1
+	    \end{align*}\]
+    }
+    
+    \proof{	\par		
+        超平面方程: $\boldsymbol w^T \boldsymbol x + b = 0$, \quad 点面距: $d = \frac{|\boldsymbol w^T \boldsymbol x + b|}{||w||}$
+		
+		分类
 			\begin{align*}\left \{ \begin{array}{cc}
 				\boldsymbol w^T \boldsymbol x_i + b \ge +1    &\quad (y_i = +1)\\
 				\boldsymbol w^T \boldsymbol x_i + b \le -1	&\quad (y_i = -1)\\
@@ -137,49 +153,73 @@
 				\quad\Rightarrow\quad y_i (\boldsymbol w^T \boldsymbol x_i + b) \ge 1
 			\end{align*}
 
-			(3) 间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
-					$$\Delta = \frac{2}{||w||}$$
+		间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
+			\[\Delta = \frac{2}{||w||} \tag{间隔}\]
 					
-			(4) 优化问题构造: 使间隔最大化. 凸二次规划问题
-					max  2 / ||w||    <=>    min  ||w||^2 / 2
-				=>	min		||w||^2 / 2
-					s.t.	y_i (\boldsymbol w^T \boldsymbol x_i + b) ≥ 1
-			(5) 计算最优点:
-				Lagrange函数
-					L(w, b,λ) = ||w||^2 / 2 + \sumλ_i (1 - y_i (\boldsymbol w^T \boldsymbol x_i + b))
-					L(w, b,λ)求导, 当导数为0时, 取得极值
-					=>	w* = \sum λ_i y_i x_i		0 = \sum λ_i y_i
-				Lagrange对偶
-					G(λ) = Lx(w*, b*, λ) = \sum λ_i - 1/2 \sum_i \sum_j λ_i λ_j y_i y_j x_i^T x_j
-				对偶问题: 二次规划问题
-					max		G(λ)
-					s.t.	λ≥0		\sum λ_i y_i = 0
-					=>	Sequential Minimal Optimization算法求解λ*
-				KKT条件
-					λ≥0    y_i (\boldsymbol w^T \boldsymbol x_i + b) - 1 ≥ 0    λ_i(y_i(\boldsymbol w^T \boldsymbol x_i + b) - 1) = 0
-			(6) 核函数:将样本从原始空间映射到更高维特征空间,使得其线性可分.
-				=>	超平面方程: w^T Φ(x) + b = 0
-					min		||w||^2 / 2
-					s.t.	y_i (w^T Φ(x_i) + b) ≥ 1
-					G(λ) = \sumλ_i - 1/2 \sum_i \sum_j λ_i λ_j y_i y_j Φ(x_i)^T Φ(x_j)
-				=>	设 核函数к(x_i, x_j) = Φ(x_i)^T Φ(x_j)
-					f(x) = w*^T x + b = \sum λ_i y_i к(x, x_i) + b
-				*	к是核函数 <=> 核矩阵[a_ij = к(x_i, x_j)]总是半正定
-			(7) Sequential Minimal Optimization算法
-				∵	λ是n-1自由度, 确定前n-1个量, 则第n个由\sum λ_i y_i = 0自动确定.
-				∴	每次选2个λ_i λ_j, 固定其他λ_k不变, 优化λ_i λ_j, 更新b
-				优化λ_i λ_j:
-				=>	λ_i = (-\sum_{k≠i≠j} λ_k y_k)·y_1 - λ_j y_i y_j = ζ y_1 - λ_j y_i y_j
-					G(λ_j) = (λ_j + ζ y_1 - λ_j y_i y_j) + C - v_i (ζ-λ_j y_j) - v_j λ_j y_j
-							- 1/2 к_ii (ζ-λ_j y_j)^2 - 1/2 к_jj λ_j^2 - к_ij λ_j y_j (ζ-λ_j y_j)^2
-					其中 v_i = \sum_{k≠i≠j} λ_i y_i к_ki = f(x_i) - λ_i y_i к_ii -λ_j y_j к_ij - b, v_j同理
-					∂G/∂λ_j = -(к_ii+к_jj-2к_ij)(λ_j^old - λ_j^new) + y_j(y_j-y_i+f(x_i)-f(x_j)) = 0
-				=>	λ_j^new = λ_j^old + y_j (E_i - E_j)/(к_ii+к_jj-2к_ij)		其中E_i = f(x_i) - y_i
-				修剪: 使得λ_j* 满足约束条件, λ_j应当∈[L,H]:
-					y_i≠y_j时,	下界L = max(0,λ_j^old-λ_i^old)	,上界L = min(C,λ_j^old-λ_i^old + C)
-					y_i= y_j时,	下界L = max(0,λ_j^old+λ_i^old - C),上界L = min(C,λ_j^old+λ_i^old)
-				更新b:
-			(8)	软间隔:
+		优化问题构造: 使间隔最大化. 凸二次规划问题
+		    \[\max\quad  \frac{2}{||\boldsymbol w||} \quad \Rightarrow \quad \min\quad  \frac{||\boldsymbol w||^2}{2}\]
+			\[s.t.\quad	y_i (\boldsymbol w^T \boldsymbol x_i + b) \ge 1\]
+	}
+    
+	\textbf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\boldsymbol w, b$求导, 令导数为0取得极值$\boldsymbol w^*, b^*$, 再求Lagrange对偶函数
+		\[L(\boldsymbol w, b,\boldsymbol \lambda) = \frac{||\boldsymbol w||^2}{2} + \sum_i \lambda_i (1 - y_i (\boldsymbol w^T \boldsymbol x_i + b)) \tag{Lagrange函数}\]
+		\[\Rightarrow \left\{\begin{array}{rl} \boldsymbol w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}\right.\tag{$\boldsymbol w, b$极值}\]
+		\[G(\boldsymbol \lambda) = L(\boldsymbol w^*, b^*, \boldsymbol \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \boldsymbol x_i^T \boldsymbol x_j \tag{Lagrange对偶}\]
+
+		得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\boldsymbol \lambda^*$
+		    \begin{align*}
+		        \max\limits_{\boldsymbol \lambda} &\quad G(\boldsymbol \lambda)\\
+			    s.t. &  \quad \lambda_i \ge 0\\
+			        & \quad \sum_i \lambda_i y_i = 0
+		    \end{align*}
+		    
+		其中, KKT条件如下
+		    \begin{align*}
+		        \lambda &\ge 0\\
+		        y_i (\boldsymbol w^T \boldsymbol x_i + b) - 1 &\ge 0\\
+		        \lambda_i(y_i(\boldsymbol w^T \boldsymbol x_i + b) - 1) &= 0
+		    \end{align*}
+					
+	\textbf{算法步骤}:
+        \begin{enumerate}
+            \item 计算核矩阵
+            \item 计算$\lambda^*$
+            \begin{enumerate}
+                \item 选择 i
+                \item 选择 j
+                \item 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
+                \item 更新 $\lambda_j, \lambda_i$
+                \item 更新 b
+            \end{enumerate}
+            \item 计算 w*, b*
+        \end{enumerate}
+
+    \textbf{核方法非线性支持向量机}:
+		\textbf{核函数}:将样本从原始空间映射到更高维特征空间,使得其线性可分.
+			=>	超平面方程: $w^T \phi(x) + b = 0$
+				min		||w||^2 / 2
+				s.t.	y_i (w^T Φ(x_i) + b) ≥ 1
+				G(λ) = \sumλ_i - 1/2 \sum_i \sum_j λ_i λ_j y_i y_j Φ(x_i)^T Φ(x_j)
+			=>	设 核函数к(x_i, x_j) = Φ(x_i)^T Φ(x_j)
+				f(x) = w*^T x + b = \sum λ_i y_i к(x, x_i) + b
+			*	к是核函数 <=> 核矩阵[a_ij = к(x_i, x_j)]总是半正定
+			
+		\textbf{Sequential Minimal Optimization算法}
+			∵	λ是n-1自由度, 确定前n-1个量, 则第n个由\sum λ_i y_i = 0自动确定.
+			∴	每次选2个λ_i λ_j, 固定其他λ_k不变, 优化λ_i λ_j, 更新b
+			优化λ_i λ_j:
+			=>	λ_i = (-\sum_{k≠i≠j} λ_k y_k)·y_1 - λ_j y_i y_j = ζ y_1 - λ_j y_i y_j
+				G(λ_j) = (λ_j + ζ y_1 - λ_j y_i y_j) + C - v_i (ζ-λ_j y_j) - v_j λ_j y_j
+						- 1/2 к_ii (ζ-λ_j y_j)^2 - 1/2 к_jj λ_j^2 - к_ij λ_j y_j (ζ-λ_j y_j)^2
+				其中 v_i = \sum_{k≠i≠j} λ_i y_i к_ki = f(x_i) - λ_i y_i к_ii -λ_j y_j к_ij - b, v_j同理
+				∂G/∂λ_j = -(к_ii+к_jj-2к_ij)(λ_j^old - λ_j^new) + y_j(y_j-y_i+f(x_i)-f(x_j)) = 0
+			=>	λ_j^new = λ_j^old + y_j (E_i - E_j)/(к_ii+к_jj-2к_ij)		其中E_i = f(x_i) - y_i
+			修剪: 使得λ_j* 满足约束条件, λ_j应当∈[L,H]:
+				y_i≠y_j时,	下界L = max(0,λ_j^old-λ_i^old)	,上界L = min(C,λ_j^old-λ_i^old + C)
+				y_i= y_j时,	下界L = max(0,λ_j^old+λ_i^old - C),上界L = min(C,λ_j^old+λ_i^old)
+			更新b:
+			
+	\textbf{软间隔}:
 
 \section{神经网络}
     \subsection{前馈神经网络}
