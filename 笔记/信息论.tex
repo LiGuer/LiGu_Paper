@@ -15,6 +15,8 @@
 \newcommand{\bb}{\boldsymbol}
 \newcommand{\P}{\mathbb P}
 \newcommand{\d}{\mathrm d}
+\newcommand{\l}{\left}
+\newcommand{\r}{\right}
 
 \begin{document}
 \maketitle
@@ -84,7 +86,7 @@
             \section{连续集合}
                 \env{enumerate}{
                     \item \defi{熵(差熵)}{$h(X)=-\underset{\P(x)}{E}[\log \P(x)]=-\int \P(x) \log \P(x) \d x$}
-                    \item \defi{联合差熵}{$h(\bb x^{N})=-\underset{\P(\bb x)}{E}[\log \P(\bb x)]=-\int_{\bb x} \P(\bb x) \log \P(\bb x) \d \bb x$}
+                    \item \defi{联合差熵}{$h(\bb x^N)=-\underset{\P(\bb x)}{E}[\log \P(\bb x)]=-\int_{\bb x} \P(\bb x) \log \P(\bb x) \d \bb x$}
                     \item \defi{条件差熵}{$h(X|Y)=-\underset{\P(xy)}{E}[\log \P(x|y)]=-\iint \P(xy) \log \P(x|y) \d x \d y$}
                     \item \defi{交叉熵}{$D(\P || \mathbb Q)=\int \P(x) \log \frac{\P(x)}{\mathbb Q(x)} \d x$}
                 }
@@ -97,9 +99,9 @@
                 
                 \section{\textbf{eg.}离散时间Gauss信源的熵}
                     \env{enumerate}{
-                    \item \textbf{1维Gauss-熵}: $h(X) = \frac{1}{2} \log \left(2 \pi e \sigma^2\right)$
-                    \item \textbf{多维独立Gauss-熵}: $h\left(\bb x^{N}\right)=\frac{N}{2} \log \left[2 \pi \mathrm{e}\left(\sigma_1^2 \sigma_2^2 \cdots \sigma_{n}^2\right)^{\frac{1}{N}}\right]$
-                    \item \textbf{多维相关Gauss-熵}: $h\left(\bb x^{N}\right)=\frac{N}{2} \log \left[2 \pi \mathrm{e} |\bb \Sigma|^{\frac{1}{N}}\right]$
+                    \item \textbf{1维Gauss-熵}: $h(X) = \frac{1}{2} \log \l(2 \pi e \sigma^2\r)$
+                    \item \textbf{多维独立Gauss-熵}: $h\l(\bb x^N\r)=\frac{N}{2} \log \l(2 \pi e\l(\sigma_1^2 \sigma_2^2 \cdots \sigma_{n}^2\r)^{\frac{1}{N}}\r)$
+                    \item \textbf{多维相关Gauss-熵}: $h\l(\bb x^N\r)=\frac{N}{2} \log \l(2 \pi e |\bb \Sigma|^{\frac{1}{N}}\r)$
                     }
     
                     \proof{\par
@@ -107,8 +109,8 @@
                         \env{align*}{
                             h(x) 
                             &= -\underset{\P(x)}{E}[\log \P(x)]\\
-                            &= -\underset{\P(x)}{E}\left[-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}  \right]\\
-                            &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\underset{\P(x)}{E}\left[(x-\mu)^2\right]}{2\sigma ^2}\\
+                            &= -\underset{\P(x)}{E}\l[-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}  \r]\\
+                            &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\underset{\P(x)}{E}\l[(x-\mu)^2\r]}{2\sigma ^2}\\
                             &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}\\
                             &= \frac{1}{2}\log(2\pi e\sigma^2)
                         }
@@ -117,34 +119,33 @@
         \section{平均互信息}
             \section{离散集合}
                 \env{enumerate}{
-                    \item \defi{集合&事件互信息}{$I(x ; Y)=\sum\limits_{y} \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 由事件x提供的关于集合Y的信息量.}
-                    \item \defi{平均互信息}{$I(X ; Y) = \underset{\P(x)}{E}[I(x ; y)] = \sum\limits_{x} \P(x) I(x ; Y)=\sum\limits_{x, y} \P(x) \P(y|x) \log \frac{\P(y|x)}{\sum\limits_{x} \P(x) \P(y|x)}$, 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.}
-                    \item \defi{平均条件互信息}{$I(X ; Y|Z)=\underset{\P(x y z)}{E}[I(x ; y|z)]=\sum\limits_{x, y, z} \P(x y z) \log \frac{p(x|y z)}{p(x|z)}$}
+                    \item \defi{集合&事件互信息}{$I(X;Y)=\underset{\P(y|x)}{E}[I(x;y)] = \sum\limits_{y} \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 由事件x提供的关于集合Y的信息量.}
+                    \item \defi{平均互信息}{$I(X;Y) = \underset{\P(xy)}{E}[I(x;y)] = \sum\limits_{x,y} \P(xy) I(x;y)=\sum\limits_{x, y} \P(x) \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.}
+                    \item \defi{平均条件互信息}{$I(X;Y|Z)=\underset{\P(xyz)}{E}[I(x;y|z)]=\sum\limits_{x,y,z} \P(xyz) \log \frac{\P(x|yz)}{\P(x|z)}$}
                 }
-                
-                \textbf{性质}: $I(x ; Y) \ge 0$
                 
                 \textbf{关系}: 
                     \env{align*}{
-                        I(X ; Y) &= H(X)-H(X|Y) \\
-                        I(X ; Y) &= H(Y)-H(Y|X) \\
-                        I(X ; Y) &= H(X)+H(Y)-H(X Y)
+                        I(X;Y) 
+                        &= H(X)-H(X|Y) \\
+                        &= H(Y)-H(Y|X) \\
+                        &= H(X)+H(Y)-H(X Y)
                     }
              
             \section{连续集合}
-                \defi{平均互信息}{$I(X ; Y)=\operatorname{Sup}_{P, Q} I\left([X]_{P} ;[Y]_{Q}\right)$}
+                \defi{平均互信息}{$I(X;Y)=\operatorname{Sup}_{P, Q} I\l([X]_{P} ;[Y]_{Q}\r)$}
                 
                 \textbf{关系}:
                     \env{align*}{
-                        I(X ; Y) &= h(X)-h(X|Y) \\
-                        I(X ; Y) &= h(Y)-h(Y|X) \\
-                        I(X ; Y) &= h(X)+h(Y)-h(X Y)
+                        I(X;Y) &= h(X)-h(X|Y) \\
+                        I(X;Y) &= h(Y)-h(Y|X) \\
+                        I(X;Y) &= h(X)+h(Y)-h(X Y)
                     }
                     
             \section{离散集 \& 连续集的互信息}
                 \env{enumerate}{
-                    \item \textbf{离散集 \& 连续集的互信息}: $I(x ; y)=\log \frac{q(x|y)}{p(x)}=\log \frac{p(y|x)}{q(y)}$
-                    \item \textbf{离散集 \& 连续集的平均互信息}: $I(X ; Y)=\underset{p(x) p(y|x)}{E}\left[\log \frac{p(y|x)}{q(y)}\right]=\sum_{x} p(x) \int p(y|x) \log \frac{p(y|x)}{q(y)} \d y$
+                    \item \textbf{离散集 \& 连续集的互信息}: $I(X;Y)=\log \frac{q(x|y)}{p(x)}=\log \frac{p(y|x)}{q(y)}$
+                    \item \textbf{离散集 \& 连续集的平均互信息}: $I(X;Y)=\underset{p(x) p(y|x)}{E}\l[\log \frac{p(y|x)}{q(y)}\r]=\sum_{x} p(x) \int p(y|x) \log \frac{p(y|x)}{q(y)} \d y$
                 }
             
             
@@ -153,11 +154,11 @@
     \textbf{记忆}: 输出符号之间相互独立, 称无记忆; 输出符号之间具有相关性, 称有记忆.
     
     \section{离散无记忆信源}
-        \textbf{离散无记忆信源}:  $ \left(\begin{array}{l} X \\ P \end{array}\right)
-                 = \left(\begin{array}{lll}
-                    a_1 & \cdots & a_{n} \\ p\left(a_1\right) & \cdots & p\left(a_{n}\right)
-                \end{array}\right) \quad;
-                p\left(a_{i}\right) \geqslant 0, \sum_{i=1}^{n} p\left(a_{i}\right)=1$
+        \textbf{离散无记忆信源}:  $ \l(\begin{array}{l} X \\ P \end{array}\r)
+                 = \l(\begin{array}{lll}
+                    a_1 & \cdots & a_{n} \\ p\l(a_1\r) & \cdots & p\l(a_{n}\r)
+                \end{array}\r) \quad;
+                p\l(a_{i}\r) \geqslant 0, \sum_{i=1}^N p\l(a_{i}\r)=1$
                 
             
         \textbf{熵}: $H(X) = -\sum p \log p$
@@ -173,16 +174,16 @@
         
     \section{离散有记忆信源}
             
-            \defi{平稳}{统计特性不随随时间推移而改变. \textit{$\left(x_{t_1}, \ldots, x_{t_{n}}\right)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
-                $$ \P\left(x_{t_1}, \ldots, x_{t_{n}}\right) = \P\left(x_{t_1+\tau}, \ldots, x_{t_{n}+\tau}\right) \quad \text { for all } \tau, t_1, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}$$
+            \defi{平稳}{统计特性不随随时间推移而改变. \textit{$\l(x_{t_1}, \ldots, x_{t_{n}}\r)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
+                $$ \P\l(x_{t_1}, \ldots, x_{t_{n}}\r) = \P\l(x_{t_1+\tau}, \ldots, x_{t_{n}+\tau}\r) \quad \text { for all } \tau, t_1, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}$$
             }
                 
                 \textbf{性质}: 
                     对于平稳信源，条件概率和熵与时间下标无关.
                         \env{align*}{
-                            \P\left(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\right) &= \P\left(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\right) \tag{条件概率}\\
-                            H\left(x_{i}, x_{i+1}, \cdots, x_{i+N}\right) &= H\left(x_{j}, x_{j+1}, \cdots, x_{j+N}\right) \tag{熵}\\
-                            H\left(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\right) &= H\left(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\right) \tag{条件熵}
+                            \P\l(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\r) &= \P\l(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\r) \tag{条件概率}\\
+                            H\l(x_{i}, x_{i+1}, \cdots, x_{i+N}\r) &= H\l(x_{j}, x_{j+1}, \cdots, x_{j+N}\r) \tag{熵}\\
+                            H\l(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\r) &= H\l(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\r) \tag{条件熵}
                         }
                         
             \textbf{离散平稳有记忆信源}:
@@ -246,7 +247,7 @@
                 \env{enumerate}{
                 \item \textbf{定长码编码速率}: $R^{\prime}=\frac{l \log r}{N}$
                 \item \textbf{定长码编码效率}: $\eta=\frac{H(X)}{R^{\prime}}=\frac{N H(X)}{l \log r}$
-                \item \textbf{定长码序列长度}: $N \geqslant \frac{\sigma^2}{\delta^2 \varepsilon}=\left(\frac{\eta}{1-\eta}\right)^2 \cdot \frac{\sigma^2}{H^2(X) \varepsilon}$
+                \item \textbf{定长码序列长度}: $N \geqslant \frac{\sigma^2}{\delta^2 \varepsilon}=\l(\frac{\eta}{1-\eta}\r)^2 \cdot \frac{\sigma^2}{H^2(X) \varepsilon}$
                 }
 
 
@@ -263,13 +264,13 @@
                 \textbf{特点}:
                     最优码, 编码结果不唯一.
                     
-        \textbf{无失真信源编码}: 只要信源编码的码率不小于信源的熵就存在无失真信源编码，否则就不存在无失真信源编码，简记为: $ R \ge H \quad \Leftrightarrow  \quad \exists \text{无失真信源编码}$.
+        \textbf{无失真信源编码}: 只要信源编码的码率不小于信源的熵就存在无失真信源编码，否则就不存在无失真信源编码，简记为: $ R \ge H \quad \lrightarrow  \quad \exists \text{无失真信源编码}$.
         
 
 \section{信道}
     \defi{信道}{信号传输的通道.}
 
-    \defi{信道容量}{输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max\limits_{p(x)} I(X ; Y)$}
+    \defi{信道容量}{输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max\limits_{p(x)} I(X;Y)$}
     
         \textbf{性质}:
             (1) 信道容量仅与$p(y|x)$有关, 与$p(x)$无关.
@@ -285,18 +286,18 @@
                 &= \sum\limits_{x,y} \P(y|x) \P(x) \log \P(y|x)  - \sum\limits_{y} \P(y) \log \P(y) - \sum_x \lambda_x \P(x) \tag{平均互信息定义式}
             }
             \env{align*}{
-                \Rightarrow \frac{\partial L}{\partial \P(x_i)} 
+                \rarrow \frac{\partial L}{\partial \P(x_i)} 
                 &= \sum\limits_{y} \P(y|x_i) (\log \P(y|x_i) - \log \P(y) - \log e) - \lambda _i \tag{求导,$\frac{\partial \P(y)}{\partial \P(x_i)}= \frac{\partial \sum\limits_x \P(x) \P(y|x)}{\partial \P(x_i)}  = \P(y|x_i)$}\\
                 &= \sum\limits_{y} \P(y|x_i) (\log \P(y|x_i) - \log \P(y)) - (\log e + \lambda _i) \tag{$\sum\limits_{y} \P(y|x_i) = 1$}\\
                 &= 0 
             }
             解方程组, 得信道容量$C$,
             \env{align*}{
-                \left\{ \begin{array}{l}
+                \l\{ \begin{array}{l}
                 \sum\limits_y \P(y|x) (C + \log \P(y)) = \sum\limits_y \P(y|x) \log \P(y|x)\\
                 \P(x) \ge 0\\
                 \sum\limits_y \P(y) = 1
-                \end{array} \right.
+                \end{array} \r.
             }
 
 
