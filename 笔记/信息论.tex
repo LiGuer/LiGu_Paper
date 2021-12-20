@@ -150,15 +150,12 @@
             
             
 \section{信源}
+    \defi{信源}{}
 
     \textbf{记忆}: 输出符号之间相互独立, 称无记忆; 输出符号之间具有相关性, 称有记忆.
     
     \section{离散无记忆信源}
-        \textbf{离散无记忆信源}:  $ \l(\begin{array}{l} X \\ P \end{array}\r)
-                 = \l(\begin{array}{lll}
-                    a_1 & \cdots & a_{n} \\ p\l(a_1\r) & \cdots & p\l(a_{n}\r)
-                \end{array}\r) \quad;
-                p\l(a_{i}\r) \geqslant 0, \sum_{i=1}^N p\l(a_{i}\r)=1$
+        \textbf{离散无记忆信源}: $\l(\begin{array}{l} X \\ P \end{array}\r) = \l(\begin{array}{lll} a_1 & \cdots & a_{n} \\ p\l(a_1\r) & \cdots & p\l(a_{n}\r) \end{array}\r) \quad; p\l(a_{i}\r) \geqslant 0, \sum_{i=1}^N p\l(a_{i}\r)=1$
                 
             
         \textbf{熵}: $H(X) = -\sum p \log p$
@@ -175,16 +172,16 @@
     \section{离散有记忆信源}
             
             \defi{平稳}{统计特性不随随时间推移而改变. \textit{$\l(x_{t_1}, \ldots, x_{t_{n}}\r)$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
-                $$ \P\l(x_{t_1}, \ldots, x_{t_{n}}\r) = \P\l(x_{t_1+\tau}, \ldots, x_{t_{n}+\tau}\r) \quad \text { for all } \tau, t_1, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}$$
+                \[ \P\l(x_{t_1}, \ldots, x_{t_{n}}\r) = \P\l(x_{t_1+\tau}, \ldots, x_{t_{n}+\tau}\r) \quad \text { for all } \tau, t_1, \ldots, t_{n} \in \mathbb{R}, \quad n \in \mathbb{N}\]
             }
                 
                 \textbf{性质}: 
                     对于平稳信源，条件概率和熵与时间下标无关.
-                        \env{align*}{
-                            \P\l(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\r) &= \P\l(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\r) \tag{条件概率}\\
-                            H\l(x_{i}, x_{i+1}, \cdots, x_{i+N}\r) &= H\l(x_{j}, x_{j+1}, \cdots, x_{j+N}\r) \tag{熵}\\
-                            H\l(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\r) &= H\l(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\r) \tag{条件熵}
-                        }
+                    \env{align*}{
+                        \P\l(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\r) &= \P\l(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\r) \tag{条件概率}\\
+                        H\l(x_{i}, x_{i+1}, \cdots, x_{i+N}\r) &= H\l(x_{j}, x_{j+1}, \cdots, x_{j+N}\r) \tag{熵}\\
+                        H\l(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}\r) &= H\l(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}\r) \tag{条件熵}
+                    }
                         
             \textbf{离散平稳有记忆信源}:
                 \env{enumerate}{
@@ -210,7 +207,7 @@
         \textbf{离散Markov信源}:
         
             \textbf{Markov平稳分布}: 其中, $\bb \pi = (\pi_1 = \P(x = S_1), ..., \pi_n = \P(x = S_n))^T, \text{且} \sum\limits_{i=1}^N \pi_i = 1$是平稳分布.
-                $$\bb \pi^T = \bb \pi^T \bb P$$
+                \[\bb \pi^T = \bb \pi^T \bb P\]
                 
                 \textbf{性质}: \textit{对于有限状态马氏链，稳态分布恒存在; 如果马氏链中仅存在一个常返类，则方程(3.4.11)的解是唯一的；如果存在r个常返类，则具有r个线性独立的矢量解; 如果马氏链中仅存在一个常返类而且是非周期的（即遍历的），则(3.4.12)式成立；如果有多个常返类，但都是非周期的，则       也收敛，但矩阵的每行可能不同；如果马氏链具有一个或多个周期常返类，则      不收敛}
 
@@ -275,48 +272,74 @@
         \textbf{性质}:
             (1) 信道容量仅与$p(y|x)$有关, 与$p(x)$无关.
 
-        \textbf{求解}: $\P(y|x)$确定且已知, 求$I(X;Y)$的最大值及其$\P(x)$的分布
-            \env{align*}{
-                \max \quad& I(X;Y)\\
-                s.t. \quad& \P(x) \ge 0\\
-                    & \sum\limits_x \P(x) = 1
-            }
-            \env{align*}{
-                L(\P(x), \lambda) &= I(X;Y) - \sum\limits_x \lambda_x \P(x) \tag{Lagrange函数}\\
-                &= \sum\limits_{x,y} \P(y|x) \P(x) \log \P(y|x)  - \sum\limits_{y} \P(y) \log \P(y) - \sum_x \lambda_x \P(x) \tag{平均互信息定义式}
-            }
-            \env{align*}{
-                \rarrow \frac{\partial L}{\partial \P(x_i)} 
-                &= \sum\limits_{y} \P(y|x_i) (\log \P(y|x_i) - \log \P(y) - \log e) - \lambda _i \tag{求导,$\frac{\partial \P(y)}{\partial \P(x_i)}= \frac{\partial \sum\limits_x \P(x) \P(y|x)}{\partial \P(x_i)}  = \P(y|x_i)$}\\
-                &= \sum\limits_{y} \P(y|x_i) (\log \P(y|x_i) - \log \P(y)) - (\log e + \lambda _i) \tag{$\sum\limits_{y} \P(y|x_i) = 1$}\\
-                &= 0 
-            }
-            解方程组, 得信道容量$C$,
-            \env{align*}{
-                \l\{ \begin{array}{l}
-                \sum\limits_y \P(y|x) (C + \log \P(y)) = \sum\limits_y \P(y|x) \log \P(y|x)\\
-                \P(x) \ge 0\\
-                \sum\limits_y \P(y) = 1
-                \end{array} \r.
+        \textbf{算法}: 
+
+            \proof{
+                $\P(y|x)$确定且已知, 求$I(X;Y)$的最大值及其$\P(x)$的分布
+                \env{align*}{
+                    \max \quad& I(X;Y)\\
+                    s.t. \quad& \P(x) \ge 0\\
+                        & \sum\limits_x \P(x) = 1
+                }
+                \env{align*}{
+                    L(\P(x), \lambda) &= I(X;Y) - \sum\limits_x \lambda_x \P(x) \tag{Lagrange函数}\\
+                    &= \sum\limits_{x,y} \P(y|x) \P(x) \log \P(y|x)  - \sum\limits_{y} \P(y) \log \P(y) - \sum_x \lambda_x \P(x) \tag{平均互信息定义式}
+                }
+                \env{align*}{
+                    \rarrow \frac{\partial L}{\partial \P(x_i)} 
+                    &= \sum\limits_{y} \P(y|x_i) (\log \P(y|x_i) - \log \P(y) - \log e) - \lambda _i \tag{求导,$\frac{\partial \P(y)}{\partial \P(x_i)}= \frac{\partial \sum\limits_x \P(x) \P(y|x)}{\partial \P(x_i)}  = \P(y|x_i)$}\\
+                    &= \sum\limits_{y} \P(y|x_i) (\log \P(y|x_i) - \log \P(y)) - (\log e + \lambda _i) \tag{$\sum\limits_{y} \P(y|x_i) = 1$}\\
+                    &= 0 
+                }
+                解方程组, 得信道容量$C$,
+                \env{align*}{
+                    \l\{ \begin{array}{l}
+                    \sum\limits_y \P(y|x) (C + \log \P(y)) = \sum\limits_y \P(y|x) \log \P(y|x)\\
+                    \P(x) \ge 0\\
+                    \sum\limits_y \P(y) = 1
+                    \end{array} \r.
+                }
             }
 
+        \textbf{特殊信道}: 
+            \env{enumerate}{
+            \item \defi{离散无噪信道}{无损确定信道, 每个输出只对应一个输入; 确定信道, 每个输入只对应一个输入出; 无损确定信道, 输入输出一一对应. \[C = \log\ \min(N_x, N_y)\] }
+            \item \defi{离散对称信道}{强对称信道; 弱对称信道. \[C = H(Y) - H(p_{1i},...)\], 强对称信道: \[C = \log N_y - H(p_{1i},...)\]}
+            }
 
-        \textbf{多维信道}: 
+        \textbf{信道连接}: 
+            \env{enumerate}{
+            \item \defi{级联信道}{ $\bb P_N = \bb P^N$ }
+            \item \defi{并联信道}{\[C = \sum_{i=0}^N C_i\]}
+            \item \defi{和信道}{各子信道输入输出均互不相交. \[C = \log_2 \sum_{i=0}^N 2^{C_i}\]}
+            }
 
-        \textbf{级联信道}: 
-        \textbf{和信道}: 
-        \textbf{并联信道}: 
-            
-    \textbf{离散时间连续信道}: 
-    \defi{加性噪声信道}{信道输入和独立于输入的噪声均为随机变量，而信道的输出是输入与噪声的和，的信道}
-        \textbf{理想限带加性高斯白噪声信道}: 
-        \textbf{有色高斯噪声信道}: 
+            \defi{多维矢量信道}{\[C_N = N C\]}
+
+          
+    \textbf{信道分析}: 
+        \textbf{离散时间连续信道}: 
+        \defi{加性噪声信道}{信道输入和独立于输入的噪声均为随机变量，而信道的输出是输入与噪声的和，的信道}
+            \textbf{理想限带加性高斯白噪声信道}: 
+            \textbf{有色高斯噪声信道}: 
 
     \textbf{波形信道}: 
 
-    \textbf{离散时间连续信道}
-
 
     \section{信道编码}
+        \defi{信道编码}{}
+            \defi{有噪信道编码}{$R<C$}
+
+        \env{enumerate}{
+        \item \textbf{最大后验译码}: $g(y) = \arg\max_x \P(x|y)$
+        \item \textbf{最大似然译码}: $g(y) = \arg\max_x \P(y|x)$
+        }
+
+        \defi{信道疑义度}{}
+
+        \defi{线性分组码}{校验位和信息位是线性关系.}
+            \defi{汉明距离}{$d(\bb x, \bb y) = \sum_k x_k \oplus y_k$}
+
+        \defi{Fano不等式}{$H(X|Y) \le H(p_E) + p_E \log(N_x - 1)$}
         
 \end{document}
