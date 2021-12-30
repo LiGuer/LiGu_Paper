@@ -1,454 +1,423 @@
-\iffalse
-Copyright 2020 LiGuer. All Rights Reserved.
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-	http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-==============================================================================\fi
-\documentclass{article} 
-\usepackage{latexsym}
-\usepackage{amssymb}
-\usepackage[UTF8]{ctex}
-\usepackage{geometry}\geometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
-\setlength{\parindent}{0pt}
-\title{Physics 物理}\author{}\date{}
-\usepackage{paralist}
-\let\itemize\compactitem
-\let\enumerate\compactenum
-
-\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
-\newcommand{\defi}[2]{\textbf{#1}, #2}
-\newcommand{\proof}[1]{\textbf{证明} #1}
-
-\begin{document}
-\maketitle
-\tableofcontents
-
 
 \section{Mechanics力学}
-    \subsection{力学之描述——运动方程}
+    \section{力学之描述——运动方程}
         (对于s个自由度的系统,)
         
-        \defi{广义坐标}{完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$}
+        \def{广义坐标}{完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$}
         
-        \defi{广义速度}{广义坐标对时间的一阶导$\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$}
+        \def{广义速度}{广义坐标对时间的一阶导$\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$}
         
         · 经验表明, 同时给定广义坐标、广义速度, 就可确定系统状态, 原则上可预测以后动作.(其中,加速度$\ddot q$, 可由$\dot q,q$唯一确定.)
         
-        \defi{运动方程}{加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)}
+        \def{运动方程}{加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)}
         
-        \defi{Lagrange函数}{每一个力学系统可以用一个确定函数L()表征.}
+        \def{Lagrange函数}{每一个力学系统可以用一个确定函数L()表征.}
         
-        $$L(q_{1},q_{2},\cdots,q_{s},\dot q_{1},\dot q_{2},\cdots,\dot q_{s},t)$$
+        $L(q_{1},q_{2},\cdots,q_{s},\dot q_{1},\dot q_{2},\cdots,\dot q_{s},t)$
         
-        \defi{最小作用量原理}{系统在两个时刻的, 位置之间的运动, 使得Lagrange函数积分(作用量S)取最小值.
-            $$S = \int_{t1}^{t2} L(q,\dot q,t)dt$$
-            $$\delta S = \delta \int_{t1}^{t2} L(q,\dot q,t)dt = \int_{t1}^{t2} (\frac{\partial L}{\partial q}\delta q + \frac{\partial L}{\partial \dot q}\delta \dot q) dt = \frac{\partial L}{\partial \dot q} \delta q \arrowvert_{t1}^{t2} + \int_{t1}^{t2} (\frac{\partial L}{\partial q} - \frac{d}{dt} \frac{\partial L}{\partial \dot q}) \delta q dt = 0$$
+        \def{最小作用量原理}{系统在两个时刻的, 位置之间的运动, 使得Lagrange函数积分(作用量S)取最小值.
+            $S = \int_{t1}^{t2} L(q,\dot q,t)dt$
+            $\delta S = \delta \int_{t1}^{t2} L(q,\dot q,t)dt = \int_{t1}^{t2} (\frac{\partial L}{\partial q}\delta q + \frac{\partial L}{\partial \dot q}\delta \dot q) dt = \frac{\partial L}{\partial \dot q} \delta q \arrowvert_{t1}^{t2} + \int_{t1}^{t2} (\frac{\partial L}{\partial q} - \frac{d}{dt} \frac{\partial L}{\partial \dot q}) \delta q dt = 0$
         }
         
-        \defi{Lagrange方程}{运动微分方程.
-            $$\Rightarrow \frac{d}{dt}\frac{\partial L}{\partial \dot q_i} - \frac{\partial L}{\partial q_i} = 0\quad(i=1,\dots,s)$$
+        \def{Lagrange方程}{运动微分方程.
+            $\Rightarrow \frac{d}{dt}\frac{\partial L}{\partial \dot q_i} - \frac{\partial L}{\partial q_i} = 0\quad(i=1,\dots,s)$
         }
 
 
-    \subsection{力学之框架——参考系}
+    \section{力学之框架——参考系}
         · 研究力学现象必须选择参考系.
         
-        \textbf{惯性参考系}:空间相对它均匀且各向同性,时间相对它均匀.(特别的,某时刻静止的自由物体将永远保持静止.)\\
+        \bf{惯性参考系}:空间相对它均匀且各向同性,时间相对它均匀.(特别的,某时刻静止的自由物体将永远保持静止.)\\
         $\Rightarrow$ Lagrange函数不显含$\vec r,t$,不依赖$\vec v$的矢量方向,即
-            $$L = L(v^2)$$
+            $L = L(v^2)$
         
         $\Rightarrow$ Lagrange方程有$\frac{d}{dt}\frac{\partial L}{\partial \vec v} = -\frac{\partial L}{\partial \vec r} = 0 \Rightarrow \frac{\partial L}{\partial \vec v}=const$
         
-        \defi{惯性定律}{在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.}
-            $$\Rightarrow \vec v = const$$
+        \def{惯性定律}{在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.}
+            $\Rightarrow \vec v = const$
 
 
-    \subsection{力学之框架——参考系间相对性}
-        \defi{Galilean相对性原理}{存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.}
+    \section{力学之框架——参考系间相对性}
+        \def{Galilean相对性原理}{存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.}
         
         (今后不特别声明,默认惯性参考系.)
         
-        \defi{Galilean变换}{两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).}
+        \def{Galilean变换}{两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).}
         
-        \defi{绝对时间假设}{我们认为两个参考系的时间相同.}
-            \begin{displaymath}
+        \def{绝对时间假设}{我们认为两个参考系的时间相同.}
+            $
                 \left\{ \begin{array}{ll}
                 \vec r = \vec r' + \vec V t\\
                 t = t'
                 \end{array} \right.
-            \end{displaymath}
+            $
         
-        \defi{Galilean相对性原理}{力学系统在Galilean变换下具有不变性.}
+        \def{Galilean相对性原理}{力学系统在Galilean变换下具有不变性.}
     
     
-    \subsection{力学之对象——质点、质点系}
-        \textbf{质点}:有质量,无体积形状的,理想的点.
+    \section{力学之对象——质点、质点系}
+        \bf{质点}:有质量,无体积形状的,理想的点.
         
-        \textbf{质点的Lagrange函数}:
+        \bf{质点的Lagrange函数}:
         
-        \textbf{质量 m}:
-            $$L = \frac{m}{2} v^2$$
+        \bf{质量 m}:
+            $L = \frac{m}{2} v^2$
         
-        \textbf{质点系}:2个及以上相互作用的质点,组成的力学系统.
+        \bf{质点系}:2个及以上相互作用的质点,组成的力学系统.
         
-        \textbf{质点系的Lagrange函数}:
+        \bf{质点系的Lagrange函数}:
         
-        \textbf{动能 T}: \quad \textbf{势能 U}:描述质点之间相互作用,而增加的关于坐标的函数(由相互作用性质决定)(限于经典力学).
-            $$L = \sum \frac{m_i v_i^2}{2} - U(\vec r_1,\vec r_2,\cdots ) = T(v_1^2,v_2^2,\cdots) - U(\vec r_1,\vec r_2,\cdots )$$
+        \bf{动能 T}: \quad \bf{势能 U}:描述质点之间相互作用,而增加的关于坐标的函数(由相互作用性质决定)(限于经典力学).
+            $L = \sum \frac{m_i v_i^2}{2} - U(\vec r_1,\vec r_2,\cdots ) = T(v_1^2,v_2^2,\cdots) - U(\vec r_1,\vec r_2,\cdots )$
 
 
-\subsection{力学之不变性——守恒定律}
-    \subsubsection{能量守恒——时间均匀性}
+\section{力学之不变性——守恒定律}
+    \section{能量守恒——时间均匀性}
         时间均匀性: 封闭系统Lagrange函数不显含时间.\quad $\Rightarrow L(\vec q,\dot \vec q)$
-            $$\frac{dL}{dt} = \sum \frac{\partial L}{\partial q_i} \dot q_i + \sum \frac{\partial L}{\partial \dot q_i} \ddot q_i = \sum \frac{d}{dt}(\frac{\partial L}{\partial \dot q_i}\dot q_i) 
-            \Rightarrow \frac{d}{dt}(\sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L) = 0$$
+            $\frac{dL}{dt} = \sum \frac{\partial L}{\partial q_i} \dot q_i + \sum \frac{\partial L}{\partial \dot q_i} \ddot q_i = \sum \frac{d}{dt}(\frac{\partial L}{\partial \dot q_i}\dot q_i) 
+            \Rightarrow \frac{d}{dt}(\sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L) = 0$
             
-        \textbf{能量E}: 
-        $$\Rightarrow E = \sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L  = T(q,\dot q) + U(q) = const.$$
+        \bf{能量E}: 
+        $\Rightarrow E = \sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L  = T(q,\dot q) + U(q) = const.$
     · 封闭系统、定常外场系统,即当Lagrange函数不显含时间时,能量守恒成立.
 
 
-    \subsubsection{动量守恒——空间均匀性、力}
+    \section{动量守恒——空间均匀性、力}
         空间均匀性: 空间平移不变性.
-            $$\delta L = \sum \frac{\partial L}{\partial \vec r_i}\cdot \delta \vec r_i = \vec \epsilon \cdot \sum \frac{\partial L}{\partial \vec r_i} = 0\quad(\forall \vec \epsilon)
-            \Rightarrow \sum \frac{\partial L}{\partial \vec r_i} = \sum \frac{d}{dt} \frac{\partial L}{\partial \vec v_i} = \frac{d}{dt} \sum \frac{\partial L}{\partial \vec v_i} = 0$$
+            $\delta L = \sum \frac{\partial L}{\partial \vec r_i}\cdot \delta \vec r_i = \vec \epsilon \cdot \sum \frac{\partial L}{\partial \vec r_i} = 0\quad(\forall \vec \epsilon)
+            \Rightarrow \sum \frac{\partial L}{\partial \vec r_i} = \sum \frac{d}{dt} \frac{\partial L}{\partial \vec v_i} = \frac{d}{dt} \sum \frac{\partial L}{\partial \vec v_i} = 0$
     
-        \textbf{动量$\vec P$: }
-            $$\Rightarrow \vec P = \sum \frac{\partial L}{\partial \vec v_i} = \sum m_i \vec v_i = const.$$
+        \bf{动量$\vec P$: }
+            $\Rightarrow \vec P = \sum \frac{\partial L}{\partial \vec v_i} = \sum m_i \vec v_i = const.$
     
-        \textbf{力$\vec F$}:动量对时间的一阶导. \quad 封闭系统合外力为零.
-            $$\Rightarrow \sum \frac{\partial L}{\partial \vec r_i} = \sum \vec F_i = 0 \quad , \quad \vec F = \frac{\partial L}{\partial \vec r} = \dot{ \vec P }$$
+        \bf{力$\vec F$}:动量对时间的一阶导. \quad 封闭系统合外力为零.
+            $\Rightarrow \sum \frac{\partial L}{\partial \vec r_i} = \sum \vec F_i = 0 \quad , \quad \vec F = \frac{\partial L}{\partial \vec r} = \dot{ \vec P }$
     
-        \textbf{广义动量、广义力}:
-            $$P_i = \frac{\partial L}{\partial \dot q_i},\quad F_i = \frac{\partial L}{\partial \dot q_i} = \dot P_i$$
+        \bf{广义动量、广义力}:
+            $P_i = \frac{\partial L}{\partial \dot q_i},\quad F_i = \frac{\partial L}{\partial \dot q_i} = \dot P_i$
 
 
-    \subsubsection{角动量守恒——空间各向同性}
+    \section{角动量守恒——空间各向同性}
         空间各向同性: 空间旋转不变性.
-            \begin{displaymath}
+            $
             \begin{array}{ll}
             \delta L = \sum (\frac{\partial L}{\partial \vec r_i} \cdot \delta \vec r_i + \frac{\partial L}{\partial \vec v_i} \cdot \delta \vec v_i) = \sum [\dot{\vec P_i} \cdot (\delta \vec \varphi \times \vec r_i) + \vec P_i \cdot ( \delta \vec \varphi \times \vec v_i )]
              = \delta \vec \varphi \cdot \sum (\vec r_i \tims \dot{\vec P_i} + \vec v_i \tims \vec P_i) \\
              \quad\  = \delta \vec \varphi \cdot \frac{d}{dt} \sum \vec r_i \times \vec P_i = 0\quad(\forall \vec \varphi) \Rightarrow \frac{d}{dt}\sum \vec r_i \times \vec P_i = 0
             \end{array}
-            \end{displaymath}
+            $
         
-        \textbf{角动量$\vec M$: }
-            $$\Rightarrow \vec M = \sum \vec r_i \times \vec P_i = const.$$
+        \bf{角动量$\vec M$: }
+            $\Rightarrow \vec M = \sum \vec r_i \times \vec P_i = const.$
 
 
-    \subsubsection{$E,\vec P,\vec M$参考系间变换}
+    \section{$E,\vec P,\vec M$参考系间变换}
         不同惯性参考系中(K'相对K以速度$\vec V$运动)(对于$\vec M$且K'相对K坐标原点相差$\vec R$)\\
-            \begin{displaymath}
+            $
                 \left\{ \begin{array}{ll}
                 E = \frac{1}{2} \sum m_i(\vec v_i + \vec V)^2 + U = \frac{m_c V^2}{2} + \vec V \cdot \sum m_i \vec v'_i + \frac{1}{2} \sum m_i v'_i^2 + U = E' + \vec V \cdot \vec P' + \frac{m_c V^2}{2}\\
                 \vec P = \sum m_i (\vec v'_i + \vec V) = \sum m_i \vec v'_i + \vec V \sum m_i = \vec P' + \vec V \sum m_i\\
                 \vec M = \sum m_i (\vec r'_i + \vec R) \times (\vec v'_i + \vec V) = \sum m_i( \vec r'_i \times \vec v'_i +  \vec R \times \vec v'_i + \vec r'_i \times \vec V + \vec R \times \vec V)
              = \vec M' + \vec R \times \vec P'_c + m_c \vec r'_c \times \vec V + m_c \vec R \times \vec V\\
                 \end{array} \right.
-            \end{displaymath}
+            $
 
 
-\subsection{力学之相似性}
+\section{力学之相似性}
     * Lagrange函数乘任意常数,不会改变运动方程.
-        $$\vec r_i \to \alpha \vec r_i, t \to \beta t 
-        \Rightarrow \vec v_i = \frac{d\vec r_i}{dt} \to \frac{\alpha}{\beta}\vec v_i,T \to \frac{\alpha^2}{\beta^2}T,U \to  \alpha^k U$$
+        $\vec r_i \to \alpha \vec r_i, t \to \beta t 
+        \Rightarrow \vec v_i = \frac{d\vec r_i}{dt} \to \frac{\alpha}{\beta}\vec v_i,T \to \frac{\alpha^2}{\beta^2}T,U \to  \alpha^k U$
     
     若$\frac{\alpha^2}{\beta^2} = \alpha ^ k $,即$\beta = \alpha^{1-k/2}$,则Lagrange函数乘const.,运动方程不变.前后运动轨迹相似,只是尺寸不同.
     
     且各力学量之比,满足:\quad(l:轨迹线度)
-        $$\frac{t'}{t} = (\frac{l'}{l})^{1-k/2},\frac{v'}{v} = (\frac{l'}{l})^{k/2},\frac{E'}{E} = (\frac{l'}{l})^k,\frac{M'}{M} = (\frac{l'}{l})^{1+k/2}$$
+        $\frac{t'}{t} = (\frac{l'}{l})^{1-k/2},\frac{v'}{v} = (\frac{l'}{l})^{k/2},\frac{E'}{E} = (\frac{l'}{l})^k,\frac{M'}{M} = (\frac{l'}{l})^{1+k/2}$
         
     · 例1: 均匀力场,势能与坐标成线性,$\Rightarrow k=1,\Rightarrow \frac{t'}{t} = \sqrt{\frac{l'}{l}}$,重力场自由落体,下落时间平方与初始高度成正比.
     
     · 例2: Kepler's第三定律,Newton引力、Coulomb力,势能与两点间距离成反比,$\Rightarrow k=-1,\Rightarrow \frac{t'}{t} = (\frac{l'}{l})^{3/2}$,轨道运动周期的平方与轨道尺寸的立方成正比.
 
 
-    \subsection{力学之对象——质心}
-        \textbf{质心系}:\exists 速度$\vec V$使得系统相对K'静止($\vec P' = 0$),且K'原点为系统质量中心,K'即质心系:
-            $$\vec V = \frac{\vec P}{\sum m_i} = \frac{\sum m_i \vec v_i}{\sum m_i}$$
+    \section{力学之对象——质心}
+        \bf{质心系}:\exists 速度$\vec V$使得系统相对K'静止($\vec P' = 0$),且K'原点为系统质量中心,K'即质心系:
+            $\vec V = \frac{\vec P}{\sum m_i} = \frac{\sum m_i \vec v_i}{\sum m_i}$
             
-        \textbf{质心}: 质点系的质量中心,并将质点系$\Leftrightarrow$位于质心的质点.
-            \begin{displaymath}
+        \bf{质心}: 质点系的质量中心,并将质点系$\Leftrightarrow$位于质心的质点.
+            $
                 \left\{ \begin{array}{ll}
                 m_c = \sum m_i\\
                 \vec r_c = \frac{\sum m_i \vec r_i}{\sum m_i}\\
                 \vec v_c = \frac{\sum m_i \vec v_i}{\sum m_i}
                 \end{array} \right.
-            \end{displaymath}
+            $
             
-        \textbf{质心力学量}:
+        \bf{质心力学量}:
             内能$E_{int}$: 整体静止的(质心系内)力学系统的能量,包括系统内相对运动动能 + 相互作用势能.\\
-            \begin{displaymath}
+            $
                 \left\{ \begin{array}{ll}
                 \vec P_c = m_c \vec v_c\\
                 E_c = \frac{m_c V^2}{2} + \vec V \cdot \vec P' |_{\vec P'=0} + E_{int} = E_{int} + \frac{m_c v_c^2}{2}\\
                 \vec M_c = \vec M' + \vec R \times \vec P'_c + m_c \vec r'_c \times \vec V + m'_c \vec R \times \vec V|_{\vec P'_c =\vec r'_c = 0, \vec R =\vec r_c, \vec V =\vec v_c} = \vec M_{int} + \vec r_c \times \vec P_c 
                 \end{array} \right.
-            \end{displaymath}
+            $
             
-        \textbf{质心组合关系}: 将质点系分成若干小系,各小系质心构成新的质点系之质心即为原质点系的质心.
+        \bf{质心组合关系}: 将质点系分成若干小系,各小系质心构成新的质点系之质心即为原质点系的质心.
 
 
-    \subsection{情景: 一维运动}
+    \section{情景: 一维运动}
         一维运动,定常外部条件下,
         
-        \textbf{[0] Lagrange函数}:
-            $$L = \frac{1}{2} = a(q) \dot q^2 - U(x)\quad (CartesianCoord)\Rightarrow L = \frac{m \dot x^2}{2} - U(x)$$
+        \bf{[0] Lagrange函数}:
+            $L = \frac{1}{2} = a(q) \dot q^2 - U(x)\quad (CartesianCoord)\Rightarrow L = \frac{m \dot x^2}{2} - U(x)$
         
-        \textbf{[1] 运动不变性 —— 能量守恒}: 定常外场下能量守恒,有
-            $$E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{1}{2}m\cdot 2 \dot x \cdot \dot x - (\frac{m \dot x^2}{2} - U(x)) = \frac{m \dot x^2}{2} + U(x) $$
+        \bf{[1] 运动不变性 —— 能量守恒}: 定常外场下能量守恒,有
+            $E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{1}{2}m\cdot 2 \dot x \cdot \dot x - (\frac{m \dot x^2}{2} - U(x)) = \frac{m \dot x^2}{2} + U(x) $
         
-        \textbf{[2] 运动方程}:
-            $$\dot x = \frac{dx}{dt} = \sqrt{\frac{2}{m}[E - U(x)]}\quad \Rightarrow \quad t = \sqrt{\frac{m}{2}} \int \frac{dx}{\sqrt{E - U(x)}} + const$$
+        \bf{[2] 运动方程}:
+            $\dot x = \frac{dx}{dt} = \sqrt{\frac{2}{m}[E - U(x)]}\quad \Rightarrow \quad t = \sqrt{\frac{m}{2}} \int \frac{dx}{\sqrt{E - U(x)}} + const$
             $\because$动能恒正,故运动只能发生在$U(x) \leqslant E$的空间区域.
 
 
-    \subsection{情景: 二体问题}
-        \textbf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)\\
+    \section{情景: 二体问题}
+        \bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)\\
         二体问题Lagrange函数:
-            $$L = \frac{m \vec \dot r_1^2}{2} + \frac{m \vec \dot r_1^2}{2} - U(|\vec r_1 - \vec r_2|)$$
+            $L = \frac{m \vec \dot r_1^2}{2} + \frac{m \vec \dot r_1^2}{2} - U(|\vec r_1 - \vec r_2|)$
         
-        \textbf{核心思想}: 将问题分解为\textbf{质心运动}和\textbf{相对质心运动},以质心为原点:
-            $$m_1\vec r_1 + m_2 \vec r_2 =0,\quad \vec r_{12} = \vec r_1 - \vec r_2, \quad \Rightarrow \quad \vec r_1 = \frac{m_2}{m_1 + m_2}\vec r_{12}, \quad \vec r_2 = - \frac{m_1}{m_1 + m_2}\vec r_{12} $$
-            $$\Rightarrow L = \frac{m_{12} \vec \dot r_{12}^2}{2} - U(|\vec r_{12}|), \quad m_{12} = \frac{m_1 m_2}{m_1 + m_2}$$
+        \bf{核心思想}: 将问题分解为\bf{质心运动}和\bf{相对质心运动},以质心为原点:
+            $m_1\vec r_1 + m_2 \vec r_2 =0,\quad \vec r_{12} = \vec r_1 - \vec r_2, \quad \Rightarrow \quad \vec r_1 = \frac{m_2}{m_1 + m_2}\vec r_{12}, \quad \vec r_2 = - \frac{m_1}{m_1 + m_2}\vec r_{12} $
+            $\Rightarrow L = \frac{m_{12} \vec \dot r_{12}^2}{2} - U(|\vec r_{12}|), \quad m_{12} = \frac{m_1 m_2}{m_1 + m_2}$
             $\Rightarrow$"二体问题"等效为一个质量$m_{12}$的质点,在外场$U(\vec r_{12})$下的运动, 而分运动$\vec r_1, \vec r_2$, 可由$\vec r_{12}$分别解出.
         
         
-    \subsection{情景: 有心力场}
-        \textbf{有心力场}: 质点势能只与质点到某一固定点的距离有关的外场.
+    \section{情景: 有心力场}
+        \bf{有心力场}: 质点势能只与质点到某一固定点的距离有关的外场.
         
-        \textbf{有心力}: 始终指向or背离与质点到某一固定点的方向，且大小只依赖r的力.
-            $$\vec F = -\frac{\partial U(r)}{\partial \vec r} = -\frac{d U(r)}{d r} \hat r$$
+        \bf{有心力}: 始终指向or背离与质点到某一固定点的方向，且大小只依赖r的力.
+            $\vec F = -\frac{\partial U(r)}{\partial \vec r} = -\frac{d U(r)}{d r} \hat r$
     
-        \textbf{[1] 运动不变性 —— 角动量守恒}:中心对称外场下(即势能仅依赖到空间某特定点(中心)距离),系统角动量在任意过中心的轴上投影都守恒.
-            $$\Rightarrow \vec M = \vec r \times \vec P = const.$$
-            $\Rightarrow$ 质点运动在垂直于$\vec M$的平面内.\quad $\Rightarrow$ 有心力场,\textbf{[0] Lagrange函数}:
-            $$L = \frac{1}{2}m v^2 - U(r) = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi ^2) - U(r)$$
+        \bf{[1] 运动不变性 —— 角动量守恒}:中心对称外场下(即势能仅依赖到空间某特定点(中心)距离),系统角动量在任意过中心的轴上投影都守恒.
+            $\Rightarrow \vec M = \vec r \times \vec P = const.$
+            $\Rightarrow$ 质点运动在垂直于$\vec M$的平面内.\quad $\Rightarrow$ 有心力场,\bf{[0] Lagrange函数}:
+            $L = \frac{1}{2}m v^2 - U(r) = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi ^2) - U(r)$
             $\varphi$的广义动量:
-            $$P_\varphi = \frac{\partial L}{\partial \dot \varphi} = m r^2 \dot \varphi \quad , \quad \frac{d P_\varphi}{d t} = \frac{d}{d t}\frac{\partial L}{\partial \dot \varphi} = \frac{\partial L}{\partial \varphi} \frac{d \frac{d \varphi}{d \varphi / d t}}{d t} = \frac{\partial L}{\partial \varphi} = 0 \quad , \quad |\vec M| = M_z = \sum \frac{\partial L}{\partial  \dot \varphi} = P_\varphi$$
-            $$\Rightarrow |\vec M| =| \vec r \times \vec P |= P_\varphi = m r^2 \dot \varphi = const.$$
+            $P_\varphi = \frac{\partial L}{\partial \dot \varphi} = m r^2 \dot \varphi \quad , \quad \frac{d P_\varphi}{d t} = \frac{d}{d t}\frac{\partial L}{\partial \dot \varphi} = \frac{\partial L}{\partial \varphi} \frac{d \frac{d \varphi}{d \varphi / d t}}{d t} = \frac{\partial L}{\partial \varphi} = 0 \quad , \quad |\vec M| = M_z = \sum \frac{\partial L}{\partial  \dot \varphi} = P_\varphi$
+            $\Rightarrow |\vec M| =| \vec r \times \vec P |= P_\varphi = m r^2 \dot \varphi = const.$
     
-        \textbf{Kepler's第二定律}:质点矢径在相同时间内扫过的面积相等.
-            $$\Rightarrow M = m r^2 \dot \varphi = 2 m \dot S_{sector} = const.\quad \Rightarrow \dot S_{sector} = \frac{1}{2} r \cdot r d\varphi = const.$$
+        \bf{Kepler's第二定律}:质点矢径在相同时间内扫过的面积相等.
+            $\Rightarrow M = m r^2 \dot \varphi = 2 m \dot S_{sector} = const.\quad \Rightarrow \dot S_{sector} = \frac{1}{2} r \cdot r d\varphi = const.$
     
-        \textbf{[2]运动不变性——能量守恒}: 定常外场下能量守恒,有
-            $$E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi ^2) + U(r) = \frac{m \dot r^2}{2} + \frac{M^2}{2mr^2} + U(r)$$
+        \bf{[2]运动不变性——能量守恒}: 定常外场下能量守恒,有
+            $E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi ^2) + U(r) = \frac{m \dot r^2}{2} + \frac{M^2}{2mr^2} + U(r)$
     
-        \textbf{[3]运动方程}:
-            $$\Rightarrow t = \int \frac{d r}{\sqrt{\frac{2}{m}[E-U(r)] - \frac{M^2}{m^2 r^2}}} + const. \quad \varphi = \int \frac{M}{m r^2} d t  + const.= \int \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$$
+        \bf{[3]运动方程}:
+            $\Rightarrow t = \int \frac{d r}{\sqrt{\frac{2}{m}[E-U(r)] - \frac{M^2}{m^2 r^2}}} + const. \quad \varphi = \int \frac{M}{m r^2} d t  + const.= \int \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
     
-        \textbf{[4]结果讨论}: 有心力场径向运动,和一维运动的联系.
+        \bf{[4]结果讨论}: 有心力场径向运动,和一维运动的联系.
     
-        \textbf{等效势能}
-            $$U_{eff} = U(r) + \frac{M^2}{2mr^2}$$
+        \bf{等效势能}
+            $U_{eff} = U(r) + \frac{M^2}{2mr^2}$
     
-        \textbf{离心势能}
-            $$U_{centrifuge} = \frac{M^2}{2mr^2}$$
+        \bf{离心势能}
+            $U_{centrifuge} = \frac{M^2}{2mr^2}$
             运动封闭条件:$\Delta \varphi$等于$2\pi$有理数倍.\quad($U(r) \propto \frac{1}{r}\ ,\ r^2$,则运动始终封闭.)
-            $$\Delta \varphi = \int_{r_{min}} ^{r_{max}} \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$$
+            $\Delta \varphi = \int_{r_{min}} ^{r_{max}} \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
     
 
-        \subsubsection{1/r有心力场}
+        \section{1/r有心力场}
         势能$U(r) \propto \frac{1}{r}$.\quad eg.引力场,库仑电场.
-            $$U = - \alpha / r$$
+            $U = - \alpha / r$
             
-        \textbf{[1]运动方程}: 焦点位于原点的圆锥曲线方程.\quad 偏心率e.
-            $$\varphi = \int \frac{M/r^2\ dr}{\sqrt{2m (E+\frac{\alpha}{r}) - \frac{M^2}{r^2}}} + C. = \int \frac{-dk}{\sqrt{2mE + \frac{2m\alpha}{M}k - k^2}}|_{k = \frac{M}{r}} + C. = arccos\frac{M/r - m\alpha /M}{\sqrt{2mE + m^2 \alpha ^2 /M^2}} + C.$$
-            $$\Rightarrow p/r = 1 + e \ cos \varphi \quad , \quad p = \frac{M^2}{m\alpha} , e = \sqrt{1 + \frac{2 E M^2}{m \alpha^2}}$$
+        \bf{[1]运动方程}: 焦点位于原点的圆锥曲线方程.\quad 偏心率e.
+            $\varphi = \int \frac{M/r^2\ dr}{\sqrt{2m (E+\frac{\alpha}{r}) - \frac{M^2}{r^2}}} + C. = \int \frac{-dk}{\sqrt{2mE + \frac{2m\alpha}{M}k - k^2}}|_{k = \frac{M}{r}} + C. = arccos\frac{M/r - m\alpha /M}{\sqrt{2mE + m^2 \alpha ^2 /M^2}} + C.$
+            $\Rightarrow p/r = 1 + e \ cos \varphi \quad , \quad p = \frac{M^2}{m\alpha} , e = \sqrt{1 + \frac{2 E M^2}{m \alpha^2}}$
             
-        \textbf{[2]结果讨论}: \\
+        \bf{[2]结果讨论}: \\
         
-        \textbf{[2.1] $\alpha > 0\ and\ e<1, E<0$时,轨道为椭圆}\quad,半长轴a: \quad , 半短轴b: \quad , 周期T:
-        $$a = \frac{p}{1-e^2} = \frac{\alpha}{2|E|} \quad , \quad b = \frac{p}{\sqrt{1-e^2}} = \frac{M}{\sqrt{2m|E|}} \quad , \quad T = \frac{2mS_{ellipse}}{M} = \frac{2\pi m \frac{\alpha}{2|E|} \frac{M}{\sqrt{2m|E|}}}{M} = \pi \alpha \sqrt{\frac{m}{2|E|^3}} $$
+        \bf{[2.1] $\alpha > 0\ and\ e<1, E<0$时,轨道为椭圆}\quad,半长轴a: \quad , 半短轴b: \quad , 周期T:
+        $a = \frac{p}{1-e^2} = \frac{\alpha}{2|E|} \quad , \quad b = \frac{p}{\sqrt{1-e^2}} = \frac{M}{\sqrt{2m|E|}} \quad , \quad T = \frac{2mS_{ellipse}}{M} = \frac{2\pi m \frac{\alpha}{2|E|} \frac{M}{\sqrt{2m|E|}}}{M} = \pi \alpha \sqrt{\frac{m}{2|E|^3}} $
         
-        \textbf{[2.2] $\alpha > 0\ and\ e=1, E=0$时,轨道为抛物线}
+        \bf{[2.2] $\alpha > 0\ and\ e=1, E=0$时,轨道为抛物线}
         
-        \textbf{[2.3] $\alpha > 0\ and\ e>1, E>0$时,轨道为双曲线}
+        \bf{[2.3] $\alpha > 0\ and\ e>1, E>0$时,轨道为双曲线}
         
-        \textbf{[2.4] $\alpha < 0$斥力场时,轨道为双曲线}
+        \bf{[2.4] $\alpha < 0$斥力场时,轨道为双曲线}
 
 
 
-    \subsection{情景: 小振动}
-        \subsubsection{一维小振动}
-            \textbf{一维小振动}:
+    \section{情景: 小振动}
+        \section{一维小振动}
+            \bf{一维小振动}:
                 设系统在势场$q_0$处平衡,即$F = -\frac{dU(q)}{dq}|_{q=q_0} = 0$,当平衡处发生微小偏移至$q(q\to q_0)$,Taylor展开,
-                $$U(q) - U(q_0) = [U(q_0) - U(q_0)] + [\frac{d U(q)}{dq}|_{q=q_0} (q - q_0)]+ [\frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}] + o((q - q_0)^2) \approx \frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}$$
+                $U(q) - U(q_0) = [U(q_0) - U(q_0)] + [\frac{d U(q)}{dq}|_{q=q_0} (q - q_0)]+ [\frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}] + o((q - q_0)^2) \approx \frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}$
             
             等效势能:
-            $$U(x) = - \frac{k x^2}{2} \quad , \quad x = q-q_0 \quad ,\quad k = \frac{d^2 U(q)}{dq^2}|_{q=q_0}$$
+            $U(x) = - \frac{k x^2}{2} \quad , \quad x = q-q_0 \quad ,\quad k = \frac{d^2 U(q)}{dq^2}|_{q=q_0}$
             
-            \textbf{[0]Lagrange函数}:
-            $$L = T - U = \frac{m \dot x^2}{2} - \frac{k x^2}{2}$$
+            \bf{[0]Lagrange函数}:
+            $L = T - U = \frac{m \dot x^2}{2} - \frac{k x^2}{2}$
             
-            \textbf{[1]运动方程}: 系统在平衡位置附近作正弦振动.
-            $$\frac{d}{dt} \frac{\partial L}{\partial \dot x} = \frac{\partial L}{\partial x} = \frac{d m\dot x}{dt} = -kx \quad \Rightarrow m \ddot x = -kx \quad \Rightarrow x = A cos(\omega t + \alpha) \quad , \omega = \sqrt{k/m}$$
+            \bf{[1]运动方程}: 系统在平衡位置附近作正弦振动.
+            $\frac{d}{dt} \frac{\partial L}{\partial \dot x} = \frac{\partial L}{\partial x} = \frac{d m\dot x}{dt} = -kx \quad \Rightarrow m \ddot x = -kx \quad \Rightarrow x = A cos(\omega t + \alpha) \quad , \omega = \sqrt{k/m}$
             
-            \textbf{[2]运动不变性——能量守恒}:
-            $$E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{m \dot x^2}{2} + \frac{k x^2}{2} = \frac{1}{2} m \omega^2 A^2$$
+            \bf{[2]运动不变性——能量守恒}:
+            $E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{m \dot x^2}{2} + \frac{k x^2}{2} = \frac{1}{2} m \omega^2 A^2$
 
 
-        \subsubsection{一维强迫小振动、共振}
-            \textbf{强迫振动}:外力下振动系统发生的振动. 对于微小偏移,强迫力势场,Taylor展开,有
+        \section{一维强迫小振动、共振}
+            \bf{强迫振动}:外力下振动系统发生的振动. 对于微小偏移,强迫力势场,Taylor展开,有
             
-            \textbf{强迫力$F(t)$}:
-                $$U_e(x,t) \approx U_e(0,t) + \frac{\partial U_e}{x}|_{x=0}x = U_e(0,t) + xF(t)$$
+            \bf{强迫力$F(t)$}:
+                $U_e(x,t) \approx U_e(0,t) + \frac{\partial U_e}{x}|_{x=0}x = U_e(0,t) + xF(t)$
             
-            \textbf{[0]Lagrange函数}:
-                $$L = T - (U_0 + U_e) = \frac{m \dot x^2}{2} - \frac{k x^2}{2} + xF(t)$$
+            \bf{[0]Lagrange函数}:
+                $L = T - (U_0 + U_e) = \frac{m \dot x^2}{2} - \frac{k x^2}{2} + xF(t)$
             
-            \textbf{[1]运动方程}:
-                $$\ddot x + \omega^2 x = \frac{F(t)}{m}$$
+            \bf{[1]运动方程}:
+                $\ddot x + \omega^2 x = \frac{F(t)}{m}$
             
-            \textbf{[2]结果讨论}:
+            \bf{[2]结果讨论}:
             
-            \textbf{[2.1]} 若强迫力是正弦函数$F(t) = f cos(\gamma t + \beta)$
-                $$\Rightarrow x = A\ cos(\omega t + \alpha) + \frac{f}{m(\omega^2 - \gamma^2)} cos(\gamma t + \beta)$$
+            \bf{[2.1]} 若强迫力是正弦函数$F(t) = f cos(\gamma t + \beta)$
+                $\Rightarrow x = A\ cos(\omega t + \alpha) + \frac{f}{m(\omega^2 - \gamma^2)} cos(\gamma t + \beta)$
                 
-            \textbf{[2.2]} \textbf{共振}:若强迫力是正弦函数,且$\gamma = \omega$.\quad 振幅随时间线性增大,直至不再是小量,理论不再适用为止.
-            $$\Rightarrow \lim_{\gamma \to \omega}x = A'cos(\omega t + \alpha) + \frac{f t}{2m\omega} sin(\omega t + \beta)$$
+            \bf{[2.2]} \bf{共振}:若强迫力是正弦函数,且$\gamma = \omega$.\quad 振幅随时间线性增大,直至不再是小量,理论不再适用为止.
+            $\Rightarrow \lim_{\gamma \to \omega}x = A'cos(\omega t + \alpha) + \frac{f t}{2m\omega} sin(\omega t + \beta)$
             
-            \textbf{[2.3]} 共振附近:若强迫力是正弦函数,且$\gamma = \omega + \epsilon$.\quad 幅度以频率$\epsilon$变化(\textbf{拍频})的小振动.
-            $$\Rightarrow x = (A' + B' e^{i\epsilon t})e^{i\omega t} \quad ,A' = Ae^{i\alpha},B' = Be^{i\beta},|A' + B' e^{i\epsilon t}| \in \{|A-B|,A+B\} $$
+            \bf{[2.3]} 共振附近:若强迫力是正弦函数,且$\gamma = \omega + \epsilon$.\quad 幅度以频率$\epsilon$变化(\bf{拍频})的小振动.
+            $\Rightarrow x = (A' + B' e^{i\epsilon t})e^{i\omega t} \quad ,A' = Ae^{i\alpha},B' = Be^{i\beta},|A' + B' e^{i\epsilon t}| \in \{|A-B|,A+B\} $
             
-            \textbf{[2.3]} 任意强迫力
-            $$let\ \xi = \dot x + i\omega x\ \Rightarrow \dot \xi - i\omega \xi = \frac{F(t)}{m}  \ \Rightarrow x = \frac{1}{\omega}Im\{\int_0^t \frac{F(t)}{m}e^{-i\omega t}dt + const.\}$$
+            \bf{[2.3]} 任意强迫力
+            $let\ \xi = \dot x + i\omega x\ \Rightarrow \dot \xi - i\omega \xi = \frac{F(t)}{m}  \ \Rightarrow x = \frac{1}{\omega}Im\{\int_0^t \frac{F(t)}{m}e^{-i\omega t}dt + const.\}$
 
 
-        \subsubsection{多自由度小振动}
+        \section{多自由度小振动}
 
 
-    \subsection{力学之对象——刚体}
-        \textbf{刚体}:质点间距离保持不变的质点组成的系统.
+    \section{力学之对象——刚体}
+        \bf{刚体}:质点间距离保持不变的质点组成的系统.
         
-        \textbf{角速度$\vec \omega$}:
+        \bf{角速度$\vec \omega$}:
         
-        \textbf{惯性张量}:
+        \bf{惯性张量}:
     
     
     
-    \subsection{力学之对象——理想流体}
-        \textbf{理想流体}:不可压缩、不计粘性的流体.
+    \section{力学之对象——理想流体}
+        \bf{理想流体}:不可压缩、不计粘性的流体.
         
         · 给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
         
-        \textbf{[1] 运动不变性 —— 质量守恒}
+        \bf{[1] 运动不变性 —— 质量守恒}
             区域体流出质量 = 区域封闭面流出质量
-            $$\Rightarrow \oint \rho \vec v \cdot d \vec f = -\frac{\partial}{\partial t}\int \rho dV \quad \Rightarrow \int \nabla \cdot (\rho \vec v) dV  = -\frac{\partial}{\partial t}\int \rho dV \Rightarrow  \int (\nabla \cdot (\rho \vec v) + \frac{\partial \rho}{\partial t}) dV  = 0$$
+            $\Rightarrow \oint \rho \vec v \cdot d \vec f = -\frac{\partial}{\partial t}\int \rho dV \quad \Rightarrow \int \nabla \cdot (\rho \vec v) dV  = -\frac{\partial}{\partial t}\int \rho dV \Rightarrow  \int (\nabla \cdot (\rho \vec v) + \frac{\partial \rho}{\partial t}) dV  = 0$
         
-        \textbf{连续性方程}:质量流流出速率 = 流体密度减少速率
-            $$\Rightarrow \nabla \cdot (\rho \vec v) +  \frac{\partial \rho}{\partial t} = 0$$
+        \bf{连续性方程}:质量流流出速率 = 流体密度减少速率
+            $\Rightarrow \nabla \cdot (\rho \vec v) +  \frac{\partial \rho}{\partial t} = 0$
         
-        \textbf{质量流密度}:
-            $$\vec j = \rho \vec v$$
+        \bf{质量流密度}:
+            $\vec j = \rho \vec v$
         
-        \textbf{[2]运动方程}
+        \bf{[2]运动方程}
             合力:
-            $$-\oint p d \vec f = -\int \nabla p\ dV$$
-            $$\rho \frac{d \vec v}{t} = -\nabla p$$
+            $-\oint p d \vec f = -\int \nabla p\ dV$
+            $\rho \frac{d \vec v}{t} = -\nabla p$
         
-        \textbf{Euler方程}:
-            $$\frac{\partial \vec v}{\partial t} + (\vec v \cdot \nabla)\vec v = - \frac{1}{\rho}\nabla p$$
+        \bf{Euler方程}:
+            $\frac{\partial \vec v}{\partial t} + (\vec v \cdot \nabla)\vec v = - \frac{1}{\rho}\nabla p$
 
 
 \section{Relativity Mechanics 相对论力学}
-    \subsection{相对性原理,相互作用传播速度}
-        \textbf{相对性原理}: 所有物理定律,在所有惯性参考系中都相同.
+    \section{相对性原理,相互作用传播速度}
+        \bf{相对性原理}: 所有物理定律,在所有惯性参考系中都相同.
         
         · 实验表明, 相对性原理是有效的.
         
         · 实验表明, 瞬时相互作用在自然界不存在,相互作用的传播需要时间.
         
-        \textbf{相互作用的传播速度},在所有惯性参考系中都一样(相对性原理可得).\quad 电动力学中证明,这个速度是光在真空中的速度.
-            $$c = 2.998 \times 10^8 m/s$$
+        \bf{相互作用的传播速度},在所有惯性参考系中都一样(相对性原理可得).\quad 电动力学中证明,这个速度是光在真空中的速度.
+            $c = 2.998 \times 10^8 m/s$
             (取$c\to \infty$,即可过渡到经典力学.)
 
 
-    \subsection{相对时间}
+    \section{相对时间}
         · <1881年Michelson-Morley干涉实验>表明, 光速与其传播方向无关. (而按经典力学,光应在地球速度同方向(v+c),比反方向(v-c)更快一点.)
         
         $\Rightarrow$Galilean变换的绝对时间假设(t=t')错了.\quad  $\Rightarrow$不同参考系,时间流逝的速度不同.
         
-        \textbf{事件}:由事件发生的位置(x,y,z)和时间(t)决定.
+        \bf{事件}:由事件发生的位置(x,y,z)和时间(t)决定.
         
-        \textbf{事件间隔}:
-            $$S_{12} = [(ct_2-ct_1)^2 - (x_2-x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2]^{1/2}$$
+        \bf{事件间隔}:
+            $S_{12} = [(ct_2-ct_1)^2 - (x_2-x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2]^{1/2}$
             $\Rightarrow$ 两个事件的间隔在所有参考系中都一样.\quad 这个不变性,就是光速不变的数学表示.
         
-        \textbf{固有时}:与物体一同运动的钟所指示的时间.
+        \bf{固有时}:与物体一同运动的钟所指示的时间.
         
-        \textbf{固有长度}:物体在相对静止参考系内的长度.
+        \bf{固有长度}:物体在相对静止参考系内的长度.
 
 
-    \subsection{参考系间变换}
-        \textbf{Lorentz变换}: 参考系间变换
-            $$ x = \frac{x' + V t'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad y=y',\quad z=z', \quad t = \frac{t'+ \frac{V}{c^2}x'}{\sqrt{1 - \frac{V^2}{c^2}}}$$
-            $$ \Rightarrow dx = \frac{dx' + V dt'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad dy=dy',\quad dz=dz', \quad dt = \frac{dt'+ \frac{V}{c^2}dx'}{\sqrt{1 - \frac{V^2}{c^2}}}$$
+    \section{参考系间变换}
+        \bf{Lorentz变换}: 参考系间变换
+            $ x = \frac{x' + V t'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad y=y',\quad z=z', \quad t = \frac{t'+ \frac{V}{c^2}x'}{\sqrt{1 - \frac{V^2}{c^2}}}$
+            $ \Rightarrow dx = \frac{dx' + V dt'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad dy=dy',\quad dz=dz', \quad dt = \frac{dt'+ \frac{V}{c^2}dx'}{\sqrt{1 - \frac{V^2}{c^2}}}$
     
-        \textbf{速度变换}: $\vec v = \frac{d\vec r}{dt},\quad v' = \frac{d\vec r'}{dt}$
-            $$\Rightarrow v_x = \frac{v'_x + V}{1 + v'_x \frac{V}{c^2}}, \quad v_y = \frac{v'_y \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}},\quad v_z = \frac{v'_z \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}}$$
+        \bf{速度变换}: $\vec v = \frac{d\vec r}{dt},\quad v' = \frac{d\vec r'}{dt}$
+            $\Rightarrow v_x = \frac{v'_x + V}{1 + v'_x \frac{V}{c^2}}, \quad v_y = \frac{v'_y \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}},\quad v_z = \frac{v'_z \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}}$
             
-        · 例1: \textbf{钟慢}:
+        · 例1: \bf{钟慢}:
     
-        · 例2: \textbf{尺缩}:
+        · 例2: \bf{尺缩}:
 
 
-    \subsection{力学量}
-        \textbf{Lagrange函数}:
-            $$L = -m c^2 \sqrt{1 - \frac{v^2}{c^2}}$$
+    \section{力学量}
+        \bf{Lagrange函数}:
+            $L = -m c^2 \sqrt{1 - \frac{v^2}{c^2}}$
     
-        \textbf{动量$\vec P$}:
-            $$\vec P = \frac{\partial L}{\partial \vec v}= (\frac{\partial}{\partial v_x} \hat{v_x}, \frac{\partial}{\partial v_y} \hat{v_y}, \frac{\partial}{\partial v_z} \hat{v_z})(-m c^2 \sqrt{1 - \frac{v_x^2 + v_y^2 + v_z^2}{c^2}}) = \frac{m \vec v}{\sqrt{1 - \frac{v^2}{c^2}}}$$
+        \bf{动量$\vec P$}:
+            $\vec P = \frac{\partial L}{\partial \vec v}= (\frac{\partial}{\partial v_x} \hat{v_x}, \frac{\partial}{\partial v_y} \hat{v_y}, \frac{\partial}{\partial v_z} \hat{v_z})(-m c^2 \sqrt{1 - \frac{v_x^2 + v_y^2 + v_z^2}{c^2}}) = \frac{m \vec v}{\sqrt{1 - \frac{v^2}{c^2}}}$
         
-        \textbf{力$\vec F$}:
-            $$\vec F = \frac{d\vec P}{dt} \to \frac{m}{\sqrt{1 - \frac{v^2}{c^2}}} \frac{d\vec v}{dt}(\vec F \perp \vec v) \quad or\quad  \frac{m}{(1 - \frac{v^2}{c^2})^{3/2}} \frac{d\vec v}{dt} (\vec F \parallel \vec v)$$
+        \bf{力$\vec F$}:
+            $\vec F = \frac{d\vec P}{dt} \to \frac{m}{\sqrt{1 - \frac{v^2}{c^2}}} \frac{d\vec v}{dt}(\vec F \perp \vec v) \quad or\quad  \frac{m}{(1 - \frac{v^2}{c^2})^{3/2}} \frac{d\vec v}{dt} (\vec F \parallel \vec v)$
     
-        \textbf{能量E}:
-            $$E = \sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L = \vec P \cdot \vec v - L = \frac{m v^2}{\sqrt{1 - \frac{v^2}{c^2}}} + m c^2 \sqrt{1 - \frac{v^2}{c^2}} = \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}}$$
+        \bf{能量E}:
+            $E = \sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L = \vec P \cdot \vec v - L = \frac{m v^2}{\sqrt{1 - \frac{v^2}{c^2}}} + m c^2 \sqrt{1 - \frac{v^2}{c^2}} = \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}}$
     
-        \textbf{静能}:\quad $E(v=0) = mc^2$\\
+        \bf{静能}:\quad $E(v=0) = m c^2$\\
 
 
-\section{Electromagnetics 电磁学}
-    \subsection{电磁场方程}
+\section{电磁学}
+    \section{电磁场方程}
         · 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.
     
-        \textbf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\vec A$:}
-            $$A^{i}=(\varphi,\vec A)$$
+        \bf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\vec A$:}
+            $A^{i}=(\varphi,\vec A)$
             
         运动方程:
-            $$\frac{d\vec P}{dt} = - \frac{e}{c} \frac{\partial\vec A}{\partial t} - e \nabla \varphi + \frac{e}{c} \vec v \times \nabla \times \vec A$$
+            $\frac{d\vec P}{dt} = - \frac{e}{c} \frac{\partial\vec A}{\partial t} - e \nabla \varphi + \frac{e}{c} \vec v \times \nabla \times \vec A$
             
-        \textbf{电场强度$\vec E$:\quad 磁场强度$\vec H$:}
-            \begin{displaymath}
+        \bf{电场强度$\vec E$:\quad 磁场强度$\vec H$:}
+            $
                 \left\{ \begin{array}{ll}
                 \vec E = -\frac{1}{c} \frac{\partial \vec A}{\partial t} - \nabla \varphi\\
                 \vec H = \nabla \times \vec A
                 \end{array} \right.
-            \end{displaymath}
-            $$\Rightarrow \frac{d\vec P}{dt} = e \vec E + \frac{e}{c} \vec v \times \vec H$$
+            $
+            $\Rightarrow \frac{d\vec P}{dt} = e \vec E + \frac{e}{c} \vec v \times \vec H$
             
         对$\vec E,\vec H$取旋散度, 有
         
-        \textbf{Maxwell's方程组}:
-            \begin{displaymath}
+        \bf{Maxwell's方程组}:
+            $
                 \left\{ \begin{array}{ll}
                 \nabla \cdot \vec E = 4\pi\rho\\
                 \nabla \cdot \vec H = 0\\
                 \nabla \times \vec E = - \frac{1}{c} \frac{\partial \vec H}{\partial t}\\
                 \nabla \times \vec H = - \frac{1}{c} \frac{\partial \vec E}{\partial t} + \frac{4\pi}{c}\vec j
                 \end{array} \right.
-            \end{displaymath}
+            $
 
 
-\subsection{特解: 静电场}
+\section{特解: 静电场}
 静电场  /  恒磁场
 *	[公式]: 
 		▽²A  = -4π/c·J		磁矢势 (恒磁场)
@@ -466,10 +435,10 @@ limitations under the License.
 		对于各种边界条件，Poisson's方程有许多种解，但每个解梯度相同.
 		静电场下, 意味边界条件下满足Poisson's方程的势函数，所解得电场唯一确定.
 
-\subsection{特解: 恒磁场}
+\section{特解: 恒磁场}
 
 
-\subsection{特解: 真空电磁波}
+\section{特解: 真空电磁波}
 
 
 
@@ -518,7 +487,7 @@ limitations under the License.
 
 
 \section{狭义相对论-参考系变换}
-    \textbf{核心}: 
+    \bf{核心}: 
         \env{enumerate}{
         \item 若新旧两个参考系相对速度不变, 则之间的参考系变换是一种线性变换.
             \[\begin{bmatrix}t' \\ x'\end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ x\end{bmatrix}\]
@@ -526,7 +495,7 @@ limitations under the License.
             \[\begin{bmatrix}t \\ -x\end{bmatrix} = \boldsymbol A \begin{bmatrix}t' \\ -x'\end{bmatrix} \quad \Rightarrow \quad \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} = \boldsymbol A \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \boldsymbol A\]
         \item 新参考系原点, 坐标恒为零, 且在旧坐标系中为速度$v$.\quad $(t,vt)^T \Rightarrow (t',0)^T$. 
             \[\begin{bmatrix}t' \\ 0 \end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ v t\end{bmatrix}\]
-        \item \textbf{光速不变原理}, 光速矢量$(1, c)^T$是参考系变换前后方向不变的矢量. 
+        \item \bf{光速不变原理}, 光速矢量$(1, c)^T$是参考系变换前后方向不变的矢量. 
             \[\begin{bmatrix}t' \\ ct' \end{bmatrix} = \boldsymbol A \begin{bmatrix}t \\ ct\end{bmatrix}\]
         }
     联立解得.
@@ -540,8 +509,3 @@ limitations under the License.
             \frac{1}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}} & \frac{v}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}}\\
             \frac{\frac{v}{c^{2}}}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}} & \frac{1}{\sqrt{1-\left( \frac{v}{c} \right)^{2}}}
         \end{bmatrix} \begin{bmatrix}t \\ x\end{bmatrix}\]
-
-
-
-
-\end{document}
