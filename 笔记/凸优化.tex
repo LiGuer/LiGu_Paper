@@ -1,23 +1,65 @@
 
 \section{凸优化}
     \section{仿射、凸、锥}
-        \item \def{仿射集}  {C是仿射集 $\Leftrightarrow$ 任意两点间直线仍在C内. $\forall \vec x_i \in C,\ \theta_i \in R, \sum \theta_i = 1 , then\ \sum \theta_i x_i \in C $}
-        \item \def{仿射包}  {$ \text{aff}\ C =   \{\sum \theta_i x_i\ |\ x_i\in C,\theta_i \in R, \sum \theta_i = 1  \}$}
-        \item \def{凸集}    {C是凸集 $\Leftrightarrow$ 任意两点间线段仍在C内.$\forall \vec x_i \in C, \theta_i \in [0,1], \sum \theta_i = 1 , then\ \sum \theta_i x_i \in C $}
-        \item \def{凸包}    {$\text{conv}\ C =   \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1  \}$}
-        \item \def{锥}      {C是锥 $\Leftrightarrow \forall \vec x \in C,\ \theta > 0,\ then\ \theta \vec x \in$ C.}
-        \item \def{凸锥}    {C是凸锥 $\Leftrightarrow \forall \vec x_1, \vec x_2 \in C,\ \theta_1,\theta_2 \ge 0,\ then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in$ C.}
+        \bf{基础集合}
+        \item \def{仿射集}{
+                集合内任意两点所画直线仍在该集合内的集合. 
+            $
+                \forall \vec x_i \in C, \theta_i \in R, \sum \theta_i = 1
+                then\ \sum \theta_i x_i \in C 
+            $ 
+            }
+        \item \def{仿射包}  {
+                集合内所有点的仿射组合的集合构成一个仿射包. 
+            $ 
+                aff\ C =   \{\sum \theta_i x_i\ |\ x_i\in C,theta_i \in R, \sum \theta_i = 1  \}
+            $
+            }
+        \item \def{凸集}{
+                集合内任意两点间的线段仍在该集合内的集合. 
+            $
+                \forall \vec x_i \in C, \theta_i \in [0,1], \sum \theta_i = 1 
+                then\ \sum \theta_i x_i \in C 
+            $
+            }
+        \item \def{凸包}{
+                集合内所有点的凸组合的集合构成一个凸包. 该凸包也是包含给定集合内所有点的最小凸集.
+            $
+                conv\ C = \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1 \}
+            $
+            }
+        \item \def{锥}{
+                以零点为起点的射线的集合.
+                $\forall \vec x \in C, \theta > 0, then\ \theta \vec x \in C$
+            }
+        \item \def{凸锥}{
+                凸的锥.
+            $
+                \forall \vec x_1, \vec x_2 \in C, \theta_1,theta_2 \ge 0
+                then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in C
+            $
+            }
         
     \section{凸函数}
-        \def{凸函数}{函数$f: \mathbf{R}^n \to \mathbf{R}$是凸的$\Leftrightarrow$ 若 $\mathbf{dom} f$是凸集, 对$\forall x,y \in \mathbf{dom} f, \forall \theta \in [0,1]$有 $f(\theta x + (1 - \theta) y) \le \theta f(x) + (1 - \theta)f(y)$}
+        \def{凸函数}{
+            定义域是凸集, 且$(x_1, f(x_1))$和$(x_2, f(x_2))$间的线段始终在函数图像上方的函数.
+        $
+            f: \mathbb R^n \to \mathbb R
+            dom\ f \text{是凸集}
+            \forall x_1, x_2 \in dom\ f, \forall \theta \in [0,1]
+            f(\theta x_1 + (1 - \theta) x_2) \le \theta f(x_1) + (1 - \theta)f(x_2)
+        $
+        }
             
         \bf{证明条件}:
-        \item \bf{一阶条件}: $f(y) \geqslant f(x)+\nabla f(x)^{T}(y-x)$
+        \item \bf{一阶条件}: $f(y) \ge f(x)+\nabla f(x)^{T}(y-x)$
         \item \bf{二阶条件}: $\nabla^{2} f(x) \succeq 0$
         
-        \def{拟凸函数}{函数$f: \mathbf{R}^n \to \mathbf{R}$是拟凸函数$\Leftrightarrow$ 对$\forall \alpha \in R ,\ \{x \in \mathbf{dom} f \mid f(x) \le \alpha\}$都是凸集.}
+        \def{拟凸函数}{
+            函数$f: \mathbf{R}^n \to \mathbf{R}$是拟凸函数$\Leftrightarrow$ 对$\forall \alpha \in R , \{x \in \mathbf{dom} f \mid f(x) \le \alpha\}$都是凸集.
+        }
         
-    \section{凸优化}
+    \section{凸优化问题}
         \def{优化问题}{
             目标函数$f_0(x)$, 不等式约束$f_i(x)$, 等式约束$h_i(x)$.
             $
@@ -38,7 +80,7 @@
                 }
 
         \def{凸优化问题}{
-            对凸函数$f_0, f_i$
+            目标函数、不等式约束函数是凸函数, 且等式约束函数是仿射函数的优化问题.
             $
                 \min \quad& x
                 s.t. \quad& f_i(x) \le 0
@@ -46,9 +88,7 @@
             $
         }
             \bf{性质}
-            \item 目标函数必须是凸.
-            \item 不等式约束函数必须是凸.
-            \item 等式约束函数$h_i(x)= a_i^T x- b_i$必须是仿射.
+            \item 凸优化问题的局部最优解就是全局最优解.
 
             \bf{例子}
             \item \def{线性规划}{
@@ -104,17 +144,24 @@
 
                 \df{关系} $二次锥规划 \supset \{二次规划 \supset \{ 线性规划 \} , 二次约束二次规划\}$
             
-    \section{对偶}
+    \section{凸优化算法}
         \def{Lagrange函数}{$L(x, \lambda, \nu) = f_0(x) + \sum_i \lambda_i f_i(x) + \sum_i \nu_i h_i(x)$}
         \def{Lagrange对偶函数}{$g(\lambda, \nu)=\inf _{x \in \mathcal{D}} L(x, \lambda, \nu)=\inf _{x \in \mathcal{D}} (f_{0}(x)+\sum_{i=1}^{m} \lambda_i f_i(x)+\sum_{i=1}^{p} \nu_i h_i(x) )$}
             \bf{性质}
-            \item Lagrange对偶函数是凹函数.
-            \item 若$\lambda \succeq 0$, 则$g(\lambda, \upsilon) \le p^*$, 即给出原问题最优解的一个不平凡下界.
+            \item Lagrange对偶函数一定是凹函数.
+            \item 若$\lambda \succeq 0$, 则$g(\lambda, \nu) \le p^*$, 即给出原问题最优解的一个不平凡下界.
         \def{对偶问题}{
             $
-                \max \quad& g(\lambda, \upsilon)
+                \max \quad& g(\lambda, \nu)
                 s.t. \quad& \lambda \succeq 0
             $
+            最优解$d^* = max g(\lambda, \nu)$
         }
+            \bf{性质}
+            \item \bf{弱对偶} $p^* \ge d^*$ 恒成立
+            \item \bf{强对偶} $p^* = d^*$ 保证强对偶成立的条件为被称约束准则.
+            
+            \def{Slater 约束准则}{}
+            \def{KKT 条件}{}
         
 \end{document}
