@@ -14,6 +14,8 @@ if __name__ == '__main__':
     
     Str = re.sub(r'\n(\s+)\$([\s\S][^\$]+)\$\n', lambda m:'\n'+ m.group(1) + '\\begin{align*}'+m.group(2)+'\\end{align*}\n', Str)
     Str = re.sub(r'\\item([\s\S][^\n]+)\n', lambda m: '\\begin{itemize}\\item' + m.group(1) + '\\end{itemize}\n', Str)
+    Str = re.sub(r'\n([\s][^\n]+)\*([\s\S][^\n]+)\n', lambda m: '\n' + m.group(1) + '\\begin{itemize}\\item' + m.group(2) + '\\end{itemize}\n', Str)
+    Str = re.sub(r'\n([\s][^\n]+)\*([\s\S][^\n]+)\n', lambda m: '\n' + m.group(1) + '\\begin{itemize}\\item' + m.group(2) + '\\end{itemize}\n', Str)
 
     file.close()
     file = open("head.tex","r", encoding='utf-8')

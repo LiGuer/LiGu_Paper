@@ -1,18 +1,7 @@
-\documentclass{article} 
-\usepackage{amsmath}
-\usepackage[UTF8]{ctex}
-\title{}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
-\usepackage{ntheorem}\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
-
-\begin{document}
-\tableofcontents
-
 \section{算法}
-    \subsection{图论}
+    \section{图论}
 
-        \subsubsection{最短路径}
+        \section{最短路径}
         *	[算法]: Dijkstra
                 [步骤]:
                     [1] init dis[]
@@ -42,7 +31,7 @@
                     Dijkstra一次只能算出给定两点间的最短路径。
                     Floyd   一次可以算出任意两点间的最短路径。
 
-        \subsubsection{最小生成树}
+        \section{最小生成树}
         *	[算法]: Prim
                 [输入]: 图的邻接链表[Graph], 节点数量[n]
                 [输出]: 最小生成树,每一条有向边的 起点[TreeU],终点[TreeV],总边数[TreeCur]
@@ -69,7 +58,7 @@
                 Kruskal	是按边贪心，适合稀疏图。
                 Prim	是按点贪心，适合稠密图。
 
-        \subsubsection{网络最大流}
+        \section{网络最大流}
         *	[算法]: Dinic
                 [原理]: 贪心 + "反悔"机制
                 增广路: 就是源->汇的一条路径。
@@ -80,7 +69,6 @@
                     广搜BFS，用队列queue。
                     深搜BFS，用递归or栈stack。
 
-        \subsubsection{商旅问题}
+        \section{商旅问题}
         *	[问题]: 遍历所有给定点的最短闭合路径.
 
-\end{document}

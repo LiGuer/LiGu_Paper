@@ -1,57 +1,42 @@
-\documentclass{article} 
-\usepackage{amsmath}
-\usepackage[UTF8]{ctex}
-\title{}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
-\usepackage{ntheorem}\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{geometry} \geometry{a4paper,left=1cm,right=1cm,top=1cm,bottom=1.5cm}
-\usepackage{paralist}
-\let\itemize\compactitem
-\let\enumerate\compactenum
-
-\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
-\newcommand{\defi}[2]{\textbf{#1}, #2}
-\newcommand{\proof}[1]{\textbf{证明} #1}
-\begin{document}
-
 \section{主成分分析}
 		[目标]:
 			数据降维，提取数据的主要特征分量, 满足:
-    			\begin{enumerate}
-    			    \item 最近重构性: 样本点到该超平面的距离都足够近。
-    			    \item 最大可分性: 样本点在该超平面的投影尽可能分开。
-    			\end{enumerate}
+    			
+    			    * 最近重构性: 样本点到该超平面的距离都足够近。
+    			    * 最大可分性: 样本点在该超平面的投影尽可能分开。
+    			
 			
 		[优化问题]:
-    		\begin{align*}
+    		$
     			\min_W  &\quad	tr( W^T x x^T W )\\
     			s.t.    &\quad	W^T W = I
-    		\end{align*}
+    		$
 			
 		[流程]:
-			(1) 数据中心化, \sum \vec x_i = 0
-			(2) 计算协方差矩阵 C = X X^T
-			(3) 对协方差矩阵C 特征值分解
-			(4) 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
-			(5) 样本点在超平面投影: y_i = W^T x_i
+			* 数据中心化, $\sum \vec x_i = 0$
+			* 计算协方差矩阵 C = X X^T
+			* 对协方差矩阵C 特征值分解
+			* 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
+			* 样本点在超平面投影: y_i = W^T x_i
 			
 		[原理]:
 				分别从目标(1, 2)可以推得同样的结果
-			(3)	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
+			*	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
 				协方差矩阵:
 					$D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T$
 				协方差矩阵对角化
-			(4) 优化问题构造:
-					min_W		tr( W^T x x^T W )
-					s.t.		W^T W = I
-			(5) 计算最优点:
+			* 优化问题构造:
+			$
+				min_W		tr( W^T x x^T W )
+				s.t.		W^T W = I
+			$
+			* 计算最优点:
 				Lagrange函数 $L(W,λ) = W^T x x^T W + λ( W^T W - I )$
 				Lagrange对偶 $G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))$
 				L(W,λ)求导, 当导数为0时, 取得极值
 				=>	$X X^T ω_i = λ_i ω_i$
 				即.对协方差X XT, 特征值求解
-			()	取特征值最大的yDim个特征向量, 即目标投影矩阵W
+			*	取特征值最大的yDim个特征向量, 即目标投影矩阵W
 
 
 \section{K-Mean 聚类}
@@ -59,143 +44,144 @@
 			聚类. 对N维分布的数据点，可以将其聚类在 K 个关键簇内.
 			
 		[步骤]:
-			(1) 随机选择 K 个簇心点 Center
-			(2) 迭代开始
-				(3) 归零 Cluster , Cluster: 簇,记录ith簇内的数据指针。
-				(4) 计算每个xi到簇心μj的距离
-					(5) 选择距离最小的簇心, 将该点加入其簇内
-				(6) 对每个簇,计算其质心 Center'
-				(7) Center≠Center' , 则更正Center为 Center'
-				(8) 迭代重新开始
-			(9) 一轮无更正时，迭代结束
+			* 随机选择 K 个簇心点 Center
+			* 迭代开始
+				* 归零 Cluster , Cluster: 簇,记录ith簇内的数据指针。
+				* 计算每个xi到簇心μj的距离
+					* 选择距离最小的簇心, 将该点加入其簇内
+				* 对每个簇,计算其质心 Center'
+				* Center≠Center' , 则更正Center为 Center'
+				* 迭代重新开始
+			* 一轮无更正时，迭代结束
 
 \section{最小二乘法}
 		[目标]:
 			求一条直线，使得所有样本点到该直线的Euclid距离最小.
 			
 		[优化问题]: 最小化均方误差
-    		\begin{align*}
-    			\min_w  &\quad	MSE(\tilde{\boldsymbol y}) · n = \sum (\tilde {\boldsymbol y} -\boldsymbol y)^2 = \sum (\boldsymbol w^T \boldsymbol x - \boldsymbol y)^2
-    		\end{align*}
+    		$
+    			\min_w  &\quad MSE(\tilde{\bb y}) · n = \sum (\tilde {\bb y} -\bb y)^2 = \sum (\bb w^T \bb x - \bb y)^2
+    		$
     		
 		[原理]:
-			(1) 直线方程: $$f(x) = \boldsymbol w^T \boldsymbol x	\quad (\boldsymbol x = [1, \boldsymbol x_0])$$
-			(2) 均方误差:
-					$$MSE(\tilde y) · n = \sum (\tilde {\boldsymbol y} -\boldsymbol y)^2 = \sum (\boldsymbol w^T \boldsymbol x - \boldsymbol y)^2 = (X w - y)^T (X w - y)$$
+			* 直线方程: $f(x) = \bb w^T \bb x	\quad (\bb x = [1, \bb x_0])$
+			* 均方误差:
+					$MSE(\tilde y) · n = \sum (\tilde {\bb y} -\bb y)^2 = \sum (\bb w^T \bb x - \bb y)^2 = (X w - y)^T (X w - y)$
 					
-			(3) 优化问题构造: 无约束凸优化问题
-					$$\min_W	\sum (\boldsymbol w^T \boldsymbol x - y)^2 = (X w - y)^T (X w - y)$$
+			* 优化问题构造: 无约束凸优化问题
+					$\min_W	\sum (\bb w^T \bb x - y)^2 = (X w - y)^T (X w - y)$
 					
-			(4) 计算最优点: 求导, 导数为0时取得极值
-				\begin{align*}
-					\frac{\partial MSE}{\partial w} &= 2·X^T·(\boldsymbol w^T \boldsymbol x - y) = 0\\
+			* 计算最优点: 求导, 导数为0时取得极值
+				$
+					\frac{\partial MSE}{\partial w} &= 2·X^T·(\bb w^T \bb x - y) = 0\\
 				\Rightarrow	w^* &= (X^T X)^-1 X^T y\\
 					f(x) &= x^T (X^T X)^-1 X^T y
-				\end{align*}
+				$
 				
-			(5) 一维场景:
+			* 一维场景:
 				优化问题:
-				\begin{align*}
-					min_{w,b}	\sum (\boldsymbol w^T \boldsymbol x_i + b - y_i)^2\\
+				$
+					min_{w,b}	\sum (\bb w^T \bb x_i + b - y_i)^2\\
 				    \Rightarrow	\frac{\partial E}{\partial w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
 					\frac{\partial E}{\partial b} = 2( n b + \sum(y_i - w x_i) ) = 0
-				\end{align*}
+				$
 				
 				最优点:
-				\begin{align*}
-				    \Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} \left(\sum_i x_i \right) \left(\sum_i y_i\right) + \frac{w}{n} \left(\sum_i x_i\right)^2\\
+				$
+				    \Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2\\
 					w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}\\
 					b^* &= \frac{1}{n}·\sum(y_i - w x_i)\\
-				\end{align*}
+				$
 
 					
 \section{核方法}
     \defi{核方法}{将样本从原始空间映射到更高维特征空间,使得其线性可分.}
-        \[\mathbf{K}=\left[\begin{array}{ccccc}
-            \kappa\left(\boldsymbol{x}_{1}, \boldsymbol{x}_{1}\right) & \cdots & \kappa\left(\boldsymbol{x}_{1}, \boldsymbol{x}_{j}\right) & \cdots & \kappa\left(\boldsymbol{x}_{1}, \boldsymbol{x}_{m}\right) \\
+        $
+			\mathbf{K}=[\begin{array}{ccccc}
+            \kappa(\bb x_1, \bb x_1) & \cdots & \kappa(\bb x_1, \bb x_j) & \cdots & \kappa(\bb x_1, \bb x_{m}) \\
             \vdots & \ddots & \vdots & \ddots & \vdots \\
-            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{1}\right) & \cdots & \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) & \cdots & \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{m}\right) \\
+            \kappa(\bb x_{i}, \bb x_1) & \cdots & \kappa(\bb x_{i}, \bb x_j) & \cdots & \kappa(\bb x_{i}, \bb x_{m}) \\
             \vdots & \ddots & \vdots & \ddots & \vdots \\
-            \kappa\left(\boldsymbol{x}_{m}, \boldsymbol{x}_{1}\right) & \cdots & \kappa\left(\boldsymbol{x}_{m}, \boldsymbol{x}_{j}\right) & \cdots & \kappa\left(\boldsymbol{x}_{m}, \boldsymbol{x}_{m}\right)
-        \end{array}\right]\]
+            \kappa(\bb x_{m}, \bb x_1) & \cdots & \kappa(\bb x_{m}, \bb x_j) & \cdots & \kappa(\bb x_{m}, \bb x_{m})
+        \end{array}]
+		$
         
-        \[\begin{array}{l}
-            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \\
-            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d} \\
-            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\exp \left(-\frac{\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|^{2}}{2 \sigma^{2}}\right) \\
-            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\exp \left(-\frac{\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|}{\sigma}\right) \\
-            \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)
-        \end{array}\]
+        $\begin{array}{l}
+            \kappa(\bb x_{i}, \bb x_j)=\bb x_{i}^T \bb x_j \\
+            \kappa(\bb x_{i}, \bb x_j)=(\bb x_{i}^T \bb x_j)^{d} \\
+            \kappa(\bb x_{i}, \bb x_j)=\exp (-\frac{\|\bb x_{i}-\bb x_j\|^{2}}{2 \sigma^{2}}) \\
+            \kappa(\bb x_{i}, \bb x_j)=\exp (-\frac{\|\bb x_{i}-\bb x_j\|}{\sigma}) \\
+            \kappa(\bb x_{i}, \bb x_j)=\tanh (\beta \bb x_{i}^T \bb x_j+\theta)
+        \end{array}$
 		
 
 \section{支持向量机}
     \defi{支持向量机}{
         是一种二分类模型，目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
-        \[\begin{align*}
-           \underset{\boldsymbol w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\boldsymbol w^T \boldsymbol x_i + b |}{||\boldsymbol w||}\\
-           s.t. &\quad y_i (\boldsymbol w^T \boldsymbol x_i + b) \le 1
-        \end{align*}
+        $
+           \underset{\bb w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\bb w^T \bb x_i + b |}{||\bb w||}\\
+           s.t. &\quad y_i (\bb w^T \bb x_i + b) \le 1
+        $
         \qquad \Rightarrow \qquad 
-	    \begin{align*}
-	        \underset{\boldsymbol w, b}{\arg\min}     &\quad	\frac{||\boldsymbol w||^2}{2}\\
-			s.t.    &\quad	y_i (\boldsymbol w^T \boldsymbol x_i + b) \le 1
-	    \end{align*}\]
+	    $
+	        \underset{\bb w, b}{\arg\min}     &\quad	\frac{||\bb w||^2}{2}\\
+			s.t.    &\quad	y_i (\bb w^T \bb x_i + b) \le 1
+	    $
     }
     
     \proof{	\par		
-        超平面方程: $\boldsymbol w^T \boldsymbol x + b = 0$, \quad 点面距: $d = \frac{|\boldsymbol w^T \boldsymbol x + b|}{||w||}$
+        超平面方程: $\bb w^T \bb x + b = 0$, \quad 点面距: $d = \frac{|\bb w^T \bb x + b|}{||w||}$
 		
 		分类
-			\begin{align*}\left \{ \begin{array}{cc}
-				\boldsymbol w^T \boldsymbol x_i + b \ge +1    &\quad (y_i = +1)\\
-				\boldsymbol w^T \boldsymbol x_i + b \le -1	&\quad (y_i = -1)\\
-			    \end{array} \right.
-				\quad\Rightarrow\quad y_i (\boldsymbol w^T \boldsymbol x_i + b) \ge 1
-			\end{align*}
+			$ \{ \begin{array}{cc}
+				\bb w^T \bb x_i + b \ge +1    &\quad (y_i = +1)\\
+				\bb w^T \bb x_i + b \le -1	&\quad (y_i = -1)\\
+			    \end{array} .
+				\quad\Rightarrow\quad y_i (\bb w^T \bb x_i + b) \ge 1
+			$
 
 		间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
-			\[\Delta = \frac{2}{||w||} \tag{间隔}\]
+			$\Delta = \frac{2}{||w||} \tag{间隔}$
 					
 		优化问题构造: 使间隔最大化. 凸二次规划问题
-		    \[\max\quad  \frac{2}{||\boldsymbol w||} \quad \Rightarrow \quad \min\quad  \frac{||\boldsymbol w||^2}{2}\]
-			\[s.t.\quad	y_i (\boldsymbol w^T \boldsymbol x_i + b) \ge 1\]
+		    $\max\quad  \frac{2}{||\bb w||} \quad \Rightarrow \quad \min\quad  \frac{||\bb w||^2}{2}$
+			$s.t.\quad	y_i (\bb w^T \bb x_i + b) \ge 1$
 	}
     
-	\textbf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\boldsymbol w, b$求导, 令导数为0取得极值$\boldsymbol w^*, b^*$, 再求Lagrange对偶函数
-		\[L(\boldsymbol w, b,\boldsymbol \lambda) = \frac{||\boldsymbol w||^2}{2} + \sum_i \lambda_i (1 - y_i (\boldsymbol w^T \boldsymbol x_i + b)) \tag{Lagrange函数}\]
-		\[\Rightarrow \left\{\begin{array}{rl} \boldsymbol w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}\right.\tag{$\boldsymbol w, b$极值}\]
-		\[G(\boldsymbol \lambda) = L(\boldsymbol w^*, b^*, \boldsymbol \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \boldsymbol x_i^T \boldsymbol x_j \tag{Lagrange对偶}\]
+	\bf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\bb w, b$求导, 令导数为0取得极值$\bb w^*, b^*$, 再求Lagrange对偶函数
+		$L(\bb w, b,\bb \lambda) = \frac{||\bb w||^2}{2} + \sum_i \lambda_i (1 - y_i (\bb w^T \bb x_i + b)) \tag{Lagrange函数}$
+		$\Rightarrow \{\begin{array}{rl} \bb w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}.\tag{$\bb w, b$极值}$
+		$G(\bb \lambda) = L(\bb w^*, b^*, \bb \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \bb x_i^T \bb x_j \tag{Lagrange对偶}$
 
-		得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\boldsymbol \lambda^*$
-		    \begin{align*}
-		        \max\limits_{\boldsymbol \lambda} &\quad G(\boldsymbol \lambda)\\
+		得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\bb \lambda^*$
+		    $
+		        \max\limits_{\bb \lambda} &\quad G(\bb \lambda)\\
 			    s.t. &  \quad \lambda_i \ge 0\\
 			        & \quad \sum_i \lambda_i y_i = 0
-		    \end{align*}
+		    $
 		    
 		其中, KKT条件如下
-		    \begin{align*}
+		    $
 		        \lambda &\ge 0\\
-		        y_i (\boldsymbol w^T \boldsymbol x_i + b) - 1 &\ge 0\\
-		        \lambda_i(y_i(\boldsymbol w^T \boldsymbol x_i + b) - 1) &= 0
-		    \end{align*}
+		        y_i (\bb w^T \bb x_i + b) - 1 &\ge 0\\
+		        \lambda_i(y_i(\bb w^T \bb x_i + b) - 1) &= 0
+		    $
 					
-	\textbf{算法步骤}:
-        \begin{enumerate}
-            \item 计算核矩阵
-            \item 计算$\lambda^*$
-            \begin{enumerate}
-                \item 选择 i
-                \item 选择 j
-                \item 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
-                \item 更新 $\lambda_j, \lambda_i$
-                \item 更新 b
-            \end{enumerate}
-            \item 计算 w*, b*
-        \end{enumerate}
+	\bf{算法步骤}:
+		* 计算核矩阵
+		* 计算$\lambda^*$
+		
+			* 选择 i
+			* 选择 j
+			* 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
+			* 更新 $\lambda_j, \lambda_i$
+			* 更新 b
+		
+		* 计算 w*, b*
+        
 
-    \textbf{核方法非线性支持向量机}:
-		\textbf{核函数}:将样本从原始空间映射到更高维特征空间,使得其线性可分.
+    \bf{核方法非线性支持向量机}:
+		\bf{核函数}:将样本从原始空间映射到更高维特征空间,使得其线性可分.
 			=>	超平面方程: $w^T \phi(x) + b = 0$
 				min		||w||^2 / 2
 				s.t.	y_i (w^T Φ(x_i) + b) ≥ 1
@@ -204,7 +190,7 @@
 				f(x) = w*^T x + b = \sum λ_i y_i к(x, x_i) + b
 			*	к是核函数 <=> 核矩阵[a_ij = к(x_i, x_j)]总是半正定
 			
-		\textbf{Sequential Minimal Optimization算法}
+		\bf{Sequential Minimal Optimization算法}
 			∵	λ是n-1自由度, 确定前n-1个量, 则第n个由\sum λ_i y_i = 0自动确定.
 			∴	每次选2个λ_i λ_j, 固定其他λ_k不变, 优化λ_i λ_j, 更新b
 			优化λ_i λ_j:
@@ -219,64 +205,61 @@
 				y_i= y_j时,	下界L = max(0,λ_j^old+λ_i^old - C),上界L = min(C,λ_j^old+λ_i^old)
 			更新b:
 			
-	\textbf{软间隔}:
+	\bf{软间隔}:
 
 \section{神经网络}
-    \subsection{前馈神经网络}
-        \subsubsection{正向传播}
+    \section{前馈神经网络}
+        \section{正向传播}
             $\sigma()$: 激活函数, 使线性拟合非线性化, eg. relu(x), Sigmoid(x)
-            $$\boldsymbol y = \sigma (\boldsymbol w \boldsymbol x + \boldsymbol b)$$
+            $\bb y = \sigma (\bb w \bb x + \bb b)$
 
 
             误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
-            $$E(\boldsymbol{w})=\frac{1}{2} \sum_{n=1}^{N}\left\|\boldsymbol{y}\left(\boldsymbol{x}_{n}, \boldsymbol{w}\right)-\boldsymbol{t}_{n}\right\|^{2}$$
+            $E(\bb{w})=\frac{1}{2} \sum_{n=1}^{N}\|\bb{y}(\bb x_{n}, \bb{w})-\bb{t}_{n}\|^{2}$
 
-        \subsubsection{反向传播 --- 梯度下降最优化}
-    		$$\boldsymbol{w}^{(\tau+1)}=\boldsymbol{w}^{(\tau)}-\eta \nabla E\left(\boldsymbol{w}^{(\tau)}\right)$$
+        \section{反向传播 --- 梯度下降最优化}
+    		$\bb{w}^{(\tau+1)}=\bb{w}^{(\tau)}-\eta \nabla E(\bb{w}^{(\tau)})$
     		
-    		设$z = \boldsymbol w^T \boldsymbol x + \boldsymbol b$
-            $$\left \{ \begin{array}{lr}
-                \delta_l = (\boldsymbol w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
+    		设$z = \bb w^T \bb x + \bb b$
+            $ \{ \begin{array}{lr}
+                \delta_l = (\bb w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
                 \delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}\\
-                \nabla E(\boldsymbol w_l) = \delta_l \boldsymbol x_l^T & \text{(每层参数误差)}
-            \end{array} \right.$$
+                \nabla E(\bb w_l) = \delta_l \bb x_l^T & \text{(每层参数误差)}
+            \end{array} .$
 
-            \textbf{证明}:
+            \bf{证明}:
         		
         		每层参数误差, 由链式法则得(其中$L$指输出层): 
-        		    \begin{align*}
+        		    $
         		        \frac{\partial E}{\partial w_l} 
-        		        &= \frac{\partial z_l}{\partial w_l} \left(\frac{\partial y_l}{\partial z_l}\frac{\partial z_l}{\partial y_{l+1}}\right) ... \left(\frac{\partial y_{L-1}}{\partial z_{L-1}} \frac{\partial z_{L-1}}{\partial y_L} \right) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
-        		        &= \frac{\partial z_l}{\partial w_l}  \left(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} \right) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}
-        		    \end{align*}
+        		        &= \frac{\partial z_l}{\partial w_l} (\frac{\partial y_l}{\partial z_l}\frac{\partial z_l}{\partial y_{l+1}}) ... (\frac{\partial y_{L-1}}{\partial z_{L-1}} \frac{\partial z_{L-1}}{\partial y_L} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
+        		        &= \frac{\partial z_l}{\partial w_l}  (\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}
+        		    $
         		    
         	    其中:
-        		    \begin{align*}
+        		    $
         		        \frac{\partial y_l}{\partial z_l} &= \sigma'(z_l)\\
-        		        \frac{\partial z_l}{\partial y_{l+1}} &= \boldsymbol w_{l+1}^T
-        		    \end{align*}
+        		        \frac{\partial z_l}{\partial y_{l+1}} &= \bb w_{l+1}^T
+        		    $
         		    
         		令$\delta_l$为每层误差:
-        		    \begin{align*}
-        		        \delta_l &=\left(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} \right) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
-        		        &= \left(\prod_{i = l}^{L} \sigma'(z_i)\boldsymbol w_{i+1}^T\right) \sigma '(z_L)\frac{\partial E}{\partial y_L}
-        		    \end{align*}
+        		    $
+        		        \delta_l &=(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
+        		        &= (\prod_{i = l}^{L} \sigma'(z_i)\bb w_{i+1}^T) \sigma '(z_L)\frac{\partial E}{\partial y_L}
+        		    $
         		    
         		得到每层参数误差结果:
-        		    \begin{align*}
+        		    $
         		        \Rightarrow \frac{\partial E}{\partial w_l} &= \delta_l \frac{\partial z_l}{\partial w_l} = \delta_l x_l^T\\
         		        \delta_L &= \frac{\partial E}{\partial y_L} ·\sigma '(z_L)
-        		    \end{align*}
+        		    $
         		    
-            \textbf{附}:
+            \bf{附}:
             
         		激活函数的导函数:
-        		    \begin{align*}
+        		    $
         		        relu(x) &= \max(0, x)\\
         		        relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}\\
         		        sigmoid(x) &= \frac{1}{1+e^{-x}}\\
         		        sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
-        		    \end{align*}
-
- 
-\end{document}
+        		    $

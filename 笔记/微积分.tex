@@ -1,30 +1,7 @@
-\documentclass{article} 
-\usepackage{amsmath}
-\usepackage[UTF8]{ctex}
-\title{}\date{} \setlength{\parindent}{0pt} \linespread{1.25}
-\usepackage{ntheorem}\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{geometry} \geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=1.5cm}
-\usepackage{paralist}
-\let\itemize\compactitem
-\let\enumerate\compactenum
-
-\newcommand{\env}[2]{\begin{#1}#2\end{#1}}
-\newcommand{\defi}[2]{\textbf{#1}, #2}
-\newcommand{\proof}[1]{\textbf{证明} #1}
-\newcommand{\bb}{\boldsymbol}
-\newcommand{\P}{\mathbb P}
-\newcommand{\d}{\mathrm d}
-\newcommand{\l}{\left}
-\newcommand{\r}{\right}
-
-\begin{document}
-\tableofcontents
-
 \section{微积分}
 	\section{极限}
 		\section{数列极限}
-			\defi{数列极限}{
+			\def{数列极限}{
 				设$\{x_n\}$为一数列，如果存在常数a,对于任意给定的正数ε (不论它多么小)，总存在正整数N,使得当n>N时，不等式$\left|x_{n}-a\right|<\varepsilon$都成立，那么就称常数a是数列$\{x_n\}$的极限, 或者称数列$\{x_n\}$收敛于a,记为$\lim _{n \rightarrow \infty} x_{n}=a$. 若不存在常数a, 则数列无极限, 数列\textbf{发散}.
 				$$\lim _{n \rightarrow \infty} x_{n}=a \Leftrightarrow \forall \varepsilon>0, \exists \text { 正整数 } N \text {, 当 } n>N \text { 时, 有 }\left|x_{n}-a\right|<\varepsilon$$
 			}
@@ -37,7 +14,7 @@
 					}
 
 		\section{函数极限}
-			\defi{函数极限}{
+			\def{函数极限}{
 				设函数$f(x)$在点$x_{0}$的某一去心邻域内有定义. 如果存在常数$A$ , 对 于任意给定的正数$\varepsilon$(不论它多么小 ), 总存在正数$\delta$ , 使得当$x$满足不等式$0<\left|x-x_{0}\right|<\delta$时, 对应的函数值$f(x)$都满足不等式$|f(x)-A|<\varepsilon$, 那么常数$A$就叫做函数$f(x)$当$x \rightarrow x_{0}$时的极限, 记作$\lim _{x \rightarrow x_{0}} f(x)=A \text { 或 } f(x) \rightarrow A\left(\text { 当 } x \rightarrow x_{0}\right) .$
 			}
 
@@ -206,9 +183,3 @@
 
 *					样条插值
 *	[算法]: 过求解三弯矩方程组得出曲线函数组的过程
-
-
-
-
-
-\end{document}
