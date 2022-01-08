@@ -1,18 +1,18 @@
-\section 强化学习-核心
-    \section 定义
+\section{强化学习-核心}
+    \section{定义}
         \defi{强化学习}{在交互中学习, 以实现一个目标的计算性方法. 即, 让\bf{智能体}去和未知的\bf{环境}互动, 学习如何动作, 来获得最大累计奖励}.
         
-    \section 智能体 \& 环境
+    \section{智能体 \& 环境}
         * \bf{智能体}: 学习和决策者.
         * \bf{环境}: 与智能体交互的, 除智能体之外的一切事物.
         
-        \section 智能体-环境的边界如何确定?
+        \section{智能体-环境的边界如何确定?}
             界限并没有确定性的定义, 而是根据实际问题来.遵循的一般规则是, 任何不能由智能体任意更改的内容, 都被视为是环境的一部分.
             
             \bf{eg.} 奖励可能在智能体内计算, 但被认为是环境的, 因为奖励定义了智能体面临的任务, 因此必须超出智能体任意改变的能力.
 
 
-    \section 状态, 动作, 奖励 $S, A, R$
+    \section{状态, 动作, 奖励 $S, A, R$}
     3类信号:
         $
             \{
@@ -22,7 +22,7 @@
             . 
         $
         
-        \section 累计奖励 $\sum R$
+        \section{累计奖励 $\sum R$}
             累积奖励: 获得最大的累积奖励是智能体的唯一目标.
                 $G_t= \sum_{i = t+1}^{T} R_i$
             为了避免$T \to \infty, G_t \to \infty$, 引入折扣$\gamma \in [0,1]$, 期望折扣回报:
@@ -44,10 +44,10 @@
             .
         $
         
-    \section 强化学习\&有/无监督学习
+    \section{强化学习\&有/无监督学习}
         强化学习是学习的第三类范式, 其与有/无监督学习不相同.
     
-        \section 与有监督学习的异同
+        \section{与有监督学习的异同}
             \bf{监督学习},是从外部监督者提供的"样本-标记对"的训练集中学习的一种方式. 目的是学习如何推断和概括, 以拥有泛化(即, 对未见过的样本也能正确判断)的能力.
         
             $
@@ -62,15 +62,15 @@
             
             
         
-        \section 与无监督学习的异同
+        \section{与无监督学习的异同}
             \bf{无监督学习}, 是寻找蕴藏在未标记的数据里的结构特征.
 
             \bf{异同点}: 强化学习是最大化累计奖励, 而非寻找隐藏的结构, 因此, 无监督学习不包含强化学习.
 
         
         
-    \section 多臂赌博机问题 $S = \{s_0\}$
-        \section 探索-利用\ 平衡
+    \section{多臂赌博机问题 $S = \{s_0\}$}
+        \section{探索-利用\ 平衡}
         
         \bf{平稳问题}: 奖励概率不随时间变化.
         
@@ -91,14 +91,14 @@
         \bf{非平稳问题}: 奖励概率随时间变化. 对最近的奖励给予更多的重视比对很久以前的奖励给予更多的重视是有道理的。最常用的方法之一是使用恒定步长参数。
             $Q_{n+1} = Q_n + \alpha (R_n - Q_n)$
             
-        \section 算法1: $\epsilon$贪心
+        \section{算法1: $\epsilon$贪心}
             $
                 A =  \{ 
                 \arg\max_a\ Q(a) & \mathbb{P}(\text{贪心}) = \epsilon\\
                 \text{a random action} & \mathbb{P}(\text{随机}) = 1 - \epsilon . 
             $
             
-        \section 算法2: 上置信界算法
+        \section{算法2: 上置信界算法}
             始终选择置信度上界最大的动作作为选择策略.
             $A_t = \underset{a}{\arg\max} [Q_t(a)+c \sqrt{\frac{\ln t}{N_t(a)}} ]$
             \bf{Proof}:\\
@@ -110,11 +110,11 @@
                     \Rightarrow & \mathbb{P} (\bar{\mu} \in  [\mu - \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}, \mu +  \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ]  ) \ge 1 - 2 \sigma
                 $
                 
-        \section 算法3: Softmax算法
+        \section{算法3: Softmax算法}
             \bf{soft-max分布}:
                 $\operatorname{Pr} \{A_t=a \} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k} e^{H_t(b)}} = \mathbb{P}_{\pi,t}(a)$
     
-    \section Markov决策过程 $S_t \to S_{t+1}$
+    \section{Markov决策过程 $S_t \to S_{t+1}$}
         Markov性质: 当前状态$S_t$只与上一时刻状态$S_{t-1}$有关, 与上一时刻之前的任何状态$S_{t-k |_{k > 1}}$无关.
             $\mathbb{P} (S_{t+1}=s | S_{1}=s_{1}, \ldots, S_t=s_t )=\mathbb{P} (S_{t+1}=s | S_t=s_t )$
         四元组:
@@ -143,8 +143,8 @@
         \bf{控制问题}：寻找一个最优策略的过程。已知一个Markov决策过程但是策略未知, 求解最优价值函数和最优策略。
 
         
-    \section 价值\&策略函数 $S-A-R$
-        \section 价值函数 $R = V(S)$
+    \section{价值\&策略函数 $S-A-R$}
+        \section{价值函数 $R = V(S)$}
             价值函数: 评价智能体在给定状态$S_t$下预期的累计奖励. (Bellman方程)
             $
                 V(s) 
@@ -158,7 +158,7 @@
             (1) 立即回报$R_{t+1}$\\
         	(2) 后继状态的折扣价值函数$\gamma \cdot V(S_{t+1})$
         
-        \section 动作-价值函数 $R_A = Q(S,A)$
+        \section{动作-价值函数 $R_A = Q(S,A)$}
             $
                 Q(s,a) 
                 &= \mathbb{E} [G_t | S_t=s, A_t = a ]\\
@@ -166,16 +166,16 @@
                 &= \mathbb{E}_{s'} [r+\gamma Q (s', a' ) | s, a ]
             $
             
-        \section 策略函数 $A = \Pi(S)$
+        \section{策略函数 $A = \Pi(S)$}
             * 确定性策略: $a = \pi(s)$
             * 随机性策略: $\mathbb{P}_\pi(a | s)$
             
-        \section 优化
+        \section{优化}
     
-\section 基于价值函数
+\section{基于价值函数}
     
-    \section 动态规划
-        \section 策略迭代 = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
+    \section{动态规划}
+        \section{策略迭代 = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$}
             \bf{策略评估}: 求当前策略下的累计奖励$V_\pi$.
             
                 解析解: (计算复杂度$|S|^3$)
@@ -200,10 +200,10 @@
             \bf{策略迭代} = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
                 $V_\pi \Rightarrow (\pi \to \pi') \Rightarrow V_\pi \Rightarrow (\pi \to \pi') \Rightarrow ... \Rightarrow \{\pi^*, V^*\}$
         
-        \section 广义策略迭代
+        \section{广义策略迭代}
             让策略评估和策略提升进行交互, 且独立于间隔和其他二者的细节。
     
-    \section Monte Carlo方法
+    \section{Monte Carlo方法}
         \bf{深度优先搜索}.
     
         我们不假设对环境有完全了解。蒙特卡罗方法只需要从与环境的实际或模拟交互中体验状态、动作和奖励的样本序列。只有在一个片段结束后, 价值评估和策略才会更新。因此, Monte Carlo方法是逐段递增的, 而不是一步一步在线的.
@@ -211,17 +211,17 @@
         对值函数的估计:
             $V (S_t )  arrow V (S_t )+\alpha (G_t-V (S_t ) )$
 
-    \section 时序差分学习
+    \section{时序差分学习}
         时序差分学习是蒙特卡罗思想和动态规划思想的结合。与蒙特卡罗方法一样, 时序差分方法可以直接从原始经验中学习, 而无需环境动力学模型。与动态规划一样, 时序差分方法部分基于其他学习的估计更新估计, 而无需等待最终结果（它们是自举的）.
             $V (S_t )  arrow V (S_t )+\alpha (R_{t+1}+\gamma V (S_{t+1} )-V (S_t ) )$
     
-    	\section off-policy --- Q-Learning
+    	\section{off-policy --- Q-Learning}
     	    $\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$
     	    
-    	\section on-policy --- Sarsa
+    	\section{on-policy --- Sarsa}
     	    $\Delta Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
     	
-    	\section Deep Q Networks = Q-Learning + 神经网络
+    	\section{Deep Q Networks = Q-Learning + 神经网络}
             \bf{论文}: \textit{Playing Atari with Deep Reinforcement Learning (2013)}
         
             \bf{优势}:
@@ -237,9 +237,9 @@
                 $\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(\cdot) \atop s' \sim \mathcal{E}}{\mathbb{E}} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
 
 
-\section 基于策略函数
+\section{基于策略函数}
 
-    \section 策略梯度
+    \section{策略梯度}
         \bf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
 
         \bf{策略梯度}, 是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
@@ -286,7 +286,7 @@
             即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的； 在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
 
             
-    \section 确定性策略梯度 
+    \section{确定性策略梯度} 
         \bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
 
         \bf{确定性策略梯度}: 采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
@@ -306,7 +306,7 @@
             
             $\lim _{\sigma \downarrow 0} \nabla_{\theta} J (\pi_{\mu_{\theta}, \sigma} )=\nabla_{\theta} J (\mu_{\theta} )$
 
-    \section Actor-Critic
+    \section{Actor-Critic}
         \bf{Actor-Critic}, \textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
     
             * \bf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_{\theta} J (\pi_{\theta} )$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
@@ -333,8 +333,8 @@
                     &= \underset{s \sim \mathbb P_\beta \atop a \sim \beta}{\mathbb E}  [ \frac{\mathbb P_{\pi,\theta}(a|s)}{\mathbb P_{\beta,\theta}(a|s)} Q(s, a)\ \nabla_\theta \mathbb P_\pi (a | s) ]
                 $
         
-    \section 确定性 Actor-Critic
-        \section On-Policy Deterministic Actor-Critic
+    \section{确定性 Actor-Critic}
+        \section{On-Policy Deterministic Actor-Critic}
             $
                 \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) \\
                 w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
@@ -343,7 +343,7 @@
             
 
         
-        \section Off-Policy Deterministic Actor-Critic
+        \section{Off-Policy Deterministic Actor-Critic}
             $
                 \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_{\theta} (s_{t+1} ) )-Q^{w} (s_t, a_t ) \\
                 w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
@@ -353,7 +353,7 @@
             随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
             
         
-    \section Deep Deterministic Policy Gradient
+    \section{Deep Deterministic Policy Gradient}
         \bf{论文}: \textit{Continuous Control With Deep Reinforcement Learning(2015)}这篇论文, 
         
         \bf{Deep Deterministic Policy Gradient}: \bf{DDPG = 确定性Actor-Critic + Deep Q-Networks}, 结合了两者的优点, 既能借助策略梯度优势帮DQN应用于连续动作空间, 又能利用DQN优势实现端到端的视觉、语音高维感官输入学习, 且提高了 Actor Critic 的稳定性和收敛性.
@@ -364,9 +364,9 @@
         * target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
     
    
-\section 例子
-    \section 围棋
-        \section 规则
+\section{例子}
+    \section{围棋}
+        \section{规则}
             *  \bf{基本元素}:
                 * \bf{棋盘}: 19×19等距且垂直交叉的平行线网格, 共391个交叉点.
                 * \bf{棋子}: 黑白两色, 对局双方各执一色, 空棋盘开局, 黑先白后, 交替下一子在棋盘空白点上, 下定后不得移动.

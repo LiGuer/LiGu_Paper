@@ -1,5 +1,5 @@
-\section 随机几何
-    \section 点过程
+\section{随机几何}
+    \section{点过程}
         \bf{注}: “点过程”一词中的“过程”并不意味着随时间的动态演变。从历史上看，该理论的第一批研究人员考虑的是时间事件的随机序列，例如电话交换机的呼叫到达瞬间、排队的客户到达、地震或矿难的发生等。然而，在R2或R3的点过程应用中，时间的概念通常是不存在的。“随机点场”将是一个更精确的术语.
         $$\text{点过程} = \text{随机点场}$$
         $$\text{静止} = \text{统计均匀}$$
@@ -23,34 +23,34 @@
             
         
         
-        \section Poisson点过程
+        \section{Poisson点过程}
             \bf{Define}: $\forall$紧集$B \set \mathbb{R}^d$, 其内部的点数, 是一个Poisson随机变量, 且不相交集中的点数是独立的.\\
             poisson分布概率函数\quad $P(x = k) = \frac{\lambda^k}{k!} e^{-\lambda}$\\
             
-        \section Neyman–Scott过程
-            \section Matern簇过程
+        \section{Neyman–Scott过程}
+            \section{Matern簇过程}
         
-        \section 硬核点过程
+        \section{硬核点过程}
         
-        \section Gibbs点过程
+        \section{Gibbs点过程}
         
-        \section 散粒噪声场
+        \section{散粒噪声场}
     
 
 
-\section 随机几何下-无线通信物理量解析解
-    \section 基站的Poisson点过程建模
+\section{随机几何下-无线通信物理量解析解}
+    \section{基站的Poisson点过程建模}
         \bf{Example:}\\
             对一终端的半径r的圆内,除了其指定基站外,没有其它基站的概率为: $P(x = 1) = e^{-\lambda \pi R^2}$\\
             针对变量r而言,\\
             概率分布函数, 则有\quad $F(R) = P(r \le R) = 1 - e^{-\lambda \pi R^2}$\\
             概率密度函数, 则有\quad $f(r) = dF(r) / dr = e^{-\lambda \pi R^2}\ 2 \pi \lambda r$
-    \section 小区平均面积
+    \section{小区平均面积}
         随机几何小区内平均面积概率密度,应当符合$\Gamma$分布:
             $$f(y)=\frac{b^{a}}{\Gamma(a)} y^{a-1} e^{-by}$$
         而在二维空间中,有 $a = b = 3.5$:
             $$f_{2 D}(y)=\frac{3.5^{3.5}}{\Gamma(3.5)} y^{2.5} e^{-3.5 y}$$
-    \section 小区内平均用户数
+    \section{小区内平均用户数}
         $$P[N=n]=\frac{3.5^{3.5} \Gamma(n+3.5)\left(\lambda_{u} / \lambda_{b}\right)^{n}}{\Gamma(3.5) n !\left(\lambda_{u} / \lambda_{b}+3.5\right)^{n+3.5}}$$
         Proof:
         \begin{align*}
@@ -60,7 +60,7 @@
         \end{align*}
         (对不同面积下的用户数量求期望, 然后代入Poisson点过程概率$P(N=k)$, 和 小区平均面积概率密度$f_{2D}$)
 
-    \section 信干噪比
+    \section{信干噪比}
         Rayleigh衰落信道下,
         * 信号功率:\quad $p = h r^{-\alpha} \quad ,h\sim exp(\mu)$
         * 干扰功率:\quad $I_r = \sum h_i r_i^{-\alpha} \quad$

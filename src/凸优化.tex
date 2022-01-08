@@ -1,6 +1,6 @@
 
-\section 凸优化
-    \section 仿射、凸、锥
+\section{凸优化}
+    \section{仿射、凸、锥}
         \bf{基础集合}
         * \def{仿射集}{
                 集合内任意两点所画直线仍在该集合内的集合. 
@@ -40,7 +40,7 @@
             $
             }
         
-    \section 凸函数
+    \section{凸函数}
         \def{凸函数}{
             定义域是凸集, 且$(x_1, f(x_1))$和$(x_2, f(x_2))$间的线段始终在函数图像上方的函数.
         $
@@ -59,7 +59,7 @@
             函数$f: \mathbf{R}^n \to \mathbf{R}$是拟凸函数$\Leftrightarrow$ 对$\forall \alpha \in R , \{x \in \mathbf{dom} f \mid f(x) \le \alpha\}$都是凸集.
         }
         
-    \section 凸优化问题
+    \section{凸优化问题}
         \def{优化问题}{
             目标函数$f_0(x)$, 不等式约束$f_i(x)$, 等式约束$h_i(x)$.
             $
@@ -144,7 +144,7 @@
 
                 \df{关系} $二次锥规划 \supset \{二次规划 \supset \{ 线性规划 \} , 二次约束二次规划\}$
             
-    \section 凸优化算法
+    \section{凸优化算法}
         \def{Lagrange函数}{$L(x, \lambda, \nu) = f_0(x) + \sum_i \lambda_i f_i(x) + \sum_i \nu_i h_i(x)$}
         \def{Lagrange对偶函数}{$g(\lambda, \nu)=\inf _{x \in \mathcal{D}} L(x, \lambda, \nu)=\inf _{x \in \mathcal{D}} (f_{0}(x)+\sum_{i=1}^{m} \lambda_i f_i(x)+\sum_{i=1}^p \nu_i h_i(x) )$}
             \bf{性质}
