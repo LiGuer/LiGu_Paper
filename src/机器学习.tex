@@ -1,0 +1,296 @@
+\section 主成分分析
+		[目标]:
+			数据降维，提取数据的主要特征分量, 满足:
+    			
+    			    * 最近重构性: 样本点到该超平面的距离都足够近。
+    			    * 最大可分性: 样本点在该超平面的投影尽可能分开。
+    			
+			
+		[优化问题]:
+    		$
+    			\min_W  &\quad	tr( W^T x x^T W )\\
+    			s.t.    &\quad	W^T W = I
+    		$
+			
+		[流程]:
+			* 数据中心化, $\sum \vec x_i = 0$
+			* 计算协方差矩阵 C = X X^T
+			* 对协方差矩阵C 特征值分解
+			* 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
+			* 样本点在超平面投影: y_i = W^T x_i
+			
+		[原理]:
+				分别从目标(1, 2)可以推得同样的结果
+			*	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
+				协方差矩阵:
+					$D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T$
+				协方差矩阵对角化
+			* 优化问题构造:
+			$
+				min_W		tr( W^T x x^T W )
+				s.t.		W^T W = I
+			$
+			* 计算最优点:
+				Lagrange函数 $L(W,λ) = W^T x x^T W + λ( W^T W - I )$
+				Lagrange对偶 $G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))$
+				L(W,λ)求导, 当导数为0时, 取得极值
+				=>	$X X^T ω_i = λ_i ω_i$
+				即.对协方差X XT, 特征值求解
+			*	取特征值最大的yDim个特征向量, 即目标投影矩阵W
+
+
+\section K-Mean 聚类
+		[目标]:
+			聚类. 对N维分布的数据点，可以将其聚类在 K 个关键簇内.
+			
+		[步骤]:
+			* 随机选择 K 个簇心点 Center
+			* 迭代开始
+				* 归零 Cluster , Cluster: 簇,记录ith簇内的数据指针。
+				* 计算每个xi到簇心μj的距离
+					* 选择距离最小的簇心, 将该点加入其簇内
+				* 对每个簇,计算其质心 Center'
+				* Center≠Center' , 则更正Center为 Center'
+				* 迭代重新开始
+			* 一轮无更正时，迭代结束
+
+\section 最小二乘法
+		[目标]:
+			求一条直线，使得所有样本点到该直线的Euclid距离最小.
+			
+		[优化问题]: 最小化均方误差
+    		$
+    			\min_w  &\quad MSE(\tilde{\. y}) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2
+    		$
+    		
+		[原理]:
+			* 直线方程: $f(x) = \. w^T \. x	\quad (\. x = [1, \. x_0])$
+			* 均方误差:
+					$MSE(\tilde y) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2 = (X w - y)^T (X w - y)$
+					
+			* 优化问题构造: 无约束凸优化问题
+					$\min_W	\sum (\. w^T \. x - y)^2 = (X w - y)^T (X w - y)$
+					
+			* 计算最优点: 求导, 导数为0时取得极值
+				$
+					\frac{\partial MSE}{\partial w} &= 2·X^T·(\. w^T \. x - y) = 0\\
+				\Rightarrow	w^* &= (X^T X)^-1 X^T y\\
+					f(x) &= x^T (X^T X)^-1 X^T y
+				$
+				
+			* 一维场景:
+				优化问题:
+				$
+					min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2\\
+				    \Rightarrow	\frac{\partial E}{\partial w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
+					\frac{\partial E}{\partial b} = 2( n b + \sum(y_i - w x_i) ) = 0
+				$
+				
+				最优点:
+				$
+				    \Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2\\
+					w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}\\
+					b^* &= \frac{1}{n}·\sum(y_i - w x_i)\\
+				$
+
+					
+\section 核方法
+    \def{核方法}{
+		核方法通过核函数将样本从原始空间映射到更高维特征空间,使得其线性可分. 其中, 核函数定义为, 将原始空间中的向量作为输入向量，并返回特征空间（转换后的数据空间,可能是高维）中向量的点积的函数称为核函数。使用内核，不需要显式地将数据嵌入到空间中，因为许多算法只需要图像向量之间的内积（内积是标量）；在特征空间不需要数据的坐标。$\kappa(\. x_i, \. x_j) = \phi(\. x_i)^T \phi(\. x_j)$
+
+		对偶公式: 将正则化的平⽅和误差函数完全由核函数表示, 因此我们可以直接针对核函数进⾏计算，避免了显式地引⼊特征向	量$\phi(\. x)$，这使得我们可以隐式地使⽤⾼维特征空间，甚⾄⽆限维特征空间
+		$
+			J(\. a)=\frac{1}{2} \. a^T \. {K} \. {K} \. a-\. a^T \. {K} \. t+\frac{1}{2} \. t^T \. t+\frac{\lambda}{2} \. a^T \. {K} \. a
+		$
+
+		Gram矩阵:
+		$
+			\. K = \. \Phi \. \Phi^T = \left[\begin{array}{ccccc}
+			\kappa(\. x_1, \. x_1) & \cdots & \kappa(\. x_1, \. x_j) & \cdots & \kappa(\. x_1, \. x_m) \\
+			\vdots & \ddots & \vdots & \ddots & \vdots \\
+			\kappa(\. x_i, \. x_1) & \cdots & \kappa(\. x_i, \. x_j) & \cdots & \kappa(\. x_i, \. x_m) \\
+			\vdots & \ddots & \vdots & \ddots & \vdots \\
+			\kappa(\. x_m, \. x_1) & \cdots & \kappa(\. x_m, \. x_j) & \cdots & \kappa(\. x_m, \. x_m)
+			\end{array}\right]
+		$
+	}
+
+		\bf{例子}
+		\item 线性核: $\kappa(\. x_i, \. x_j) = \. x_i^T \. x_j$
+		\item 高斯核: $\kappa(\. x_i,\. x_j) = e^{-\frac{1}{2}(\. x_i - \. x_j)^T \Sigma^{-1} (\. x_i - \. x_j)}$
+		\item 多项式核: $\kappa(\. x_i, \. x_j) = (\. x_i^T \. x_j)^{d}$
+		\item 拉普拉斯核: $\kappa(\. x_i, \. x_j) = e^{-\frac{\|\. x_i-\. x_j\|}{\sigma}}$
+		\item Sigmoid核: $\kappa(\. x_i, \. x_j)=\tanh (\beta \. x_i^T \. x_j+\theta)$
+		
+
+\section 支持向量机
+    \def{支持向量机}{
+        是一种二分类模型，目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
+        $
+           \underset{\. w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\. w^T \. x_i + b |}{||\. w||}\\
+           s.t. &\quad y_i (\. w^T \. x_i + b) \le 1
+        $
+        \qquad \Rightarrow \qquad 
+	    $
+	        \underset{\. w, b}{\arg\min}     &\quad	\frac{||\. w||^2}{2}\\
+			s.t.    &\quad	y_i (\. w^T \. x_i + b) \le 1
+	    $
+    }
+    
+    \proof{	\par		
+        超平面方程: $\. w^T \. x + b = 0$, \quad 点面距: $d = \frac{|\. w^T \. x + b|}{||w||}$
+		
+		分类
+			$ \{ \begin{array}{cc}
+				\. w^T \. x_i + b \ge +1    &\quad (y_i = +1)\\
+				\. w^T \. x_i + b \le -1	&\quad (y_i = -1)\\
+			    \end{array} .
+				\quad\Rightarrow\quad y_i (\. w^T \. x_i + b) \ge 1
+			$
+
+		间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
+			$\Delta = \frac{2}{||w||} \tag{间隔}$
+					
+		优化问题构造: 使间隔最大化. 凸二次规划问题
+		    $\max\quad  \frac{2}{||\. w||} \quad \Rightarrow \quad \min\quad  \frac{||\. w||^2}{2}$
+			$s.t.\quad	y_i (\. w^T \. x_i + b) \ge 1$
+	}
+    
+	\bf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\. w, b$求导, 令导数为0取得极值$\. w^*, b^*$, 再求Lagrange对偶函数
+		$
+			L(\. w, b,\. \lambda) = \frac{||\. w||^2}{2} + \sum_i \lambda_i (1 - y_i (\. w^T \. x_i + b)) \tag{Lagrange函数}
+		$
+		$
+			\Rightarrow \{\begin{array}{rl} \. w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}.\tag{$\. w, b$极值}
+		$
+		$G(\. \lambda) = L(\. w^*, b^*, \. \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \. x_i^T \. x_j \tag{Lagrange对偶}
+		$
+
+		得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\. \lambda^*$
+		    $
+		        \max\limits_{\. \lambda} &\quad G(\. \lambda)\\
+			    s.t. &  \quad \lambda_i \ge 0\\
+			        & \quad \sum_i \lambda_i y_i = 0
+		    $
+		    
+		其中, KKT条件如下
+		    $
+		        \lambda &\ge 0\\
+		        y_i (\. w^T \. x_i + b) - 1 &\ge 0\\
+		        \lambda_i(y_i(\. w^T \. x_i + b) - 1) &= 0
+		    $
+					
+	\bf{算法步骤}:
+		* 计算核矩阵
+		* 计算$\lambda^*$
+		
+			* 选择 i
+			* 选择 j
+			* 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
+			* 更新 $\lambda_j, \lambda_i$
+			* 更新 b
+		
+		* 计算 w*, b*
+
+\section 神经网络
+    \section 前馈神经网络
+        \section 正向传播
+            $\sigma()$: 激活函数, 使线性拟合非线性化, eg. relu(x), Sigmoid(x)
+            $\. y = \sigma (\. w \. x + \. b)$
+
+
+            误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
+            $E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^{2}$
+
+        \section 反向传播 --- 梯度下降最优化
+    		$\.{w}^{(\tau+1)}=\.{w}^{(\tau)}-\eta \nabla E(\.{w}^{(\tau)})$
+    		
+    		设$z = \. w^T \. x + \. b$
+            $ \{ \begin{array}{lr}
+                \delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
+                \delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}\\
+                \nabla E(\. w_l) = \delta_l \. x_l^T & \text{(每层参数误差)}
+            \end{array} .$
+
+            \bf{证明}:
+        		
+        		每层参数误差, 由链式法则得(其中$L$指输出层): 
+        		    $
+        		        \frac{\partial E}{\partial w_l} 
+        		        &= \frac{\partial z_l}{\partial w_l} (\frac{\partial y_l}{\partial z_l}\frac{\partial z_l}{\partial y_{l+1}}) ... (\frac{\partial y_{L-1}}{\partial z_{L-1}} \frac{\partial z_{L-1}}{\partial y_L} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
+        		        &= \frac{\partial z_l}{\partial w_l}  (\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}
+        		    $
+        		    
+        	    其中:
+        		    $
+        		        \frac{\partial y_l}{\partial z_l} &= \sigma'(z_l)\\
+        		        \frac{\partial z_l}{\partial y_{l+1}} &= \. w_{l+1}^T
+        		    $
+        		    
+        		令$\delta_l$为每层误差:
+        		    $
+        		        \delta_l &=(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
+        		        &= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{\partial E}{\partial y_L}
+        		    $
+        		    
+        		得到每层参数误差结果:
+        		    $
+        		        \Rightarrow \frac{\partial E}{\partial w_l} &= \delta_l \frac{\partial z_l}{\partial w_l} = \delta_l x_l^T\\
+        		        \delta_L &= \frac{\partial E}{\partial y_L} ·\sigma '(z_L)
+        		    $
+        		    
+            \bf{附}:
+            
+        		激活函数的导函数:
+        		    $
+        		        relu(x) &= \max(0, x)\\
+        		        relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}\\
+        		        sigmoid(x) &= \frac{1}{1+e^{-x}}\\
+        		        sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
+        		    $
+
+
+\section 概率图模型
+	在机器学习领域，概率图模型(Graphical Model)是一种将问题抽象成数学模型的高效建模方法，具有很强的表达能力。借助于概率图模型，很多机器学习的方法都可以用概率图模型来表示。 概率图模型是综合了图论和概率论的知识。根据图的不同，概率图模型可以分为三类：
+
+	* 有向图, 也称Bayesian网
+	* 无向图, 也称Markov随机场
+	* 因子图
+
+\section Markov随机场
+	\def{Markov随机场}{
+		这是一种著名的无向图模型, 图中每个结点表示一个或一组变量, 结点之间的边表示两个变量之间的依赖关系.马尔可夫随机场有一组势函数(potential functions),亦称“因子”(factor), 这是定义在变量子集上的非负实函数,主要用于定义概率分布函数.
+	}
+	
+	\def{极大团}{
+		给定一张图$G=(V,E)$，和顶点集合的一个非空子集合$C \subset V$，如果C中任何两个顶点之间均有边链接，则称C为团(clique)；更进一步，若加入任何一个顶点$V \in G/C$中的顶点，都使得C∪v不再是团,则称C为极大团(maximal clique)。
+	}
+
+
+\section 混合⾼斯分布
+	\def{混合⾼斯分布}{
+		$
+			\P(x) = \sum_{k=0}^K N(x | \mu_k, \Sigma_k)
+		$
+	}
+
+\section 期望最大化算法
+	\def{隐变量}{
+		未观测的变量, 
+	}
+
+	\def{期望最大化算法}{
+		EM算法的⽬标是找到具有潜在变量的模型的最⼤似然解。基本思想是, 
+		\item E步骤: 若参数$\Theta$已知, 则可根据训练数据推断最优隐变量Z的值. 以当前参数$\Theta_t$ 推断隐变量分布$\P (Z | X, \Theta_t)$, 并计算对数似然函数关于Z的期望,
+		$
+			Q(\Theta | \Theta_t) = \E_{Z|X,\Thetat_t}[ln\ L(\Theta | X, Z)]
+		$
+		\item M步骤: 若Z的值已知, 则可以方便地对参数$\Theta$做极大似然估计. 
+		$
+			\Theta_{t+1} = \arg\max_\Theta Q(\Theta | \Theta_t)
+		$
+		于是以初始值$\Theta_0$作为起点, 迭代执行上述步骤直至收敛.
+
+		EM算法可以看作是一种非梯度优化方法, 避免了梯度下降方法由于求和的项数随着隐变量数目而指数上升的问题.
+	}
+
