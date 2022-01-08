@@ -1,7 +1,8 @@
-\section{信息 \& 通信}
+\section 信息 \& 通信
     \def{信息}{信息是认识主体所感受的和所表达的事物运动状态及运动状态变化的方式. \textit{构成客观世界的三大基本物质之一(物质,能量,信息).}}
 
     \def{通信}{}
+
         \bf{通信基本问题}: 在一点精确/近似地   恢复另一点所选择的信息.
 
         \bf{通信基本模型}:
@@ -15,9 +16,9 @@
             * \bf{可靠性}: 信息传输差错应当小.
             * \bf{安全性}: 信息传输中不应泄露.
 
-\section{信息的度量}
-    \section{事件信息的度量}
-        \section{自信息}
+\section 信息的度量
+    \section 事件信息的度量
+        \section 自信息
             自信息
             * \def{自信息}{$I(x) = -\log \P(x)$, 事件发生前, 事件发生的不确定性; 事件发生后, 事件包含的信息量, 即解除不确定性所需的信息量.}
             * \def{联合自信息}{$I(x, y) = -\log \P(x, y)$, 事件x, y同时发生后提供的信息量.}
@@ -27,15 +28,15 @@
             * $I(xy) = I(x) + I(y|x) = I(y) + I(x|y)$
             * 单位: bit
 
-        \section{互信息}
+        \section 互信息
             互信息
             * \def{互信息}{$I(x;y) = \log\frac{\P(x|y)}{\P(x)}$, 两个随机事件之间的统计关联程度, 事件y发生后所能提供的关于事件x的信息量, 即事件y发生后事件x不确定性的变化.}
             * \def{条件互信息}{$I(x;y|z) = -\log\frac{\P(x|y, z)}{\P(x|z)}$}
                 \bf{关系}: $I(x;y) = I(x) - I(x|y)$, 事件y发生后所能提供的关于事件x的信息量 = 事件x单独发生后提供的信息量 - 事件y已经发生的情况下, 事件x发生后所能提供的信息量.
    
-    \section{事件集合信息的度量}
-        \section{平均自信息}
-            \section{离散集合}
+    \section 事件集合信息的度量
+        \section 平均自信息
+            \section 离散集合
                 * \def{信息熵 (平均自信息)}{$H(X) = \underset{\P(x)}{E}[I(x)] = -\sum_x \P(x)\log \P(x)$ 平均自信息, (1)信源输出前，表示信源的平均不确定性; (2)信源输出后，表示每个信源符号所提供的平均信息量, 解除信源不确定性平均所需的信息量. (3)表示信源随机性大小，H(X) 大的信源，随机性大. }
                 * \def{联合信息熵}{$H(XY) = \underset{\P(xy)}{E}[I(xy)] = -\sum_x \sum_y \P(xy) \log \P(xy)$}
                 * \def{条件信息熵}{$H(Y|X) = \underset{\P(xy)}{E}[I(y|x)] = -\sum_x \sum_y \P(xy) \log \P(y|x) = \sum_x \P(x) H(Y|x)$}
@@ -55,7 +56,7 @@
                     \bf{交叉熵}: (1)$D(\P || \mathbb Q) \ge 0$
                     * 单位: bit/符号
 
-            \section{连续集合}
+            \section 连续集合
                 * \def{熵(差熵)}{$h(X)=-E_{\P(x)}[\log \P(x)]=-\int \P(x) \log \P(x) \d x$}
                 * \def{联合差熵}{$h(x^N)=-E_{\P(x)}[\log \P(x)]=-\int_{x} \P(x) \log \P(x) \d x$}
                 * \def{条件差熵}{$h(X|Y)=-E_{\P(xy)}[\log \P(x|y)]=-\iint \P(xy) \log \P(x|y) \d x \d y$}
@@ -67,25 +68,25 @@
                     * 限峰值最大熵: 幅度受限的随机变量，当均匀分布时有最大的熵.
                     * 限功率最大熵: 平均功率受限的随机变量，当高斯分布时有最大的熵.
                 
-                \section{\bf{eg.}离散时间Gauss信源的熵}
+                \section \bf{eg.}离散时间Gauss信源的熵
                     * \bf{1维Gauss-熵}: $h(X) = \frac{1}{2} \log (2 \pi e \sigma^2)$
                     * \bf{多维独立Gauss-熵}: $h(x^N)=\frac{N}{2} \log (2 \pi e (\sigma_1^2 \sigma_2^2 \cdots \sigma_n^2)^{\frac{1}{N}})$
                     * \bf{多维相关Gauss-熵}: $h(x^N)=\frac{N}{2} \log (2 \pi e |\Sigma|^{\frac{1}{N}})$
 
                     \proof{
                         \bf{1维Gauss-熵}: 
-                        $
-                            h(x) 
-                            &= -\underset{\P(x)}{E}[\log \P(x)]\\
-                            &= -\underset{\P(x)}{E}\l[-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}  \r]\\
-                            &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\underset{\P(x)}{E}\l[(x-\mu)^2\r]}{2\sigma ^2}\\
-                            &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}\\
-                            &= \frac{1}{2}\log(2\pi e\sigma^2)
-                        $
+                    $
+                        h(x) 
+                        &= -\underset{\P(x)}{E}[\log \P(x)]\\
+                        &= -\underset{\P(x)}{E}\l[-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}  \r]\\
+                        &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\underset{\P(x)}{E}\l[(x-\mu)^2\r]}{2\sigma ^2}\\
+                        &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}\\
+                        &= \frac{1}{2}\log(2\pi e\sigma^2)
+                    $
                     }
 
-        \section{平均互信息}
-            \section{离散集合}
+        \section 平均互信息
+            \section 离散集合
                 * \def{集合&事件互信息}{$I(X;Y)=\underset{\P(y|x)}{E}[I(x;y)] = \sum_y \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 由事件x提供的关于集合Y的信息量.}
                 * \def{平均互信息}{$I(X;Y) = \underset{\P(xy)}{E}[I(x;y)] = \sum_{x,y} \P(xy) I(x;y)=\sum_{x, y} \P(x) \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.}
                 * \def{平均条件互信息}{$I(X;Y|Z)=\underset{\P(xyz)}{E}[I(x;y|z)]=\sum_{x,y,z} \P(xyz) \log \frac{\P(x|yz)}{\P(x|z)}$}
@@ -98,7 +99,7 @@
                     &= H(X)+H(Y)-H(X Y)
                 $
              
-            \section{连续集合}
+            \section 连续集合
                 \def{平均互信息}{$I(X;Y) = Sup_{P, Q} I([X]_{P} ;[Y]_{Q})$}
                 
                 \bf{关系}:
@@ -109,17 +110,17 @@
                     &= h(X)+h(Y)-h(X Y)
                 $
                     
-            \section{离散集 \& 连续集的互信息}
+            \section 离散集 \& 连续集的互信息
                 * \bf{离散集 \& 连续集的互信息}: $I(X;Y)=\log \frac{q(x|y)}{p(x)}=\log \frac{p(y|x)}{q(y)}$
                 * \bf{离散集 \& 连续集的平均互信息}: $I(X;Y)=\underset{p(x) p(y|x)}{E}\l[\log \frac{p(y|x)}{q(y)}\r]=\sum_{x} p(x) \int p(y|x) \log \frac{p(y|x)}{q(y)} \d y$
             
             
-\section{信源}
+\section 信源
     \def{信源}{}
 
     \bf{记忆}: 输出符号之间相互独立, 称无记忆; 输出符号之间具有相关性, 称有记忆.
     
-    \section{离散无记忆信源}
+    \section 离散无记忆信源
         \bf{离散无记忆信源}: $(\begin{array}{l} X \\ P \end{array}) = (\begin{array}{lll} a_1 & \cdots & a_n \\ p(a_1) & \cdots & p(a_n) \end{array}) \quad; p(a_{i}) \geqslant 0, \sum_{i=1}^N p(a_{i})=1$
                 
             
@@ -134,11 +135,11 @@
                 &= N\ H(X)  \tag{$X_i$ 同分布}
             $
         
-    \section{离散有记忆信源}
+    \section 离散有记忆信源
             
             \def{平稳}{
                 统计特性不随随时间推移而改变. \textit{$(x_{t_1}, \ldots, x_{t_n})$ 指在时间序列上随意的任意间隔任意顺序的采样, 而不限于连续采样.}
-                $ \P(x_{t_1}, \ldots, x_{t_n}) = \P(x_{t_1+\tau}, \ldots, x_{t_n+\tau}) \quad \text { for all } \tau, t_1, \ldots, t_n \in \mathbb{R}, \quad n \in \mathbb{N}$
+                $ \P(x_{t_1}, \ldots, x_{t_n}) = \P(x_{t_1+\tau}, \ldots, x_{t_n+\tau}) \quad \text { for all } \tau, t_1, \ldots, t_n \in \mathbb R, \quad n \in \mathbb N$
             }
                 
                 \bf{性质}: 
@@ -204,11 +205,11 @@
         * 离散信源经过一一对应变换, 熵不变; 连续信源, 经过平移和旋转变换后, 差熵不变. 
 
 
-    \section{相关性 \& 剩余度}
+    \section 相关性 \& 剩余度
         \def{信源效率}{$\eta = \frac{H_\infty}{H_0}$}
         \def{信源剩余度}{$\eta = 1 - \frac{H_\infty}{H_0}$, $H_\infty$是信源实际的熵, $H_0$是符号独立等概率时信源的熵, 即每个信源符号最大能携带$H_0$的信息量, 但实际只携带了$H_\infty$的信息量.}
             
-    \section{信源编码}
+    \section 信源编码
         \bf{性质}:
             长度N的信源序列, 通过r进制信源编码成长度l的码序列.
 
@@ -248,7 +249,7 @@
         \bf{无失真信源编码}: 只要信源编码的码率不小于信源的熵就存在无失真信源编码，否则就不存在无失真信源编码，简记为: $ R \ge H \quad \lrightarrow  \quad \exists \text{无失真信源编码}$.
         
 
-\section{信道}
+\section 信道
     \def{信道}{信号传输的通道.}
 
     \def{信道容量}{输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max_{p(x)} I(X;Y)$}
@@ -295,11 +296,11 @@
                 }
             * \def{信道矩阵可逆的信道}{
                 $
-                    P^{-1}
-                    h = [H(P_{1j}) \\ \vdots \\ H(P_{nj})]
-                    \beta = -P^{-1} h
-                    C = \log( \sum_i 2^{\beta_i} )
-                    \P_{Yi} = \farc{2^{\beta_i}}{\sum_j 2^{\beta_j}}
+                    P^{-1}\\
+                    h = [H(P_{1j}) \\ \vdots \\ H(P_{nj})]\\
+                    \beta = -P^{-1} h\\
+                    C = \log( \sum_i 2^{\beta_i} )\\
+                    \P_{Yi} = \farc{2^{\beta_i}}{\sum_j 2^{\beta_j}}\\
                     \P_X^T = \P_Y^T P^{-1}
                 $
                 }
@@ -338,7 +339,7 @@
         \def{加性噪声信道}{信道输入和独立于输入的噪声均为随机变量，而信道的输出是输入与噪声的和，的信道.n}
 
 
-    \section{信道编码}
+    \section 信道编码
         \def{信道编码}{}
             \def{有噪信道编码}{$R<C$}
 

@@ -1,48 +1,42 @@
 
 \section{}
-    \defi{命题}{非真即假的陈述句.}
+    \def{命题}{非真即假的陈述句.}
 
-        \textbf{命题联结词}
-            \env{enumerate}{
-            \item \defi{否定}{$\neg$}
-            \item \defi{合取}{$\wedge$}
-            \item \defi{析取}{$\vee$}
-            \item \defi{蕴含}{$\to$}
-            \item \defi{等价}{$\leftrightarrow$}
-            }
+        \bf{命题联结词}
+            * \def{否定}{$\neg$}
+            * \def{合取}{$\wedge$}
+            * \def{析取}{$\vee$}
+            * \def{蕴含}{$\to$}
+            * \def{等价}{$\leftrightarrow$}
             
-            \textbf{关系}: 优先级顺序, 从上到下, 同级运算符从左往右算.
+            \bf{关系}: 优先级顺序, 从上到下, 同级运算符从左往右算.
 
-            \textbf{基本等值公式}
-                \env{enumerate}{
-                \item \textbf{双重否定律}$\neg \neg p = p$
-                \item \textbf{结合律} 
-                    \env{align*}{
+            \bf{基本等值公式}
+                * \bf{双重否定律}$\neg \neg p = p$
+                * \bf{结合律} 
+                    $
                         (P \wedge Q) \wedge R &= P \wedge(Q \wedge R) \\
                         (P \vee Q) \vee R &= P \vee(Q \vee R) \\
                         (P \leftrightarrow Q) \leftrightarrow R &= P \leftrightarrow(Q \leftrightarrow R)
-                    }
-                \item \textbf{交换律}
-                    \env{align*}{
+                    $
+                * \bf{交换律}
+                    $
                         P \wedge Q &= Q \wedge P \\
                         P \vee Q &= Q \vee P \\
                         P \leftrightarrow Q &= Q \leftrightarrow P
-                    }
-                \item \textbf{分配律}
-                \item \textbf{吸收律} $P \vee (P \wedge Q) = P \wedge(P \vee Q) = P$
-                \item \textbf{反演律}
-                    \env{align*}{
+                    $
+                * \bf{分配律}
+                * \bf{吸收律} $P \vee (P \wedge Q) = P \wedge(P \vee Q) = P$
+                * \bf{反演律}
+                    $
                         \neg(P \vee   Q) &= \neg P \wedge \neg Q \\
                         \neg(P \wedge Q) &= \neg P \vee \neg Q
-                    }
-            }
+                    $
 
-        \defi{范式}{每一类中的命题公式, 能逐步化为一种统一规范的形式.}
+        \def{范式}{每一类中的命题公式, 能逐步化为一种统一规范的形式.}
         
-        \defi{谓词}{描述个体的属性, 以及个体之间的关系.}
+        \def{谓词}{描述个体的属性, 以及个体之间的关系.}
 
-        \defi{量词}{用来对个体的数量进行约束.}
-            \env{enumerate}{
-            \item \defi{全称量词}{$\forall$}
-            \item \defi{存在量词}{$\exists$}
-            }
+        \def{量词}{用来对个体的数量进行约束.}
+            * \def{全称量词}{$\forall$}
+            * \def{存在量词}{$\exists$}
