@@ -1,14 +1,14 @@
-\section 线性空间
+* 线性空间
     \def{线性空间}{一个非空集合, 带有加法和数乘, 且满足下列条件,
-            * 加法封闭 $x+y \in V$
-            * 数乘封闭 $k x \in V$
-            * 存在零元 $x+0=x$
-            * 存在负元 $x+(-x) = 0$
-            * $1x = x$
-            * 交换律 $x+y = y+x$
-            * 分配律 $(k+l)x = kx+lx$
-            * 加法结合律 $x+(y+z) = (x+y) +z$
-            * 数乘结合律 $k(Lx) = (kl)x$
+        * 加法封闭 $x+y \in V$
+        * 数乘封闭 $k x \in V$
+        * 存在零元 $x+0=x$
+        * 存在负元 $x+(-x) = 0$
+        * $1x = x$
+        * 交换律 $x+y = y+x$
+        * 分配律 $(k+l)x = kx+lx$
+        * 加法结合律 $x+(y+z) = (x+y) +z$
+        * 数乘结合律 $k(Lx) = (kl)x$
     }
 
     \bf{性质}
@@ -53,28 +53,28 @@
         * 数乘封闭 $x \in V_1, k x \in V_1$
     }
         \bf{性质}
-        * 线性子空间也是线性空间. \Proof{这是因为$V_1$是V的子集合,所以$V_1$中的向量不仅对线性空间V已定义的线性运算封闭,而且还满足相应的8条运算律.}
-        * 每个非零线性空间至少有两个子空间，(1)自身; (2)仅由零向量所构成的子集合, 称为零子空间.             
-        * $dim\ V_1 e dim\ V$
+            * 线性子空间也是线性空间. \Proof{这是因为$V_1$是V的子集合,所以$V_1$中的向量不仅对线性空间V已定义的线性运算封闭,而且还满足相应的8条运算律.}
+            * 每个非零线性空间至少有两个子空间，(1)自身; (2)仅由零向量所构成的子集合, 称为零子空间.             
+            * $dim\ V_1 e dim\ V$
 
         \bf{张成}: $span(\vec x_1,...,\vec x_n ) = {\sum_{i=1}^n a_i \vec_i}$ 
 
         \bf{子空间运算}
-        * \def{交}{} 
-        * \def{和}{$V_1 + V_2 = \{z | z=x+y, x \in V_1, y \in V_2\}$}
+            * \def{交}{} 
+            * \def{和}{$V_1 + V_2 = \{z | z=x+y, x \in V_1, y \in V_2\}$}
+                    \bf{性质}
+                        \def{直和}{
+                            不相交的两个子空间的和. $V_1 \oplus V_2$
+                            $V_1 + V_2$为直和 $\Leftrightarrow V_1 \cap V_2$等于零空间.
+                        }
+                            \bf{性质}
+                                $V_1 \oplus V_2$中的任一向量只能唯一地表示为子空间V1与V2中各自一个向量的和.
                 \bf{性质}
-                    \def{直和}{
-                        不相交的两个子空间的和. $V_1 \oplus V_2$
-                        $V_1 + V_2$为直和 $\Leftrightarrow V_1 \cap V_2$等于零空间.
-                    }
-                        \bf{性质}
-                            $V_1 \oplus V_2$中的任一向量只能唯一地表示为子空间V1与V2中各自一个向量的和.
-            \bf{性质}
-            * 子空间的交、和, 也是子空间. $V_1, V_2 \subseteq V,\ V_1 \cap V_2 \subseteq V,\ V_1 + V_2 \subseteq V$
-            * $dim\ V_1 + dim\ V_2 = dim\ (V_1 + V_2) + dim\ (V_1 \cap V_2)$
-            * $U=V_1 + V_2, then\ \quad U=V_1 \oplus V_2 \quad \Leftrightarrow \quad dim\ U=dim\ (V_1+V_2)=dim\  V_1+dim\  V_2 $
+                    * 子空间的交、和, 也是子空间. $V_1, V_2 \subseteq V,\ V_1 \cap V_2 \subseteq V,\ V_1 + V_2 \subseteq V$
+                    * $dim\ V_1 + dim\ V_2 = dim\ (V_1 + V_2) + dim\ (V_1 \cap V_2)$
+                    * $U=V_1 + V_2, then\ \quad U=V_1 \oplus V_2 \quad \Leftrightarrow \quad dim\ U=dim\ (V_1+V_2)=dim\  V_1+dim\  V_2 $
         
-\section 线性变换
+* 线性变换
     \def{变换}{线性空间到自身的映射, 且$\forall x \in V$都有唯一$y \in V$与之对应.}
 
     \def{线性变换}{线性空间的一种变换, 且满足$T(k x + l y) = k(T x) + l(T y)$}
@@ -263,7 +263,7 @@
         * 满秩分解算广义逆 $A^+ = G^H (F^H A G^H)^{-1} F^H$
                     
 
-\section 范数
+* 范数
     \def{范数}{}
 
         \def{向量范数}{
@@ -295,7 +295,7 @@
         \bf{关系}
             \bf{矩阵范数 \& 向量范数相容}: $||A x||_V \le ||A||_M ||x||_V$
 
-\section 矩阵分解
+* 矩阵分解
     \def{矩阵分解}{}
 
         \bf{例子} 
@@ -378,7 +378,7 @@
                 }
 
 
-\section 矩阵分析
+* 矩阵分析
     \bf{矩阵函数计算}
         $P^{-1} A P = \Lambda \Rightarrow f(A) = P f(\Lambda) P^{-1}$
         $P^{-1} A P = J \Rightarrow f(A) = P f(J) P^{-1}$
