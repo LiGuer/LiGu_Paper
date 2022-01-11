@@ -1,5 +1,6 @@
 * 线性空间
-    \def{线性空间}{一个非空集合, 带有加法和数乘, 且满足下列条件,
+    \def{线性空间} 
+        一个非空集合, 带有加法和数乘, 且满足下列条件,
         * 加法封闭 $x+y \in V$
         * 数乘封闭 $k x \in V$
         * 存在零元 $x+0=x$
@@ -9,43 +10,41 @@
         * 分配律 $(k+l)x = kx+lx$
         * 加法结合律 $x+(y+z) = (x+y) +z$
         * 数乘结合律 $k(Lx) = (kl)x$
-    }
 
-    \bf{性质}
-        \def{线性组合}{$x = a_1 x_1 +a_2 x_2+ ... +a_m x_m = [x_1 ... x_n] [ a_1 = X a\\ \vdots \\ a_3 ], \text{且}\ x \in V$}
-            \bf{性质}
-                \bf{线性无关/线性相关}: $\nexists / \exists\ a \neq 0, let x = \sum_{i=1}^n a_i x_i = 0$ 
+    \Property
+        \def{线性组合} $x = a_1 x_1 +a_2 x_2+ ... +a_m x_m = [x_1 ... x_n] [ a_1 = X a\\ \vdots \\ a_3 ], \text{且}\ x \in V$
+            \Property
+                \bf{线性无关/线性相关} $\nexists / \exists\ a \neq 0, let x = \sum_{i=1}^n a_i x_i = 0$ 
 
-        \def{维数}{线性空间中, 线性无关向量组所含向量最大的个数.}
+        \def{维数} 线性空间中, 线性无关向量组所含向量最大的个数.
 
-        \def{基}{一个线性无关的向量组$X = [x_1, ... , x_n]$, 且线性空间中所有向量都是该向量组的线性组合. $\forall x \in V, and\ x = \sum_{i=1}^n a_i x_i$. 其中, $x_i$称\bf{基向量}, $a_i \in a$称\bf{坐标}.}
-            \bf{性质}: 
-                \bf{基变换}: 新旧基之间的变换矩阵. $Y = X C$
-                    \bf{性质}: 基变换矩阵是非奇异矩阵.
-                \bf{坐标变换}: $a_x = C a_y$.
+        \def{基} 一个线性无关的向量组$X = [x_1, ... , x_n]$, 且线性空间中所有向量都是该向量组的线性组合. $\forall x \in V, and\ x = \sum_{i=1}^n a_i x_i$. 其中, $x_i$称\bf{基向量}, $a_i \in a$称\bf{坐标}.
+            \Property 
+                \bf{基变换} 新旧基之间的变换矩阵. $Y = X C$
+                    \Property 基变换矩阵是非奇异矩阵.
+                \bf{坐标变换} $a_x = C a_y$.
                     \Proof{$v = X a_x = Y a_y = X C a_y \Rightarrow a_x = C a_y$}
         
-    \bf{例子} {
+    \Example 
         * n维实/复空间 $\mathbb R^N = {(x_1,...,x_n)| x_i\in \mathbb R} \quad \mathbb C^N = {(x_1,...,x_n)| x_i\in \mathbb C}$
         * 矩阵空间 $\mathbb R^{n \times n}$
-        * \def{内积空间}{定义了内积的线性空间. 实线性空间的称Euclid空间; 复线性空间的称Unitary空间.
-                \def{内积}{内积满足
+        * 内积空间
+            \def{内积空间} 定义了内积的线性空间. 实线性空间的称Euclid空间; 复线性空间的称Unitary空间.
+                \def{内积} 
+                    内积满足
                     * 交换律:$<x, y>=\overline{<y, x>}$
                     * 分配律:$<x, y+z> = <x , y> + <x, z>$
                     * 齐次性:$<k x, y> = k <x, y>$
                     * 非负性:$<x,x> \ge 0$, 当且仅当 $x = 0, <x,x> = 0$
-                }
-            }
-                \bf{性质}: 
-                    \def{正交}{两个向量的内积为零. $<x,y> = 0$}
-                        \bf{算法}:
-                            \bf{Schmidt正交化}{
-                                $b_i = a_i - \sum_{k=1}^{i-1} \frac{<a_i,b_j>}{<b_j,b_j>}b_j$
-                            }
 
-                    \def{度量矩阵}{}
-                    \def{Cauchy-Бyнияковскнй不等式}{$|<x, y>| e |x|\ |y|$}
-    }
+            \Property
+                \def{正交} 两个向量的内积为零. $<x,y> = 0$
+                    \bf{算法}:
+                        \bf{Schmidt正交化}{
+                            $b_i = a_i - \sum_{k=1}^{i-1} \frac{<a_i,b_j>}{<b_j,b_j>}b_j$
+
+                \def{度量矩阵}{}
+                \def{Cauchy-Бyнияковскнй不等式} $|<x, y>| e |x|\ |y|$
 
     * 线性子空间
         \def{线性子空间}{
@@ -54,48 +53,48 @@
             * 数乘封闭 $x \in V_1, k x \in V_1$
         }
 
-        \bf{性质}
+        \Property
             * 线性子空间也是线性空间. \Proof{这是因为$V_1$是V的子集合,所以$V_1$中的向量不仅对线性空间V已定义的线性运算封闭,而且还满足相应的8条运算律.}
             * 每个非零线性空间至少有两个子空间，(1)自身; (2)仅由零向量所构成的子集合, 称为零子空间.             
             * $dim\ V_1 e dim\ V$
 
-        \bf{张成}: $span(\vec x_1,...,\vec x_n ) = {\sum_{i=1}^n a_i \vec_i}$ 
+        \bf{张成} $span(\vec x_1,...,\vec x_n ) = {\sum_{i=1}^n a_i \vec_i}$ 
 
         \bf{子空间运算}
             * \def{交}{} 
-            * \def{和}{$V_1 + V_2 = \{z | z=x+y, x \in V_1, y \in V_2\}$}
-                    \bf{性质}
+            * \def{和} $V_1 + V_2 = \{z | z=x+y, x \in V_1, y \in V_2\}$
+                    \Property
                         \def{直和}{
                             不相交的两个子空间的和. $V_1 \oplus V_2$
                             $V_1 + V_2$为直和 $\Leftrightarrow V_1 \cap V_2$等于零空间.
                         }
-                            \bf{性质}
+                            \Property
                                 $V_1 \oplus V_2$中的任一向量只能唯一地表示为子空间V1与V2中各自一个向量的和.
-                \bf{性质}
+                \Property
                     * 子空间的交、和, 也是子空间. $V_1, V_2 \subseteq V,\ V_1 \cap V_2 \subseteq V,\ V_1 + V_2 \subseteq V$
                     * $dim\ V_1 + dim\ V_2 = dim\ (V_1 + V_2) + dim\ (V_1 \cap V_2)$
                     * $U=V_1 + V_2, then\ \quad U=V_1 \oplus V_2 \quad \Leftrightarrow \quad dim\ U=dim\ (V_1+V_2)=dim\  V_1+dim\  V_2 $
             
     * 线性变换
-        \def{变换}{线性空间到自身的映射, 且$\forall x \in V$都有唯一$y \in V$与之对应.}
+        \def{变换} 线性空间到自身的映射, 且$\forall x \in V$都有唯一$y \in V$与之对应.
 
-        \def{线性变换}{线性空间的一种变换, 且满足$T(k x + l y) = k(T x) + l(T y)$}
+        \def{线性变换} 线性空间的一种变换, 且满足$T(k x + l y) = k(T x) + l(T y)$
 
-        \bf{性质}
-            * \def{值域}{线性空间中, 所有向量在线性变换后的结果的集合, 也即线性变换后的线性空间. $R(T)=\{T x | x \in V\}$}
-                \bf{性质}
+        \Property
+            * \def{值域} 线性空间中, 所有向量在线性变换后的结果的集合, 也即线性变换后的线性空间. $R(T)=\{T x | x \in V\}$
+                \Property
                     * 线性空间V的线性变换T的值域和核都是V的线性子空间.
-                    * \def{秩}{变换后的空间的维数, 也即值域的维数. $rank(A) = dim\ R(A) = dim\ R(A^T)$}
+                    * \def{秩} 变换后的空间的维数, 也即值域的维数. $rank(A) = dim\ R(A) = dim\ R(A^T)$
 
-            * \def{零空间}{线性空间中, 所有在线性变换为零向量的原向量的集合. $N(T) = \{x | T x = 0\}$}
-                \bf{性质}
+            * \def{零空间} 线性空间中, 所有在线性变换为零向量的原向量的集合. $N(T) = \{x | T x = 0\}$
+                \Property
                     变换前线性空间维数 = 值域维数 + 零空间维数. $n = dim\ R(A) + dim\ N(A)$
 
-            * \def{不变子空间}{对于线性变换$T$的, 线性空间中的一个子空间, 且满足$\forall x \in V_1, T x \in V_1$}
+            * \def{不变子空间} 对于线性变换$T$的, 线性空间中的一个子空间, 且满足$\forall x \in V_1, T x \in V_1$
 
             * 特征值 \& 特征向量
-                \def{特征值 \& 特征向量}{线性变换前后, 方向不改变的向量, 称特征向量$\lambda$; 特征向量在线性变换后长度变化的倍率, 称特征值$x$. $T x = \lambda x$}
-                \bf{性质}
+                \def{特征值 \& 特征向量} 线性变换前后, 方向不改变的向量, 称特征向量$\lambda$; 特征向量在线性变换后长度变化的倍率, 称特征值$x$. $T x = \lambda x$
+                \Property
                     * \bf{Hamilton-Cayley定理}{ 矩阵是其特征多项式的根.
                         $
                             \varphi(\lambda) &= |\lambda I-A|=\lambda^n + a_1 \lambda^{n-1} + ... + a_{n-1} \lambda + a_n
@@ -103,21 +102,21 @@
                         $
                         }
                     * \def{最小多项式}{}
-                            \bf{性质}
+                            \Property
                             * 最小多项式唯一
                             * 最小多项式整除所有以A为根, 1为首项的多项式$\varphi(\lambda)$.
                             * 最小多项式一定是特征多项式的所有零点都相同的因子. 且$m(\lambda) = \frac{\varphi(\lambda)}{D_{n-1}(\lambda)}$
                             * 相似矩阵, 转置矩阵, 最小多项式相同
 
-            * \def{线性变换矩阵}{线性变换在基X下的矩阵表示. $T X = X A$ }
-                \bf{性质}
+            * \def{线性变换矩阵} 线性变换在基X下的矩阵表示. $T X = X A$ 
+                \Property
                     * 运算 {
                         * $(T_1 + T_2) X = X (A + B)$
                         * $(k\ T_1) X = X (k\ A)$
                         * $(T_1 T_2) X = X AB$
                         * $T_1^{-1} X = X A^{-1}$
                         }
-                    * 不同基下线性变换矩阵的转换: $A_Y = C^{-1} A_X C \text{ ,其中 } Y = C X$
+                    * 不同基下线性变换矩阵的转换 $A_Y = C^{-1} A_X C \text{ ,其中 } Y = C X$
                         \Proof{
                         $
                             T Y = Y A_Y         \tag{定义} 
@@ -127,21 +126,21 @@
                             A_Y = C^{-1} A_X C
                         $
                         }
-                    * 坐标变换: $b = A a$
-                    * \def{奇异矩阵}{满秩的方阵.}
-                    * \def{正定矩阵}{$x^T A x > 0$, 则称A正定.}
+                    * 坐标变换 $b = A a$
+                    * \def{奇异矩阵} 满秩的方阵.
+                    * \def{正定矩阵} $x^T A x > 0$, 则称A正定.
 
             * 相似
-                \def{相似}{$\exists \text{非奇异矩阵}P, then \quad A \sim B \quad\Leftrightarrow\quad B = P^{-1} A P$}
-                \bf{性质} 
+                \def{相似} $\exists \text{非奇异矩阵}P, then \quad A \sim B \quad\Leftrightarrow\quad B = P^{-1} A P$
+                \Property 
                     * $A \sim A$ 
                     * $A \sim B \Leftrightarrow B \sim A$ 
                     * $A \sim B, B \sim C \Leftrightarrow A \sim C$
                     * 相似矩阵特征值、特征向量相同.
                     * 相似矩阵迹相同.
 
-                * \def{对角矩阵}{$diag(\lambda_1, ... ,\lambda_n)$}
-                    \bf{性质}
+                * \def{对角矩阵} $diag(\lambda_1, ... ,\lambda_n)$
+                    \Property
                         n阶矩阵相似于对称矩阵 $\Leftrightarrow$ 矩阵有n个线性无关的特征向量.
 
                 * \def{Jordan标准型}{
@@ -155,7 +154,7 @@
                             &&&\lambda_i
                         ]$
                     }
-                    \bf{性质}
+                    \Property
                         * 对角矩阵是特殊的Jordan标准型.
 
                     \bf{算法}{
@@ -176,16 +175,16 @@
                             (X A)^H &= A X
                         . $
             
-                        列满秩: $A^+ = (A^H A)^{-1} A^H$
-                        行满秩: $A^+ = A^H (A A^H)^{-1}$
+                        列满秩 $A^+ = (A^H A)^{-1} A^H$
+                        行满秩 $A^+ = A^H (A A^H)^{-1}$
                     }
-                    \bf{性质}
+                    \Property
                         * $rank(A) = rank(A^H A) = rank(A A^H)$
                         * 满秩分解算广义逆 $A^+ = G^H (F^H A G^H)^{-1} F^H$
 
-        \bf{例子}
-            * \def{恒等变换}{$T x = x \quad ;(\forall x \in V)$}
-            * \def{零变换}{$T x = 0 \quad ;(\forall x \in V)$}
+        \Example 
+            * \def{恒等变换} $T x = x \quad ;(\forall x \in V)$
+            * \def{零变换} $T x = 0 \quad ;(\forall x \in V)$
 
             * \def{正交变换}{
                     在内积空间中, 保持任意向量的长度不变的一种变换. Euclid空间中称正交变换, Unitary空间中称Unitary变换.
@@ -208,7 +207,7 @@
                     \bf{投影矩阵}:
                         $P_{L,M} = [X & 0]\ [X & Y]^{-1}$
                 }
-                    \bf{性质}
+                    \Property
                     * P是投影矩阵 $\Rightarrow$ P是幂等矩阵($P = P^2$)
                     * $A = \U [\Sigma & 0\\ 0 & 0] \V^H \Rightarrow A^+ = \V [\Sigma^{-1} & 0\\ 0 & 0] \U^H$
                     * $N(A) = R(I - A)$
@@ -234,13 +233,13 @@
                         \bf{正交投影矩阵}:
                             $P_L = X(X^H X)^{-1}X^H$
                     }
-                        \bf{性质}
+                        \Property
                         * 正交投影矩阵,是幂等矩阵, 也是Hermite矩阵.
 
             * \def{初等旋转变换}{
                     $T_{ij} = I + [ 0\\ & \cos\theta|_{(i,i)}& 0 & \sin\theta|_{(i,j)}& \\ & 0&0&0\\&-\sin\theta|_{(j,i)}& 0 & \cos\theta|_{(j,j)}\\ &&&&0 ] - [ 0\\ &1|_{(i,i)}\\&&0\\&&& 1 |_{(j,j)}\\&&&0 ]$
                 }
-                    \bf{性质}
+                    \Property
                     * $T$是正交矩阵.
                     * 设$x = (\xi_1, \cdots, \xi_{n})^T, \quad y= T_{ij}\ x=(\eta_1, \cdots, \eta_{n},)$, 则
                         $\{
@@ -250,8 +249,8 @@
                         .$
                         且当$\xi_i^2+\xi_j^2 \neq 0$时, $c=\frac{\xi_i}{\sqrt{\xi_i^2+\xi_j^2}}, \quad s=\frac{\xi_j}{\sqrt{\xi_i^2+\xi_j^2}}$, 可使$\eta_i=\sqrt{\xi_i^2+\xi_j^2}>0, \eta_j=0$.
 
-            * \def{初等反射变换}{$H x = (I-2 e_2 e_2^T) x$}
-                    \bf{性质} 
+            * \def{初等反射变换} $H x = (I-2 e_2 e_2^T) x$
+                    \Property 
                     * 对称矩阵$H^T = H$, 正交矩阵$H^T H = I$, 对合$H^2 = I$, 自逆$H^{-1} = H$, $|H| = -1$.
                     * 初等旋转矩阵是两个初等反射矩阵的乘积.
 
@@ -272,10 +271,10 @@
             * 三角不等式, $||A + B|| e ||A|| + ||B||$
         }
 
-        \bf{例子}
-            * \bf{$p$-范数}: $||x||_{p}=(\sum_{i=1}^{n}|x_i|^p)^{1 / p}$
-            * \bf{$\infty$-范数}: $||x||_\infty = \max|x_i|$
-            * \bf{椭圆范数}: $||x||_{A}=(x^T A x)^{\frac{1}{2}}$
+        \Example 
+            * \bf{$p$-范数} $||x||_{p}=(\sum_{i=1}^{n}|x_i|^p)^{1 / p}$
+            * \bf{$\infty$-范数} $||x||_\infty = \max|x_i|$
+            * \bf{椭圆范数} $||x||_{A}=(x^T A x)^{\frac{1}{2}}$
 
     * 矩阵范数
         \def{矩阵范数}{
@@ -286,22 +285,22 @@
             * 相容性, $||A B|| e ||A||\ ||B||$
         }
 
-        \bf{例子}
+        \Example 
             * $||A||_{m_1} = \sum_{i,j} |a_{ij}|$
             * $||A||_{m_2} = (\sum_{i,j} a_{ij}^2)^{\frac{1}{2}}$
             * $||A||_{m_\infty} = n·\max_{i,j}|a_{ij}|$
-            * \bf{列和范数}: $||A||_1      = \max_j \sum_i |a_{ij}|$
-            * \bf{行和范数}: $||A||_\infty = \max_i \sum_j |a_{ij}|$
-            * \bf{谱范数}:   $||A||_2 = \sqrt{\max\ \lambda_i} \quad ,(\lambda_i)$为$A^H A$特征值.
+            * \bf{列和范数} $||A||_1      = \max_j \sum_i |a_{ij}|$
+            * \bf{行和范数} $||A||_\infty = \max_i \sum_j |a_{ij}|$
+            * \bf{谱范数}   $||A||_2 = \sqrt{\max\ \lambda_i} \quad ,(\lambda_i)$为$A^H A$特征值.
         
     \bf{关系}
-        \bf{矩阵范数 \& 向量范数相容}: $||A x||_V \le ||A||_M ||x||_V$
+        \bf{矩阵范数 \& 向量范数相容} $||A x||_V \le ||A||_M ||x||_V$
 
 * 矩阵分解
     \def{矩阵分解}{}
 
-    \bf{例子} 
-        * \def{上下三角分解}{将矩阵A化成上三角矩阵R与下三角矩阵L的乘积.$A = L R$}
+    \Example  
+        * \def{上下三角分解} 将矩阵A化成上三角矩阵R与下三角矩阵L的乘积.$A = L R$
             \bf{算法} {
             $
                 L_1      = I + [0 &0&...&0\\ \frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\ \frac{a_{n1}}{a_{11}}&0&...&0]
@@ -315,9 +314,9 @@
                 A = L U
             $
             }
-        * \def{上下三角对角分解}{将矩阵A化成上三角矩阵R, 对角矩阵D, 下三角矩阵L的乘积.$A = L D R$}
+        * \def{上下三角对角分解} 将矩阵A化成上三角矩阵R, 对角矩阵D, 下三角矩阵L的乘积.$A = L D R$
             \bf{算法} {先上下三角分解, 在将对角线非全1一侧矩阵的对角线元素提出(并改为1)为对角矩阵D, 即 A = L D R}
-        * \def{对称三角分解}{将对称正定矩阵化成对称的两个上下三角矩阵. $A = G G^T$}
+        * \def{对称三角分解} 将对称正定矩阵化成对称的两个上下三角矩阵. $A = G G^T$
             \bf{算法} {
             * 先上下三角分解 $A = L D U = L D L^T \tag{因为对称正定矩阵}$
             * 
@@ -329,7 +328,7 @@
                 $
             }
 
-        * \def{正交三角分解}{将非奇异矩阵A化成正交矩阵Q与非奇异上三角矩阵R的乘积.$A = Q R$}
+        * \def{正交三角分解} 将非奇异矩阵A化成正交矩阵Q与非奇异上三角矩阵R的乘积.$A = Q R$
                 \bf{算法}  {
                 * \bf{Schmidt正交化方法} {
                     * $A = [a_1, ..., a_n]$
@@ -368,10 +367,10 @@
                         $
                 }
 
-        * \def{满秩分解}{将矩阵A化成F G的乘积.$A = F G$}
+        * \def{满秩分解} 将矩阵A化成F G的乘积.$A = F G$
                 \Proof{$A=P^{-1} B= [F & S ] [ G\\ 0 ] = F G$}
                 \bf{算法} {初等行变换$A \to [ G\\ 0 ]$, 取A左侧rank(A)列作为F, 则$A = F G$}
-        * \def{奇异值分解}{将矩阵A化成两个Unitary矩阵$U, V$, 和一个非零奇异值组成的矩阵$\Sigma$的乘积. $A = U [\Sigma & 0 \\ 0 & 0] V^T$}
+        * \def{奇异值分解} 将矩阵A化成两个Unitary矩阵$U, V$, 和一个非零奇异值组成的矩阵$\Sigma$的乘积. $A = U [\Sigma & 0 \\ 0 & 0] V^T$
                 \bf{算法} {
                 * $A^T A$ 计算特征值 $\lambda$, 特征向量$x$
                 * $V = [ \frac{x_1}{|x_1|}, ... ,\frac{x_n}{|x_n|} ], \quad \Sigma = diag(\sqrt(\lambda_1), ... ,\sqrt(\lambda_n))$
@@ -382,7 +381,7 @@
 
 * 矩阵分析
     * 矩阵函数
-        \bf{性质}
+        \Property
             * 若 $AB = BA$, 则$e^A e^B = e^B e^A = e^(A+B)$
             *   $P^{-1} A P = \Lambda \Rightarrow f(A) = P f(\Lambda) P^{-1}$
                 $P^{-1} A P = J \Rightarrow f(A) = P f(J) P^{-1}$

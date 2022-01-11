@@ -1,17 +1,17 @@
 
-\section{Mechanics力学}
-    \section{力学之描述——运动方程}
+* Mechanics力学
+    * 力学之描述——运动方程
         (对于s个自由度的系统,)
         
-        \def{广义坐标}{完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$}
+        \def{广义坐标} 完全刻画其位置的任意s个变量 $q_{1},q_{2},\cdots,q_{s}$
         
-        \def{广义速度}{广义坐标对时间的一阶导$\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$}
+        \def{广义速度} 广义坐标对时间的一阶导$\dot q_{1},\dot q_{2},\cdots,\dot q_{s}$
         
         * 经验表明, 同时给定广义坐标、广义速度, 就可确定系统状态, 原则上可预测以后动作.(其中,加速度$\ddot q$, 可由$\dot q,q$唯一确定.)
         
-        \def{运动方程}{加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)}
+        \def{运动方程} 加速度与坐标、速度的关系式. (二阶微分方程,原则上积分得q(t)可确定系统运动轨迹.)
         
-        \def{Lagrange函数}{每一个力学系统可以用一个确定函数L()表征.}
+        \def{Lagrange函数} 每一个力学系统可以用一个确定函数L()表征.
         
         $L(q_{1},q_{2},\cdots,q_{s},\dot q_{1},\dot q_{2},\cdots,\dot q_{s},t)$
         
@@ -25,7 +25,7 @@
         }
 
 
-    \section{力学之框架——参考系}
+    * 力学之框架——参考系
         * 研究力学现象必须选择参考系.
         
         \bf{惯性参考系}:空间相对它均匀且各向同性,时间相对它均匀.(特别的,某时刻静止的自由物体将永远保持静止.)\\
@@ -34,18 +34,18 @@
         
         $\Rightarrow$ Lagrange方程有$\frac{d}{dt}\frac{\partial L}{\partial \vec v} = -\frac{\partial L}{\partial \vec r} = 0 \Rightarrow \frac{\partial L}{\partial \vec v}=const$
         
-        \def{惯性定律}{在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.}
+        \def{惯性定律} 在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.
             $\Rightarrow \vec v = const$
 
 
-    \section{力学之框架——参考系间相对性}
-        \def{Galilean相对性原理}{存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.}
+    * 力学之框架——参考系间相对性
+        \def{Galilean相对性原理} 存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.
         
         (今后不特别声明,默认惯性参考系.)
         
-        \def{Galilean变换}{两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).}
+        \def{Galilean变换} 两个不同参考系K、K'之间的的坐标变换(K'相对K以速度$\vec V$运动).
         
-        \def{绝对时间假设}{我们认为两个参考系的时间相同.}
+        \def{绝对时间假设} 我们认为两个参考系的时间相同.
             $
                 \left\{ \begin{array}{ll}
                 \vec r = \vec r' + \vec V t\\
@@ -53,10 +53,10 @@
                 \end{array} \right.
             $
         
-        \def{Galilean相对性原理}{力学系统在Galilean变换下具有不变性.}
+        \def{Galilean相对性原理} 力学系统在Galilean变换下具有不变性.
     
     
-    \section{力学之对象——质点、质点系}
+    * 力学之对象——质点、质点系
         \bf{质点}:有质量,无体积形状的,理想的点.
         
         \bf{质点的Lagrange函数}:
@@ -72,8 +72,8 @@
             $L = \sum \frac{m_i v_i^2}{2} - U(\vec r_1,\vec r_2,\cdots ) = T(v_1^2,v_2^2,\cdots) - U(\vec r_1,\vec r_2,\cdots )$
 
 
-\section{力学之不变性——守恒定律}
-    \section{能量守恒——时间均匀性}
+* 力学之不变性——守恒定律
+    * 能量守恒——时间均匀性
         时间均匀性: 封闭系统Lagrange函数不显含时间.\quad $\Rightarrow L(\vec q,\dot \vec q)$
             $\frac{dL}{dt} = \sum \frac{\partial L}{\partial q_i} \dot q_i + \sum \frac{\partial L}{\partial \dot q_i} \ddot q_i = \sum \frac{d}{dt}(\frac{\partial L}{\partial \dot q_i}\dot q_i) 
             \Rightarrow \frac{d}{dt}(\sum \dot q_i \frac{\partial L}{\partial \dot q_i} - L) = 0$
@@ -83,7 +83,7 @@
     * 封闭系统、定常外场系统,即当Lagrange函数不显含时间时,能量守恒成立.
 
 
-    \section{动量守恒——空间均匀性、力}
+    * 动量守恒——空间均匀性、力
         空间均匀性: 空间平移不变性.
             $\delta L = \sum \frac{\partial L}{\partial \vec r_i}\cdot \delta \vec r_i = \vec \epsilon \cdot \sum \frac{\partial L}{\partial \vec r_i} = 0\quad(\forall \vec \epsilon)
             \Rightarrow \sum \frac{\partial L}{\partial \vec r_i} = \sum \frac{d}{dt} \frac{\partial L}{\partial \vec v_i} = \frac{d}{dt} \sum \frac{\partial L}{\partial \vec v_i} = 0$
@@ -98,7 +98,7 @@
             $P_i = \frac{\partial L}{\partial \dot q_i},\quad F_i = \frac{\partial L}{\partial \dot q_i} = \dot P_i$
 
 
-    \section{角动量守恒——空间各向同性}
+    * 角动量守恒——空间各向同性
         空间各向同性: 空间旋转不变性.
             $
             \begin{array}{ll}
@@ -112,7 +112,7 @@
             $\Rightarrow \vec M = \sum \vec r_i \times \vec P_i = const.$
 
 
-    \section{$E,\vec P,\vec M$参考系间变换}
+    * $E,\vec P,\vec M$参考系间变换
         不同惯性参考系中(K'相对K以速度$\vec V$运动)(对于$\vec M$且K'相对K坐标原点相差$\vec R$)\\
             $
                 \left\{ \begin{array}{ll}
@@ -124,7 +124,7 @@
             $
 
 
-\section{力学之相似性}
+* 力学之相似性
     * Lagrange函数乘任意常数,不会改变运动方程.
         $\vec r_i \to \alpha \vec r_i, t \to \beta t 
         \Rightarrow \vec v_i = \frac{d\vec r_i}{dt} \to \frac{\alpha}{\beta}\vec v_i,T \to \frac{\alpha^2}{\beta^2}T,U \to  \alpha^k U$
@@ -139,7 +139,7 @@
     * 例2: Kepler's第三定律,Newton引力、Coulomb力,势能与两点间距离成反比,$\Rightarrow k=-1,\Rightarrow \frac{t'}{t} = (\frac{l'}{l})^{3/2}$,轨道运动周期的平方与轨道尺寸的立方成正比.
 
 
-    \section{力学之对象——质心}
+    * 力学之对象——质心
         \bf{质心系}:\exists 速度$\vec V$使得系统相对K'静止($\vec P' = 0$),且K'原点为系统质量中心,K'即质心系:
             $\vec V = \frac{\vec P}{\sum m_i} = \frac{\sum m_i \vec v_i}{\sum m_i}$
             
@@ -165,7 +165,7 @@
         \bf{质心组合关系}: 将质点系分成若干小系,各小系质心构成新的质点系之质心即为原质点系的质心.
 
 
-    \section{情景: 一维运动}
+    * 情景: 一维运动
         一维运动,定常外部条件下,
         
         \bf{[0] Lagrange函数}:
@@ -179,7 +179,7 @@
             $\because$动能恒正,故运动只能发生在$U(x) \leqslant E$的空间区域.
 
 
-    \section{情景: 二体问题}
+    * 情景: 二体问题
         \bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)\\
         二体问题Lagrange函数:
             $L = \frac{m \vec \dot r_1^2}{2} + \frac{m \vec \dot r_1^2}{2} - U(|\vec r_1 - \vec r_2|)$
@@ -190,7 +190,7 @@
             $\Rightarrow$"二体问题"等效为一个质量$m_{12}$的质点,在外场$U(\vec r_{12})$下的运动, 而分运动$\vec r_1, \vec r_2$, 可由$\vec r_{12}$分别解出.
         
         
-    \section{情景: 有心力场}
+    * 情景: 有心力场
         \bf{有心力场}: 质点势能只与质点到某一固定点的距离有关的外场.
         
         \bf{有心力}: 始终指向or背离与质点到某一固定点的方向，且大小只依赖r的力.
@@ -224,7 +224,7 @@
             $\Delta \varphi = \int_{r_{min}} ^{r_{max}} \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
     
 
-        \section{1/r有心力场}
+        * 1/r有心力场
         势能$U(r) \propto \frac{1}{r}$.\quad eg.引力场,库仑电场.
             $U = - \alpha / r$
             
@@ -245,8 +245,8 @@
 
 
 
-    \section{情景: 小振动}
-        \section{一维小振动}
+    * 情景: 小振动
+        * 一维小振动
             \bf{一维小振动}:
                 设系统在势场$q_0$处平衡,即$F = -\frac{dU(q)}{dq}|_{q=q_0} = 0$,当平衡处发生微小偏移至$q(q\to q_0)$,Taylor展开,
                 $U(q) - U(q_0) = [U(q_0) - U(q_0)] + [\frac{d U(q)}{dq}|_{q=q_0} (q - q_0)]+ [\frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}] + o((q - q_0)^2) \approx \frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}$
@@ -264,7 +264,7 @@
             $E = \frac{\partial L}{\partial \dot q}\dot q - L = \frac{m \dot x^2}{2} + \frac{k x^2}{2} = \frac{1}{2} m \omega^2 A^2$
 
 
-        \section{一维强迫小振动、共振}
+        * 一维强迫小振动、共振
             \bf{强迫振动}:外力下振动系统发生的振动. 对于微小偏移,强迫力势场,Taylor展开,有
             
             \bf{强迫力$F(t)$}:
@@ -291,10 +291,10 @@
             $let\ \xi = \dot x + i\omega x\ \Rightarrow \dot \xi - i\omega \xi = \frac{F(t)}{m}  \ \Rightarrow x = \frac{1}{\omega}Im\{\int_0^t \frac{F(t)}{m}e^{-i\omega t}dt + const.\}$
 
 
-        \section{多自由度小振动}
+        * 多自由度小振动
 
 
-    \section{力学之对象——刚体}
+    * 力学之对象——刚体
         \bf{刚体}:质点间距离保持不变的质点组成的系统.
         
         \bf{角速度$\vec \omega$}:
@@ -303,7 +303,7 @@
     
     
     
-    \section{力学之对象——理想流体}
+    * 力学之对象——理想流体
         \bf{理想流体}:不可压缩、不计粘性的流体.
         
         * 给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
@@ -327,8 +327,8 @@
             $\frac{\partial \vec v}{\partial t} + (\vec v \cdot \nabla)\vec v = - \frac{1}{\rho}\nabla p$
 
 
-\section{Relativity Mechanics 相对论力学}
-    \section{相对性原理,相互作用传播速度}
+* Relativity Mechanics 相对论力学
+    * 相对性原理,相互作用传播速度
         \bf{相对性原理}: 所有物理定律,在所有惯性参考系中都相同.
         
         * 实验表明, 相对性原理是有效的.
@@ -340,7 +340,7 @@
             (取$c\to \infty$,即可过渡到经典力学.)
 
 
-    \section{相对时间}
+    * 相对时间
         * <1881年Michelson-Morley干涉实验>表明, 光速与其传播方向无关. (而按经典力学,光应在地球速度同方向(v+c),比反方向(v-c)更快一点.)
         
         $\Rightarrow$Galilean变换的绝对时间假设(t=t')错了.\quad  $\Rightarrow$不同参考系,时间流逝的速度不同.
@@ -356,7 +356,7 @@
         \bf{固有长度}:物体在相对静止参考系内的长度.
 
 
-    \section{参考系间变换}
+    * 参考系间变换
         \bf{Lorentz变换}: 参考系间变换
             $ x = \frac{x' + V t'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad y=y',\quad z=z', \quad t = \frac{t'+ \frac{V}{c^2}x'}{\sqrt{1 - \frac{V^2}{c^2}}}$
             $ \Rightarrow dx = \frac{dx' + V dt'}{\sqrt{1 - \frac{V^2}{c^2}}},\quad dy=dy',\quad dz=dz', \quad dt = \frac{dt'+ \frac{V}{c^2}dx'}{\sqrt{1 - \frac{V^2}{c^2}}}$
@@ -369,7 +369,7 @@
         * 例2: \bf{尺缩}:
 
 
-    \section{力学量}
+    * 力学量
         \bf{Lagrange函数}:
             $L = -m c^2 \sqrt{1 - \frac{v^2}{c^2}}$
     
@@ -385,8 +385,8 @@
         \bf{静能}:\quad $E(v=0) = m c^2$\\
 
 
-\section{电磁学}
-    \section{电磁场方程}
+* 电磁学
+    * 电磁场方程
         * 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.
     
         \bf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\vec A$:}
@@ -417,7 +417,7 @@
             $
 
 
-\section{特解: 静电场}
+* 特解: 静电场
 静电场  /  恒磁场
 *	[公式]: 
 		▽²A  = -4π/c·J		磁矢势 (恒磁场)
@@ -435,14 +435,14 @@
 		对于各种边界条件，Poisson's方程有许多种解，但每个解梯度相同.
 		静电场下, 意味边界条件下满足Poisson's方程的势函数，所解得电场唯一确定.
 
-\section{特解: 恒磁场}
+* 特解: 恒磁场
 
 
-\section{特解: 真空电磁波}
+* 特解: 真空电磁波
 
 
 
-\section{流体力学}
+* 流体力学
     Navier Stokes 流体方程
     ∂\vec u/∂t + (\vec v·▽)\vec v =  - 1/ρ·▽p  + \vec g + η/ρ▽²\vec v + (ζ + η/3)/ρ·▽(▽·\vec v)
 			η: 粘度    ρ: 密度
@@ -455,11 +455,11 @@
 			∂u_x/∂t + v_x·∂v_x/∂x+ v_y·∂v_x/∂y + v_z·∂v_x/∂z = - 1/ρ·∂p/∂x + g_x
 
 
-\section{Gravitational Field 引力场}
+* Gravitational Field 引力场
 
 
 
-\section{Quantum Mechanics 量子力学}
+* Quantum Mechanics 量子力学
 *                    Schrödinger 方程
 *	[定义]: iℏ·∂ψ(r,t)/∂t = [-ℏ/2m▽² + U(r,t)]·ψ(r,t)
 		or	iℏ·d/dt·|ψ(t)> = H |ψ(t)>
@@ -479,14 +479,14 @@
 		* ∂²ψ/∂x² = [ψ(x+1,...) - 2·ψ(x,...) + ψ(x-1,...)] / Δt²
 
 
-\section{Statistical Mechanics 统计力学}
+* Statistical Mechanics 统计力学
 
 
 
 
 
 
-\section{狭义相对论-参考系变换}
+* 狭义相对论-参考系变换
     \bf{核心}: 
         \env{enumerate}{
         \item 若新旧两个参考系相对速度不变, 则之间的参考系变换是一种线性变换.
