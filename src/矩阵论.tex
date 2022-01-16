@@ -43,7 +43,7 @@
                         \bf{Schmidt正交化}{
                             $b_i = a_i - \sum_{k=1}^{i-1} \frac{<a_i,b_j>}{<b_j,b_j>}b_j$
 
-                \def{度量矩阵}{}
+                \def{度量矩阵}
                 \def{Cauchy-Бyнияковскнй不等式} $|<x, y>| e |x|\ |y|$
 
     * 线性子空间
@@ -61,7 +61,7 @@
         \bf{张成} $span(\vec x_1,...,\vec x_n ) = {\sum_{i=1}^n a_i \vec_i}$ 
 
         \bf{子空间运算}
-            * \def{交}{} 
+            * \def{交} 
             * \def{和} $V_1 + V_2 = \{z | z=x+y, x \in V_1, y \in V_2\}$
                     \Property
                         \def{直和}{
@@ -101,7 +101,7 @@
                             \varphi(A) &= A^n + a_{1} A^{n-1}+ ... +a_{n-1} A + a_n I=0
                         $
                         }
-                    * \def{最小多项式}{}
+                    * \def{最小多项式}
                             \Property
                             * 最小多项式唯一
                             * 最小多项式整除所有以A为根, 1为首项的多项式$\varphi(\lambda)$.
@@ -186,90 +186,86 @@
             * \def{恒等变换} $T x = x \quad ;(\forall x \in V)$
             * \def{零变换} $T x = 0 \quad ;(\forall x \in V)$
 
-            * \def{正交变换}{
+            * \def{正交变换}
                     在内积空间中, 保持任意向量的长度不变的一种变换. Euclid空间中称正交变换, Unitary空间中称Unitary变换.
                     $<x, x> = <T x, T x>$
                     \bf{正交矩阵}:
                         $A A^T = I$
                         $A A^H = I$
-                }
 
-            * \def{对称变换}{
+            * \def{对称变换}
                     一种变换. Euclid空间中称对称变换, Unitary空间中称Hermite变换.
                     $<T x, y> = <x, T y>$
                     \bf{对称矩阵}:
                         $A^T = A$
                         $A^H = A$
-                }
 
-            * \def{投影变换}{
+            * 投影变换
+                \def{投影变换}
                     令线性空间分为不交的子空间L,M, 将线性空间沿M到L的投影的变换, 称投影变换.
-                    \bf{投影矩阵}:
-                        $P_{L,M} = [X & 0]\ [X & Y]^{-1}$
-                }
-                    \Property
-                    * P是投影矩阵 $\Rightarrow$ P是幂等矩阵($P = P^2$)
+                    \bf{投影矩阵}: $P_{L,M} = [X & 0]\ [X & Y]^{-1}$
+
+                \Property
+                    * 对投影的结果再做投影结果不变, 即, P是投影矩阵 $\Rightarrow$ P是幂等矩阵($P = P^2$)
                     * $A = \U [\Sigma & 0\\ 0 & 0] \V^H \Rightarrow A^+ = \V [\Sigma^{-1} & 0\\ 0 & 0] \U^H$
                     * $N(A) = R(I - A)$
-                        \Proof{
-                        $
-                            \text{设} x \in R(I-A) \Rightarrow x = (I-A) y
-                            \because A^2 = A \Rightarrow A(I - A) = 0
-                            \therefore A x = A(I - A) y = 0
-                            \therefore x \in N(A)
-                            \therefore R(I-A) \subseteq N(A) \tag{(1)}
+                        \Proof
+                            $
+                                \text{设} x \in R(I-A) \Rightarrow x = (I-A) y
+                                \because A^2 = A \Rightarrow A(I - A) = 0
+                                \therefore A x = A(I - A) y = 0
+                                \therefore x \in N(A)
+                                \therefore R(I-A) \subseteq N(A) \tag{(1)}
 
-                            \therefore dim(I - A) \le dim\ N(A) = n - dim\ A
-                            \because I = A + (I - A) \Rightarrow n \le dim\ A + dim (I - A) \Rightarrow dim(I - A) \ge n - dim\ A
-                            \therefore dim(I - A) = n - dim\ A \tag{(2)}
+                                \therefore dim(I - A) \le dim\ N(A) = n - dim\ A
+                                \because I = A + (I - A) \Rightarrow n \le dim\ A + dim (I - A) \Rightarrow dim(I - A) \ge n - dim\ A
+                                \therefore dim(I - A) = n - dim\ A \tag{(2)}
 
-                            \because (1), (2)
-                            \therefore R(I - A) = N(A)
-                        $
-                        }
+                                \because (1), (2)
+                                \therefore R(I - A) = N(A)
+                            $
 
-                    \def{正交投影变换}{
+                * 正交投影变换
+                    \def{正交投影变换}
                         设线性空间的子空间L, 将线性空间沿$L_\bot$到L的投影的变换, 称投影变换.
-                        \bf{正交投影矩阵}:
-                            $P_L = X(X^H X)^{-1}X^H$
-                    }
-                        \Property
-                        * 正交投影矩阵,是幂等矩阵, 也是Hermite矩阵.
-
-            * \def{初等旋转变换}{
-                    $T_{ij} = I + [ 0\\ & \cos\theta|_{(i,i)}& 0 & \sin\theta|_{(i,j)}& \\ & 0&0&0\\&-\sin\theta|_{(j,i)}& 0 & \cos\theta|_{(j,j)}\\ &&&&0 ] - [ 0\\ &1|_{(i,i)}\\&&0\\&&& 1 |_{(j,j)}\\&&&0 ]$
-                }
+                        \bf{正交投影矩阵}: $P_L = X(X^H X)^{-1}X^H$
+                        
                     \Property
+                        * 正交投影矩阵, 既是幂等矩阵, 也是Hermite矩阵.
+
+            * \def{初等旋转变换}
+                    $T_{ij} = I + [ 0\\ & \cos\theta|_{(i,i)}& 0 & \sin\theta|_{(i,j)}& \\ & 0&0&0\\&-\sin\theta|_{(j,i)}& 0 & \cos\theta|_{(j,j)}\\ &&&&0 ] - [ 0\\ &1|_{(i,i)}\\&&0\\&&& 1 |_{(j,j)}\\&&&0 ]$
+
+                \Property
                     * $T$是正交矩阵.
                     * 设$x = (\xi_1, \cdots, \xi_{n})^T, \quad y= T_{ij}\ x=(\eta_1, \cdots, \eta_{n},)$, 则
                         $\{
-                        \eta_i= c \xi_i+s \xi_j \\
-                        \eta_j=-s \xi_i+c \xi_j \\
-                        \eta_{k}=\xi_{k} \quad(k \neq i, j)
+                            \eta_i= c \xi_i+s \xi_j \\
+                            \eta_j=-s \xi_i+c \xi_j \\
+                            \eta_{k}=\xi_{k} \quad(k \neq i, j)
                         .$
                         且当$\xi_i^2+\xi_j^2 \neq 0$时, $c=\frac{\xi_i}{\sqrt{\xi_i^2+\xi_j^2}}, \quad s=\frac{\xi_j}{\sqrt{\xi_i^2+\xi_j^2}}$, 可使$\eta_i=\sqrt{\xi_i^2+\xi_j^2}>0, \eta_j=0$.
 
             * \def{初等反射变换} $H x = (I-2 e_2 e_2^T) x$
-                    \Property 
+                    
+                \Property 
                     * 对称矩阵$H^T = H$, 正交矩阵$H^T H = I$, 对合$H^2 = I$, 自逆$H^{-1} = H$, $|H| = -1$.
                     * 初等旋转矩阵是两个初等反射矩阵的乘积.
 
-                    \bf{算法} {
+                \bf{算法} 
                     * $u = \frac{b - |b| z}{|b - |b| z|}$
                     * $H = I - 2 u u^T$
-                    }
                     
 
 * 范数
-    \def{范数}{}
+    \def{范数}
 
     * 向量范数
-        \def{向量范数}{
+        \def{向量范数}
             一类函数, 且满足
             * 非负性, $||A|| \ge 0$, 当且仅当$A = 0, ||A|| = 0$
             * 齐次性, $||k A|| = |k| ||A||$
             * 三角不等式, $||A + B|| e ||A|| + ||B||$
-        }
 
         \Example 
             * \bf{$p$-范数} $||x||_{p}=(\sum_{i=1}^{n}|x_i|^p)^{1 / p}$
@@ -277,13 +273,12 @@
             * \bf{椭圆范数} $||x||_{A}=(x^T A x)^{\frac{1}{2}}$
 
     * 矩阵范数
-        \def{矩阵范数}{
+        \def{矩阵范数}
             一类函数, 且满足
             * 非负性, $||A|| \ge 0$, 当且仅当$A = 0, ||A|| = 0$
             * 齐次性, $||k A|| = |k| ||A||$
             * 三角不等式, $||A + B|| e ||A|| + ||B||$
             * 相容性, $||A B|| e ||A||\ ||B||$
-        }
 
         \Example 
             * $||A||_{m_1} = \sum_{i,j} |a_{ij}|$
@@ -297,40 +292,38 @@
         \bf{矩阵范数 \& 向量范数相容} $||A x||_V \le ||A||_M ||x||_V$
 
 * 矩阵分解
-    \def{矩阵分解}{}
+    \def{矩阵分解}
 
     \Example  
         * \def{上下三角分解} 将矩阵A化成上三角矩阵R与下三角矩阵L的乘积.$A = L R$
-            \bf{算法} {
-            $
-                L_1      = I + [0 &0&...&0\\ \frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\ \frac{a_{n1}}{a_{11}}&0&...&0]
-                L_1^{-1} = I + [0 &0&...&0\\-\frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\-\frac{a_{n1}}{a_{11}}&0&...&0]
-                L_1^{-1} A = A_1
+            \bf{算法} 
+                $
+                    L_1      = I + [0 &0&...&0\\ \frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\ \frac{a_{n1}}{a_{11}}&0&...&0]
+                    L_1^{-1} = I + [0 &0&...&0\\-\frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\-\frac{a_{n1}}{a_{11}}&0&...&0]
+                    L_1^{-1} A = A_1
 
-                \text{重复上面步骤, 直至将 $A_i$ 化为上三角矩阵}
-                
-                U = A_{n-1}
-                L = \prod L_i
-                A = L U
-            $
-            }
+                    \text{重复上面步骤, 直至将 $A_i$ 化为上三角矩阵}
+                    
+                    U = A_{n-1}
+                    L = \prod L_i
+                    A = L U
+                $
         * \def{上下三角对角分解} 将矩阵A化成上三角矩阵R, 对角矩阵D, 下三角矩阵L的乘积.$A = L D R$
             \bf{算法} {先上下三角分解, 在将对角线非全1一侧矩阵的对角线元素提出(并改为1)为对角矩阵D, 即 A = L D R}
         * \def{对称三角分解} 将对称正定矩阵化成对称的两个上下三角矩阵. $A = G G^T$
-            \bf{算法} {
-            * 先上下三角分解 $A = L D U = L D L^T \tag{因为对称正定矩阵}$
-            * 
-                $
-                    A = L (\sqrt(D))^2 L^T
-                        = (L \sqrt(D)) (\sqrt(D) L^T)
-                        = (L \sqrt(D)) (L \sqrt(D))^T
-                        = G G^T
-                $
-            }
+            \bf{算法} 
+                * 先上下三角分解 $A = L D U = L D L^T \tag{因为对称正定矩阵}$
+                * 
+                    $
+                        A = L (\sqrt(D))^2 L^T
+                            = (L \sqrt(D)) (\sqrt(D) L^T)
+                            = (L \sqrt(D)) (L \sqrt(D))^T
+                            = G G^T
+                    $
 
         * \def{正交三角分解} 将非奇异矩阵A化成正交矩阵Q与非奇异上三角矩阵R的乘积.$A = Q R$
-                \bf{算法}  {
-                * \bf{Schmidt正交化方法} {
+            \bf{算法}  
+                * \bf{Schmidt正交化方法} 
                     * $A = [a_1, ..., a_n]$
                     * Schmidt正交化 $b_i = a_i - \sum_{k=1}^{i-1} \frac{<a_i,b_j>}{<b_j,b_j>}b_j$
                     * 
@@ -339,8 +332,7 @@
                             R = [ |b_1|\\ & \ddots\\ && |b_{n}| ] [ 1 & k_{21} & ... & k_{n1} \\ & 1 & ... & k_{n2} \\& & \ddots & \vdots \\& & & 1 ] \quad; k_ij = \frac{<a_i,b_j>}{<b_j,b_j>}
                             A = Q R
                         $
-                    }
-                * \bf{初等旋转变换方法} {
+                * \bf{初等旋转变换方法} 
                     * 对第1列, 初等旋转变换使其变为 $T_i a_1 = [b_{11}, 0,...,0]$
                     * $T_i = \prod_{i=0}^{n-1} T_{i(n-1-j)}$
                     * 重复上面步骤, 直至将 $A_i$ 化为上三角矩阵
@@ -350,8 +342,7 @@
                             Q = (\prod_{i=0}^{n-1} T_{n-1-i} )^T
                             A = Q R
                         $
-                    }
-                * \bf{初等反射变换} {
+                * \bf{初等反射变换} 
                     * 对第1列, 初等旋转变换使其变为 $H_i a_1 = [b_{11}, 0,...,0]$
                         $
                             u_i = \frac{b_i - |b_i|}{| b_i - |b_i| |}
@@ -365,18 +356,21 @@
                             Q = (\prod_{i=0}^{n-1} H_{n-1-i} )^T
                             A = Q R
                         $
-                }
 
         * \def{满秩分解} 将矩阵A化成F G的乘积.$A = F G$
-                \Proof{$A=P^{-1} B= [F & S ] [ G\\ 0 ] = F G$}
-                \bf{算法} {初等行变换$A \to [ G\\ 0 ]$, 取A左侧rank(A)列作为F, 则$A = F G$}
+            \Proof $A=P^{-1} B= [F & S ] [ G\\ 0 ] = F G$
+            
+            \bf{算法} 
+                初等行变换$A \to [ G\\ 0 ]$, 取A左侧rank(A)列作为F, 则$A = F G$
+
         * \def{奇异值分解} 将矩阵A化成两个Unitary矩阵$U, V$, 和一个非零奇异值组成的矩阵$\Sigma$的乘积. $A = U [\Sigma & 0 \\ 0 & 0] V^T$
-                \bf{算法} {
+
+            \bf{算法} 
                 * $A^T A$ 计算特征值 $\lambda$, 特征向量$x$
                 * $V = [ \frac{x_1}{|x_1|}, ... ,\frac{x_n}{|x_n|} ], \quad \Sigma = diag(\sqrt(\lambda_1), ... ,\sqrt(\lambda_n))$
                 * $U_1 = A V \Sigma^{-1}$, 计算正交矩阵$U$
                 * $ A = U [\Sigma & 0 \\ 0 & 0] V^T $
-                }
+
 
 
 * 矩阵分析

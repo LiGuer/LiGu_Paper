@@ -103,9 +103,8 @@
 * 基于价值函数
     
     * 动态规划
-        \def{动态规划方法}{
+        \def{动态规划方法}
             完备的环境模型下, 计算最优策略的一种方法.
-        }
 
         * 策略迭代 = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
             * \bf{策略评估}: 求当前策略下的累计奖励$V_\pi$.
@@ -137,58 +136,56 @@
             }
     
     * Monte Carlo方法
-        \def{动态规划方法}{
+        \def{动态规划方法}
             深度优先搜索. 我们不假设对环境有完全了解。蒙特卡罗方法只需要从与环境的实际或模拟交互中体验状态、动作和奖励的样本序列。只有在一个片段结束后, 价值评估和策略才会更新。因此, Monte Carlo方法是逐段递增的, 而不是一步一步在线的.
             对值函数的估计:
             $V (S_t )  arrow V (S_t )+\alpha (G_t-V (S_t ) )$
-        }
 
     * 时序差分学习
-        \def{时序差分学习}{
+        \def{时序差分学习}
             时序差分学习是蒙特卡罗思想和动态规划思想的结合。与蒙特卡罗方法一样, 时序差分方法可以直接从原始经验中学习, 而无需环境动力学模型。与动态规划一样, 时序差分方法部分基于其他学习的估计更新估计, 而无需等待最终结果（它们是自举的）.
             $V (S_t )  arrow V (S_t )+\alpha (R_{t+1}+\gamma V (S_{t+1} )-V (S_t ) )$
-        }
 
-        \bf{例子}
-    	* \def{Q-Learning}{
-            --- off-policy
-            $\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$
-        }
+        \Example
+            * \def{Q-Learning}
+                --- off-policy
+                $\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$
 
-    	* \def{Sarsa}{
-            --- on-policy
-            $\Delta Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
-        }    	    
-    	
-    	* \def{Deep Q Networks}{
-            Deep Q Networks = Q-Learning + 神经网络
+            * \def{Sarsa}
+                --- on-policy
+                $\Delta Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
+            
+            * Deep Q Networks
+                \def{Deep Q Networks}{
+                    Deep Q Networks = Q-Learning + 神经网络
 
-            \bf{论文}: \textit{Playing Atari with Deep Reinforcement Learning (2013)}
-        }        
-            \bf{优势}:
-            * 利用神经网络的深度学习对强化学习进行提升, Q-Learning + 卷积神经网络. 深度学习的进展使得直接从视觉和语音等高维感官输入的端到端学习成为可能 (eg,直接从电脑屏幕学习到游戏手柄动作), 解决了Q-Learning的Q表中状态、动作数量无法做大的问题.
-            * 经验库回放机制, 解决深度学习训练所需样本独立，但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
-            * 随机小批量更新
+                \bf{论文}: \textit{Playing Atari with Deep Reinforcement Learning (2013)}
 
-            \bf{劣势}: 只能处理离散和低维的动作空间.
-        
-            \bf{更新函数}: 神经网络(Q 网络)对于更新函数, 主要表现在参数$\theta$上
-                $\theta_{t+1} = \theta_t + \alpha \nabla_{\theta_t} J (\theta_t )$
-                $J (\theta_t )=\underset{s, a \sim \rho(\cdot)}{\mathbb{E}}  [ (y_t-Q (s, a ; \theta_t ) )^{2} ]$
-                $\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(\cdot) \atop s' \sim \mathcal{E}}{\mathbb{E}} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
+                \bf{优势}:
+                * 利用神经网络的深度学习对强化学习进行提升, Q-Learning + 卷积神经网络. 深度学习的进展使得直接从视觉和语音等高维感官输入的端到端学习成为可能 (eg,直接从电脑屏幕学习到游戏手柄动作), 解决了Q-Learning的Q表中状态、动作数量无法做大的问题.
+                * 经验库回放机制, 解决深度学习训练所需样本独立，但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
+                * 随机小批量更新
+
+                \bf{劣势}: 只能处理离散和低维的动作空间.
+            
+                \bf{更新函数}: 神经网络(Q 网络)对于更新函数, 主要表现在参数$\theta$上
+                    $\theta_{t+1} = \theta_t + \alpha \nabla_{\theta_t} J (\theta_t )$
+                    $J (\theta_t )=\underset{s, a \sim \rho(\cdot)}{\mathbb{E}}  [ (y_t-Q (s, a ; \theta_t ) )^{2} ]$
+                    $\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(\cdot) \atop s' \sim \mathcal{E}}{\mathbb{E}} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
 
 
 * 基于策略函数
 
-    \def{策略梯度方法}{
-        是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
+    * 策略梯度方法
+        \def{策略梯度方法}
+            是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
 
-        \bf{策略梯度}, 
-            $\P_\pi (a | s, \theta)$
-            $ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$
+            \bf{策略梯度}, 
+                $\P_\pi (a | s, \theta)$
+                $ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$
 
-        \bf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
-    }        
+            \bf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
+    
         \bf{优势}: 解决连续动作空间的强化学习问题.
 
         \bf{劣势}:
@@ -201,43 +198,43 @@
                 & \propto \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ]
             $
         
-        \Proof{
-        $
-            \nabla_\theta V(s)
-            &= \nabla_\theta\ \E[G_t|S_t = s] \tag{价值函数定义}\\
-            &= \nabla_\theta  (\sum_{a \in A} \P_\pi (a | s)\ Q(s,a)  ) \tag{期望公式}\\
-            &= \sum_{a \in A} \nabla_\theta  ( \P_\pi (a | s)\ Q(s,a)  ) \tag{分配律}\\
-            &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}\\
-            &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}\\
-            &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s)+ \P_\pi (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}\\
-            &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_{r} \P(s', r | s, a)  \tag{加法性质}\\
-            &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}\\
-            &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
-            &= \sum_{s' \in S} \sum_{t=0}^{\infty} 
-            \gamma^t \P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}\\
-            &=  (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^{\infty} \P_\pi^{(t)} (s'| s )$归一化}\\
-            &= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
-            &= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  ] \tag{期望形式}\\
-            &= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} \P_\pi (a | s') Q_\pi(s', a) \frac{\nabla_\theta \P_\pi (a | s')}{\P_\pi (a | s')}  ] \tag{提项$\P_\pi (a | s')$, 方便后面对$a$写期望}\\
-            &= \alpha \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ] \tag{期望形式, 微分公式}\\
-        $
-        }
+        \Proof
+            $
+                \nabla_\theta V(s)
+                &= \nabla_\theta\ \E[G_t|S_t = s] \tag{价值函数定义}\\
+                &= \nabla_\theta  (\sum_{a \in A} \P_\pi (a | s)\ Q(s,a)  ) \tag{期望公式}\\
+                &= \sum_{a \in A} \nabla_\theta  ( \P_\pi (a | s)\ Q(s,a)  ) \tag{分配律}\\
+                &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}\\
+                &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}\\
+                &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s)+ \P_\pi (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}\\
+                &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_{r} \P(s', r | s, a)  \tag{加法性质}\\
+                &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}\\
+                &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
+                &= \sum_{s' \in S} \sum_{t=0}^{\infty} 
+                \gamma^t \P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}\\
+                &=  (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^{\infty} \P_\pi^{(t)} (s'| s )$归一化}\\
+                &= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
+                &= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  ] \tag{期望形式}\\
+                &= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} \P_\pi (a | s') Q_\pi(s', a) \frac{\nabla_\theta \P_\pi (a | s')}{\P_\pi (a | s')}  ] \tag{提项$\P_\pi (a | s')$, 方便后面对$a$写期望}\\
+                &= \alpha \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ] \tag{期望形式, 微分公式}\\
+            $
             
         \bf{优点}, 解决连续动作空间的强化学习问题
         
         \bf{缺点}:
             即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的； 在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
 
-    \def{确定性策略梯度方法}{
-        采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
+    * 确定性策略梯度方法
+        \def{确定性策略梯度方法}
+            采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
 
-        \bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
-            $\nabla_\theta J (\mu_\theta ) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]$ 
-            
-            $\lim _{\sigma \downarrow 0} \nabla_\theta J (\pi_{\mu_\theta, \sigma} )=\nabla_\theta J (\mu_\theta )$
+            \bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
+                $\nabla_\theta J (\mu_\theta ) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]$ 
+                
+                $\lim _{\sigma \downarrow 0} \nabla_\theta J (\pi_{\mu_\theta, \sigma} )=\nabla_\theta J (\mu_\theta )$
 
-        \bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
-    }
+            \bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
+
         \bf{优势}: 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。
         
         \bf{eg.} 策略函数常用形式
@@ -249,7 +246,7 @@
         $
         
     * Actor-Critic
-        \def{Actor-Critic}{
+        \def{Actor-Critic}
             \textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
     
             * \bf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_\theta J (\pi_\theta )$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
@@ -265,13 +262,12 @@
                 &=  (G_{t: t+1}-\hat{v} (S_t, \mathbf{w} ) )\  \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) \\
                 &=  (R_{t+1}+\gamma \hat{v} (S_{t+1}, \mathbf{w} )-\hat{v} (S_t, \mathbf{w} ) )\ \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) 
             $
-        }
 
         \bf{优势}: 引入了时序差分算法, 因此可以进行单步更新, 比传统 Policy Gradient 训练更快.
         
         \bf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题.  
         
-        \bf{例子}: 
+        \Example: 
             \bf{Off-Policy Actor Critic}: 
             $
                 \nabla J(\theta) &= \sum_S  \P_\beta (s) \sum_A Q(s, a)\ \nabla_\theta \P_\pi (a | s) \\
@@ -279,23 +275,23 @@
             $
         
     * 确定性 Actor-Critic
-        \bf{例子}: 
-        * On-Policy Deterministic Actor-Critic
-            $
-                \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) \\
-                w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
-                \theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
-            $
+        \Example: 
+            * On-Policy Deterministic Actor-Critic
+                $
+                    \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) \\
+                    w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
+                    \theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
+                $
+                
             
-        
-        * Off-Policy Deterministic Actor-Critic
-            $
-                \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_\theta (s_{t+1} ) )-Q^{w} (s_t, a_t ) \\
-                w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
-                \theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
-            $
-            
-            随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
+            * Off-Policy Deterministic Actor-Critic
+                $
+                    \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_\theta (s_{t+1} ) )-Q^{w} (s_t, a_t ) \\
+                    w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
+                    \theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
+                $
+                
+                随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
             
         
     * Deep Deterministic Policy Gradient
@@ -309,20 +305,20 @@
             * target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
     
    
-    * 例子
-        * 围棋
-            * 规则
-                * \bf{基本元素}:
-                    * \bf{棋盘}: 19×19等距且垂直交叉的平行线网格, 共391个交叉点.
-                    * \bf{棋子}: 黑白两色, 对局双方各执一色, 空棋盘开局, 黑先白后, 交替下一子在棋盘空白点上, 下定后不得移动.
-                    * \bf{气}: 棋子紧邻的空点(上下左右). 紧邻同色子连成一个整体, 气一并计算且一空点只算一次.
+\Example
+    * 围棋
+        * 规则
+            * \bf{基本元素}:
+                * \bf{棋盘}: 19×19等距且垂直交叉的平行线网格, 共391个交叉点.
+                * \bf{棋子}: 黑白两色, 对局双方各执一色, 空棋盘开局, 黑先白后, 交替下一子在棋盘空白点上, 下定后不得移动.
+                * \bf{气}: 棋子紧邻的空点(上下左右). 紧邻同色子连成一个整体, 气一并计算且一空点只算一次.
+            
+            * \bf{基本规则}:
+                * \bf{无气提子}: 若棋子无气, 应立即提出棋盘. 下子后，若对方或双方棋子无气, 都只提对方无气子.
+                * \bf{无气禁入}: 棋盘上空点, 若下子后，该子立即无气且同时不能提对方棋子, 则该空点禁止下子.
+                * \bf{禁止全局同形}: 下子后, 不得使对方重复面临曾出现过的棋局. (全局同形再现是妨碍终局的唯一技术性原因, 应禁止.)
+                * \bf{终局}: 双方交替放弃下子. 双方除了自己的禁入点和眼点(对方禁入点且紧邻皆为自己), 均无空点可下时, 游戏结束.
+                * \bf{输赢判定}: 数子法, 死棋提出, 数棋盘上活棋(不能被提出的棋子)及其围住空点(紧邻皆为同色棋子)数. 黑色先手, 贴3.75子, 黑胜(黑棋数子数 - 184.25)子, 白胜(白棋数子数 - 176.75)子, 正赢负输.
                 
-                * \bf{基本规则}:
-                    * \bf{无气提子}: 若棋子无气, 应立即提出棋盘. 下子后，若对方或双方棋子无气, 都只提对方无气子.
-                    * \bf{无气禁入}: 棋盘上空点, 若下子后，该子立即无气且同时不能提对方棋子, 则该空点禁止下子.
-                    * \bf{禁止全局同形}: 下子后, 不得使对方重复面临曾出现过的棋局. (全局同形再现是妨碍终局的唯一技术性原因, 应禁止.)
-                    * \bf{终局}: 双方交替放弃下子. 双方除了自己的禁入点和眼点(对方禁入点且紧邻皆为自己), 均无空点可下时, 游戏结束.
-                    * \bf{输赢判定}: 数子法, 死棋提出, 数棋盘上活棋(不能被提出的棋子)及其围住空点(紧邻皆为同色棋子)数. 黑色先手, 贴3.75子, 黑胜(黑棋数子数 - 184.25)子, 白胜(白棋数子数 - 176.75)子, 正赢负输.
-                    
-                * \bf{性质}:
-                    * \bf{劫争}: 双方棋子互围, 一方提子, 另一方不得立即回提, 只能在别处下子, 再回提, 以避免全局同形导致死循环.
+            * \bf{性质}:
+                * \bf{劫争}: 双方棋子互围, 一方提子, 另一方不得立即回提, 只能在别处下子, 再回提, 以避免全局同形导致死循环.

@@ -1,66 +1,59 @@
 
-\section 凸优化
-    \section 仿射、凸、锥
+* 凸优化
+    * 仿射、凸、锥
         \bf{基础集合}
-        * \def{仿射集}{
-                集合内任意两点所画直线仍在该集合内的集合. 
-            $
-                \forall \vec x_i \in C, \theta_i \in R, \sum \theta_i = 1
-                then\ \sum \theta_i x_i \in C 
-            $ 
-            }
-        * \def{仿射包}  {
-                集合内所有点的仿射组合的集合构成一个仿射包. 
-            $ 
-                aff\ C =   \{\sum \theta_i x_i\ |\ x_i\in C,theta_i \in R, \sum \theta_i = 1  \}
-            $
-            }
-        * \def{凸集}{
-                集合内任意两点间的线段仍在该集合内的集合. 
-            $
-                \forall \vec x_i \in C, \theta_i \in [0,1], \sum \theta_i = 1 
-                then\ \sum \theta_i x_i \in C 
-            $
-            }
-        * \def{凸包}{
-                集合内所有点的凸组合的集合构成一个凸包. 该凸包也是包含给定集合内所有点的最小凸集.
-            $
-                conv\ C = \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1 \}
-            $
-            }
-        * \def{锥}{
-                以零点为起点的射线的集合.
-                $\forall \vec x \in C, \theta > 0, then\ \theta \vec x \in C$
-            }
-        * \def{凸锥}{
-                凸的锥.
-            $
-                \forall \vec x_1, \vec x_2 \in C, \theta_1,theta_2 \ge 0
-                then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in C
-            $
-            }
+            * \def{仿射集}
+                    集合内任意两点所画直线仍在该集合内的集合. 
+                    $
+                        \forall \vec x_i \in C, \theta_i \in R, \sum \theta_i = 1
+                        then\ \sum \theta_i x_i \in C 
+                    $ 
+            * \def{仿射包} 
+                    集合内所有点的仿射组合的集合构成一个仿射包. 
+                    $ 
+                        aff\ C =   \{\sum \theta_i x_i\ |\ x_i\in C,theta_i \in R, \sum \theta_i = 1  \}
+                    $
+            * \def{凸集}
+                    集合内任意两点间的线段仍在该集合内的集合. 
+                    $
+                        \forall \vec x_i \in C, \theta_i \in [0,1], \sum \theta_i = 1 
+                        then\ \sum \theta_i x_i \in C 
+                    $
+            * \def{凸包}
+                    集合内所有点的凸组合的集合构成一个凸包. 该凸包也是包含给定集合内所有点的最小凸集.
+                    $
+                        conv\ C = \{\sum \theta_i x_i\ |\ x_i\in C, \theta_i \in [0,1], \sum \theta_i = 1 \}
+                    $
+            * \def{锥}
+                    以零点为起点的射线的集合.
+                    $\forall \vec x \in C, \theta > 0, then\ \theta \vec x \in C$
+            * \def{凸锥}
+                    凸的锥.
+                    $
+                        \forall \vec x_1, \vec x_2 \in C, \theta_1,theta_2 \ge 0
+                        then\ \theta_1 \vec x_1 + \theta_2 \vec x_2 \in C
+                    $
         
-    \section 凸函数
-        \def{凸函数}{
+    * 凸函数
+        \def{凸函数}
             定义域是凸集, 且$(x_1, f(x_1))$和$(x_2, f(x_2))$间的线段始终在函数图像上方的函数.
-        $
-            f: \mathbb R^n \to \mathbb R
-            dom\ f \text{是凸集}
-            \forall x_1, x_2 \in dom\ f, \forall \theta \in [0,1]
-            f(\theta x_1 + (1 - \theta) x_2) \le \theta f(x_1) + (1 - \theta)f(x_2)
-        $
-        }
+            $
+                f: \mathbb R^n \to \mathbb R
+                dom\ f \text{是凸集}
+                \forall x_1, x_2 \in dom\ f, \forall \theta \in [0,1]
+                f(\theta x_1 + (1 - \theta) x_2) \le \theta f(x_1) + (1 - \theta)f(x_2)
+            $
             
-        \bf{证明条件}:
-        * \bf{一阶条件}: $f(y) \ge f(x)+\nabla f(x)^{T}(y-x)$
-        * \bf{二阶条件}: $\nabla^{2} f(x) \succeq 0$
+        \Property
+            * 证明条件:
+                * \bf{一阶条件}: $f(y) \ge f(x)+\nabla f(x)^{T}(y-x)$
+                * \bf{二阶条件}: $\nabla^{2} f(x) \succeq 0$
         
-        \def{拟凸函数}{
+        \def{拟凸函数}
             函数$f: \mathbf{R}^n \to \mathbf{R}$是拟凸函数$\Leftrightarrow$ 对$\forall \alpha \in R , \{x \in \mathbf{dom} f \mid f(x) \le \alpha\}$都是凸集.
-        }
         
-    \section 凸优化问题
-        \def{优化问题}{
+    * 凸优化问题
+        \def{优化问题}
             目标函数$f_0(x)$, 不等式约束$f_i(x)$, 等式约束$h_i(x)$.
             $
                 \min \quad& f_0(x) 
@@ -68,100 +61,92 @@
                           & h_i(x) = 0
             $
             \bf{最优解}: $p^{\star}=\inf  \{f_{0}(x) \mid f_i(x) \le 0, h_i(x) = 0 \}$\
-        }
-            \bf{例子}
-                \def{可行性问题}{
-                    如果目标函数恒等于零，则最优解是0或∞ (若可行集非空或空集).
-                    $
-                        \min \quad& x 
-                        s.t. \quad& f_i(x) \le 0
-                                  & h_i(x) = 0
-                    $
-                }
 
-        \def{凸优化问题}{
+        \Example
+            \def{可行性问题}
+                如果目标函数恒等于零，则最优解是0或∞ (若可行集非空或空集).
+                $
+                    \min \quad& x 
+                    s.t. \quad& f_i(x) \le 0
+                                & h_i(x) = 0
+                $
+
+        \def{凸优化问题}
             目标函数、不等式约束函数是凸函数, 且等式约束函数是仿射函数的优化问题.
             $
                 \min \quad& x
                 s.t. \quad& f_i(x) \le 0
                           & a_i^T x = b_i
             $
-        }
-            \bf{性质}
+        \Property
             * 凸优化问题的局部最优解就是全局最优解.
 
-            \bf{例子}
-            * \def{线性规划}{
+        \Example
+            * \def{线性规划}
                     目标函数和约束函数都是放射的优化问题.
                     $
                         \min \quad& a^T x + b
                         s.t. \quad& Gx \preceq 0
-                                  & Ax = b
+                                    & Ax = b
                     $
                     几何意义: 可行解集是多面体, 等位曲线是与向量$a^T$正交的超平面, 最优解是多面体中在$-a^T$方向最远的点.
-                }
-            * \def{线性分式规划}{
+            * \def{线性分式规划}
                     $
                         \min \quad& \frac{a^T x+ b}{c^T x + d}
                         s.t. \quad& Gx \preceq 0
-                                  & Ax = b
+                                    & Ax = b
                     $
                     该问题可以等价转化为线性规划.
-                }
-            * \def{二次规划}{
+            * \def{二次规划}
                     $
                         \min \quad& \frac{1}{2} x^T P x + q^T x + r
                         s.t. \quad& Gx \preceq 0
-                                  & Ax = b
+                                    & Ax = b
                     $
-                }
-                    \df{例子}
-                        最小二乘法$\min ||Ax + b||_2^2$
-            * \def{二次约束二次规划}{
+
+                \Example
+                    最小二乘法$\min ||Ax + b||_2^2$
+
+            * \def{二次约束二次规划}
                     $
                         \min \quad& \frac{1}{2} x^T P_0 x + q_0^T x + r_0
                         s.t. \quad& \frac{1}{2} x^T P_i x + q_i^T x + r_i \preceq 0
-                                  & Ax = b
+                                    & Ax = b
                     $
-                }
-            * \def{二次锥规划}{
+
+            * \def{二次锥规划}
                     $
                         \min \quad& f^T x
                         s.t. \quad& ||A_i x + b_i|| \le c_i^T + d_i
-                                  & Fx = g
-                    $
-                }
-            * \def{几何规划}{
+                                    & Fx = g
                     $
 
-                    $
-                }
-            * \def{半正定规划}{
-                    $
+            * \def{几何规划}
 
-                    $
-                }
+            * \def{半正定规划}
 
-                \df{关系} $二次锥规划 \supset \{二次规划 \supset \{ 线性规划 \} , 二次约束二次规划\}$
+            \df{关系} $二次锥规划 \supset \{二次规划 \supset \{ 线性规划 \} , 二次约束二次规划\}$
             
-    \section 凸优化算法
-        \def{Lagrange函数}{$L(x, \lambda, \nu) = f_0(x) + \sum_i \lambda_i f_i(x) + \sum_i \nu_i h_i(x)$}
-        \def{Lagrange对偶函数}{$g(\lambda, \nu)=\inf _{x \in \mathcal{D}} L(x, \lambda, \nu)=\inf _{x \in \mathcal{D}} (f_{0}(x)+\sum_{i=1}^{m} \lambda_i f_i(x)+\sum_{i=1}^p \nu_i h_i(x) )$}
-            \bf{性质}
+    * 凸优化算法
+        \def{Lagrange函数} $L(x, \lambda, \nu) = f_0(x) + \sum_i \lambda_i f_i(x) + \sum_i \nu_i h_i(x)$
+        \def{Lagrange对偶函数} $g(\lambda, \nu)=\inf _{x \in \mathcal{D}} L(x, \lambda, \nu)=\inf _{x \in \mathcal{D}} (f_{0}(x)+\sum_{i=1}^{m} \lambda_i f_i(x)+\sum_{i=1}^p \nu_i h_i(x) )$
+
+        \Property
             * Lagrange对偶函数一定是凹函数.
             * 若$\lambda \succeq 0$, 则$g(\lambda, \nu) \le p^*$, 即给出原问题最优解的一个不平凡下界.
-        \def{对偶问题}{
+
+        \def{对偶问题}
             $
                 \max \quad& g(\lambda, \nu)
                 s.t. \quad& \lambda \succeq 0
             $
             最优解$d^* = max g(\lambda, \nu)$
-        }
-            \bf{性质}
+
+        \Property
             * \bf{弱对偶} $p^* \ge d^*$ 恒成立
             * \bf{强对偶} $p^* = d^*$ 保证强对偶成立的条件为被称约束准则.
             
-            \def{Slater 约束准则}{}
-            \def{KKT 条件}{}
-        
-\end{document}
+        \def{Slater 约束准则}
+        \def{KKT 条件}
+
+

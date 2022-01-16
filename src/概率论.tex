@@ -1,13 +1,30 @@
+* 概率论
+    * 概率空间
+        \def{概率空间}
+            概率空间是一个三元组 $<\Omega, \mathcal F, \P>$
+            * $\Omega$, 样本空间.
+            * $\mathcal F$: 被选择的 $\Omega$的子集系列. 且满足
+                * 包含空集、样本空间全集 $\emptyset, \Omega \in \mathcal F$
+                * 取补封闭，如果一个事件A在其中，那么补集也需要在其中.  
+                    $A \in \mathcal F \Rightarrow A^C \in \mathcal F$
+                * 可列并封闭 
+                    $A_1, A_2, \cdots \in \mathcal F \Rightarrow \bigcup_{i=1}^\infty A_i \in \mathcal F$
+            * $\P : \mathcal F \to [0, 1]$ 概率测度, 且满足Kolmogorov公理.
+
+    * 公理
+        \def{Kolmogorov公理}
+            * 非负性 $\P(A) \in [0, 1] \quad ; \forall A \in F$
+            * 规范性 $\P(\Omega) = 1$
+            * 可列可加性 $\P (\bigcup_i A_i)=\sum_i \P(A_i)$
+
+
 * 随机过程
     * 平稳性
-        \def{平稳性}{
+        \def{平稳性}
             时间平移不变性, 即统计特性不随随时间推移而改变. 在时间序列上随意的任意间隔任意顺序的采样, 都具有时间平移不变性.
-        $ 
-            \P(x_{t_1}, \ldots, x_{t_n}) = \P(x_{t_1+\tau}, \ldots, x_{t_n+\tau}) \quad \text { for all } \tau, t_1, \ldots, t_n \in \mathbb R, \quad n \in \mathbb N
-        $
-        }
+            $ 
+                \P(x_{t_1}, \ldots, x_{t_n}) = \P(x_{t_1+\tau}, \ldots, x_{t_n+\tau}) \quad \text { for all } \tau, t_1, \ldots, t_n \in \mathbb R, \quad n \in \mathbb N
+            $
 
     * Markov性
-        \def{Markov性}{
-
-        }
+        \def{Markov性}
