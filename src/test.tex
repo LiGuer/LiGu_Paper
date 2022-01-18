@@ -1,0 +1,15 @@
+\Property 
+对于平稳信源，条件概率和熵与时间下标无关.
+    $
+        \P(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}) &= \P(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}) \tag{条件概率}
+        H(x_{i}, x_{i+1}, \cdots, x_{i+N}) &= H(x_{j}, x_{j+1}, \cdots, x_{j+N}) \tag{熵}
+        H(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}) &= H(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}) \tag{条件熵}
+    $
+\bf{熵}:
+    $
+        H(X^N) &= H(X_1 X_2 ... X_N) \tag{定义}
+        &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_1 ... X_{N-1}) \tag{条件熵展开}
+        &≤ N\ H(X_1) \tag{熵的不增原理}
+    $
+\bf{平均符号熵}: $H_N(X^N) = \frac{H(X^N)}{N}$
+\bf{极限符号熵}: $H_\infty(X^N) = \lim_{N \to \infty} \frac{H(X^N)}{N}$
