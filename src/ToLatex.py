@@ -71,12 +71,16 @@ def Formulas(Str):
         StrB = re.sub(r'\n', r'\\\\\n', StrB)
         StrB = re.sub(r'\(', r'\\left(', StrB)
         StrB = re.sub(r'\)', r'\\right)', StrB)
-        StrB = re.sub(r'\[', r'\\left[', StrB)
-        StrB = re.sub(r'\]', r'\\right]', StrB)
+        StrB = re.sub(r'\[', r'\\left[\\begin{matrix}', StrB)
+        StrB = re.sub(r'\]', r'\\end{matrix}\\right]', StrB)
+        StrB = re.sub(r'\\\{', r'\\left\\{\\begin{matrix}', StrB)
+        StrB = re.sub(r'\\\}', r'\\end{matrix}\\right\\}', StrB)
+        StrB = re.sub(r'\\\!', r'\\end{matrix}\\right.', StrB)
         # ans
         Str = StrA + StrB + StrC
 
     Str = re.sub(r'\n\\\\\n', r'\n', Str)
+    Str = re.sub(r'\\\\\\\\', r'\\\\', Str)
     return Str
 
     return Str
@@ -110,6 +114,7 @@ def ToLatex(Str):
     Str = re.sub(r'\\end{align\*}\\par', r'\\end{align*}', Str)
     Str = re.sub(r'\\par(\s+)\\begin{align\*}', lambda m: m.group(1) + '\\begin{align*}', Str)
     Str = re.sub(r'\\\\(\s+)\\end{align\*}', lambda m: m.group(1) + '\\end{align*}', Str)
+    Str = re.sub(r'\\begin{matrix}\\\\', r'\\begin{matrix}', Str)
 
     file = open("head.tex","r", encoding='utf-8')
     Str = file.read() + Str + "\n\\end{document}"
@@ -117,7 +122,7 @@ def ToLatex(Str):
     return Str
 
 if __name__ == '__main__':
-    fileName = "信息论.tex"
+    fileName = "矩阵论.tex"
     file = open(fileName,"r", encoding='utf-8')
     Str = file.read()
     file.close()
