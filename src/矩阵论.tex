@@ -13,7 +13,7 @@
         * 数乘结合律 $k(Lx) = (kl)x$
 
     \Property
-        * \def{线性组合} $x = a_1 x_1 +a_2 x_2+ ... +a_m x_m = [x_1 ... x_n] [ a_1 = X a\\ \vdots \\ a_3 ], \text{且}\ x \in V$
+        * \def{线性组合} $x = a_1 x_1 +a_2 x_2+ ... +a_m x_m = [x_1 ... x_n] [\mb a_1 = X a\\ \vdots \\ a_3 \me], \text{且}\ x \in V$
 
             \Property
                 * 线性无关/线性相关: $\nexists / \exists\ a \neq 0, let x = \sum_{i=1}^n a_i x_i = 0$ 
@@ -154,12 +154,12 @@
                     线性空间中一定存在一个基, 使得线性变换可以表达为Jordan标准型.
                     $J = diag(J_1(\lambda_1), ... , J_s(\lambda_s))$
                     Jordan块:
-                    $J_i(\lambda_i) = [
-                        \lambda_i&1&\\
-                        &\lambda_i&1\\
-                        &&\ddots&1\\
+                    $J_i(\lambda_i) = [\mb
+                        \lambda_i&1&
+                        &\lambda_i&1
+                        &&\ddots&1
                         &&&\lambda_i
-                    ]$
+                    \me]$
 
                 \Property
                     * 对角矩阵是特殊的Jordan标准型.
@@ -175,12 +175,12 @@
             * 广义逆
                 \def{广义逆}
                     满足以下方程的解,
-                    $ \{
-                        A X A &= A \\
-                        X A X &= X \\
-                        (A X)^H &= A X\\
+                    $ \{\mb
+                        A X A &= A
+                        X A X &= X
+                        (A X)^H &= A X
                         (X A)^H &= A X
-                    \e.$
+                    \me\right.$
                     列满秩 $A^+ = (A^H A)^{-1} A^H$
                     行满秩 $A^+ = A^H (A A^H)^{-1}$
 
@@ -239,20 +239,22 @@
                 \Property
                     * 正交投影矩阵, 既是幂等矩阵, 也是Hermite矩阵.
 
-        * \def{初等旋转变换}
-                $T_{ij} = I + [ 0\\ & \cos\theta|_{(i,i)}& 0 & \sin\theta|_{(i,j)}& \\ & 0&0&0\\&-\sin\theta|_{(j,i)}& 0 & \cos\theta|_{(j,j)}\\ &&&&0 ] - [ 0\\ &1|_{(i,i)}\\&&0\\&&& 1 |_{(j,j)}\\&&&0 ]$
+        * 初等旋转变换
+            \def{初等旋转变换}
+                $T_{ij} = I + [\mb 0\\ & \cos\theta|_{(i,i)}& 0 & \sin\theta|_{(i,j)}& \\ & 0&0&0\\&-\sin\theta|_{(j,i)}& 0 & \cos\theta|_{(j,j)}\\ &&&&0 \me] - [\mb 0\\ &1|_{(i,i)}\\&&0\\&&& 1 |_{(j,j)}\\&&&&0 \me]$
 
             \Property
                 * $T$是正交矩阵.
                 * 设$x = (\xi_1, \cdots, \xi_{n})^T, \quad y= T_{ij}\ x=(\eta_1, \cdots, \eta_{n},)$, 则
-                    $\{
-                        \eta_i= c \xi_i+s \xi_j \\
-                        \eta_j=-s \xi_i+c \xi_j \\
+                    $\{\mb
+                        \eta_i= c \xi_i+s \xi_j 
+                        \eta_j=-s \xi_i+c \xi_j 
                         \eta_{k}=\xi_{k} \quad(k \neq i, j)
-                    \!$
+                    \me\right.$
                     且当$\xi_i^2+\xi_j^2 \neq 0$时, $c=\frac{\xi_i}{\sqrt{\xi_i^2+\xi_j^2}}, \quad s=\frac{\xi_j}{\sqrt{\xi_i^2+\xi_j^2}}$, 可使$\eta_i=\sqrt{\xi_i^2+\xi_j^2}>0, \eta_j=0$.
 
-        * \def{初等反射变换} $H x = (I-2 e_2 e_2^T) x$
+        * 初等反射变换
+            \def{初等反射变换} $H x = (I-2 e_2 e_2^T) x$
                 
             \Property 
                 * 对称矩阵$H^T = H$, 正交矩阵$H^T H = I$, 对合$H^2 = I$, 自逆$H^{-1} = H$, $|H| = -1$.
@@ -305,8 +307,8 @@
             \def{上下三角分解} 将矩阵A化成上三角矩阵R与下三角矩阵L的乘积.$A = L R$
             \bf{算法} 
                 $
-                    L_1      = I + [0 &0&...&0\\ \frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\ \frac{a_{n1}}{a_{11}}&0&...&0]
-                    L_1^{-1} = I + [0 &0&...&0\\-\frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\-\frac{a_{n1}}{a_{11}}&0&...&0]
+                    L_1 = I + [\mb 0 &0&...&0\\ \frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\ \frac{a_{n1}}{a_{11}}&0&...&0 \me]
+                    L_1^{-1} = I + [\mb 0 &0&...&0\\-\frac{a_{i1}}{a_{11}} &0&...&0\\ \vdots \\-\frac{a_{n1}}{a_{11}}&0&...&0 \me]
                     L_1^{-1} A = A_1
 
                     \text{重复上面步骤, 直至将 $A_i$ 化为上三角矩阵}
@@ -344,7 +346,7 @@
                     * 
                         $
                             Q = [ \frac{b_1}{|b_1|}, ... , \frac{b_n}{|b_n|} ]
-                            R = [ |b_1|\\ & \ddots\\ && |b_{n}| ] [ 1 & k_{21} & ... & k_{n1} \\ & 1 & ... & k_{n2} \\& & \ddots & \vdots \\& & & 1 ] \quad; k_ij = \frac{<a_i,b_j>}{<b_j,b_j>}
+                            R = [\mb |b_1|\\ & \ddots\\ && |b_{n}| ] [ 1 & k_{21} & ... & k_{n1} \\ & 1 & ... & k_{n2} \\& & \ddots & \vdots \\& & & 1 \me] \quad; k_ij = \frac{<a_i,b_j>}{<b_j,b_j>}
                             A = Q R
                         $
                 * \bf{初等旋转变换方法} 
@@ -375,10 +377,10 @@
         * 满秩分解
             \def{满秩分解} 将矩阵A化成F G的乘积.$A = F G$
 
-            \Proof $A=P^{-1} B= [F & S ] [ G\\ 0 ] = F G$
+            \Proof $A=P^{-1} B= [\mb F & S \me] [\mb G\\ 0 \me] = F G$
             
             \bf{算法} 
-                初等行变换$A \to [ G\\ 0 ]$, 取A左侧rank(A)列作为F, 则$A = F G$
+                初等行变换$A \to [\mb G\\ 0 \me]$, 取A左侧rank(A)列作为F, 则$A = F G$
 
         * 奇异值分解
             \def{奇异值分解} 将矩阵A化成两个Unitary矩阵$U, V$, 和一个非零奇异值组成的矩阵$\Sigma$的乘积. $A = U [\Sigma & 0 \\ 0 & 0] V^T$
@@ -387,8 +389,7 @@
                 * $A^T A$ 计算特征值 $\lambda$, 特征向量$x$
                 * $V = [ \frac{x_1}{|x_1|}, ... ,\frac{x_n}{|x_n|} ], \quad \Sigma = diag(\sqrt(\lambda_1), ... ,\sqrt(\lambda_n))$
                 * $U_1 = A V \Sigma^{-1}$, 计算正交矩阵$U$
-                * $ A = U [\Sigma & 0 \\ 0 & 0] V^T $
-
+                * $ A = U [\mb \Sigma & 0 \\ 0 & 0 \me] V^T $
 
 * 矩阵分析
     * 矩阵函数
@@ -398,12 +399,12 @@
                 $P^{-1} A P = J => f(A) = P f(J) P^{-1}$
             * Jordan标准型计算:
                 Jordan块:
-                $ f(J_i) = [
+                $ f(J_i) = [\mb
                     f(\lambda_i) & \frac{1}{1 !} f'(\lambda_i) & \cdots & \frac{1}{(m_i-1) !} f^{(m_i-1)}(\lambda_i) \\
                     & f(\lambda_i) & \ddots & \vdots \\
                     & & \ddots & \frac{1}{1 !} f'(\lambda_i) \\
                     & & & f(\lambda_i)
-                ]$
+                \me]$
 
 
     * 矩阵微积分

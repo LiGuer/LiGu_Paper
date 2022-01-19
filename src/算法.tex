@@ -1,9 +1,9 @@
-\section 数据结构
+* 数据结构
 
-    \section 线性表
-        \section 数组
+    * 线性表
+        * 数组
 
-        \section 链表
+        * 链表
         * 核心数据
             node* head;										//链表头地址
         * 基础性质
@@ -22,16 +22,16 @@
             void clear();									//全清
             iterator search(T& x);							//查找
 
-        \section 队列
+        * 队列
             * 先进后出
 
-        \section 栈
+        * 栈
             * 先进先出
 
-    \section 树
-        \section 二叉树
+    * 树
+        * 二叉树
 
-        \section 红黑树
+        * 红黑树
         * red-black properties:
             * Every node is either red or black.
             * The root is black.
@@ -44,16 +44,16 @@
             insert									//插入
             erase									//删除
 
-    \section 堆
+    * 堆
 
-    \section 图
+    * 图
 
-    \section Hash 表
+    * Hash 表
 
 
-\section 算法
-    \section 排序
-        \section 快速排序
+* 算法
+    * 排序
+        * 快速排序
         *	[输入]: [1]first: 最初元素地址	[2]last: 最末元素地址 + 1
         *	[时间复杂度]: 上限n²，大概率平均值n log(n)
         *	[流程]: 
@@ -84,11 +84,11 @@
                 }
             }
             
-        \section 堆排序
+        * 堆排序
 
-    \section 图论
+    * 图论
 
-        \section 最短路径
+        * 最短路径
         * [算法]: Dijkstra
                 [步骤]:
                     [1] init dis[]
@@ -117,7 +117,7 @@
                     Dijkstra一次只能算出给定两点间的最短路径。
                     Floyd   一次可以算出任意两点间的最短路径。
 
-        \section 最小生成树
+        * 最小生成树
         * [算法]: Prim
                 [输入]: 图的邻接链表[Graph], 节点数量[n]
                 [输出]: 最小生成树,每一条有向边的 起点[TreeU],终点[TreeV],总边数[TreeCur]
@@ -143,7 +143,7 @@
                 Kruskal	是按边贪心，适合稀疏图。
                 Prim	是按点贪心，适合稠密图。
 
-        \section 网络最大流
+        * 网络最大流
         * [算法]: Dinic
                 [原理]: 贪心 + "反悔"机制
                 增广路: 就是源->汇的一条路径。
@@ -154,7 +154,7 @@
                     广搜BFS，用队列queue。
                     深搜BFS，用递归or栈stack。
 
-        \section 商旅问题
+        * 商旅问题
         * [问题]: 遍历所有给定点的最短闭合路径.
 
-    \section 动态规划
+    * 动态规划

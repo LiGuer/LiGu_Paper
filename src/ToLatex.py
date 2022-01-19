@@ -71,11 +71,14 @@ def Formulas(Str):
         StrB = re.sub(r'\n', r'\\\\\n', StrB)
         StrB = re.sub(r'\(', r'\\left(', StrB)
         StrB = re.sub(r'\)', r'\\right)', StrB)
-        StrB = re.sub(r'\[', r'\\left[\\begin{matrix}', StrB)
-        StrB = re.sub(r'\]', r'\\end{matrix}\\right]', StrB)
-        StrB = re.sub(r'\\\{', r'\\left\\{\\begin{matrix}', StrB)
-        StrB = re.sub(r'\\\}', r'\\end{matrix}\\right\\}', StrB)
-        StrB = re.sub(r'\\\!', r'\\end{matrix}\\right.', StrB)
+        StrB = re.sub(r'\[', r'\\left[', StrB)
+        StrB = re.sub(r'\]', r'\\right]', StrB)
+        StrB = re.sub(r'\\\{', r'\\left\\{', StrB)
+        StrB = re.sub(r'\\\}', r'\\right\\}', StrB)
+        StrB = re.sub(r'\|\\mb', r'\\left|\\begin{matrix}', StrB)
+        StrB = re.sub(r'\\me\|', r'\\end{matrix}\\right|', StrB)
+        StrB = re.sub(r'\\mb', r'\\begin{matrix}', StrB)
+        StrB = re.sub(r'\\me', r'\\end{matrix}', StrB)
         # ans
         Str = StrA + StrB + StrC
 
@@ -87,6 +90,7 @@ def Formulas(Str):
 
 def ToLatex(Str):
     Str = re.sub(r'\n\s*\n', r'\n', Str)
+    Str = re.sub(r'\t', r'    ', Str)
     # 简单命令
     Str = re.sub(r'\\\.', r'\\boldsymbol', Str)
     Str = re.sub(r'--', r'---', Str)
@@ -122,7 +126,7 @@ def ToLatex(Str):
     return Str
 
 if __name__ == '__main__':
-    fileName = "矩阵论.tex"
+    fileName = "计算几何.tex"
     file = open(fileName,"r", encoding='utf-8')
     Str = file.read()
     file.close()
