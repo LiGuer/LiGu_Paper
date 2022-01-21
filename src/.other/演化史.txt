@@ -1,0 +1,249 @@
+
+* 动物 Animalia
+    * 棘头动物 Acanthocephala
+    * 环节动物 Annelida
+    * 节肢动物 Arthropoda
+    * 腕足动物 Brachiopoda
+    * 苔藓动物 Bryozoa
+    *          Cephalorhyncha
+    * 毛颚动物 Chaetognatha
+    * 脊索动物 Chordata
+    * 刺胞动物 Cnidaria
+    * 栉水母   Ctenophora
+    * 环口动物 Cycliophora
+    * 菱形虫   Dicyemida
+    * 棘皮动物 Echinodermata
+    * 螠虫动物 Echiura
+    * 内肛动物 Entoprocta
+    * 腹毛动物 Gastrotricha
+    * 颚胃动物 Gnathostomulida
+    * 半索动物 Hemichordata
+    * 铠甲动物 Loricifera
+    * 微颚动物 Micrognathozoa
+    * 软体动物 Mollusca
+    * 粘体动物 Myxozoa
+    * 线虫动物 Nematoda
+    * 线形动物 Nematomorpha
+    * 纽形动物 Nemertea
+    * 有爪动物 Onychophora
+    * 直泳虫 Orthonectida
+    * 帚形动物 Phoronida
+    * 扁盘动物 Placozoa
+        * 丝盘虫 Trichoplax adhaerens Schulze
+    * 扁形动物 Platyhelminthes
+    * 多孔动物 Porifera
+    * 轮虫动物 Rotifera
+    * 星虫动物 Sipuncula
+    * 缓步动物 Tardigrada
+    * 异涡动物 Xenacoelomorpha
+* 古菌 Archaea
+    * 泉古菌 Crenarchaeota
+    * 广古菌 Euryarchaeota
+* 细菌 Bacteria
+    * Acidobacteria
+    * Actinobacteria 放线菌
+    * Aquificae
+    * Armatimonadetes
+    * Bacteroidetes
+    * Caldiserica
+    * Chlamydiae
+    * Chlorobi
+    * Chloroflexi
+    * Chrysiogenetes
+    * Cyanobacteria 蓝藻
+    * Deferribacteres
+    * Deinococcus-thermus
+    * Dictyoglomi
+    * Elusimicrobia
+    * Fibrobacteres
+    * Firmicutes
+    * Fusobacteria
+    * Gemmatimonadetes
+    * Lentisphaerae
+    * Nitrospira
+    * Planctomycetes
+    * Proteobacteria
+    * Spirochaetae
+    * Synergistetes
+    * Tenericutes
+    * Thermodesulfobacteria
+    * Thermotogae
+    * Verrucomicrobia
+* Chromista
+    * Bigyra
+    * Ciliophora
+    * Cryptista
+    * Foraminifera
+    * Haptophyta
+    * Miozoa
+    * Ochrophyta
+    * Oomycota
+    * Radiozoa
+* 真菌 Fungi
+    * 子囊菌 Ascomycota
+    * 担子菌 Basidiomycota
+    * 壶  菌 Chytridiomycota
+    * 球囊菌 Glomeromycota
+    * 接合菌 Zygomycota
+* 植物 Plantae
+    * 角苔     Anthocerotophyta
+    * 苔藓植物 Bryophyta
+    * 轮藻     Charophyta
+    * 绿藻     Chlorophyta
+    * 灰藻     Glaucophyta
+    * 地钱     Marchantiophyta
+    * 红藻     Rhodophyta
+    * 维管植物 Tracheophyta
+* 原生动物 Protozoa
+    * Amoebozoa
+    * Cercozoa
+    * Choanozoa
+    * Euglenozoa
+    * Loukozoa
+    * Metamonada
+    * Microsporidia
+    * Mycetozoa
+    * Percolozoa
+    * Sarcomastigophora
+    * Sulcozoa
+    * assigned Not
+* 病毒 Viruses
+    * assigned Not
+
+
+
+* 聚胞动物
+    * 领鞭毛虫
+    * 动物 Animalia
+
+
+
+* 动物 Animalia
+    * 多孔动物 Porifera
+        * 海绵
+    * 真后生动物 Eumetazoa
+        * 栉水母 Ctenophora
+        * 
+            * 
+                * 扁盘动物 Placozoa
+                * 刺胞动物 Cnidaria
+            * 两侧对称动物 Bilateria
+                * 异涡动物 Xenacoelomorpha
+                * 肾管动物 Nephrozoa
+                    * 原口动物 Protostomia
+                        * 螺旋动物 Spiralia
+                            * 触手冠动物
+                                * 腕足动物 Brachiopoda
+                                    * 海豆芽 Lingula
+                                * 外肛动物
+                                * 软舌螺
+                            * 软体动物 Mollusca
+                                * 腹足纲
+                                    * 螺
+                                * 双壳纲
+                                    * 贝
+                                * 头足纲
+                                    * 角石
+                                        * 菊石
+                                        * 鹦鹉螺
+                                        * 蛸类
+                                            * 章鱼
+                                            * 鱿鱼
+                                * 掘足纲
+                            * 环节动物 Annelida
+                        * 
+                            * 毛颚动物 Chaetognatha
+                            * 蜕皮动物 Ecdysozoa
+                                * 线虫动物 Nematoda
+                                * 节肢动物 Arthropoda
+                                    * 奇虾
+                                    * 三叶虫
+                                    * 螯肢动物 Chelicerata
+                                        * 鲎
+                                        * 蜘蛛
+                                        * 蜱螨亚纲
+                                    * 有颚亚门 Mandibulata
+                                        * 多足亚门 Myriapoda
+                                        * 六足亚门 Hexapoda
+                                            * 昆虫
+                                                * 鞘翅目
+                                                * 双翅目
+                                                * 膜翅目
+                                                    * 蜂
+                                                        * 蚂蚁
+                                                * 鳞翅目
+                                                    * 蝴蝶
+                                                * 脉翅目
+                                                    * 丽蛉
+                                        * 甲壳动物
+                                            * 虾
+                                                * 螃蟹
+                    * 后口动物
+                        * 脊索动物 Chordata
+                            * 头索动物 Leptocardii
+                            *
+                                * 被囊动物
+                                    *   海鞘 Ascidiacea
+                                    * 樽海鞘 Thaliacea
+                                    * 尾海鞘 Appendicularia
+                                * 脊椎动物
+                                    * 圆口鱼
+                                        * 盲  鳗 Myxini
+                                        * 七鳃鳗
+                                    * 头甲鱼 Cephalaspidomorphi
+                                    * 有颌鱼
+                                        * 软骨鱼 Holocephali
+                                            * 鲨鱼
+                                        * 硬骨鱼
+                                            * 辐鳍鱼 Actinopterygii
+                                            * 肉鳍鱼 Sarcopterygii
+                                                * 两栖动物 Amphibia
+                                                * 羊膜动物
+                                                    * 合弓纲
+                                                        * 哺乳动物 Mammalia
+                                                            * 啮齿动物
+                                                                * 鼠
+                                                            * 灵长类
+                                                                * 人
+                                                                * 猩猩
+                                                                * 猴子
+                                                            * 蝙蝠
+                                                            * 奇蹄目
+                                                                * 马
+                                                                * 犀
+                                                                * 貘
+                                                            * 偶蹄目
+                                                                * 牛
+                                                                * 羊
+                                                                * 猪
+                                                                * 鲸
+                                                                * 河马
+                                                            * 食肉目
+                                                                * 猫
+                                                                    * 猫
+                                                                    * 狮子
+                                                                    * 老虎
+                                                                    * 豹
+                                                                * 犬
+                                                                    * 狼
+                                                                    * 狗
+                                                    * 蜥形纲
+                                                        * 鳞龙形类
+                                                        * 主龙形类
+                                                            * 翼龙
+                                                            * 鸟 Aves
+                                                                * 古颚类
+                                                                    * 鸵鸟
+                                                                    * 恐鸟
+                        * 步带动物
+                            * 棘皮动物 Echinodermata
+                                * 海百合
+                                * 海扁果
+                                * 海蕾
+                                * 海胆
+                                    * 海参
+                                    * 海胆
+                                * 海星
+                                    * 海蛇尾
+                                    * 海星
+                            * 半索动物 Hemichordata
