@@ -426,6 +426,16 @@
                             $
                                 => C = \sum_{i, \sigma_i^2 ≤ B} \frac{1}{2} \log \frac{B}{\sigma_i^2} = \frac{1}{2} \sum_{i=1}^{N} \log (1+\frac{E_i}{\sigma_i^2})
                             $
+
+                * 加性Gauss白噪声信道
+
+                    \Property
+                        * 信道容量 $C = W \log (1+\frac{P}{N_0 W})$
+                        * 编码定理 $\frac{R}{W} ≤ \log (1+\frac{E_b}{N_0} \frac{R}{W})$
+
+                * 有色Gauss噪声信道
+                    \Property
+                        * 信道容量 $C = \frac{1}{2} \int_{f \in F_B} \log \frac{|G(f)|^2 B}{N(f)} \d f$
                             
 
     * 信道编码
@@ -454,6 +464,7 @@
 
         \Example
             * Hamming码
+            
                 * Hamming距离
                     \def{Hamming距离} $d(x, y) = \sum_k x_k \oplus y_k$
 
