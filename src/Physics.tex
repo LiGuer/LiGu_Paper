@@ -1,9 +1,8 @@
 
 * Mechanics力学
     * 力学之描述——运动方程
-        (对于s个自由度的系统,)
-        
-        \def{广义坐标} 完全刻画其位置的任意s个变量 $q_1,q_2, ... ,q_{s}$
+
+        \def{广义坐标} 完全刻画其位置的任意s个变量 $q_1,q_2, ... ,q_{s}$. (对于s个自由度的系统,)
         
         \def{广义速度} 广义坐标对时间的一阶导$\dot q_1,\dot q_2, ... ,\dot q_{s}$
         
@@ -452,23 +451,23 @@
 
 
 * Quantum Mechanics 量子力学
-*                    Schrödinger 方程
-*	[定义]: iℏ·∂ψ(r,t)/∂t = [-ℏ/2m▽² + U(r,t)]·ψ(r,t)
-		or	iℏ·d/dt·|ψ(t)> = H |ψ(t)>
-		[符号]:
-			ℏ: 约化Planck常量 = h / 2π    U(r,t): 势
-			H: Hamiltonian算子 = -ℏ/2m▽² + U(r)
-			ψ: the state vector of the quantum system, letter psi.
-		[* Time-independent Schrödinger]:
-			[-ℏ/2m▽² + U(r)]·ψ(r)  = Eψ(r)
-		or	H|ψ> = E|ψ>
-		[符号]: E: 系统的能级, 常量.
-		* In the language of linear algebra, this equation is an eigenvalue equation.
-		  Therefore, the wave function is an eigenfunction of the Hamiltonian operator
-		  with corresponding eigenvalue(s) E.
-*	[算法]: 有限差分法
-		* ∂ψ/∂x   = [ψ(x+1,...) - ψ(x-1,...)] / 2Δt
-		* ∂²ψ/∂x² = [ψ(x+1,...) - 2·ψ(x,...) + ψ(x-1,...)] / Δt²
+    * Schrödinger 方程
+        *	[定义]: iℏ·∂ψ(r,t)/∂t = [-ℏ/2m▽² + U(r,t)]·ψ(r,t)
+                or	iℏ·d/dt·|ψ(t)> = H |ψ(t)>
+                [符号]:
+                    ℏ: 约化Planck常量 = h / 2π    U(r,t): 势
+                    H: Hamiltonian算子 = -ℏ/2m▽² + U(r)
+                    ψ: the state vector of the quantum system, letter psi.
+                [* Time-independent Schrödinger]:
+                    [-ℏ/2m▽² + U(r)]·ψ(r)  = Eψ(r)
+                or	H|ψ> = E|ψ>
+                [符号]: E: 系统的能级, 常量.
+                * In the language of linear algebra, this equation is an eigenvalue equation.
+                Therefore, the wave function is an eigenfunction of the Hamiltonian operator
+                with corresponding eigenvalue(s) E.
+        *	[算法]: 有限差分法
+                * ∂ψ/∂x   = [ψ(x+1,...) - ψ(x-1,...)] / 2Δt
+                * ∂²ψ/∂x² = [ψ(x+1,...) - 2·ψ(x,...) + ψ(x-1,...)] / Δt²
 
 
 * Statistical Mechanics 统计力学
@@ -478,25 +477,26 @@
 
 
 
-* 狭义相对论-参考系变换
-    \bf{核心}: 
-        * 若新旧两个参考系相对速度不变, 则之间的参考系变换是一种线性变换.
-            $[t' \\ x'] = \. A [t \\ x]$
-        * \text{运动相对性}, 参考系变换可完成旧$\to$新、新$\to$旧的变换, 即新系相对于旧系沿$x$方向以速度$v$运动$\Leftrightarrow$新系相对于旧系沿$-x$方向以速度$v$运动
-            $[t \\ -x] = \. A [t' \\ -x'] \quad => \quad [1 & 0 \\ 0 & -1] = \. A [1 & 0 \\ 0 & -1] \. A$
-        * 新参考系原点, 坐标恒为零, 且在旧坐标系中为速度$v$.\quad $(t,vt)^T => (t',0)^T$. 
-            $[t' \\ 0 ] = \. A [t \\ v t]$
-        * \bf{光速不变原理}, 光速矢量$(1, c)^T$是参考系变换前后方向不变的矢量. 
-            $[t' \\ ct' ] = \. A [t \\ ct]$
-        }
-    联立解得.
-        $\{
-            a_{11}^2 + a_{12}a_{21} &= 1 &\quad (\text{运动相对性})\\
-            a_{11} &= a_{22}  &\quad (\text{运动相对性})\\
-            a_{21} + v·a_{22} &= 0 &\quad (\text{原点})\\
-            a_{21} + c·a_{22} &= c(a_{11} + c·a_{12} ) &\quad (\text{光速不变})\\
-        \right.$
-        $=> [t' \\ x'] = \. A [t \\ x] = [
-            \frac{1}{\sqrt{1-( \frac{v}{c} )^2}} & \frac{v}{\sqrt{1-( \frac{v}{c} )^2}}\\
-            \frac{\frac{v}{c^2}}{\sqrt{1-( \frac{v}{c} )^2}} & \frac{1}{\sqrt{1-( \frac{v}{c} )^2}}
-        ] [t \\ x]$
+* 狭义相对论
+    * 参考系变换
+        \Proof
+            * 若新旧两个参考系相对速度不变, 则之间的参考系变换是一种线性变换.
+                $[t' \\ x'] = \. A [t \\ x]$
+            * \text{运动相对性}, 参考系变换可完成旧$\to$新、新$\to$旧的变换, 即新系相对于旧系沿$x$方向以速度$v$运动$\Leftrightarrow$新系相对于旧系沿$-x$方向以速度$v$运动
+                $[t \\ -x] = \. A [t' \\ -x'] \quad => \quad [1 & 0 \\ 0 & -1] = \. A [1 & 0 \\ 0 & -1] \. A$
+            * 新参考系原点, 坐标恒为零, 且在旧坐标系中为速度$v$.\quad $(t,vt)^T => (t',0)^T$. 
+                $[t' \\ 0 ] = \. A [t \\ v t]$
+            * \bf{光速不变原理}, 光速矢量$(1, c)^T$是参考系变换前后方向不变的矢量. 
+                $[t' \\ ct' ] = \. A [t \\ ct]$
+            }
+        联立解得.
+            $\{
+                a_{11}^2 + a_{12}a_{21} &= 1 &\quad (\text{运动相对性})\\
+                a_{11} &= a_{22}  &\quad (\text{运动相对性})\\
+                a_{21} + v·a_{22} &= 0 &\quad (\text{原点})\\
+                a_{21} + c·a_{22} &= c(a_{11} + c·a_{12} ) &\quad (\text{光速不变})\\
+            \right.$
+            $=> [t' \\ x'] = \. A [t \\ x] = [
+                \frac{1}{\sqrt{1-( \frac{v}{c} )^2}} & \frac{v}{\sqrt{1-( \frac{v}{c} )^2}}\\
+                \frac{\frac{v}{c^2}}{\sqrt{1-( \frac{v}{c} )^2}} & \frac{1}{\sqrt{1-( \frac{v}{c} )^2}}
+            ] [t \\ x]$

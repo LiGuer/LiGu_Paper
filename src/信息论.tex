@@ -191,9 +191,9 @@
                                     $
                                     极限符号熵:
                                     $
-                                        H_\infty(X^N) &= \lim_{N \to \infty} \frac{H(X^N)} N}{                   \tag{定义}
-                                        &= \lim_{N \to \infty} \frac{H(\pi) + (N-1) \pi^T h} N}{   \tag{代入}
-                                        &= \lim_{N \to \infty} \frac{N \pi^T h} N}{                \tag{省略$\to 0$量}
+                                        H_\infty(X^N) &= \lim_{N \to \infty} \frac{H(X^N)}{N}                   \tag{定义}
+                                        &= \lim_{N \to \infty} \frac{H(\pi) + (N-1) \pi^T h}{N}   \tag{代入}
+                                        &= \lim_{N \to \infty} \frac{N \pi^T h}{N}                \tag{省略$\to 0$量}
                                         &= \pi^T h
                                     $
 
@@ -294,8 +294,8 @@
                     \Property
                         * \bf{典型序列}: 序列中所有符号出现的次数满足大数定律的序列称为典型序列, 否则为非典型序列。
                         * 编码速率: $R'=\frac{l \log r}{N}$
-                        * 编码效率: $\eta=\frac{H(X)} R'}=\frac{N H(X)}{l \log r}$
-                        * 序列长度: $N ≥ \frac{\sigma^2} \delta^2 \varepsilon}=(\frac{\eta} 1-\eta})^2 \cdot \frac{\sigma^2}{H^2(X) \varepsilon}$
+                        * 编码效率: $\eta=\frac{H(X)}{R'}=\frac{N H(X)}{l \log r}$
+                        * 序列长度: $N ≥ \frac{\sigma^2}{\delta^2 \varepsilon}=(\frac{\eta}{1-\eta})^2 \cdot \frac{\sigma^2}{H^2(X) \varepsilon}$
 
                 * 变长码
                     \def{变长码} 各个码字的码长不相同的编码.
@@ -326,10 +326,10 @@
 
                 * 算法: 信道容量计算 
                     $
-                        \{
+                        \{\mb
                             I(x_i ; Y) = \sum_j p_{i j} \log \frac{p_{i j}}{q_j} = C  \quad ;when\ p_i > 0
                             I(x_i ; Y) = \sum_j p_{i j} \log \frac{p_{i j}}{q_j} ≤ C  \quad ;when\ p_i = 0
-                        \right.
+                        \me\right.
                     $
 
                     \Proof
@@ -347,16 +347,17 @@
                             => \frac{∂ L}{∂ \P(x_i)} &= \sum_y \P(y|x_i) (\log \P(y|x_i) - \log \P(y) - \log e) - \lambda \tag{求导,$\frac{∂ \P(y)}{∂ \P(x_i)} = \frac{∂ \sum_x \P(x) \P(y|x)}{∂ \P(x_i)} = \P(y|x_i)$}
                                 &= \sum_y \P(y|x_i) (\log \P(y|x_i) - \log \P(y)) - (\log e + \lambda) \tag{$\sum_y \P(y|x_i) = 1$}
                                 &= 0 
-
-                            => \{
+                        $
+                        $
+                            => \{\mb
                                 \sum_y \P(y|x) (C + \log \P(y)) = \sum_y \P(y|x) \log \P(y|x)
                                 \P(x) ≥ 0
                                 \sum_y \P(y) = 1
-                            \right.
+                            \me\right.
                         $
 
                 * 信道连接
-                    * \def{级联信道}  $P_N = \prod P_i$ 
+                    * \def{级联信道} $P_N = \prod P_i$ 
                     * \def{并联信道} $C = \sum_{i=0}^N C_i$
                     * \def{和信道} 
                             各子信道输入输出均互不相交. 
@@ -389,11 +390,13 @@
                         信道容量:
                         $
                             P^{-1}
-                            h = [H(P_{1j}) \\ \vdots \\ H(P_{nj})]
+                            h = [\mb H(P_{1j}) \\ \vdots \\ H(P_{nj}) \me]
                             \beta = -P^{-1} h
-                            C = \log( \sum_i 2^{\beta_i} )
-                            \P_{Yi} = \frac{2^{\beta_i}}{\sum_j 2^{\beta_j}}
-                            \P_X^T = \P_Y^T P^{-1}
+                            => \{\mb
+                                C = \log( \sum_i 2^{\beta_i} )
+                                \P_{Yi} = \frac{2^{\beta_i}}{\sum_j 2^{\beta_j}}
+                                \P_X^T = \P_Y^T P^{-1}
+                            \me\right.
                         $
 
         * 时间离散连续信道
@@ -417,11 +420,11 @@
                     \Property
                         * 算法: 并联加性噪声信道的信道容量计算, 注水定理
                             $
-                                \{
+                                \{\mb
                                     E_i +\sigma_i^2 =B \quad& ;when\ B ≥ \sigma_i^2 
                                     E_i = 0            \quad& ;when\ B < \sigma_i^2 
                                     \sum_{i, \sigma_i^2 ≤ B} E_i = E
-                                \right.
+                                \me\right.
                             $
                             $
                                 => C = \sum_{i, \sigma_i^2 ≤ B} \frac{1}{2} \log \frac{B}{\sigma_i^2} = \frac{1}{2} \sum_{i=1}^{N} \log (1+\frac{E_i}{\sigma_i^2})
@@ -464,7 +467,7 @@
 
         \Example
             * Hamming码
-            
+
                 * Hamming距离
                     \def{Hamming距离} $d(x, y) = \sum_k x_k \oplus y_k$
 

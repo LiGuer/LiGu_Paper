@@ -1,7 +1,7 @@
 import re
 
-def Cut(Str):
-    Str = re.sub(r'\n {' + str(int(4 * 3)) + r',}[^\n]*', r'', Str)
+def Cut(Str, n):
+    Str = re.sub(r'\n {' + str(int(4 * n)) + r',}[^\n]*', r'', Str)
     Str = re.sub(r'\n\s*\n', r'\n', Str)
     return Str
 
@@ -100,6 +100,7 @@ def ToLatex(Str):
     Str = re.sub(r'\\Proof', r'\\textbf{Proof. }', Str)
     Str = re.sub(r'\\def\{([\S]+)\}', lambda m: '\\textbf{Define (' + m.group(1)+ '). }', Str)
     Str = re.sub(r'\\Theorem\{([\S]+)\}', lambda m: '\\textbf{Theorem (' + m.group(1)+ ').} ', Str)
+    Str = re.sub(r'\\Code\{([\S]+)\}', lambda m: '\\textbf{Code (' + m.group(1)+ ').} ', Str)
     # section
     Str = re.sub(r'(\n {8})\*', lambda m:m.group(1) +'\\subsubsection', Str)
     Str = re.sub(r'(\n {4})\*', lambda m:m.group(1) +'\\subsection', Str)
@@ -115,6 +116,7 @@ def ToLatex(Str):
     Str = re.sub(r'\\begin{enumerate}\\par', r'\\begin{enumerate}', Str)
     Str = re.sub(r'\\end{enumerate}\\par', r'\\end{enumerate}', Str)
     Str = re.sub(r'\\begin{align\*}\\par', r'\\begin{align*}', Str)
+    Str = re.sub(r'\\begin{align\*}\\\\', r'\\begin{align*}', Str)
     Str = re.sub(r'\\end{align\*}\\par', r'\\end{align*}', Str)
     Str = re.sub(r'\\par(\s+)\\begin{align\*}', lambda m: m.group(1) + '\\begin{align*}', Str)
     Str = re.sub(r'\\\\(\s+)\\end{align\*}', lambda m: m.group(1) + '\\end{align*}', Str)
@@ -126,7 +128,7 @@ def ToLatex(Str):
     return Str
 
 if __name__ == '__main__':
-    fileName = "计算几何.tex"
+    fileName = "信息论.tex"
     file = open(fileName,"r", encoding='utf-8')
     Str = file.read()
     file.close()
