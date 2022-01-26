@@ -129,7 +129,7 @@ def ToLatex(Str):
     return Str
 
 if __name__ == '__main__':
-    fileName = "Test.tex"
+    fileName = "D:/Test.tex"
     file = open(fileName,"r", encoding='utf-8')
     Str = file.read()
     file.close()
