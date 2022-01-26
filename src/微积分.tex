@@ -1,73 +1,70 @@
 * 微积分
 	* 极限
 		* 数列极限
-			\def{数列极限}{
-				设$\{x_n\}$为一数列，如果存在常数a,对于任意给定的正数ε (不论它多么小)，总存在正整数N,使得当n>N时，不等式$\left|x_{n}-a\right|<\varepsilon$都成立，那么就称常数a是数列$\{x_n\}$的极限, 或者称数列$\{x_n\}$收敛于a,记为$\lim _{n \rightarrow \infty} x_{n}=a$. 若不存在常数a, 则数列无极限, 数列\bf{发散}.
-				$$\lim _{n \rightarrow \infty} x_{n}=a \Leftrightarrow \forall \varepsilon>0, \exists \text { 正整数 } N \text {, 当 } n>N \text { 时, 有 }\left|x_{n}-a\right|<\varepsilon$$
-			}
+			\def{数列极限}
+				设$\{x_n\}$为一数列，如果存在常数a,对于任意给定的正数ε (不论它多么小)，总存在正整数N,使得当n>N时，不等式$|x_n-a|<\varepsilon$都成立，那么就称常数a是数列$\{x_n\}$的极限, 或者称数列$\{x_n\}$收敛于a,记为$\lim{n \to \infty} x_n = a$. 若不存在常数a, 则数列无极限, 数列\bf{发散}.
+				$$\lim_{n \to \infty} x_n=a <=> \forall \varepsilon>0, \exists \text { 正整数 } N \text {, 当 } n>N \text { 时, 有 }|x_n-a|<\varepsilon$$
 
-				\bf{性质}: 
-				*  极限唯一性
-				*  收敛数列有界性
-				*  收敛数列保号性
+			\bf{性质}: 
+				* 极限唯一性
+				* 收敛数列有界性
+				* 收敛数列保号性
 
 		* 函数极限
-			\def{函数极限}{
-				设函数$f(x)$在点$x_{0}$的某一去心邻域内有定义. 如果存在常数$A$ , 对 于任意给定的正数$\varepsilon$(不论它多么小 ), 总存在正数$\delta$ , 使得当$x$满足不等式$0<\left|x-x_{0}\right|<\delta$时, 对应的函数值$f(x)$都满足不等式$|f(x)-A|<\varepsilon$, 那么常数$A$就叫做函数$f(x)$当$x \rightarrow x_{0}$时的极限, 记作$\lim _{x \rightarrow x_{0}} f(x)=A \text { 或 } f(x) \rightarrow A\left(\text { 当 } x \rightarrow x_{0}\right) .$
-			}
+			\def{函数极限}
+				设函数$f(x)$在点$x_0$的某一去心邻域内有定义. 如果存在常数$A$ , 对 于任意给定的正数$\varepsilon$(不论它多么小 ), 总存在正数$\delta$ , 使得当$x$满足不等式$0<|x-x_0|<\delta$时, 对应的函数值$f(x)$都满足不等式$|f(x)-A|<\varepsilon$, 那么常数$A$就叫做函数$f(x)$当$x \to x_0$时的极限, 记作$\lim_{x \to x_0} f(x)=A \text { 或 } f(x) arrow A(\text { 当 } x \to x_0) .$
 
     * 微分
-		* 导数  N阶
-		*	[定义]:
-				导数: df/dx = lim_(x->0)  [ f(x+Δx) - f(x-Δx) ] / (2 Δx)
-				N阶偏导:
-					d^n f/dx ^n = lim_(x->0)  [ f^(n - 1)(x+Δx) - f^(n - 1)(x-Δx) ] / (2 Δx)
-		*	[算法]: 中心差分公式
+		* 导数 -- 一元函数微分
+			\def{导数}
+				$\frac{df}{dx} = lim_{x \to 0}  \frac{ f(x + Δx) - f(x - Δx) }{ 2 Δx }$
+				$\frac{d^n f}{dx^n} = lim_{x \to 0} \frac{ f^{n - 1}(x + Δx) - f^{n - 1}(x - Δx)} { 2 Δx }$
+
+			\bf{算法}: 中心差分公式
 				f'(x) = ( f(x+Δx) -  f(x-Δx) ) / (2 Δx) + Err(f,Δx)
-				·截断误差: Err(f,Δx) = h² f^(3)(c) / 6 = O(h²)
-				·精度: O(h²)
+				* 截断误差: Err(f,Δx) = h^2  f^(3)(c) / 6 = O(h^2 )
+				* 精度: O(h^2 )
 				f'(x) = ( -f(x+2Δx) + 8·f(x+Δx) - 8·f(x-Δx) + f(x-2Δx) ) / (12 Δx) + Err(f,Δx)
-				·截断误差: Err(f,Δx) = h^4 f^(5)(c) / 6 = O(h^4)
-				·精度: O(h^4)
+				* 截断误差: Err(f,Δx) = h^4 f^(5)(c) / 6 = O(h^4)
+				* 精度: O(h^4)
 
 			* 曲率
-			*	[定义]: 单位弧段弯曲的角度. 也即等效曲率圆的半径的倒数.
-			*	[公式]: K = |Δα/Δs| = 1 / R = |y''| / (1 + y'²)^(3/2)
+				\def{曲率}
+					单位弧段弯曲的角度, 也即等效曲率圆的半径的倒数.
+					$ K = |\frac{Δ\alpha}{Δs}| = 1 / R = \frac{ |y''|}{ (1 + y'^2)^{3/2}} $
 
-    	* 多元函数微分
-			* 偏导数
-			*	[定义]:
-					偏导: ∂f/∂x_i = [ f(..,xi+Δxi,..) -  f(..,xi-Δxi,..) ] / (2 Δxi)
-					二阶偏导:
-						∂²f/∂x_i² = [ f'(..,xi+Δxi,..) -  f'(..,xi-Δ,..) ] / Δxi
-								= f(..,xi+Δxi) - 2·f'(..,x) + f'(..,xi-Δxi) / Δxi²
+		* 偏导数 -- 多元函数微分
+			\def{偏导数}
+				$ ∂f/∂x_i = [ f(...,x_i + Δx_i,...) -  f(..., x_i - Δx_i, ...) ] / (2 Δx_i)$
+				$∂^2 f/∂x_i^2  = [ f'(..,xi+Δxi,..) -  f'(..,xi-Δ,..) ] / Δxi = f(..,xi+Δxi) - 2·f'(..,x) + f'(..,xi-Δxi) / Δxi^2 $
+						
 
-			* 梯度、散度、旋度
-			*	[定义]:
-				梯度: ▽f		: 矢量, 函数在该点处变化率最大的方向.
-				散度: ▽·\vec f: 标量, 矢量场在该点发散的程度, 表征场的有源性(>0源,<0汇,=0无源)
-				旋度: ▽×\vec f: 矢量, 矢量场在该点旋转的程度, 
-									方向是旋转度最大的环量的旋转轴, 旋转的方向满足右手定则,
-									大小是绕该旋转轴旋转的环量与旋转路径围成的面元面积之比.
-			*	[公式]: (直角坐标系)
-					▽f        = ∂f/∂x \vec x + ∂f/∂y \vec y + ∂f/∂z \vec z + ...
-					▽·\vec f =  ∂fx/∂x + ∂fy/∂y + ∂fz/∂z + ...
-					▽×\vec f = (∂fz/∂y - ∂fy/∂z) \vec x
-							+ (∂fx/∂z - ∂fz/∂x) \vec y
-							+ (∂fy/∂x - ∂fx/∂y) \vec z
+			* 梯度, 散度, 旋度
+				\def{梯度} $\nabla f $ 矢量, 函数在该点处变化率最大的方向.
+				\def{散度} $\nabla · \. f $ 标量, 矢量场在该点发散的程度, 表征场的有源性(>0源,<0汇,=0无源)
+				\def{旋度} $\nabla \times \. f $ 矢量, 矢量场在该点旋转的程度, 方向是旋转度最大的环量的旋转轴, 旋转的方向满足右手定则, 大小是绕该旋转轴旋转的环量与旋转路径围成的面元面积之比.
 
-			* Hamilton 算子、Laplace算子
-			*	[定义]: 
-					Hamilton: ▽  ≡ ∂/∂x \vec x + ∂/∂y \vec y + ∂/∂z \vec z + ... (看成一个矢量)
-					Laplace:  ▽² ≡ ∂²/∂x² + ∂²/∂y² + ∂²/∂z² + ...
-					▽² = ▽·▽
-			*	[算法]: 有限差分法
-					[u(x+1,...) - 2·u(x,...) + u(x-1,...)] / Δx² + ...
-			*	[注]: Hamilton算子程序，见<梯度、散度、旋度>   
+				\Property
+					(直角坐标系)
+					$\nablaf        = ∂f/∂x \. x + ∂f/∂y \. y + ∂f/∂z \. z + ...$
+					$\nabla · \. f =  ∂fx/∂x + ∂fy/∂y + ∂fz/∂z + ...$
+					$\nabla \times \. f = (∂fz/∂y - ∂fy/∂z) \. x
+							+ (∂fx/∂z - ∂fz/∂x) \. y
+							+ (∂fy/∂x - ∂fx/∂y) \. z$
+
+			* Hamilton算子, Laplace算子
+				\def{Hamilton算子} 
+					$\nabla \equiv ∂/∂x \. x + ∂/∂y \. y + ∂/∂z \. z + ... $
+					Hamilton算子可以看成一个矢量.
+
+				\def{Laplace算子} 
+					$\nabla^2 \equiv ∂^2/∂x^2 + ∂^2 /∂y^2  + ∂^2 /∂z^2  + ...$
+					$\nabla^2 = \nabla · \nabla$
 
     * 积分
-    *	[定义]:
-    *	[算法]: NewtonCotes 公式
+		\def{积分}
+
+    	\bf{算法} NewtonCotes 公式
             ∫_a^b f(x) = (b - a) Σ_(k=0)^n  C_k^(n) f(xi)
             C_k^(n) = (-1)^(n-k) / (n·k!(n-k)!) ∫_0^n Π_(k≠j) (t-j)dt 
             n = 1: C = {1/2, 1/2}
@@ -77,85 +74,89 @@
             复合求积法: 将积分区间分成若干个子区间, 再在每个子区间使用低阶求积公式.
 
     	* 多元函数积分
-			*  重积分
-			*	[定义]: ∫∫∫ f(r) dr³
+			* 重积分
+				\def{重积分} ∫∫∫ f(r) dr³
 		
 * 微分方程
-    * 解常微分方程组: Runge Kutta 方法
-	*	[公式]:           ->   ->       ->      ->
-			常微分方程组: y' = f(x, y)	y(x0) = y0
-			迭代求解 \vec y(x) 的一点/一区间的数值解.
-			y(x + dx) = y(x) + dx/6·(k1 + 2·k2 + 2·k3 + k4)
-			k1 = f(xn , yn)						//区间开始斜率
-			k2 = f(xn + dx/2, yn + dx/2·k1)	//区间中点斜率,通过欧拉法采用k1决定y在xn+dx/2值
-			k3 = f(xn + dx/2, yn + dx/2·k2)	//区间中点斜率,采用k2决定y值
-			k4 = f(xn + dx	, yn + dx  ·k3)	//区间终点斜率
-	*	[目的]: 解常微分方程组
-			[ y1'(x) = f1(y1 , ... , yn , x)          ->   ->
-			| y2'(x) = f2(y1 , ... , yn , x)    =>    y' = f(x , y)
-			| ...
-			[ yn'(x) = fn(y1 , ... , yn , x)
-	*	[性质]:
-			* RK4法是四阶方法，每步误差是h⁵阶，总积累误差为h⁴阶
+
+	* 常微分方程
+
+		\bf{算法} 
+			\bf{Runge Kutta 方法}
+				常微分方程组
+					$
+						\. y' = f(\. x, \. y) 
+						\. y(\. x_0) = \. y_0
+					$
+					迭代求解 $\. y(x)$ 的一点/一区间的数值解.
+					$
+						y(x + dx) = y(x) + dx/6 · (k_1 + 2·k_2 + 2·k_3 + k_4)
+						k_1 = f(x_n , y_n)						\tag{区间开始斜率}
+						k_2 = f(x_n + dx/2, y_n + dx/2·k_1)		\tag{区间中点斜率,通过欧拉法采用k1决定y在xn+dx/2值}
+						k_3 = f(x_n + dx/2, y_n + dx/2·k_2)		\tag{区间中点斜率,采用k2决定y值}
+						k_4 = f(x_n + dx, y_n + dx·k_3)			\tag{区间终点斜率}
+					$
+
+				解常微分方程组
+						[ y1'(x) = f1(y1 , ... , yn , x)          ->   ->
+						| y2'(x) = f2(y1 , ... , yn , x)    =>    y' = f(x , y)
+						| ...
+						[ yn'(x) = fn(y1 , ... , yn , x)
+
+				\Property
+					* RK4法是四阶方法，每步误差是h⁵阶，总积累误差为h⁴阶
+
+				\Code
+					void RungeKutta(Mat& y, double dx, double x, function f, int enpoch) 
+						Mat k1, k2, k3, k4
+
+						while (enpoch--) 
+							k1 = f(x, y)
+							k2 = f(x + dx / 2, y + (dx / 2) * k1)
+							k3 = f(x + dx / 2, y + (dx / 2) * k2)
+							k4 = f(x + dx,     y +  dx      * k3)
+
+							y = y + h/6 * (k1 + 2 * k2 + 2 * k3 + k4)
+
+	* 偏微分方程
+
+		\Example
+			* Poisson's方程
+				\def{Poisson's方程} 
+					$ Δ \phi = f $
+					$ \nabla^2 \phi = f \quad\text{(Euclidean空间)}$  
+					三维直角坐标系中 (∂^2 /∂x^2  + ∂^2 /∂y^2  + ∂^2 /∂z^2 ) φ(x,y,z) = f(x,y,z)
+					当f ≡ 0, 得到 Laplace's方程
+					
+				\bf{算法} Green's函数  φ(r) = - ∫∫∫ f(rt) / 4π|r-rt| d³rt    ,r rt为矢量
 
 
-    * Poisson's方程
-	*	[定义]: Δφ = f
-				▽²φ = f  (Euclidean空间)
-			三维直角坐标系中 (∂²/∂x² + ∂²/∂y² + ∂²/∂z²) φ(x,y,z) = f(x,y,z)
-			当f ≡ 0, 得到 Laplace's方程
-		[解法]:  Green's函数  φ(r) = - ∫∫∫ f(rt) / 4π|r-rt| d³rt    ,r rt为矢量
+			* 波动方程
+				\def{波动方程} a \nabla^2 u = ∂^2 u/∂t^2 
 
+				\bf{算法} 
+					有限差分法
+					u(t+1,...) = 2·u(t,...) - u(t-1,...) + Δt^2 ·a{[u(x+1,...) - 2·u(x,...) + u(x-1,...)]/Δx^2  + ...}
 
-    * 波动方程
-	*	[定义]: a ▽²u = ∂²u/∂t²
-	*	[算法]: 有限差分法
-			u(t+1,...) = 2·u(t,...) - u(t-1,...)
-					+ Δt²·a{[u(x+1,...) - 2·u(x,...) + u(x-1,...)]/Δx² + ...}
+			* 扩散方程
+				\def{扩散方程} 
+					$a \nabla^2 u = \frac{∂u}{∂t}$
 
-	* 扩散方程
-	*	[定义]: a ▽²u = ∂u/∂t
-		[算法]: 有限差分法
-			u(t+1,...) = u(t,r)
-					+ Δt·a{[u(x+1,...) - 2·u(x,...) + u(x-1,...)]/Δx² + ...}
+				\bf{算法} 
+					有限差分法
+					u(t+1,...) = u(t,r)
+							+ Δt·a{[u(x+1,...) - 2·u(x,...) + u(x-1,...)]/Δx^2  + ...}
 
 * 级数
-	* Taylor 展开
-	*	[定义]: 
-			f(x) = f(x0)/0! + f'(x0)/1!·(x-x0) + ... + f^(n)(x0)/n!·(x-x0)
-	*	[Example]:
-			Calculus::TaylorFormula(0, [](double x) { return sin(x); }, Coeff, 10);
+	* Taylor级数
+		\def{Taylor级数}
+			$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!} · (x - x_0)^n$
 
+	* Fourier级数
+		\def{Fourier级数}
+			$f(x) = \sum_{n=0}^{N-1} e^(-\frac{j 2 \pi n k}{N}) · x_n$
+		
+		\bf{算法}
+			快速Fourier变换
+			* 时间复杂度: O(N·logN)
 
-
-	* Fast Fourier Transform 快速Fourier变换
-	*	[定义]: 离散Fourier变换的高效算法
-	*	[公式]:
-			离散Fourier变换: X[k] = Σ_(n=0)^(N-1)  e^(-j2πnk/N)·x[n]
-	*	[时间复杂度]: O(N·logN)
-	*	[算法]:
-			N-Point Model:
-					___________
-			x[0] —| N/2-Point |—> E[0] —×××> X[0]  (E[0],+O[0])
-			x[2] —|   DFT	   |—> E[1] —×××> X[1]  (E[1],+O[1])
-			x[4] —|		   |—> E[2] —×××> X[2]  (E[2],+O[2])
-			x[6] —|		   |—> E[3] —×××> X[3]  (E[3],+O[3])
-					___________
-			x[1] —| N/2-Point |—> O[0] —×××> X[4]  (E[0],-O[0])
-			x[3] —|   DFT	   |—> O[1] —×××> X[5]  (E[1],-O[1])
-			x[5] —|		   |—> O[2] —×××> X[6]  (E[2],-O[2])
-			x[7] —|		   |—> O[3] —×××> X[7]  (E[3],-O[3])
-
-			(E[k],±O[k]) = E[k] ± W_N^K·O[k]
-
-* 插值
-	* Lagrange插值
-		[原理]:
-			f(x) = Σ_(i=1)^n  y_i · f_i(x)
-			f_i(x) = Π_(j=1,i≠j)^n  (x - x_j) / (x_i - x_j)
-			第N点y = 基函数1×第1点y + 基函数2×第2点y + 基函数3×第3点y
-			基函数状态2 = (输入X-第1点x)(输入X-第3点x) / (第2点x-第1点x)(第2点x-第3点x)
-
-
-	* 样条插值
-	*	[算法]: 过求解三弯矩方程组得出曲线函数组的过程

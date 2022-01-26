@@ -46,6 +46,7 @@ def Formulas(Str):
     Str = re.sub(r'≤', r'\\le ', Str)
     Str = re.sub(r'≠', r'\\neq ', Str)
     Str = re.sub(r'∂', r'\\partial ', Str)
+    Str = re.sub(r'Δ', r'\\Delta ', Str)
     Str = re.sub(r' => ', r' \\Rightarrow ', Str)
     Str = re.sub(r' <=> ', r' \\Leftrightarrow ', Str)
     Str = re.sub(r'\\sum_', r'\\sum\\limits_', Str)
@@ -92,7 +93,7 @@ def ToLatex(Str):
     Str = re.sub(r'\n\s*\n', r'\n', Str)
     Str = re.sub(r'\t', r'    ', Str)
     # 简单命令
-    Str = re.sub(r'\\\.', r'\\boldsymbol', Str)
+    Str = re.sub(r'\\\.', r'\\boldsymbol ', Str)
     Str = re.sub(r'--', r'---', Str)
     Str = re.sub(r'\\bf', r'\\textbf', Str)
     Str = re.sub(r'\\Example', r'\\textbf{Example. }', Str)
@@ -128,7 +129,7 @@ def ToLatex(Str):
     return Str
 
 if __name__ == '__main__':
-    fileName = "信息论.tex"
+    fileName = "Test.tex"
     file = open(fileName,"r", encoding='utf-8')
     Str = file.read()
     file.close()
