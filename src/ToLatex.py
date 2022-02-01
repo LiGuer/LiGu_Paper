@@ -76,6 +76,8 @@ def Formulas(Str):
         StrB = re.sub(r'\]', r'\\right]', StrB)
         StrB = re.sub(r'\\\{', r'\\left\\{', StrB)
         StrB = re.sub(r'\\\}', r'\\right\\}', StrB)
+        StrB = re.sub(r'<', r'\\left<', StrB)
+        StrB = re.sub(r'>', r'\\right>', StrB)
         StrB = re.sub(r'\|\\mb', r'\\left|\\begin{matrix}', StrB)
         StrB = re.sub(r'\\me\|', r'\\end{matrix}\\right|', StrB)
         StrB = re.sub(r'\\mb', r'\\begin{matrix}', StrB)
@@ -129,7 +131,7 @@ def ToLatex(Str):
     return Str
 
 if __name__ == '__main__':
-    fileName = "D:/Test.tex"
+    fileName = "D:/新建文件夹/组会论文.tex"
     file = open(fileName,"r", encoding='utf-8')
     Str = file.read()
     file.close()

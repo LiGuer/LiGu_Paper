@@ -466,9 +466,9 @@
             \Theorem{Lorentz变换} 设两个惯性参考系 $K, K'$, 其中$K'$沿$x$轴以速度$V$相对于$K$作相对运动, 
                 $
                     (\mb t' \\ x' \\ y' \\ z' \me) = (\mb
-                        \frac{1}{\sqrt{1-(\frac{V}{c})^2}} & \frac{-\frac{V}{c^2}}{\sqrt{1-( \frac{V}{c} )^2}}\\
-                        \frac{-V}{\sqrt{1-( \frac{V}{c} )^2}} & \frac{1}{\sqrt{1-( \frac{V}{c} )^2}}\\
-                        & & 1\\
+                        \frac{1}{\sqrt{1-(\frac{V}{c})^2}} & \frac{-\frac{V}{c^2}}{\sqrt{1-( \frac{V}{c} )^2}}
+                        \frac{-V}{\sqrt{1-( \frac{V}{c} )^2}} & \frac{1}{\sqrt{1-( \frac{V}{c} )^2}}
+                        & & 1
                         & & & 1
                     \me) (\mb t \\ x \\ y \\ z \me)
                 $
@@ -514,7 +514,7 @@
                     $
                         => \quad & \mu = artanh(-\frac{V}{c})
                         => \quad & \{\mb
-                                \tanh \mu = \frac{V}{c} = \frac{\sinh \mu}{\cosh \mu}
+                                \tanh \mu = -\frac{V}{c} = \frac{\sinh \mu}{\cosh \mu}
                                 \cosh^2 \mu - \sinh^2 \mu = 1
                             \me\right.
                         => \quad & \{\mb
@@ -531,11 +531,17 @@
                             \me) (\mb t \\ x \me)
                     $
 
+            \Example
+                * 钟慢效应
 
+                * 尺缩效应
 
-            * \bf{速度变换}
-                $\. v = \frac{d\. r}{dt},\quad v' = \frac{d\. r'}{dt}$
-                $ => v_x = \frac{v'_x + V}{1 + v'_x \frac{V}{c^2}}, \quad v_y = \frac{v'_y \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}},\quad v_z = \frac{v'_z \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}}$
+            * 速度变换
+                \Theorem{Lorentz变换下的速度变换}
+                    $ => v_x = \frac{v'_x + V}{1 + v'_x \frac{V}{c^2}}, \quad v_y = \frac{v'_y \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}},\quad v_z = \frac{v'_z \sqrt{1 - \frac{V^2}{c^2}}}{1 + v'_x \frac{V}{c^2}}$
+
+                \Proof 
+                    $\. v = \frac{d\. r}{dt},\quad v' = \frac{d\. r'}{dt}$
 
 
 
