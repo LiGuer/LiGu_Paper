@@ -1,617 +1,617 @@
 * 机器学习
-    * 主成分分析
-            [目标]:
-                数据降维，提取数据的主要特征分量, 满足:
-                    
-                    * 最近重构性: 样本点到该超平面的距离都足够近。
-                    * 最大可分性: 样本点在该超平面的投影尽可能分开。
-                    
-                
-            [优化问题]:
-                $
-                    \min_W  &\quad	tr( W^T x x^T W )\\
-                    s.t.    &\quad	W^T W = I
-                $
-                
-            [流程]:
-                * 数据中心化, $\sum \vec x_i = 0$
-                * 计算协方差矩阵 C = X X^T
-                * 对协方差矩阵C 特征值分解
-                * 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
-                * 样本点在超平面投影: y_i = W^T x_i
-                
-            [原理]:
-                    分别从目标(1, 2)可以推得同样的结果
-                *	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
-                    协方差矩阵:
-                        $D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T$
-                    协方差矩阵对角化
-                * 优化问题构造:
-                $
-                    min_W		tr( W^T x x^T W )
-                    s.t.		W^T W = I
-                $
-                * 计算最优点:
-                    Lagrange函数 $L(W,λ) = W^T x x^T W + λ( W^T W - I )$
-                    Lagrange对偶 $G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))$
-                    L(W,λ)求导, 当导数为0时, 取得极值
-                    =>	$X X^T ω_i = λ_i ω_i$
-                    即.对协方差X XT, 特征值求解
-                *	取特征值最大的yDim个特征向量, 即目标投影矩阵W
+	* 主成分分析
+			[目标]:
+				数据降维，提取数据的主要特征分量, 满足:
+					
+					* 最近重构性: 样本点到该超平面的距离都足够近。
+					* 最大可分性: 样本点在该超平面的投影尽可能分开。
+					
+				
+			[优化问题]:
+				$
+					\min_W  &\quad	tr( W^T x x^T W )\\
+					s.t.	&\quad	W^T W = I
+				$
+				
+			[流程]:
+				* 数据中心化, $\sum \vec x_i = 0$
+				* 计算协方差矩阵 C = X X^T
+				* 对协方差矩阵C 特征值分解
+				* 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
+				* 样本点在超平面投影: y_i = W^T x_i
+				
+			[原理]:
+					分别从目标(1, 2)可以推得同样的结果
+				*	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
+					协方差矩阵:
+						$D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T$
+					协方差矩阵对角化
+				* 优化问题构造:
+				$
+					min_W		tr( W^T x x^T W )
+					s.t.		W^T W = I
+				$
+				* 计算最优点:
+					Lagrange函数 $L(W,λ) = W^T x x^T W + λ( W^T W - I )$
+					Lagrange对偶 $G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))$
+					L(W,λ)求导, 当导数为0时, 取得极值
+					=>	$X X^T ω_i = λ_i ω_i$
+					即.对协方差X XT, 特征值求解
+				*	取特征值最大的yDim个特征向量, 即目标投影矩阵W
 
 
-    * K-Means 聚类
-            [目标]:
-                聚类. 对N维分布的数据点，可以将其聚类在 K 个关键簇内.
-                
-            [步骤]:
-                * 随机选择 K 个簇心点 Center
-                * 迭代开始
-                    * 归零 Cluster , Cluster: 簇,记录ith簇内的数据指针。
-                    * 计算每个xi到簇心μj的距离
-                        * 选择距离最小的簇心, 将该点加入其簇内
-                    * 对每个簇,计算其质心 Center'
-                    * Center≠Center' , 则更正Center为 Center'
-                    * 迭代重新开始
-                * 一轮无更正时，迭代结束
+	* K-Means 聚类
+			[目标]:
+				聚类. 对N维分布的数据点，可以将其聚类在 K 个关键簇内.
+				
+			[步骤]:
+				* 随机选择 K 个簇心点 Center
+				* 迭代开始
+					* 归零 Cluster , Cluster: 簇,记录ith簇内的数据指针。
+					* 计算每个xi到簇心μj的距离
+						* 选择距离最小的簇心, 将该点加入其簇内
+					* 对每个簇,计算其质心 Center'
+					* Center≠Center' , 则更正Center为 Center'
+					* 迭代重新开始
+				* 一轮无更正时，迭代结束
 
-    * 最小二乘法
-            [目标]:
-                求一条直线，使得所有样本点到该直线的Euclid距离最小.
-                
-            [优化问题]: 最小化均方误差
-                $
-                    \min_w  &\quad MSE(\tilde{\. y}) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2
-                $
-                
-            [原理]:
-                * 直线方程: $f(x) = \. w^T \. x	\quad (\. x = [1, \. x_0])$
-                * 均方误差:
-                        $MSE(\tilde y) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2 = (X w - y)^T (X w - y)$
-                        
-                * 优化问题构造: 无约束凸优化问题
-                        $\min_W	\sum (\. w^T \. x - y)^2 = (X w - y)^T (X w - y)$
-                        
-                * 计算最优点: 求导, 导数为0时取得极值
-                    $
-                        \frac{\partial MSE}{\partial w} &= 2·X^T·(\. w^T \. x - y) = 0\\
-                    \Rightarrow	w^* &= (X^T X)^-1 X^T y\\
-                        f(x) &= x^T (X^T X)^-1 X^T y
-                    $
-                    
-                * 一维场景:
-                    优化问题:
-                    $
-                        min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2\\
-                        \Rightarrow	\frac{\partial E}{\partial w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
-                        \frac{\partial E}{\partial b} = 2( n b + \sum(y_i - w x_i) ) = 0
-                    $
-                    
-                    最优点:
-                    $
-                        \Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2\\
-                        w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}\\
-                        b^* &= \frac{1}{n}·\sum(y_i - w x_i)\\
-                    $
+	* 最小二乘法
+			[目标]:
+				求一条直线，使得所有样本点到该直线的Euclid距离最小.
+				
+			[优化问题]: 最小化均方误差
+				$
+					\min_w  &\quad MSE(\tilde{\. y}) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2
+				$
+				
+			[原理]:
+				* 直线方程: $f(x) = \. w^T \. x	\quad (\. x = [1, \. x_0])$
+				* 均方误差:
+						$MSE(\tilde y) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2 = (X w - y)^T (X w - y)$
+						
+				* 优化问题构造: 无约束凸优化问题
+						$\min_W	\sum (\. w^T \. x - y)^2 = (X w - y)^T (X w - y)$
+						
+				* 计算最优点: 求导, 导数为0时取得极值
+					$
+						\frac{\partial MSE}{\partial w} &= 2·X^T·(\. w^T \. x - y) = 0\\
+					\Rightarrow	w^* &= (X^T X)^-1 X^T y\\
+						f(x) &= x^T (X^T X)^-1 X^T y
+					$
+					
+				* 一维场景:
+					优化问题:
+					$
+						min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2\\
+						\Rightarrow	\frac{\partial E}{\partial w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
+						\frac{\partial E}{\partial b} = 2( n b + \sum(y_i - w x_i) ) = 0
+					$
+					
+					最优点:
+					$
+						\Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2\\
+						w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}\\
+						b^* &= \frac{1}{n}·\sum(y_i - w x_i)\\
+					$
 
-                        
-    * 核方法
-        \def{核方法}
-            核方法通过核函数将样本从原始空间映射到更高维特征空间,使得其线性可分. 其中, 核函数定义为, 将原始空间中的向量作为输入向量，并返回特征空间（转换后的数据空间,可能是高维）中向量的点积的函数称为核函数。使用内核，不需要显式地将数据嵌入到空间中，因为许多算法只需要图像向量之间的内积（内积是标量）；在特征空间不需要数据的坐标。$\kappa(\. x_i, \. x_j) = \phi(\. x_i)^T \phi(\. x_j)$
+						
+	* 核方法
+		\def{核方法}
+			核方法通过核函数将样本从原始空间映射到更高维特征空间,使得其线性可分. 其中, 核函数定义为, 将原始空间中的向量作为输入向量，并返回特征空间（转换后的数据空间,可能是高维）中向量的点积的函数称为核函数。使用内核，不需要显式地将数据嵌入到空间中，因为许多算法只需要图像向量之间的内积（内积是标量）；在特征空间不需要数据的坐标。$\kappa(\. x_i, \. x_j) = \phi(\. x_i)^T \phi(\. x_j)$
 
-            对偶公式: 将正则化的平⽅和误差函数完全由核函数表示, 因此我们可以直接针对核函数进⾏计算，避免了显式地引⼊特征向	量$\phi(\. x)$，这使得我们可以隐式地使⽤⾼维特征空间，甚⾄⽆限维特征空间
-            $
-                J(\. a)=\frac{1}{2} \. a^T \. {K} \. {K} \. a-\. a^T \. {K} \. t+\frac{1}{2} \. t^T \. t+\frac{\lambda}{2} \. a^T \. {K} \. a
-            $
+			对偶公式: 将正则化的平⽅和误差函数完全由核函数表示, 因此我们可以直接针对核函数进⾏计算，避免了显式地引⼊特征向	量$\phi(\. x)$，这使得我们可以隐式地使⽤⾼维特征空间，甚⾄⽆限维特征空间
+			$
+				J(\. a)=\frac{1}{2} \. a^T \. {K} \. {K} \. a-\. a^T \. {K} \. t+\frac{1}{2} \. t^T \. t+\frac{\lambda}{2} \. a^T \. {K} \. a
+			$
 
-            Gram矩阵:
-            $
-                \. K = \. \Phi \. \Phi^T = \left[\begin{array}{ccccc}
-                \kappa(\. x_1, \. x_1) & \cdots & \kappa(\. x_1, \. x_j) & \cdots & \kappa(\. x_1, \. x_m) \\
-                \vdots & \ddots & \vdots & \ddots & \vdots \\
-                \kappa(\. x_i, \. x_1) & \cdots & \kappa(\. x_i, \. x_j) & \cdots & \kappa(\. x_i, \. x_m) \\
-                \vdots & \ddots & \vdots & \ddots & \vdots \\
-                \kappa(\. x_m, \. x_1) & \cdots & \kappa(\. x_m, \. x_j) & \cdots & \kappa(\. x_m, \. x_m)
-                \end{array}\right]
-            $
+			Gram矩阵:
+			$
+				\. K = \. \Phi \. \Phi^T = \left[\begin{array}{ccccc}
+				\kappa(\. x_1, \. x_1) & \cdots & \kappa(\. x_1, \. x_j) & \cdots & \kappa(\. x_1, \. x_m) \\
+				\vdots & \ddots & \vdots & \ddots & \vdots \\
+				\kappa(\. x_i, \. x_1) & \cdots & \kappa(\. x_i, \. x_j) & \cdots & \kappa(\. x_i, \. x_m) \\
+				\vdots & \ddots & \vdots & \ddots & \vdots \\
+				\kappa(\. x_m, \. x_1) & \cdots & \kappa(\. x_m, \. x_j) & \cdots & \kappa(\. x_m, \. x_m)
+				\end{array}\right]
+			$
 
-        \Example
-            * 线性核: $\kappa(\. x_i, \. x_j) = \. x_i^T \. x_j$
-            * 高斯核: $\kappa(\. x_i,\. x_j) = e^{-\frac{1}{2}(\. x_i - \. x_j)^T \Sigma^{-1} (\. x_i - \. x_j)}$
-            * 多项式核: $\kappa(\. x_i, \. x_j) = (\. x_i^T \. x_j)^{d}$
-            * 拉普拉斯核: $\kappa(\. x_i, \. x_j) = e^{-\frac{\|\. x_i-\. x_j\|}{\sigma}}$
-            * Sigmoid核: $\kappa(\. x_i, \. x_j)=\tanh (\beta \. x_i^T \. x_j+\theta)$
-            
+		\Example
+			* 线性核: $\kappa(\. x_i, \. x_j) = \. x_i^T \. x_j$
+			* 高斯核: $\kappa(\. x_i,\. x_j) = e^{-\frac{1}{2}(\. x_i - \. x_j)^T \Sigma^{-1} (\. x_i - \. x_j)}$
+			* 多项式核: $\kappa(\. x_i, \. x_j) = (\. x_i^T \. x_j)^{d}$
+			* 拉普拉斯核: $\kappa(\. x_i, \. x_j) = e^{-\frac{\|\. x_i-\. x_j\|}{\sigma}}$
+			* Sigmoid核: $\kappa(\. x_i, \. x_j)=\tanh (\beta \. x_i^T \. x_j+\theta)$
+			
 
-    * 支持向量机
-        \def{支持向量机}
-            是一种二分类模型，目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
-            $
-            \underset{\. w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\. w^T \. x_i + b |}{||\. w||}\\
-            s.t. &\quad y_i (\. w^T \. x_i + b) \le 1
-            $
-            \qquad \Rightarrow \qquad 
-            $
-                \underset{\. w, b}{\arg\min}     &\quad	\frac{||\. w||^2}{2}\\
-                s.t.    &\quad	y_i (\. w^T \. x_i + b) \le 1
-            $
-        
-        \proof		
-            超平面方程: $\. w^T \. x + b = 0$, \quad 点面距: $d = \frac{|\. w^T \. x + b|}{||w||}$
-            
-            分类
-                $ \{ \begin{array}{cc}
-                    \. w^T \. x_i + b \ge +1    &\quad (y_i = +1)\\
-                    \. w^T \. x_i + b \le -1	&\quad (y_i = -1)\\
-                    \end{array} .
-                    \quad\Rightarrow\quad y_i (\. w^T \. x_i + b) \ge 1
-                $
+	* 支持向量机
+		\def{支持向量机}
+			是一种二分类模型，目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
+			$
+			\underset{\. w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\. w^T \. x_i + b |}{||\. w||}\\
+			s.t. &\quad y_i (\. w^T \. x_i + b) \le 1
+			$
+			\qquad \Rightarrow \qquad 
+			$
+				\underset{\. w, b}{\arg\min}	 &\quad	\frac{||\. w||^2}{2}\\
+				s.t.	&\quad	y_i (\. w^T \. x_i + b) \le 1
+			$
+		
+		\proof		
+			超平面方程: $\. w^T \. x + b = 0$, \quad 点面距: $d = \frac{|\. w^T \. x + b|}{||w||}$
+			
+			分类
+				$ \{ \begin{array}{cc}
+					\. w^T \. x_i + b \ge +1	&\quad (y_i = +1)\\
+					\. w^T \. x_i + b \le -1	&\quad (y_i = -1)\\
+					\end{array} .
+					\quad\Rightarrow\quad y_i (\. w^T \. x_i + b) \ge 1
+				$
 
-            间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
-                $\Delta = \frac{2}{||w||} \tag{间隔}$
-                        
-            优化问题构造: 使间隔最大化. 凸二次规划问题
-                $\max\quad  \frac{2}{||\. w||} \quad \Rightarrow \quad \min\quad  \frac{||\. w||^2}{2}$
-                $s.t.\quad	y_i (\. w^T \. x_i + b) \ge 1$
-        
-        \bf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\. w, b$求导, 令导数为0取得极值$\. w^*, b^*$, 再求Lagrange对偶函数
-            $
-                L(\. w, b,\. \lambda) = \frac{||\. w||^2}{2} + \sum_i \lambda_i (1 - y_i (\. w^T \. x_i + b)) \tag{Lagrange函数}
-            $
-            $
-                \Rightarrow \{\begin{array}{rl} \. w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}.\tag{$\. w, b$极值}
-            $
-            $G(\. \lambda) = L(\. w^*, b^*, \. \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \. x_i^T \. x_j \tag{Lagrange对偶}
-            $
+			间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
+				$\Delta = \frac{2}{||w||} \tag{间隔}$
+						
+			优化问题构造: 使间隔最大化. 凸二次规划问题
+				$\max\quad  \frac{2}{||\. w||} \quad \Rightarrow \quad \min\quad  \frac{||\. w||^2}{2}$
+				$s.t.\quad	y_i (\. w^T \. x_i + b) \ge 1$
+		
+		\bf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\. w, b$求导, 令导数为0取得极值$\. w^*, b^*$, 再求Lagrange对偶函数
+			$
+				L(\. w, b,\. \lambda) = \frac{||\. w||^2}{2} + \sum_i \lambda_i (1 - y_i (\. w^T \. x_i + b)) \tag{Lagrange函数}
+			$
+			$
+				\Rightarrow \{\begin{array}{rl} \. w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}.\tag{$\. w, b$极值}
+			$
+			$G(\. \lambda) = L(\. w^*, b^*, \. \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \. x_i^T \. x_j \tag{Lagrange对偶}
+			$
 
-            得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\. \lambda^*$
-                $
-                    \max\limits_{\. \lambda} &\quad G(\. \lambda)\\
-                    s.t. &  \quad \lambda_i \ge 0\\
-                        & \quad \sum_i \lambda_i y_i = 0
-                $
-                
-            其中, KKT条件如下
-                $
-                    \lambda &\ge 0\\
-                    y_i (\. w^T \. x_i + b) - 1 &\ge 0\\
-                    \lambda_i(y_i(\. w^T \. x_i + b) - 1) &= 0
-                $
-                        
-        \bf{算法步骤}:
-            * 计算核矩阵
-            * 计算$\lambda^*$
-            
-                * 选择 i
-                * 选择 j
-                * 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
-                * 更新 $\lambda_j, \lambda_i$
-                * 更新 b
-            
-            * 计算 w*, b*
+			得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\. \lambda^*$
+				$
+					\max\limits_{\. \lambda} &\quad G(\. \lambda)\\
+					s.t. &  \quad \lambda_i \ge 0\\
+						& \quad \sum_i \lambda_i y_i = 0
+				$
+				
+			其中, KKT条件如下
+				$
+					\lambda &\ge 0\\
+					y_i (\. w^T \. x_i + b) - 1 &\ge 0\\
+					\lambda_i(y_i(\. w^T \. x_i + b) - 1) &= 0
+				$
+						
+		\bf{算法步骤}:
+			* 计算核矩阵
+			* 计算$\lambda^*$
+			
+				* 选择 i
+				* 选择 j
+				* 计算 $K_{ii}+K_{jj}-2K_{ij}, L, H$
+				* 更新 $\lambda_j, \lambda_i$
+				* 更新 b
+			
+			* 计算 w*, b*
 
-    * 神经网络
-        * 前馈神经网络
-            * 正向传播
-                $\sigma()$: 激活函数, 使线性拟合非线性化, eg. relu(x), Sigmoid(x)
-                $\. y = \sigma (\. w \. x + \. b)$
-
-
-                误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
-                $E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^{2}$
-
-            * 反向传播 --- 梯度下降最优化
-                $\.{w}^{(\tau+1)}=\.{w}^{(\tau)}-\eta \nabla E(\.{w}^{(\tau)})$
-                
-                设$z = \. w^T \. x + \. b$
-                $ \{ \begin{array}{lr}
-                    \delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
-                    \delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}\\
-                    \nabla E(\. w_l) = \delta_l \. x_l^T & \text{(每层参数误差)}
-                \end{array} .$
-
-                \bf{证明}:
-                    
-                    每层参数误差, 由链式法则得(其中$L$指输出层): 
-                        $
-                            \frac{\partial E}{\partial w_l} 
-                            &= \frac{\partial z_l}{\partial w_l} (\frac{\partial y_l}{\partial z_l}\frac{\partial z_l}{\partial y_{l+1}}) ... (\frac{\partial y_{L-1}}{\partial z_{L-1}} \frac{\partial z_{L-1}}{\partial y_L} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
-                            &= \frac{\partial z_l}{\partial w_l}  (\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}
-                        $
-                        
-                    其中:
-                        $
-                            \frac{\partial y_l}{\partial z_l} &= \sigma'(z_l)\\
-                            \frac{\partial z_l}{\partial y_{l+1}} &= \. w_{l+1}^T
-                        $
-                        
-                    令$\delta_l$为每层误差:
-                        $
-                            \delta_l &=(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
-                            &= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{\partial E}{\partial y_L}
-                        $
-                        
-                    得到每层参数误差结果:
-                        $
-                            \Rightarrow \frac{\partial E}{\partial w_l} &= \delta_l \frac{\partial z_l}{\partial w_l} = \delta_l x_l^T\\
-                            \delta_L &= \frac{\partial E}{\partial y_L} ·\sigma '(z_L)
-                        $
-                        
-                \bf{附}:
-                
-                    激活函数的导函数:
-                        $
-                            relu(x) &= \max(0, x)\\
-                            relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}\\
-                            sigmoid(x) &= \frac{1}{1+e^{-x}}\\
-                            sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
-                        $
+	* 神经网络
+		* 前馈神经网络
+			* 正向传播
+				$\sigma()$: 激活函数, 使线性拟合非线性化, eg. relu(x), Sigmoid(x)
+				$\. y = \sigma (\. w \. x + \. b)$
 
 
-    * 概率图模型
-        在机器学习领域，概率图模型(Graphical Model)是一种将问题抽象成数学模型的高效建模方法，具有很强的表达能力。借助于概率图模型，很多机器学习的方法都可以用概率图模型来表示。 概率图模型是综合了图论和概率论的知识。根据图的不同，概率图模型可以分为三类：
+				误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
+				$E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^{2}$
 
-        * 有向图, 也称Bayesian网
-        * 无向图, 也称Markov随机场
-        * 因子图
+			* 反向传播 --- 梯度下降最优化
+				$\.{w}^{(\tau+1)}=\.{w}^{(\tau)}-\eta \nabla E(\.{w}^{(\tau)})$
+				
+				设$z = \. w^T \. x + \. b$
+				$ \{ \begin{array}{lr}
+					\delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
+					\delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}\\
+					\nabla E(\. w_l) = \delta_l \. x_l^T & \text{(每层参数误差)}
+				\end{array} .$
 
-    * Markov随机场
-        \def{Markov随机场}
-            这是一种著名的无向图模型, 图中每个结点表示一个或一组变量, 结点之间的边表示两个变量之间的依赖关系.马尔可夫随机场有一组势函数(potential functions),亦称“因子”(factor), 这是定义在变量子集上的非负实函数,主要用于定义概率分布函数.
-        
-        
-        \def{极大团}
-            给定一张图$G=(V,E)$，和顶点集合的一个非空子集合$C \subset V$，如果C中任何两个顶点之间均有边链接，则称C为团(clique)；更进一步，若加入任何一个顶点$V \in G/C$中的顶点，都使得C∪v不再是团,则称C为极大团(maximal clique)。
+				\bf{证明}:
+					
+					每层参数误差, 由链式法则得(其中$L$指输出层): 
+						$
+							\frac{\partial E}{\partial w_l} 
+							&= \frac{\partial z_l}{\partial w_l} (\frac{\partial y_l}{\partial z_l}\frac{\partial z_l}{\partial y_{l+1}}) ... (\frac{\partial y_{L-1}}{\partial z_{L-1}} \frac{\partial z_{L-1}}{\partial y_L} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
+							&= \frac{\partial z_l}{\partial w_l}  (\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}
+						$
+						
+					其中:
+						$
+							\frac{\partial y_l}{\partial z_l} &= \sigma'(z_l)\\
+							\frac{\partial z_l}{\partial y_{l+1}} &= \. w_{l+1}^T
+						$
+						
+					令$\delta_l$为每层误差:
+						$
+							\delta_l &=(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
+							&= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{\partial E}{\partial y_L}
+						$
+						
+					得到每层参数误差结果:
+						$
+							\Rightarrow \frac{\partial E}{\partial w_l} &= \delta_l \frac{\partial z_l}{\partial w_l} = \delta_l x_l^T\\
+							\delta_L &= \frac{\partial E}{\partial y_L} ·\sigma '(z_L)
+						$
+						
+				\bf{附}:
+				
+					激活函数的导函数:
+						$
+							relu(x) &= \max(0, x)\\
+							relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}\\
+							sigmoid(x) &= \frac{1}{1+e^{-x}}\\
+							sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
+						$
 
 
-    * 混合⾼斯分布
-        \def{混合⾼斯分布}
-            $
-                \P(x) = \sum_{k=0}^K N(x | \mu_k, \Sigma_k)
-            $
+	* 概率图模型
+		在机器学习领域，概率图模型(Graphical Model)是一种将问题抽象成数学模型的高效建模方法，具有很强的表达能力。借助于概率图模型，很多机器学习的方法都可以用概率图模型来表示。 概率图模型是综合了图论和概率论的知识。根据图的不同，概率图模型可以分为三类：
 
-    * 期望最大化算法
-        \def{隐变量}
-            未观测的变量, 
+		* 有向图, 也称Bayesian网
+		* 无向图, 也称Markov随机场
+		* 因子图
 
-        \def{期望最大化算法}
-            EM算法的⽬标是找到具有潜在变量的模型的最⼤似然解。基本思想是, 
-            * E步骤: 若参数$\Theta$已知, 则可根据训练数据推断最优隐变量Z的值. 以当前参数$\Theta_t$ 推断隐变量分布$\P (Z | X, \Theta_t)$, 并计算对数似然函数关于Z的期望,
-            $
-                Q(\Theta | \Theta_t) = \E_{Z|X,\Thetat_t}[ln\ L(\Theta | X, Z)]
-            $
-            * M步骤: 若Z的值已知, 则可以方便地对参数$\Theta$做极大似然估计. 
-            $
-                \Theta_{t+1} = \arg\max_\Theta Q(\Theta | \Theta_t)
-            $
-            于是以初始值$\Theta_0$作为起点, 迭代执行上述步骤直至收敛.
+	* Markov随机场
+		\def{Markov随机场}
+			这是一种著名的无向图模型, 图中每个结点表示一个或一组变量, 结点之间的边表示两个变量之间的依赖关系.马尔可夫随机场有一组势函数(potential functions),亦称“因子”(factor), 这是定义在变量子集上的非负实函数,主要用于定义概率分布函数.
+		
+		
+		\def{极大团}
+			给定一张图$G=(V,E)$，和顶点集合的一个非空子集合$C \subset V$，如果C中任何两个顶点之间均有边链接，则称C为团(clique)；更进一步，若加入任何一个顶点$V \in G/C$中的顶点，都使得C∪v不再是团,则称C为极大团(maximal clique)。
 
-            EM算法可以看作是一种非梯度优化方法, 避免了梯度下降方法由于求和的项数随着隐变量数目而指数上升的问题.
+
+	* 混合⾼斯分布
+		\def{混合⾼斯分布}
+			$
+				\P(x) = \sum_{k=0}^K N(x | \mu_k, \Sigma_k)
+			$
+
+	* 期望最大化算法
+		\def{隐变量}
+			未观测的变量, 
+
+		\def{期望最大化算法}
+			EM算法的⽬标是找到具有潜在变量的模型的最⼤似然解。基本思想是, 
+			* E步骤: 若参数$\Theta$已知, 则可根据训练数据推断最优隐变量Z的值. 以当前参数$\Theta_t$ 推断隐变量分布$\P (Z | X, \Theta_t)$, 并计算对数似然函数关于Z的期望,
+			$
+				Q(\Theta | \Theta_t) = \E_{Z|X,\Thetat_t}[ln\ L(\Theta | X, Z)]
+			$
+			* M步骤: 若Z的值已知, 则可以方便地对参数$\Theta$做极大似然估计. 
+			$
+				\Theta_{t+1} = \arg\max_\Theta Q(\Theta | \Theta_t)
+			$
+			于是以初始值$\Theta_0$作为起点, 迭代执行上述步骤直至收敛.
+
+			EM算法可以看作是一种非梯度优化方法, 避免了梯度下降方法由于求和的项数随着隐变量数目而指数上升的问题.
 
 
 
 
 * 强化学习
-    \def{强化学习} 在交互中学习, 以实现一个目标的计算性方法. 即, 让智能体去和未知的环境互动, 学习如何动作以获得最大累计奖励.
+	\def{强化学习} 在交互中学习, 以实现一个目标的计算性方法. 即, 让智能体去和未知的环境互动, 学习如何动作以获得最大累计奖励.
 
-    \question{强化学习与有/无监督学习的异同?}
-        * 强化学习与有监督学习的异同?
-            监督学习,是从外部监督者提供的"样本-标记对"的训练集中学习的一种方式. 目的是学习如何推断和概括, 以拥有泛化(即, 对未见过的样本也能正确判断)的能力. 异同点: 相似之处,如上式, 但强化学习并没有明确的"样本---标记"对来提供训练. 在交互问题的未知场景中, 不能即时获得当前"状态S---动作A"关联的答案, 也无法即时获得"状态S---动作A"选择的好坏, 其产生的影响只能在未来长期累积奖励中反映出来.因此, 单靠监督学习不足以实现"从互动中学习". 强化学习, 可以看作是一种具有延迟标记信息的监督学习.
-            $
-                \{ 
-                \text{状态 --- 样本}\\
-                \text{动作 --- 标记}\\
-                \text{策略 --- 分类/回归器}
-                .
-            $
+	\question{强化学习与有/无监督学习的异同?}
+		* 强化学习与有监督学习的异同?
+			监督学习,是从外部监督者提供的"样本-标记对"的训练集中学习的一种方式. 目的是学习如何推断和概括, 以拥有泛化(即, 对未见过的样本也能正确判断)的能力. 异同点: 相似之处,如上式, 但强化学习并没有明确的"样本---标记"对来提供训练. 在交互问题的未知场景中, 不能即时获得当前"状态S---动作A"关联的答案, 也无法即时获得"状态S---动作A"选择的好坏, 其产生的影响只能在未来长期累积奖励中反映出来.因此, 单靠监督学习不足以实现"从互动中学习". 强化学习, 可以看作是一种具有延迟标记信息的监督学习.
+			$
+				\{ 
+				\text{状态 --- 样本}\\
+				\text{动作 --- 标记}\\
+				\text{策略 --- 分类/回归器}
+				.
+			$
 
-        * 强化学习与无监督学习的异同?
-            无监督学习, 是寻找蕴藏在未标记的数据里的结构特征. 异同点: 强化学习是最大化累计奖励, 而非寻找隐藏的结构, 因此, 无监督学习不包含强化学习.
+		* 强化学习与无监督学习的异同?
+			无监督学习, 是寻找蕴藏在未标记的数据里的结构特征. 异同点: 强化学习是最大化累计奖励, 而非寻找隐藏的结构, 因此, 无监督学习不包含强化学习.
 
-        * 综上所述, 强化学习是学习的第三类范式, 其与有/无监督学习不相同.
+		* 综上所述, 强化学习是学习的第三类范式, 其与有/无监督学习不相同.
 
-    * 智能体 \& 环境
-        * \def{智能体} 学习和决策者.
-        * \def{环境} 与智能体交互的, 除智能体之外的一切事物.
-        
-        \question{智能体-环境的边界如何确定?}{
-            界限并没有确定性的定义, 而是根据实际问题来.遵循的一般规则是, 任何不能由智能体任意更改的内容, 都被视为是环境的一部分.
-            \bf{eg.} 奖励可能在智能体内计算, 但被认为是环境的, 因为奖励定义了智能体面临的任务, 因此必须超出智能体任意改变的能力.
-        }
+	* 智能体 \& 环境
+		* \def{智能体} 学习和决策者.
+		* \def{环境} 与智能体交互的, 除智能体之外的一切事物.
+		
+		\question{智能体-环境的边界如何确定?}{
+			界限并没有确定性的定义, 而是根据实际问题来.遵循的一般规则是, 任何不能由智能体任意更改的内容, 都被视为是环境的一部分.
+			\bf{eg.} 奖励可能在智能体内计算, 但被认为是环境的, 因为奖励定义了智能体面临的任务, 因此必须超出智能体任意改变的能力.
+		}
 
 
-    * 状态, 动作, 奖励 $S, A, R$
-        * \def{状态}{}
-        * \def{动作}{}
-        * \def{奖励}{}
-        
-        ------
-        * \def{累计奖励}{
-            奖励的长期累积值$\sum R$. 同时, 获得最大的累积奖励是智能体的唯一目标.
-                $G_t= \sum_{i = t+1}^{T} R_i$
-            为了避免$T \to \infty, G_t \to \infty$, 引入折扣$\gamma \in [0,1]$, 期望折扣回报:
-                $G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}$
-        }
+	* 状态, 动作, 奖励 $S, A, R$
+		* \def{状态}{}
+		* \def{动作}{}
+		* \def{奖励}{}
+		
+		------
+		* \def{累计奖励}{
+			奖励的长期累积值$\sum R$. 同时, 获得最大的累积奖励是智能体的唯一目标.
+				$G_t= \sum_{i = t+1}^{T} R_i$
+			为了避免$T \to \infty, G_t \to \infty$, 引入折扣$\gamma \in [0,1]$, 期望折扣回报:
+				$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}$
+		}
    
-        
-    * 探索-利用平衡
-        \bf{算法}
-        * $\epsilon$贪心
-            $
-                A =  \{ 
-                    \arg\max_a\ Q(a) & \P(\text{贪心}) = \epsilon\\
-                    \text{a random action} & \P(\text{随机}) = 1 - \epsilon 
-                . 
-            $
-            
-        * 上置信界算法
-            始终选择置信度上界最大的动作作为选择策略.
-            $A_t = \underset{a}{\arg\max} [Q_t(a)+c \sqrt{\frac{\ln t}{N_t(a)}} ]$
-            \Proof{
-                Gauss分布下的Chernoff边界:
-                    $\P(\mu \geq \bar{\mu}+\epsilon) \leq \exp  (\frac{-n \epsilon^{2}}{2} )$
-                令$\delta = e^{-n \epsilon / 2}$, 即 $\epsilon = \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}$
-            $
-                \Rightarrow & \P (\mu \ge \bar{\mu} + \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ) \le \sigma\\
-                \Rightarrow & \P (\bar{\mu} \in  [\mu - \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}, \mu +  \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ]  ) \ge 1 - 2 \sigma
-            $
-            }
-                
-        * Softmax算法
-            \bf{soft-max分布}:
-                $\operatorname{Pr} \{A_t=a \} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k} e^{H_t(b)}} = \P_{\pi,t}(a)$
-    
-    * Markov决策过程
+		
+	* 探索-利用平衡
+		\bf{算法}
+		* $\epsilon$贪心
+			$
+				A =  \{ 
+					\arg\max_a\ Q(a) & \P(\text{贪心}) = \epsilon\\
+					\text{a random action} & \P(\text{随机}) = 1 - \epsilon 
+				. 
+			$
+			
+		* 上置信界算法
+			始终选择置信度上界最大的动作作为选择策略.
+			$A_t = \underset{a}{\arg\max} [Q_t(a)+c \sqrt{\frac{\ln t}{N_t(a)}} ]$
+			\Proof{
+				Gauss分布下的Chernoff边界:
+					$\P(\mu \geq \bar{\mu}+\epsilon) \leq \exp  (\frac{-n \epsilon^{2}}{2} )$
+				令$\delta = e^{-n \epsilon / 2}$, 即 $\epsilon = \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}$
+			$
+				\Rightarrow & \P (\mu \ge \bar{\mu} + \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ) \le \sigma\\
+				\Rightarrow & \P (\bar{\mu} \in  [\mu - \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}, \mu +  \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ]  ) \ge 1 - 2 \sigma
+			$
+			}
+				
+		* Softmax算法
+			\bf{soft-max分布}:
+				$\operatorname{Pr} \{A_t=a \} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k} e^{H_t(b)}} = \P_{\pi,t}(a)$
+	
+	* Markov决策过程
 
-        
-    * 价值\&策略函数 $S-A-R$
-        * 价值函数 $R = V(S)$
-            价值函数: 评价智能体在给定状态$S_t$下预期的累计奖励. (Bellman方程)
-            $
-                V(s) 
-                &= \mathbb{E}  [G_t | S_t=s ] \tag{定义}\\
-                &= \mathbb{E}  [R_{t+1} + \gamma G_{t+1} | S_t=s ] \tag{代换}\\
-                &= \sum_{a \in A} \P_\pi(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)\cdot  (r + \gamma \mathbb{E}  [G_{t+1} | S_{t+1} = s' ] )  ) \tag{期望公式}\\
-                &= \sum_{a \in A} \P_\pi(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)\cdot  (r + \gamma V(s')  )  ) \tag{代换}\\
-                &= \mathbb{E}  [R_{t+1} + \gamma V(S_{t+1}) | S_t=s ]
-            $
+		
+	* 价值\&策略函数 $S-A-R$
+		* 价值函数 $R = V(S)$
+			价值函数: 评价智能体在给定状态$S_t$下预期的累计奖励. (Bellman方程)
+			$
+				V(s) 
+				&= \mathbb{E}  [G_t | S_t=s ] \tag{定义}\\
+				&= \mathbb{E}  [R_{t+1} + \gamma G_{t+1} | S_t=s ] \tag{代换}\\
+				&= \sum_{a \in A} \P_\pi(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)\cdot  (r + \gamma \mathbb{E}  [G_{t+1} | S_{t+1} = s' ] )  ) \tag{期望公式}\\
+				&= \sum_{a \in A} \P_\pi(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)\cdot  (r + \gamma V(s')  )  ) \tag{代换}\\
+				&= \mathbb{E}  [R_{t+1} + \gamma V(S_{t+1}) | S_t=s ]
+			$
 
-            (1) 立即回报$R_{t+1}$\\
-        	(2) 后继状态的折扣价值函数$\gamma \cdot V(S_{t+1})$
-        
-        * 动作-价值函数 $R_A = Q(S,A)$
-            $
-                Q(s,a) 
-                &= \mathbb{E} [G_t | S_t=s, A_t = a ]\\
-                &= \mathbb{E} [\sum_{k=0}^\infty \gamma^k R_{t+k+1} | S_t = s, A_t = a ]\\
-                &= \mathbb{E}_{s'} [r+\gamma Q (s', a' ) | s, a ]
-            $
-            
-        * 策略函数 $A = \Pi(S)$
-            * 确定性策略: $a = \pi(s)$
-            * 随机性策略: $\P_\pi(a | s)$
-            
-        * 优化
-    
-    * 基于价值函数
-        
-        * 动态规划
-            \def{动态规划方法}
-                完备的环境模型下, 计算最优策略的一种方法.
+			(1) 立即回报$R_{t+1}$\\
+			(2) 后继状态的折扣价值函数$\gamma \cdot V(S_{t+1})$
+		
+		* 动作-价值函数 $R_A = Q(S,A)$
+			$
+				Q(s,a) 
+				&= \mathbb{E} [G_t | S_t=s, A_t = a ]\\
+				&= \mathbb{E} [\sum_{k=0}^\infty \gamma^k R_{t+k+1} | S_t = s, A_t = a ]\\
+				&= \mathbb{E}_{s'} [r+\gamma Q (s', a' ) | s, a ]
+			$
+			
+		* 策略函数 $A = \Pi(S)$
+			* 确定性策略: $a = \pi(s)$
+			* 随机性策略: $\P_\pi(a | s)$
+			
+		* 优化
+	
+	* 基于价值函数
+		
+		* 动态规划
+			\def{动态规划方法}
+				完备的环境模型下, 计算最优策略的一种方法.
 
-            * 策略迭代 = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
-                * \bf{策略评估}: 求当前策略下的累计奖励$V_\pi$.
-                    解析解: (计算复杂度$|S|^3$)
-                    $
-                        V_\pi(s)
-                        &=\mathbb{E}_\pi [R_{t+1}+\gamma V_\pi (S_{t+1} ) | S_t=s ] \\
-                        &= \sum_{a} \pi(a | s) \sum_{s',r} p (s', r | s, a ) [r+\gamma V_\pi (s' ) ]\\
-                        \Rightarrow V_\pi &= R_\pi + \gamma P_\piV_\pi \tag{矩阵式}\\
-                        \Rightarrow V_\pi &= (I - \gamma P_\pi)^{-1} R_\pi \tag{解析解})
-                    $
-                    
-                    迭代计算数值解: $\lim_{k \to \infty} V_k = V_\pi$
-                    $
-                        V_{k+1}(s) & = \mathbb{E}_\pi [R_{t+1}+\gamma V_{k} (S_{t+1} ) | S_t=s ] \\
-                        &= \sum_{a} \pi(a | s) \sum_{s' r} p (s', r | s, a ) [r+\gamma V_{k} (s' ) ]
-                    $
-                    
-                * \bf{策略改进}: 找到累计奖励更多的策略$\pi'$.
-                    $\forall s \in S,\ V_\pi(s) \le Q(s, \pi'(s)) \quad \Rightarrow \quad V_\pi(s) \le V_{\pi'}(s)$
-                    贪心策略: $\forall s \in S,\ \pi' = \arg\max_a\ q_\pi (s,a)$
-                    
-                * \bf{策略迭代} = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
-                    $V_\pi \Rightarrow (\pi \to \pi') \Rightarrow V_\pi \Rightarrow (\pi \to \pi') \Rightarrow ... \Rightarrow \{\pi^*, V^*\}$
-            
-            * 广义策略迭代
-                \def{广义策略迭代}{
-                    让策略评估和策略提升进行交互, 且独立于间隔和其他二者的细节.
-                }
-        
-        * Monte Carlo方法
-            \def{动态规划方法}
-                深度优先搜索. 我们不假设对环境有完全了解。蒙特卡罗方法只需要从与环境的实际或模拟交互中体验状态、动作和奖励的样本序列。只有在一个片段结束后, 价值评估和策略才会更新。因此, Monte Carlo方法是逐段递增的, 而不是一步一步在线的.
-                对值函数的估计:
-                $V (S_t )  arrow V (S_t )+\alpha (G_t-V (S_t ) )$
+			* 策略迭代 = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
+				* \bf{策略评估}: 求当前策略下的累计奖励$V_\pi$.
+					解析解: (计算复杂度$|S|^3$)
+					$
+						V_\pi(s)
+						&=\mathbb{E}_\pi [R_{t+1}+\gamma V_\pi (S_{t+1} ) | S_t=s ] \\
+						&= \sum_{a} \pi(a | s) \sum_{s',r} p (s', r | s, a ) [r+\gamma V_\pi (s' ) ]\\
+						\Rightarrow V_\pi &= R_\pi + \gamma P_\piV_\pi \tag{矩阵式}\\
+						\Rightarrow V_\pi &= (I - \gamma P_\pi)^{-1} R_\pi \tag{解析解})
+					$
+					
+					迭代计算数值解: $\lim_{k \to \infty} V_k = V_\pi$
+					$
+						V_{k+1}(s) & = \mathbb{E}_\pi [R_{t+1}+\gamma V_{k} (S_{t+1} ) | S_t=s ] \\
+						&= \sum_{a} \pi(a | s) \sum_{s' r} p (s', r | s, a ) [r+\gamma V_{k} (s' ) ]
+					$
+					
+				* \bf{策略改进}: 找到累计奖励更多的策略$\pi'$.
+					$\forall s \in S,\ V_\pi(s) \le Q(s, \pi'(s)) \quad \Rightarrow \quad V_\pi(s) \le V_{\pi'}(s)$
+					贪心策略: $\forall s \in S,\ \pi' = \arg\max_a\ q_\pi (s,a)$
+					
+				* \bf{策略迭代} = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
+					$V_\pi \Rightarrow (\pi \to \pi') \Rightarrow V_\pi \Rightarrow (\pi \to \pi') \Rightarrow ... \Rightarrow \{\pi^*, V^*\}$
+			
+			* 广义策略迭代
+				\def{广义策略迭代}{
+					让策略评估和策略提升进行交互, 且独立于间隔和其他二者的细节.
+				}
+		
+		* Monte Carlo方法
+			\def{动态规划方法}
+				深度优先搜索. 我们不假设对环境有完全了解。蒙特卡罗方法只需要从与环境的实际或模拟交互中体验状态、动作和奖励的样本序列。只有在一个片段结束后, 价值评估和策略才会更新。因此, Monte Carlo方法是逐段递增的, 而不是一步一步在线的.
+				对值函数的估计:
+				$V (S_t )  arrow V (S_t )+\alpha (G_t-V (S_t ) )$
 
-        * 时序差分学习
-            \def{时序差分学习}
-                时序差分学习是蒙特卡罗思想和动态规划思想的结合。与蒙特卡罗方法一样, 时序差分方法可以直接从原始经验中学习, 而无需环境动力学模型。与动态规划一样, 时序差分方法部分基于其他学习的估计更新估计, 而无需等待最终结果（它们是自举的）.
-                $V (S_t )  arrow V (S_t )+\alpha (R_{t+1}+\gamma V (S_{t+1} )-V (S_t ) )$
+		* 时序差分学习
+			\def{时序差分学习}
+				时序差分学习是蒙特卡罗思想和动态规划思想的结合。与蒙特卡罗方法一样, 时序差分方法可以直接从原始经验中学习, 而无需环境动力学模型。与动态规划一样, 时序差分方法部分基于其他学习的估计更新估计, 而无需等待最终结果（它们是自举的）.
+				$V (S_t )  arrow V (S_t )+\alpha (R_{t+1}+\gamma V (S_{t+1} )-V (S_t ) )$
 
-            \Example
-                * \def{Q-Learning}
-                    --- off-policy
-                    $\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$
+			\Example
+				* \def{Q-Learning}
+					--- off-policy
+					$\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$
 
-                * \def{Sarsa}
-                    --- on-policy
-                    $\Delta Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
-                
-                * Deep Q Networks
-                    \def{Deep Q Networks}{
-                        Deep Q Networks = Q-Learning + 神经网络
+				* \def{Sarsa}
+					--- on-policy
+					$\Delta Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
+				
+				* Deep Q Networks
+					\def{Deep Q Networks}{
+						Deep Q Networks = Q-Learning + 神经网络
 
-                    \bf{论文}: \textit{Playing Atari with Deep Reinforcement Learning (2013)}
+					\bf{论文}: \textit{Playing Atari with Deep Reinforcement Learning (2013)}
 
-                    \bf{优势}:
-                    * 利用神经网络的深度学习对强化学习进行提升, Q-Learning + 卷积神经网络. 深度学习的进展使得直接从视觉和语音等高维感官输入的端到端学习成为可能 (eg,直接从电脑屏幕学习到游戏手柄动作), 解决了Q-Learning的Q表中状态、动作数量无法做大的问题.
-                    * 经验库回放机制, 解决深度学习训练所需样本独立，但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
-                    * 随机小批量更新
+					\bf{优势}:
+					* 利用神经网络的深度学习对强化学习进行提升, Q-Learning + 卷积神经网络. 深度学习的进展使得直接从视觉和语音等高维感官输入的端到端学习成为可能 (eg,直接从电脑屏幕学习到游戏手柄动作), 解决了Q-Learning的Q表中状态、动作数量无法做大的问题.
+					* 经验库回放机制, 解决深度学习训练所需样本独立，但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
+					* 随机小批量更新
 
-                    \bf{劣势}: 只能处理离散和低维的动作空间.
-                
-                    \bf{更新函数}: 神经网络(Q 网络)对于更新函数, 主要表现在参数$\theta$上
-                        $\theta_{t+1} = \theta_t + \alpha \nabla_{\theta_t} J (\theta_t )$
-                        $J (\theta_t )=\underset{s, a \sim \rho(\cdot)}{\mathbb{E}}  [ (y_t-Q (s, a ; \theta_t ) )^{2} ]$
-                        $\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(\cdot) \atop s' \sim \mathcal{E}}{\mathbb{E}} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
+					\bf{劣势}: 只能处理离散和低维的动作空间.
+				
+					\bf{更新函数}: 神经网络(Q 网络)对于更新函数, 主要表现在参数$\theta$上
+						$\theta_{t+1} = \theta_t + \alpha \nabla_{\theta_t} J (\theta_t )$
+						$J (\theta_t )=\underset{s, a \sim \rho(\cdot)}{\mathbb{E}}  [ (y_t-Q (s, a ; \theta_t ) )^{2} ]$
+						$\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(\cdot) \atop s' \sim \mathcal{E}}{\mathbb{E}} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
 
 
-    * 基于策略函数
+	* 基于策略函数
 
-        * 策略梯度方法
-            \def{策略梯度方法}
-                是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
+		* 策略梯度方法
+			\def{策略梯度方法}
+				是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
 
-                \bf{策略梯度}, 
-                    $\P_\pi (a | s, \theta)$
-                    $ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$
+				\bf{策略梯度}, 
+					$\P_\pi (a | s, \theta)$
+					$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$
 
-                \bf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
-        
-            \bf{优势}: 解决连续动作空间的强化学习问题.
+				\bf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
+		
+			\bf{优势}: 解决连续动作空间的强化学习问题.
 
-            \bf{劣势}:
-                即使通过策略梯度学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得动作的具体值；而动作通常是高维的向量, 在高维的动作空间的频繁采样很耗费计算能力. 在策略梯度学习过程中, 每一步计算策略梯度都需要在整个动作空间进行积分,这个积分我们一般通过Monte Carlo采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。 (这在确定性策略梯度方法中得到解决.)
+			\bf{劣势}:
+				即使通过策略梯度学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得动作的具体值；而动作通常是高维的向量, 在高维的动作空间的频繁采样很耗费计算能力. 在策略梯度学习过程中, 每一步计算策略梯度都需要在整个动作空间进行积分,这个积分我们一般通过Monte Carlo采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。 (这在确定性策略梯度方法中得到解决.)
 
-            \bf{性能度量函数}, .设性能度量函数即是价值函数$J(\.\theta) = V(s)$, 则梯度有:
-                $
-                    \nabla J(\.\theta) &= \nabla_\theta V(s) \\
-                    &\propto \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi(a | s', \.\theta) \\
-                    & \propto \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ]
-                $
-            
-            \Proof
-                $
-                    \nabla_\theta V(s)
-                    &= \nabla_\theta\ \E[G_t|S_t = s] \tag{价值函数定义}\\
-                    &= \nabla_\theta  (\sum_{a \in A} \P_\pi (a | s)\ Q(s,a)  ) \tag{期望公式}\\
-                    &= \sum_{a \in A} \nabla_\theta  ( \P_\pi (a | s)\ Q(s,a)  ) \tag{分配律}\\
-                    &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}\\
-                    &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}\\
-                    &= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s)+ \P_\pi (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}\\
-                    &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_{r} \P(s', r | s, a)  \tag{加法性质}\\
-                    &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}\\
-                    &= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
-                    &= \sum_{s' \in S} \sum_{t=0}^{\infty} 
-                    \gamma^t \P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}\\
-                    &=  (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^{\infty} \P_\pi^{(t)} (s'| s )$归一化}\\
-                    &= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
-                    &= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  ] \tag{期望形式}\\
-                    &= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} \P_\pi (a | s') Q_\pi(s', a) \frac{\nabla_\theta \P_\pi (a | s')}{\P_\pi (a | s')}  ] \tag{提项$\P_\pi (a | s')$, 方便后面对$a$写期望}\\
-                    &= \alpha \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ] \tag{期望形式, 微分公式}\\
-                $
-                
-            \bf{优点}, 解决连续动作空间的强化学习问题
-            
-            \bf{缺点}:
-                即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的； 在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
+			\bf{性能度量函数}, .设性能度量函数即是价值函数$J(\.\theta) = V(s)$, 则梯度有:
+				$
+					\nabla J(\.\theta) &= \nabla_\theta V(s) \\
+					&\propto \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi(a | s', \.\theta) \\
+					& \propto \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ]
+				$
+			
+			\Proof
+				$
+					\nabla_\theta V(s)
+					&= \nabla_\theta\ \E[G_t|S_t = s] \tag{价值函数定义}\\
+					&= \nabla_\theta  (\sum_{a \in A} \P_\pi (a | s)\ Q(s,a)  ) \tag{期望公式}\\
+					&= \sum_{a \in A} \nabla_\theta  ( \P_\pi (a | s)\ Q(s,a)  ) \tag{分配律}\\
+					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}\\
+					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}\\
+					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s)+ \P_\pi (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}\\
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_{r} \P(s', r | s, a)  \tag{加法性质}\\
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}\\
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
+					&= \sum_{s' \in S} \sum_{t=0}^{\infty} 
+					\gamma^t \P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}\\
+					&=  (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^{\infty} \P_\pi^{(t)} (s'| s )$归一化}\\
+					&= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
+					&= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  ] \tag{期望形式}\\
+					&= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} \P_\pi (a | s') Q_\pi(s', a) \frac{\nabla_\theta \P_\pi (a | s')}{\P_\pi (a | s')}  ] \tag{提项$\P_\pi (a | s')$, 方便后面对$a$写期望}\\
+					&= \alpha \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ] \tag{期望形式, 微分公式}\\
+				$
+				
+			\bf{优点}, 解决连续动作空间的强化学习问题
+			
+			\bf{缺点}:
+				即使通过PG学习得到了随机策略之后, 在每一步行为时, 我们还需要对得到的最优策略概率分布进行采样, 才能获得action的具体值；而action通常是高维的向量, 比如25维、50维, 在高维的action空间的频繁采样, 无疑是很耗费计算能力的； 在PG的学习过程中, 每一步计算policy gradient都需要在整个action space进行积分,这个积分我们一般通过Monte Carlo 采样来进行估算, 需要在高维的action空间进行采样, 耗费计算能力。
 
-        * 确定性策略梯度方法
-            \def{确定性策略梯度方法}
-                采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
+		* 确定性策略梯度方法
+			\def{确定性策略梯度方法}
+				采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
 
-                \bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
-                    $\nabla_\theta J (\mu_\theta ) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]$ 
-                    
-                    $\lim _{\sigma \downarrow 0} \nabla_\theta J (\pi_{\mu_\theta, \sigma} )=\nabla_\theta J (\mu_\theta )$
+				\bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
+					$\nabla_\theta J (\mu_\theta ) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]$ 
+					
+					$\lim _{\sigma \downarrow 0} \nabla_\theta J (\pi_{\mu_\theta, \sigma} )=\nabla_\theta J (\mu_\theta )$
 
-                \bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
+				\bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
 
-            \bf{优势}: 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。
-            
-            \bf{eg.} 策略函数常用形式
-            $
-                a = \pi(s) =  \{
-                \underset{a}{\arg\max}\ Q_\pi(s, a)    & (\text{max})\\
-                \underset{a}{\arg\max}\ \frac{e^{h(s, a, \theta)}}{\sum_{b} e^{h(s, b, \theta)}}    & (\text{soft-max})
-                . 
-            $
-            
-        * Actor-Critic
-            \def{Actor-Critic}
-                \textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
-        
-                * \bf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_\theta J (\pi_\theta )$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
-                
-                * \bf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样。通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差。然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_\theta J (\pi_\theta )=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_\theta} [\nabla_\theta \log \pi_\theta(a | s) Q^{w}(s, a) ]$. 更直观地说，条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的，$\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解，该线性回归问题根据这些特征估计$Q_\pi(s，a)$。在实践中，条件(2)通常被放宽，以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上，如果同时满足近似值(1)和(2)，则整个算法相当于根本不使用批评家. }
+			\bf{优势}: 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。
+			
+			\bf{eg.} 策略函数常用形式
+			$
+				a = \pi(s) =  \{
+				\underset{a}{\arg\max}\ Q_\pi(s, a)	& (\text{max})\\
+				\underset{a}{\arg\max}\ \frac{e^{h(s, a, \theta)}}{\sum_{b} e^{h(s, b, \theta)}}	& (\text{soft-max})
+				. 
+			$
+			
+		* Actor-Critic
+			\def{Actor-Critic}
+				\textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
+		
+				* \bf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_\theta J (\pi_\theta )$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
+				
+				* \bf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样。通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差。然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_\theta J (\pi_\theta )=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_\theta} [\nabla_\theta \log \pi_\theta(a | s) Q^{w}(s, a) ]$. 更直观地说，条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的，$\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解，该线性回归问题根据这些特征估计$Q_\pi(s，a)$。在实践中，条件(2)通常被放宽，以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上，如果同时满足近似值(1)和(2)，则整个算法相当于根本不使用批评家. }
 
-                Actor 在运用 随机梯度算法 进行 梯度上升 时, 由 Critic 来告诉他, 这次的 梯度上升 是不是一次正确的上升, 如果这次的得分不好, 那么就不要上升那么多. Actor 想要最大化期望的奖励, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做奖励. Critic 的更新很简单, 就是像 Q-learning 那样更新现实和估计的误差 (TD error) 就好了.
+				Actor 在运用 随机梯度算法 进行 梯度上升 时, 由 Critic 来告诉他, 这次的 梯度上升 是不是一次正确的上升, 如果这次的得分不好, 那么就不要上升那么多. Actor 想要最大化期望的奖励, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做奖励. Critic 的更新很简单, 就是像 Q-learning 那样更新现实和估计的误差 (TD error) 就好了.
 
-                \bf{更新函数}
-                $\.\theta_{t+1} = \.\theta_t+\alpha \nabla_\theta J(\theta)$
-                $
-                    \nabla_\theta J(\theta)
-                    &=  (G_{t: t+1}-\hat{v} (S_t, \mathbf{w} ) )\  \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) \\
-                    &=  (R_{t+1}+\gamma \hat{v} (S_{t+1}, \mathbf{w} )-\hat{v} (S_t, \mathbf{w} ) )\ \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) 
-                $
+				\bf{更新函数}
+				$\.\theta_{t+1} = \.\theta_t+\alpha \nabla_\theta J(\theta)$
+				$
+					\nabla_\theta J(\theta)
+					&=  (G_{t: t+1}-\hat{v} (S_t, \mathbf{w} ) )\  \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) \\
+					&=  (R_{t+1}+\gamma \hat{v} (S_{t+1}, \mathbf{w} )-\hat{v} (S_t, \mathbf{w} ) )\ \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) 
+				$
 
-            \bf{优势}: 引入了时序差分算法, 因此可以进行单步更新, 比传统 Policy Gradient 训练更快.
-            
-            \bf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题.  
-            
-            \Example: 
-                \bf{Off-Policy Actor Critic}: 
-                $
-                    \nabla J(\theta) &= \sum_S  \P_\beta (s) \sum_A Q(s, a)\ \nabla_\theta \P_\pi (a | s) \\
-                    &= \underset{s \sim \P_\beta \atop a \sim \beta}{\E}  [ \frac{\P_{\pi,\theta}(a|s)}{\P_{\beta,\theta}(a|s)} Q(s, a)\ \nabla_\theta \P_\pi (a | s) ]
-                $
-            
-        * 确定性 Actor-Critic
-            \Example: 
-                * On-Policy Deterministic Actor-Critic
-                    $
-                        \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) \\
-                        w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
-                        \theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
-                    $
-                    
-                
-                * Off-Policy Deterministic Actor-Critic
-                    $
-                        \delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_\theta (s_{t+1} ) )-Q^{w} (s_t, a_t ) \\
-                        w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
-                        \theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
-                    $
-                    
-                    随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
-                
-            
-        * Deep Deterministic Policy Gradient
-            \bf{论文}: \textit{Continuous Control With Deep Reinforcement Learning(2015)}这篇论文, 
-            
-            \bf{Deep Deterministic Policy Gradient}: \bf{DDPG = 确定性Actor-Critic + Deep Q-Networks}, 结合了两者的优点, 既能借助策略梯度优势帮DQN应用于连续动作空间, 又能利用DQN优势实现端到端的视觉、语音高维感官输入学习, 且提高了 Actor Critic 的稳定性和收敛性.
-            
-            \bf{改进}:
-                * 使用卷积神经网络来模拟策略函数和Q函数, 并用深度学习的方法来训练, 证明了在RL方法中, 非线性模拟函数的准确性和高性能、可收敛；而DPG中, 可以看成使用线性回归的机器学习方法: 使用带参数的线性函数来模拟策略函数和Q函数, 然后使用线性回归的方法进行训练。
-                * experience replay memory的使用: actor同环境交互时, 产生的transition数据序列是在时间上高度关联(correlated)的, 如果这些数据序列直接用于训练, 会导致神经网络的overfit, 不易收敛。DDPG的actor将transition数据先存入experience replay buffer, 然后在训练时, 从experience replay buffer中随机采样mini-batch数据, 这样采样得到的数据可以认为是无关联的。
-                * target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
-        
-    
-    \Example
-        * 围棋
-            * 规则
-                * \bf{基本元素}:
-                    * \bf{棋盘}: 19×19等距且垂直交叉的平行线网格, 共391个交叉点.
-                    * \bf{棋子}: 黑白两色, 对局双方各执一色, 空棋盘开局, 黑先白后, 交替下一子在棋盘空白点上, 下定后不得移动.
-                    * \bf{气}: 棋子紧邻的空点(上下左右). 紧邻同色子连成一个整体, 气一并计算且一空点只算一次.
-                
-                * \bf{基本规则}:
-                    * \bf{无气提子}: 若棋子无气, 应立即提出棋盘. 下子后，若对方或双方棋子无气, 都只提对方无气子.
-                    * \bf{无气禁入}: 棋盘上空点, 若下子后，该子立即无气且同时不能提对方棋子, 则该空点禁止下子.
-                    * \bf{禁止全局同形}: 下子后, 不得使对方重复面临曾出现过的棋局. (全局同形再现是妨碍终局的唯一技术性原因, 应禁止.)
-                    * \bf{终局}: 双方交替放弃下子. 双方除了自己的禁入点和眼点(对方禁入点且紧邻皆为自己), 均无空点可下时, 游戏结束.
-                    * \bf{输赢判定}: 数子法, 死棋提出, 数棋盘上活棋(不能被提出的棋子)及其围住空点(紧邻皆为同色棋子)数. 黑色先手, 贴3.75子, 黑胜(黑棋数子数 - 184.25)子, 白胜(白棋数子数 - 176.75)子, 正赢负输.
-                    
-                * \bf{性质}:
-                    * \bf{劫争}: 双方棋子互围, 一方提子, 另一方不得立即回提, 只能在别处下子, 再回提, 以避免全局同形导致死循环.
+			\bf{优势}: 引入了时序差分算法, 因此可以进行单步更新, 比传统 Policy Gradient 训练更快.
+			
+			\bf{劣势}: 取决于 Critic 的价值判断, 但是 Critic 难收敛, 再加上 Actor 的更新, 就更难收敛. Deep Deterministic Policy Gradient融合了 DQN 的优势, 解决了收敛难的问题.  
+			
+			\Example: 
+				\bf{Off-Policy Actor Critic}: 
+				$
+					\nabla J(\theta) &= \sum_S  \P_\beta (s) \sum_A Q(s, a)\ \nabla_\theta \P_\pi (a | s) \\
+					&= \underset{s \sim \P_\beta \atop a \sim \beta}{\E}  [ \frac{\P_{\pi,\theta}(a|s)}{\P_{\beta,\theta}(a|s)} Q(s, a)\ \nabla_\theta \P_\pi (a | s) ]
+				$
+			
+		* 确定性 Actor-Critic
+			\Example: 
+				* On-Policy Deterministic Actor-Critic
+					$
+						\delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) \\
+						w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
+						\theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
+					$
+					
+				
+				* Off-Policy Deterministic Actor-Critic
+					$
+						\delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_\theta (s_{t+1} ) )-Q^{w} (s_t, a_t ) \\
+						w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
+						\theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
+					$
+					
+					随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
+				
+			
+		* Deep Deterministic Policy Gradient
+			\bf{论文}: \textit{Continuous Control With Deep Reinforcement Learning(2015)}这篇论文, 
+			
+			\bf{Deep Deterministic Policy Gradient}: \bf{DDPG = 确定性Actor-Critic + Deep Q-Networks}, 结合了两者的优点, 既能借助策略梯度优势帮DQN应用于连续动作空间, 又能利用DQN优势实现端到端的视觉、语音高维感官输入学习, 且提高了 Actor Critic 的稳定性和收敛性.
+			
+			\bf{改进}:
+				* 使用卷积神经网络来模拟策略函数和Q函数, 并用深度学习的方法来训练, 证明了在RL方法中, 非线性模拟函数的准确性和高性能、可收敛；而DPG中, 可以看成使用线性回归的机器学习方法: 使用带参数的线性函数来模拟策略函数和Q函数, 然后使用线性回归的方法进行训练。
+				* experience replay memory的使用: actor同环境交互时, 产生的transition数据序列是在时间上高度关联(correlated)的, 如果这些数据序列直接用于训练, 会导致神经网络的overfit, 不易收敛。DDPG的actor将transition数据先存入experience replay buffer, 然后在训练时, 从experience replay buffer中随机采样mini-batch数据, 这样采样得到的数据可以认为是无关联的。
+				* target 网络和online 网络的使用,  使的学习过程更加稳定, 收敛更有保障。
+		
+	
+	\Example
+		* 围棋
+			* 规则
+				* \bf{基本元素}:
+					* \bf{棋盘}: 19×19等距且垂直交叉的平行线网格, 共391个交叉点.
+					* \bf{棋子}: 黑白两色, 对局双方各执一色, 空棋盘开局, 黑先白后, 交替下一子在棋盘空白点上, 下定后不得移动.
+					* \bf{气}: 棋子紧邻的空点(上下左右). 紧邻同色子连成一个整体, 气一并计算且一空点只算一次.
+				
+				* \bf{基本规则}:
+					* \bf{无气提子}: 若棋子无气, 应立即提出棋盘. 下子后，若对方或双方棋子无气, 都只提对方无气子.
+					* \bf{无气禁入}: 棋盘上空点, 若下子后，该子立即无气且同时不能提对方棋子, 则该空点禁止下子.
+					* \bf{禁止全局同形}: 下子后, 不得使对方重复面临曾出现过的棋局. (全局同形再现是妨碍终局的唯一技术性原因, 应禁止.)
+					* \bf{终局}: 双方交替放弃下子. 双方除了自己的禁入点和眼点(对方禁入点且紧邻皆为自己), 均无空点可下时, 游戏结束.
+					* \bf{输赢判定}: 数子法, 死棋提出, 数棋盘上活棋(不能被提出的棋子)及其围住空点(紧邻皆为同色棋子)数. 黑色先手, 贴3.75子, 黑胜(黑棋数子数 - 184.25)子, 白胜(白棋数子数 - 176.75)子, 正赢负输.
+					
+				* \bf{性质}:
+					* \bf{劫争}: 双方棋子互围, 一方提子, 另一方不得立即回提, 只能在别处下子, 再回提, 以避免全局同形导致死循环.

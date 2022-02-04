@@ -1,478 +1,507 @@
 
 * 信息
-    \def{信息} 信息是认识主体所感受的和所表达的事物运动状态及运动状态变化的方式. \textit{构成客观世界的三大基本物质之一(物质,能量,信息).}
+	\def{信息} 信息是认识主体所感受的和所表达的事物运动状态及运动状态变化的方式. \textit{构成客观世界的三大基本物质之一(物质,能量,信息).}
 
-    * 信息的度量
-        * 事件的信息度量
-            * 自信息
-                * \def{自信息} $I(x) = -\log \P(x)$, 事件发生前, 事件发生的不确定性; 事件发生后, 事件包含的信息量, 即解除不确定性所需的信息量.
-                * \def{联合自信息} $I(x, y) = -\log \P(x, y)$, 事件x, y同时发生后提供的信息量.
-                * \def{条件自信息} $I(x|y) = -\log \P(x|y)$, 事件y已经发生的情况下, 事件x发生后所能提供的信息量.
+	* 信息的度量
+		* 事件的信息度量
+			* 自信息
+				\def{自信息} 
+					$I(x) = -\log \P(x)$, 
+					事件发生前, 事件发生的不确定性; 
+					事件发生后, 事件包含的信息量, 即解除不确定性所需的信息量.
 
-                \Property
-                    * 非负性, $I(x) ≥ 0$
-                    * $I(xy) = I(x) + I(y|x) = I(y) + I(x|y)$
-                    * 单位: bit
+				* \def{联合自信息} $I(x, y) = -\log \P(x, y)$, 事件x, y同时发生后提供的信息量.
+				* \def{条件自信息} $I(x|y) = -\log \P(x|y)$, 事件y已经发生的情况下, 事件x发生后所能提供的信息量.
 
-            * 互信息
-                * \def{互信息} $I(x;y) = \log\frac{\P(x|y)}{\P(x)}$, 两个随机事件之间的统计关联程度, 事件y发生后所能提供的关于事件x的信息量, 即事件y发生后事件x不确定性的变化.
-                * \def{条件互信息} $I(x;y|z) = -\log\frac{\P(x|y, z)}{\P(x|z)}$
-                    \bf{关系}: $I(x;y) = I(x) - I(x|y)$, 事件y发生后所能提供的关于事件x的信息量 = 事件x单独发生后提供的信息量 - 事件y已经发生的情况下, 事件x发生后所能提供的信息量.
-    
-        * 事件集合的信息度量
-            * 平均自信息
-                * 离散集合
-                    * \def{信息熵(平均自信息)} $H(X) = \E_{\P(x)} [I(x)] = -\sum_x \P(x)\log \P(x)$ 平均自信息, 信源输出前, 表示信源的平均不确定性; 信源输出后, 表示每个信源符号所提供的平均信息量, 解除信源不确定性平均所需的信息量; 表示信源随机性大小, H(X) 大的信源, 随机性大. 
-                    * \def{联合信息熵} $H(XY) = \E_{\P(xy)} [I(xy)] = -\sum_x \sum_y \P(xy) \log \P(xy)$
-                    * \def{条件信息熵} $H(Y|X) = \E_{\P(xy)} [I(y|x)] = -\sum_x \sum_y \P(xy) \log \P(y|x) = \sum_x \P(x) H(Y|x)$
-                    * \def{交叉熵} 若P和Q为定义在同一概率空间的两个概率测度, 定义P相对于Q的散度为: $D(\P || \mathbb Q)=\sum_x \P(x) \log \frac{\P(x)}{\mathbb Q(x)}$
-                    
-                    \bf{关系}
-                        * $H(Y|X) ≤ H(Y)$: 信息处理中, 条件越多, 熵越小. (当且仅当$X_i$相互独立, 则等式成立.)
-                        * $H(X_1...X_n) ≤ \sum_{i=0}^n H(X_i)$ (当且仅当$X_i$相互独立, 则等式成立.)
-                
-                    \Property 
-                        * 单位: bit/符号
-                        * 信息熵
-                            * 对称性, $H(p_1, p_2, ..., p_n) = H(p_n, p_{n-1}, ..., p_1)$
-                            * 非负性, $H(p) ≥ 0$
-                            * $H(XY) = H(X) + H(Y|X) \\ H(X_1 X_2 ... X_n) = H(X) + H(X_2|X_1) + ... + H(X_n|X_1...X_{n-1})$
-                            * 有限离散随机变量集合中事件等概率发生时, 熵达到最大.
-                            * 随机变量集合中任一事件概率为1, 则熵为0.
-                        * 交叉熵: $D(\P || \mathbb Q) ≥ 0$
+				\Property
+					* 单位
+						* 以2为底, 称"bit" (binary digit)
+						* 以3为底, 称"Tit"
+						* 以e为底, 称"Nit" (Natural digit)
+						* 以10为底, 称"Dit"
+					* 非负性, $I(x) ≥ 0$
+					* $I(xy) = I(x) + I(y|x) = I(y) + I(x|y)$
+					* 单位: bit
 
-                * 连续集合
-                    * \def{熵(差熵)} $h(X)=-E_{\P(x)}[\log \P(x)]=-\int \P(x) \log \P(x) \d x$
-                    * \def{联合差熵} $h(x^N)=-E_{\P(x)}[\log \P(x)]=-\int_{x} \P(x) \log \P(x) \d x$
-                    * \def{条件差熵} $h(X|Y)=-E_{\P(xy)}[\log \P(x|y)]=-\iint \P(xy) \log \P(x|y) \d x \d y$
-                    * \def{交叉熵} $D(\P || \mathbb Q)=\int \P(x) \log \frac{\P(x)}{\mathbb Q(x)}\d x$
-                    
-                    \Property 
-                        * 单位: (差熵) bit/自由度 ; (联合差熵) bit/N自由度
-                        * \bf{连续最大熵定理}
-                            * 限峰值最大熵: 幅度受限的随机变量, 当均匀分布时有最大的熵.
-                            * 限功率最大熵: 平均功率受限的随机变量, 当高斯分布时有最大的熵.
-                    
-                    \Example 
-                        * 离散时间Gauss信源的熵
-                            * \bf{1维Gauss-熵}: $h(X) = \frac{1}{2}{\log (2 \pi e \sigma^2)$
-                            * \bf{多维独立Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 \pi e (\sigma_1^2 \sigma_2^2 \cdots \sigma_n^2)^{\frac{1}{N}})$
-                            * \bf{多维相关Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 \pi e |\Sigma|^{\frac{1}{N}})$
+			* 互信息
+				\def{互信息} $I(x;y) = \log\frac{\P(x|y)}{\P(x)}$, 两个随机事件之间的统计关联程度, 事件y发生后所能提供的关于事件x的信息量, 即事件y发生后事件x不确定性的变化.
 
-                        \Proof
-                            \bf{1维Gauss-熵}: 
-                            $
-                                h(x) &= -E_{\P(x)} [\log \P(x)]
-                                &= -E_{\P(x)} [-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}]
-                                &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\E_{\P(x)} [(x-\mu)^2]}{2\sigma ^2}
-                                &= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}
-                                &= \frac{1}{2}\log(2\pi e\sigma^2)
-                            $
+				* \def{条件互信息} $I(x;y|z) = -\log\frac{\P(x|y, z)}{\P(x|z)}$
+					\bf{关系}: $I(x;y) = I(x) - I(x|y)$, 事件y发生后所能提供的关于事件x的信息量 = 事件x单独发生后提供的信息量 - 事件y已经发生的情况下, 事件x发生后所能提供的信息量.
+	
+		* 事件集合的信息度量
+			* 平均自信息
+				\def{信息熵(平均自信息)} 
+					离散集合下,
+					$H(X) = \E_{\P(x)} [I(x)] = -\sum_x \P(x)\log \P(x)$ 
+					平均自信息, 信源输出前, 表示信源的平均不确定性; 信源输出后, 表示每个信源符号所提供的平均信息量, 解除信源不确定性平均所需的信息量; 表示信源随机性大小, H(X) 大的信源, 随机性大. 
 
-            * 平均互信息
-                * 离散集合
-                    * \def{集合&事件互信息} $I(X;Y) = \E_{\P(y|x)}[I(x;y)] = \sum_y \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 由事件x提供的关于集合Y的信息量.
-                    * \def{平均互信息} $I(X;Y) = \E_{\P(xy)} [I(x;y)] = \sum_{x,y} \P(xy) I(x;y)=\sum_{x, y} \P(x) \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.
-                    * \def{平均条件互信息} $I(X;Y|Z) = \E_{\P(xyz)} [I(x;y|z)]=\sum_{x,y,z} \P(xyz) \log \frac{\P(x|yz)}{\P(x|z)}$
-                    
-                    \Property 
-                        * 关系: 
-                            $
-                                I(X;Y) &= H(X)-H(X|Y) 
-                                &= H(Y)-H(Y|X) 
-                                &= H(X)+H(Y)-H(X Y)
-                            $
-                
-                * 连续集合
-                    * \def{平均互信息} $I(X;Y) = Sup_{P, Q} I([X]_{P} ;[Y]_{Q})$
-                    
-                    \Property 
-                        * 关系: 
-                            $
-                                I(X;Y) &= h(X) - h(X|Y) 
-                                &= h(Y) - h(Y|X) 
-                                &= h(X) + h(Y) - h(X Y)
-                            $
-                        
-                * 离散集 \& 连续集的互信息
-                    * \bf{离散集 \& 连续集的互信息}: $I(X;Y)=\log \frac{q(x|y)}{p(x)}=\log \frac{p(y|x)}{q(y)}$
-                    * \bf{离散集 \& 连续集的平均互信息}: $I(X;Y)=\E_{p(x) p(y|x)}[\log \frac{p(y|x)}{q(y)}]=\sum_x p(x) \int p(y|x) \log \frac{p(y|x)}{q(y)}\d y$
-            
+					连续集合下, 取差熵.
+					$h(X)=-E_{\P(x)}[\log \P(x)]=-\int \P(x) \log \P(x) \d x$
+
+					
+				* 联合信息熵
+					\def{联合信息熵} 
+						离散集合下,
+						$H(XY) = \E_{\P(xy)} [I(xy)] = -\sum_x \sum_y \P(xy) \log \P(xy)$
+
+						连续集合下, 联合差熵
+						$h(x^N)=-E_{\P(x)}[\log \P(x)]=-\int_{x} \P(x) \log \P(x) \d x$
+
+				* 条件信息熵
+					\def{条件信息熵} 
+						离散集合下,
+						$H(Y|X) = \E_{\P(xy)} [I(y|x)] = -\sum_x \sum_y \P(xy) \log \P(y|x) = \sum_x \P(x) H(Y|x)$
+
+						连续集合下, 条件差熵
+						$h(X|Y)=-E_{\P(xy)}[\log \P(x|y)]=-\iint \P(xy) \log \P(x|y) \d x \d y$
+
+
+				* 交叉熵
+					\def{交叉熵} 
+						离散集合下,
+						若P和Q为定义在同一概率空间的两个概率测度, 定义P相对于Q的散度为: $D(\P || \mathbb Q)=\sum_x \P(x) \log \frac{\P(x)}{\mathbb Q(x)}$
+
+						连续集合下,
+						$D(\P || \mathbb Q)=\int \P(x) \log \frac{\P(x)}{\mathbb Q(x)}\d x$
+			
+				\Property 
+					* 关系
+						* $H(Y|X) ≤ H(Y)$: 信息处理中, 条件越多, 熵越小. (当且仅当$X_i$相互独立, 则等式成立.)
+						* $H(X_1...X_n) ≤ \sum_{i=0}^n H(X_i)$ (当且仅当$X_i$相互独立, 则等式成立.)
+					* 单位: (离散) bit/符号; (差熵) bit/自由度; (联合差熵) bit/N自由度
+					* 信息熵
+						* 对称性, $H(p_1, p_2, ..., p_n) = H(p_n, p_{n-1}, ..., p_1)$
+						* 非负性, $H(p) ≥ 0$
+						* $H(XY) = H(X) + H(Y|X) \\ H(X_1 X_2 ... X_n) = H(X) + H(X_2|X_1) + ... + H(X_n|X_1...X_{n-1})$
+						* 有限离散随机变量集合中事件等概率发生时, 熵达到最大.
+						* 随机变量集合中任一事件概率为1, 则熵为0.
+					* 交叉熵: $D(\P || \mathbb Q) ≥ 0$
+					* \bf{连续最大熵定理}
+						* 限峰值最大熵: 幅度受限的随机变量, 当均匀分布时有最大的熵.
+						* 限功率最大熵: 平均功率受限的随机变量, 当高斯分布时有最大的熵.
+					
+				\Example 
+					* 离散时间Gauss信源的熵
+						* \bf{1维Gauss-熵}: $h(X) = \frac{1}{2}{\log (2 \pi e \sigma^2)$
+						* \bf{多维独立Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 \pi e (\sigma_1^2 \sigma_2^2 \cdots \sigma_n^2)^{\frac{1}{N}})$
+						* \bf{多维相关Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 \pi e |\Sigma|^{\frac{1}{N}})$
+
+					\Proof
+						\bf{1维Gauss-熵}: 
+						$
+							h(x) &= -E_{\P(x)} [\log \P(x)]
+							&= -E_{\P(x)} [-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}]
+							&= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\E_{\P(x)} [(x-\mu)^2]}{2\sigma ^2}
+							&= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}
+							&= \frac{1}{2}\log(2\pi e\sigma^2)
+						$
+
+			* 平均互信息
+				\def{平均互信息} 
+					离散集合下,
+					$I(X;Y) = \E_{\P(xy)} [I(x;y)] = \sum_{x,y} \P(xy) I(x;y)=\sum_{x, y} \P(x) \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.
+
+					连续集合下,
+					$I(X;Y) = Sup_{P, Q} I([X]_{P} ;[Y]_{Q})$
+
+				* \def{集合&事件互信息} $I(X;Y) = \E_{\P(y|x)}[I(x;y)] = \sum_y \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 由事件x提供的关于集合Y的信息量.
+				
+				* \def{平均条件互信息} $I(X;Y|Z) = \E_{\P(xyz)} [I(x;y|z)]=\sum_{x,y,z} \P(xyz) \log \frac{\P(x|yz)}{\P(x|z)}$
+				
+				\Property 
+					* 关系: 
+						离散情况,
+						$
+							I(X;Y) &= H(X)-H(X|Y) 
+							&= H(Y)-H(Y|X) 
+							&= H(X)+H(Y)-H(X Y)
+						$
+						连续情况
+						$
+							I(X;Y) &= h(X) - h(X|Y) 
+							&= h(Y) - h(Y|X) 
+							&= h(X) + h(Y) - h(X Y)
+						$
+					* 离散集 \& 连续集的互信息
+						* \bf{离散集 \& 连续集的互信息}: $I(X;Y)=\log \frac{q(x|y)}{p(x)}=\log \frac{p(y|x)}{q(y)}$
+						* \bf{离散集 \& 连续集的平均互信息}: $I(X;Y)=\E_{p(x) p(y|x)}[\log \frac{p(y|x)}{q(y)}]=\sum_x p(x) \int p(y|x) \log \frac{p(y|x)}{q(y)}\d y$					 
+
 * 通信
-    \def{通信}
-
-    \bf{通信基本问题}: 在一点精确/近似地恢复另一点所选择的信息.
-
-    \bf{通信基本模型}:
-        $(\text{信源}) \to (\text{编码器}) \to (\text{信道})_{(+\text{噪声})} \to (\text{译码器}) \to (\text{信宿})$
-        * \bf{信源/信宿}: 信息的来源, 信息的接收者.
-        * \bf{编码/译码}: 信源编码, 信道编码. 将消息变为适合信道传输的信号.
-        * \bf{信道}: 信号传输的通道.
-
-    \bf{通信性能指标}
-        * \bf{有效性}: 资源利用率和速率应当高.
-        * \bf{可靠性}: 信息传输差错应当小.
-        * \bf{安全性}: 信息传输中不应泄露.
-
-    * 信源
-        \def{信源} 信息的来源.
-
-        * 离散信源
-            \bef{离散信源}
-
-            \Property
-                * 离散信源经过一一对应变换, 熵不变; 连续信源, 经过平移和旋转变换后, 差熵不变. 
-                * 相关性 \& 剩余度
-                    * \def{信源效率} $\eta = \frac{H_\infty}{H_0}$
-                    * \def{信源剩余度} $\eta = 1 - \frac{H_\infty}{H_0}$, $H_\infty$是信源实际的熵, $H_0$是符号独立等概率时信源的熵, 即每个信源符号最大能携带$H_0$的信息量, 但实际只携带了$H_\infty$的信息量.
-                * $H(X_N | X_1 ... X_{N-1})$ 和 $H_N(X^N)$ 不随N而增加.
-                * $H(X_N | X_1 ... X_{N-1}) ≤ H_N(X^N)$
-                * $H_\infty(X^N)$存在, 且$H_\infty(X^N) = \lim_{N \to \infty} H(X_N | X_1 ... X_{N-1})$. $H_\infty(X^N)$是最小的平均符号熵.
-
-            * 离散无记忆信源
-                \def{离散无记忆信源} 每次发出的符号之间相互独立的信源.  
-                
-                \Property
-                    * 熵: $H(X) = -\sum p \log p$
-                    * 信源N次扩展源的熵: 
-                        N次扩展源是X构成的N维随机矢量集 $X^N = X_1 X_2...X_N$, 且$X_i$ 独立同分布.
-                        $
-                            H(X^N) &= \sum_{i=1}^N H(X_i)  \tag{$X_i$ 独立}
-                            &= N\ H(X)  \tag{$X_i$ 同分布}
-                        $
-
-            * 离散有记忆信源
-                \def{离散有记忆信源} 每次发出的符号之间具有相关性的信源.  
-
-                * 离散平稳有记忆信源
-                    \def{离散平稳有记忆信源} 
-                        输出符号具有平稳性的离散有记忆信源.
-
-                        平稳性: 时间平移不变性, 即统计特性不随随时间推移而改变. 在时间序列上随意的任意间隔任意顺序的采样, 都具有时间平移不变性.
-                        $ 
-                            \P(x_{t_1}, \ldots, x_{t_n}) = \P(x_{t_1+\tau}, \ldots, x_{t_n+\tau}) \quad \text { for all } \tau, t_1, \ldots, t_n \in \mathbb R, \quad n \in \mathbb N
-                        $
-
-                    \Property 
-                        * 对于平稳信源, 条件概率和熵与时间下标无关.
-                            $
-                                \P(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}) &= \P(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}) \tag{条件概率}
-                                H(x_{i}, x_{i+1}, \cdots, x_{i+N}) &= H(x_{j}, x_{j+1}, \cdots, x_{j+N}) \tag{熵}
-                                H(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}) &= H(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}) \tag{条件熵}
-                            $
-                        * \bf{熵}:
-                            $
-                                H(X^N) &= H(X_1 X_2 ... X_N) \tag{定义}
-                                &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_1 ... X_{N-1}) \tag{条件熵展开}
-                                &≤ N\ H(X_1) \tag{熵的不增原理}
-                            $
-                        * \bf{平均符号熵}: $H_N(X^N) = \frac{H(X^N)}{N}$
-                        * \bf{极限符号熵}: $H_\infty(X^N) = \lim_{N \to \infty} \frac{H(X^N)}{N}$
-
-                    * 离散Markov平稳有记忆信源
-                        \def{离散Markov平稳有记忆信源} 
-                            \bf{Markov平稳分布}: $\pi = (\pi_1 = \P(x = S_1), ..., \pi_n = \P(x = S_n))^T, \text{且} \sum_{i=1}^N \pi_i = 1$是平稳分布.
-                                $\pi^T = \pi^T P$
-
-                        \Property 
-                            * 一个遍历有限状态Markov链有, $\lim_{k \to \infty} P^k = e \pi^T$
-                            * 遍历有限状态Markov链, 当转移步数足够大, 无论任何起始状态, 都能收敛到平稳分布$\pi$. 
-                                \Proof{ $\lim_{k \to \infty} p^k = p_0 \lim_{k \to \infty} P^k = p_0 e \pi^T = \pi$ } ???
-                            * m阶离散Markov信源的熵: $H(X^N) = H(X_1 ... X_N) = H(\pi) + (N-1) \pi^T h$; 极限符号熵: $H_\infty(X^N) = \pi^T h$
-                                \Proof
-                                    熵:
-                                    $
-                                        H(X^N) &= H(X_1 ... X_N)
-                                        &= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_{N-1} ... X_1) \tag{条件熵展开}
-                                        &= H(X_1) + \sum_{t=2}^N H(X_t | X_{t-1}) \tag{Markov性}
-                                        &= H(X_1) + (N-1) H(X_t | X_{t-1}) \tag{平稳性}
-                                        &= H(X_1) + (N-1) \sum p(X_{t-1}) \sum - \P(X_t | X_{t-1}) \log \P(X_t | X_{t-1}) \tag{条件熵代入}
-                                        &= H(\pi) + (N-1) \pi^T h \tag{平稳分布$\pi$代入}
-                                    $
-                                    极限符号熵:
-                                    $
-                                        H_\infty(X^N) &= \lim_{N \to \infty} \frac{H(X^N)}{N}                   \tag{定义}
-                                        &= \lim_{N \to \infty} \frac{H(\pi) + (N-1) \pi^T h}{N}   \tag{代入}
-                                        &= \lim_{N \to \infty} \frac{N \pi^T h}{N}                \tag{省略$\to 0$量}
-                                        &= \pi^T h
-                                    $
-
-    * 信源编码
-        \def{信源编码}
-
-        \Property
-            * \def{平均码长} $\bar l(X) = \sum_{x \in X} \P(x) l(x)$
-
-            * \def{编码速率} 
-                    编码后,一个信源符号平均携带的最大信息量, 也是传送一个信源符号平均所需的bit. 
-                    $R' = l \log r$
-
-            * \def{编码效率}  $\eta = \frac{H(X)}{R'}=\frac{N H(X)}{l \log r}$ 
-
-            * \def{信息传输速率} 每个传输符号所含的信息量. $R = \frac{N H(X)}{l}$
-
-            * \Theorem{无失真信源编码}
-                    若信源编码的码率不小于信源的熵, 则存在无失真信源编码, 否则不存在.
-                    . $ R ≥ H <=> \exists $无失真信源编码.
-            
-        \Example
-            * 非奇异码 $\supset$ 惟一可译码 $\supset$ 异前置码
-
-                * 非奇异码
-                    \def{非奇异码} 随机变量集合中的每个元素, 与信源编码的不同码字之间一一映射的编码. $x ≠ x' => C(x) ≠ C(x')$
-
-                * 惟一可译码
-                    \def{惟一可译码} 任意有限长的码字序列, 只能被唯一地分割成一个个的码字, 则其编码称为惟一可译码.
-
-                    \Property
-                        * 编码是惟一可译码$ => $满足Karft不等式.
-
-                * 异前置码
-                    \def{异前置码} 码集中无任何码字是其他码字的前缀. 
-
-                    \Example
-                        * 0, 10, 1100, 1101, 1110, 1111 ;每个码字的任意前缀都不存在在该码集中.
-
-                    \Property
-                        * 码树中, 只有叶节点能对应码字, 即中间节点无法作为码字, 从而保证异前置条件.
-
-                        * \Theorem{Karft不等式 -- 异前置码存在性} r元异前置码存在$ <=> \sum_{i=0}^{q} r^{-l_i} ≤ 1$. 当码集元素个数q为无穷时, 该定理仍成立. \textit{(本定理只证明存在性, 而非证明该码集是异前置码.)}
-
-                            \Proof
-                                码长也表示码树中的层数 (根节点为第一层),
-                                . $r^l$表示码树的l层中满树时的节点数,
-                                只要证, 该码集中的码字能够全部分布在码树的叶节点上,
-                                只要证, 该码集中的码字个数$ ≤ $该码树的叶节点个数
-                                
-                                对码长$l$的码字, 设其在码树的l层的叶节点上, 则其延申至$l_{max}$层最多能在第$l_{max}$层上拥有$r^{l_{max} - l_i}$个子节点. 同时, 第$l_{max}$层最多只有$r^l_{max}$个节点. (码字不在叶节点上没关系, 因为本定理只证明存在性, 而非证明该码集是异前置码.)
-
-                                只要证, 所有码字所在节点延申至$l_{max}$层拥有的节点总数$ ≤ $第$l_{max}$层最大节点数
-                                只要证, $r^{l_{max} - l_i} ≤ r^l_{max}$
-                                只要证, $r^{- l_i} ≤ 1$
-                                得证.
-                                
-                        * \Theorem{最优码长} 
-                                最优码是所有异前置码中平均码长最小的异前置码. 随机变量集合X的所有异前置码的平均码长不小于其熵. 但因最优码码长只能取整, 故可能无法等于熵.
-                                $\bar l ≥ = \frac{H(X)}{\log_2 r} \quad; l_i = - \log_r p_i \text{时取等}$
-                                最优码长的上下界 
-                                $ 
-                                    \frac{H(X)}{\log_2 r} ≤ \bar l^* ≤ \frac{H(X)}{\log_2 r} + 1
-                                    l_i^* = ⌈ - \log_r p_i ⌉
-                                $
-                                多符号离散信源每字符最小平均码长 (符号长度为N)
-                                $ 
-                                    \frac{H(X)}{\log_2 r} ≤ \bar l^* ≤ \frac{H(X)}{\log_2 r} + \frac{1}{N}
-                                $
-
-                            \Proof
-                                优化问题形式:
-                                $
-                                    \min \quad& \sum_i p_i l_i
-                                    s.t. \quad& \sum_i r^{- l_i} ≤ 1
-                                $
-                                Lagrange乘子法, 得最优码长下界 
-                                $
-                                    L(l, \lambda) = \sum_i p_i l_i + \lambda \sum_i r^{- l_i}
-                                    \frac{∂ L}{∂ l_i} = p_i - \lambda r^{- l_i} \ln r = 0
-                                $
-                                $
-                                    => \quad& r^{- l_i} = \frac{p_i}{\lambda \ln r}
-                                    => \quad& \sum_i r^{- l_i} = \sum_i \frac{p_i}{\lambda \ln r} = \frac{\sum_i p_i}{\lambda \ln r} = \frac{1}{\lambda \ln r} ≤ 1
-                                    => \quad& \lambda^* = \frac{1}{\ln r} = p_i = r^{- l_i^*}
-                                    => \quad& l_i^* = - \log_r p_i
-                                    => \quad& \bar l^* = \sum_i l_i^* p_i = - \sum_i p_i \log_r p_i = \frac{- \sum_i p_i \log_2 p_i}{\log_2 r} = \frac{H(X)}{\log_2 r}
-                                $
-
-            * 分组码/非分组码
-                \def{分组码}
-                    信源序列进入编码器之前先分成若干信源符号组. 而非分组码, 信源序列连续不断地从编码器的输入端进入. 区别在于分组码中包含码字.
-
-            * 定长码/变长码
-                * 定长码
-                    \def{定长码} 所有码字的码长都相同的编码.
-                    
-                    \Property
-                        * \bf{典型序列}: 序列中所有符号出现的次数满足大数定律的序列称为典型序列, 否则为非典型序列。
-                        * 编码速率: $R'=\frac{l \log r}{N}$
-                        * 编码效率: $\eta=\frac{H(X)}{R'}=\frac{N H(X)}{l \log r}$
-                        * 序列长度: $N ≥ \frac{\sigma^2}{\delta^2 \varepsilon}=(\frac{\eta}{1-\eta})^2 \cdot \frac{\sigma^2}{H^2(X) \varepsilon}$
-
-                * 变长码
-                    \def{变长码} 各个码字的码长不相同的编码.
-
-                    \Property
-                        * 编码速率: $R' = \bar l \log r$
-                        * 编码效率: $eta = \frac{H(X)} R'}=\frac{H(X)}{\bar l \log r}$
-                        * 信息传输速率: $R = \frac{H(X)}{\bar l}$
-
-            * Haffman编码
-                \def{Haffman编码} 
-                    \bf{编码方法}:
-                    * 将信源概率分布按大小依递减次序排列, 合并两概率最小者, 得到新信源:并分配0, 1符号。
-                    * 新信源若包含两个以上符号返回(1),  否则到(3)。
-                    * 从最后一级向前,  按顺序写出每个信源符号所对应的码字。
-
-    * 信道
-        \def{信道} 信号传输的通道.
-            
-        \Property
-            * \def{信道容量} 输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max_{p(x)} I(X;Y)$
-
-        * 离散信道
-            \def{离散信道}
-
-            \Property
-                * 信道容量仅与$\P(y|x)$有关, 与$\P(x)$无关.
-
-                * 算法: 信道容量计算 
-                    $
-                        \{\mb
-                            I(x_i ; Y) = \sum_j p_{i j} \log \frac{p_{i j}}{q_j} = C  \quad ;when\ p_i > 0
-                            I(x_i ; Y) = \sum_j p_{i j} \log \frac{p_{i j}}{q_j} ≤ C  \quad ;when\ p_i = 0
-                        \me\right.
-                    $
-
-                    \Proof
-                        问题表示为$\P(y|x)$确定且已知, 求$I(X;Y)$的最大值及其$\P(x)$的优化问题,
-                        $
-                            \max \quad& I(X;Y)
-                            s.t. \quad& \P(x) ≥ 0
-                                        & \sum_x \P(x) = 1
-                        $
-                        Language乘子法求解该优化问题, 
-                        $
-                            L(\P(x), \lambda) &= I(X;Y) - \lambda \sum_x \P(x) \tag{Lagrange函数}
-                                &= \sum_{x,y} \P(y|x) \P(x) \log \P(y|x)  - \sum_y \P(y) \log \P(y) - \lambda \sum_x \P(x) \tag{平均互信息定义式}
-
-                            => \frac{∂ L}{∂ \P(x_i)} &= \sum_y \P(y|x_i) (\log \P(y|x_i) - \log \P(y) - \log e) - \lambda \tag{求导,$\frac{∂ \P(y)}{∂ \P(x_i)} = \frac{∂ \sum_x \P(x) \P(y|x)}{∂ \P(x_i)} = \P(y|x_i)$}
-                                &= \sum_y \P(y|x_i) (\log \P(y|x_i) - \log \P(y)) - (\log e + \lambda) \tag{$\sum_y \P(y|x_i) = 1$}
-                                &= 0 
-                        $
-                        $
-                            => \{\mb
-                                \sum_y \P(y|x) (C + \log \P(y)) = \sum_y \P(y|x) \log \P(y|x)
-                                \P(x) ≥ 0
-                                \sum_y \P(y) = 1
-                            \me\right.
-                        $
-
-                * 信道连接
-                    * \def{级联信道} $P_N = \prod P_i$ 
-                    * \def{并联信道} $C = \sum_{i=0}^N C_i$
-                    * \def{和信道} 
-                            各子信道输入输出均互不相交. 
-                            $C = \log_2 \sum_{i=0}^N 2^{C_i}$
-                            达到信道容量时, 输入概率:
-                            $
-                                \gamma_i = \frac{2^{C_i}}{\sum_{i=0}^N 2^{C_i}}
-                                \P_{X_{ij}} = \gamma_i \P_{X_j}
-                            $
-
-            \Example
-                * \def{离散无噪信道} 
-                        无损信道, 每个输出只对应一个输入; 
-                        确定信道, 每个输入只对应一个输出; 
-                        无损确定信道, 输入输出一一对应. 
-
-                    \Property
-                        信道容量: $C = \log\ \min(N_x, N_y)$ 
-
-                * \def{离散对称信道} 
-                        强对称信道; 
-                        弱对称信道
-                        
-                    \Property
-                        信道容量: 
-                            强对称信道: $C = \log N_y - H(p_{1i},...)$, 因为强对称信道的输出也是等概率的, 所以$H(Y) = \log N_y$.
-                            弱对称信道: $C = H(Y) - H(p_{1i},...)$
-
-                * \bf{信道矩阵可逆的信道} 
-                        信道容量:
-                        $
-                            P^{-1}
-                            h = [\mb H(P_{1j}) \\ \vdots \\ H(P_{nj}) \me]
-                            \beta = -P^{-1} h
-                            => \{\mb
-                                C = \log( \sum_i 2^{\beta_i} )
-                                \P_{Yi} = \frac{2^{\beta_i}}{\sum_j 2^{\beta_j}}
-                                \P_X^T = \P_Y^T P^{-1}
-                            \me\right.
-                        $
-
-        * 时间离散连续信道
-
-            * 加性噪声信道
-                \Property
-                    * $\P(y|x) = p_Z(y - x)$
-                    * 条件熵等于噪音熵 $h(Y|X) = h(Z)$
-                    * 信道容量 $C = \max_{p(x)} I(X ; Y) = \max_{p(x)} h(Y) - h(Z)$
-                    * 信道容量上下界: 熵功率$\sigma^2$:
-                        $\frac{1}{2} \log (1+\frac{\sigma_x^2}{\sigma_z^2}) ≤ C ≤ \frac{1}{2} \log (\frac{\sigma_x^2+\sigma_x^2}{\sigma^2})$
-
-
-                * 加性Gauss噪声信道
-                    \Property
-                        * 信道容量
-                            $C=\frac{1}{2} \log (1+\frac{E}{\sigma_z^2})$
-
-                * 并联加性Gauss噪声信道
-
-                    \Property
-                        * 算法: 并联加性噪声信道的信道容量计算, 注水定理
-                            $
-                                \{\mb
-                                    E_i +\sigma_i^2 =B \quad& ;when\ B ≥ \sigma_i^2 
-                                    E_i = 0            \quad& ;when\ B < \sigma_i^2 
-                                    \sum_{i, \sigma_i^2 ≤ B} E_i = E
-                                \me\right.
-                            $
-                            $
-                                => C = \sum_{i, \sigma_i^2 ≤ B} \frac{1}{2} \log \frac{B}{\sigma_i^2} = \frac{1}{2} \sum_{i=1}^{N} \log (1+\frac{E_i}{\sigma_i^2})
-                            $
-
-                * 加性Gauss白噪声信道
-
-                    \Property
-                        * 信道容量 $C = W \log (1+\frac{P}{N_0 W})$
-                        * 编码定理 $\frac{R}{W} ≤ \log (1+\frac{E_b}{N_0} \frac{R}{W})$
-
-                * 有色Gauss噪声信道
-                    \Property
-                        * 信道容量 $C = \frac{1}{2} \int_{f \in F_B} \log \frac{|G(f)|^2 B}{N(f)} \d f$
-                            
-
-    * 信道编码
-        \def{信道编码} 通过在信道传输的信号序列中加入冗余信号, 以实现信号检错和纠错的, 并提高信息传输的可靠性的一种方法.
-
-        \Property
-            * \Theorem{有噪信道编码定理} 对于离散无记忆信道, 只要信息传输率小于信道容量$R < C$, 则总存在一种(M,n)码使得当n足够长时, 译码差错率$P_e$任意小; 反之, 当信息传输率$R > C$时, 对任何编码方式, 译码差错率$P_e > 0$.
-
-            * \Theorem{无失真信源信道编码定理} 对于离散无记忆信道, 若离散信源每秒的熵小于信道容量$H < C$, 则总存在一种编码使得信源输出以任意小的差错率通过信道传输; 反之, 若$H > C$时, 对任何编码, 译码差错率$P_e > 0$.
-
-            * 译码
-                * \bf{最大后验译码}: $g(y) = \arg\max_x \P(x|y)$
-                * \bf{最大似然译码}: $g(y) = \arg\max_x \P(y|x)$
-
-            * 输入符号等概率时, 最大后验译码$ <=> $最大似然译码.
-
-            * \def{信道疑义度} 信息传输中丢失的信息量 $H(X|Y)$. \textit{意义: 接收者收到信息Y后, 再给答案 -- 原始信息X, 所能得到的信息量, 也是信道传输中丢掉的信息量.}
-
-                \Property
-                    * \Theorem{Fano不等式} 
-                            信息传输中丢失的信息量, 称信道疑义度, 用条件熵$H(X|Y)$表示. 其上限由信源、信道、译码规则确定: $H(X|Y) ≤ H(p_E) + p_E \log(N_x - 1)$ 即确定传输是否有错的信息量$H(p_E)$ + 确定传输出错后哪一个出错的信息量$p_E \log(N_x - 1)$.
-
-                    * 信道疑义度最大 $ <=> $ 信道输入/输出相互独立.
-
-            * \def{线性分组码} 校验位和信息位是线性关系.
-
-        \Example
-            * Hamming码
-
-                * Hamming距离
-                    \def{Hamming距离} $d(x, y) = \sum_k x_k \oplus y_k$
-
-                    \Property
-                        * 对于无记忆二元对称信道, 最大似然译码准则等价于最小Hamming距离
-
-            * 卷积码
-                
+	\def{通信}
+
+	\bf{通信基本问题}: 在一点精确/近似地恢复另一点所选择的信息.
+
+	\bf{通信基本模型}:
+		$(\text{信源}) \to (\text{编码器}) \to (\text{信道})_{(+\text{噪声})} \to (\text{译码器}) \to (\text{信宿})$
+		* \bf{信源/信宿}: 信息的来源, 信息的接收者.
+		* \bf{编码/译码}: 信源编码, 信道编码. 将消息变为适合信道传输的信号.
+		* \bf{信道}: 信号传输的通道.
+
+	\bf{通信性能指标}
+		* \bf{有效性}: 资源利用率和速率应当高.
+		* \bf{可靠性}: 信息传输差错应当小.
+		* \bf{安全性}: 信息传输中不应泄露.
+
+	* 信源
+		\def{信源} 信息的来源.
+
+		* 离散信源
+			\bef{离散信源}
+
+			\Property
+				* 离散信源经过一一对应变换, 熵不变; 连续信源, 经过平移和旋转变换后, 差熵不变. 
+				* 相关性 \& 剩余度
+					* \def{信源效率} $\eta = \frac{H_\infty}{H_0}$
+					* \def{信源剩余度} $\eta = 1 - \frac{H_\infty}{H_0}$, $H_\infty$是信源实际的熵, $H_0$是符号独立等概率时信源的熵, 即每个信源符号最大能携带$H_0$的信息量, 但实际只携带了$H_\infty$的信息量.
+				* $H(X_N | X_1 ... X_{N-1})$ 和 $H_N(X^N)$ 不随N而增加.
+				* $H(X_N | X_1 ... X_{N-1}) ≤ H_N(X^N)$
+				* $H_\infty(X^N)$存在, 且$H_\infty(X^N) = \lim_{N \to \infty} H(X_N | X_1 ... X_{N-1})$. $H_\infty(X^N)$是最小的平均符号熵.
+
+			* 离散无记忆信源
+				\def{离散无记忆信源} 每次发出的符号之间相互独立的信源.  
+				
+				\Property
+					* 熵: $H(X) = -\sum p \log p$
+					* 信源N次扩展源的熵: 
+						N次扩展源是X构成的N维随机矢量集 $X^N = X_1 X_2...X_N$, 且$X_i$ 独立同分布.
+						$
+							H(X^N) &= \sum_{i=1}^N H(X_i)  \tag{$X_i$ 独立}
+							&= N\ H(X)  \tag{$X_i$ 同分布}
+						$
+
+			* 离散有记忆信源
+				\def{离散有记忆信源} 每次发出的符号之间具有相关性的信源.  
+
+				* 离散平稳有记忆信源
+					\def{离散平稳有记忆信源} 
+						输出符号具有平稳性的离散有记忆信源.
+
+						平稳性: 时间平移不变性, 即统计特性不随随时间推移而改变. 在时间序列上随意的任意间隔任意顺序的采样, 都具有时间平移不变性.
+						$ 
+							\P(x_{t_1}, \ldots, x_{t_n}) = \P(x_{t_1+\tau}, \ldots, x_{t_n+\tau}) \quad \text { for all } \tau, t_1, \ldots, t_n \in \mathbb R, \quad n \in \mathbb N
+						$
+
+					\Property 
+						* 对于平稳信源, 条件概率和熵与时间下标无关.
+							$
+								\P(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}) &= \P(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}) \tag{条件概率}
+								H(x_{i}, x_{i+1}, \cdots, x_{i+N}) &= H(x_{j}, x_{j+1}, \cdots, x_{j+N}) \tag{熵}
+								H(x_{i+N}|x_{i}, x_{i+1}, \cdots, x_{i+N-1}) &= H(x_{j+N}|x_{j}, x_{j+1}, \cdots, x_{j+N-1}) \tag{条件熵}
+							$
+						* \bf{熵}:
+							$
+								H(X^N) &= H(X_1 X_2 ... X_N) \tag{定义}
+								&= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_1 ... X_{N-1}) \tag{条件熵展开}
+								&≤ N\ H(X_1) \tag{熵的不增原理}
+							$
+						* \bf{平均符号熵}: $H_N(X^N) = \frac{H(X^N)}{N}$
+						* \bf{极限符号熵}: $H_\infty(X^N) = \lim_{N \to \infty} \frac{H(X^N)}{N}$
+
+					* 离散Markov平稳有记忆信源
+						\def{离散Markov平稳有记忆信源} 
+							\bf{Markov平稳分布}: $\pi = (\pi_1 = \P(x = S_1), ..., \pi_n = \P(x = S_n))^T, \text{且} \sum_{i=1}^N \pi_i = 1$是平稳分布.
+								$\pi^T = \pi^T P$
+
+						\Property 
+							* 一个遍历有限状态Markov链有, $\lim_{k \to \infty} P^k = e \pi^T$
+							* 遍历有限状态Markov链, 当转移步数足够大, 无论任何起始状态, 都能收敛到平稳分布$\pi$. 
+								\Proof{ $\lim_{k \to \infty} p^k = p_0 \lim_{k \to \infty} P^k = p_0 e \pi^T = \pi$ } ???
+							* m阶离散Markov信源的熵: $H(X^N) = H(X_1 ... X_N) = H(\pi) + (N-1) \pi^T h$; 极限符号熵: $H_\infty(X^N) = \pi^T h$
+								\Proof
+									熵:
+									$
+										H(X^N) &= H(X_1 ... X_N)
+										&= H(X_1) + H(X_2|X_1) + ... + H(X_N | X_{N-1} ... X_1) \tag{条件熵展开}
+										&= H(X_1) + \sum_{t=2}^N H(X_t | X_{t-1}) \tag{Markov性}
+										&= H(X_1) + (N-1) H(X_t | X_{t-1}) \tag{平稳性}
+										&= H(X_1) + (N-1) \sum p(X_{t-1}) \sum - \P(X_t | X_{t-1}) \log \P(X_t | X_{t-1}) \tag{条件熵代入}
+										&= H(\pi) + (N-1) \pi^T h \tag{平稳分布$\pi$代入}
+									$
+									极限符号熵:
+									$
+										H_\infty(X^N) &= \lim_{N \to \infty} \frac{H(X^N)}{N}				   \tag{定义}
+										&= \lim_{N \to \infty} \frac{H(\pi) + (N-1) \pi^T h}{N}   \tag{代入}
+										&= \lim_{N \to \infty} \frac{N \pi^T h}{N}				\tag{省略$\to 0$量}
+										&= \pi^T h
+									$
+
+	* 信源编码
+		\def{信源编码}
+
+		\Property
+			* \def{平均码长} $\bar l(X) = \sum_{x \in X} \P(x) l(x)$
+
+			* \def{编码速率} 
+					编码后,一个信源符号平均携带的最大信息量, 也是传送一个信源符号平均所需的bit. 
+					$R' = l \log r$
+
+			* \def{编码效率}  $\eta = \frac{H(X)}{R'}=\frac{N H(X)}{l \log r}$ 
+
+			* \def{信息传输速率} 每个传输符号所含的信息量. $R = \frac{N H(X)}{l}$
+
+			* \Theorem{无失真信源编码}
+					若信源编码的码率不小于信源的熵, 则存在无失真信源编码, 否则不存在.
+					. $ R ≥ H <=> \exists $无失真信源编码.
+			
+		\Example
+			* 非奇异码 $\supset$ 惟一可译码 $\supset$ 异前置码
+
+				* 非奇异码
+					\def{非奇异码} 随机变量集合中的每个元素, 与信源编码的不同码字之间一一映射的编码. $x ≠ x' => C(x) ≠ C(x')$
+
+				* 惟一可译码
+					\def{惟一可译码} 任意有限长的码字序列, 只能被唯一地分割成一个个的码字, 则其编码称为惟一可译码.
+
+					\Property
+						* 编码是惟一可译码$ => $满足Karft不等式.
+
+				* 异前置码
+					\def{异前置码} 码集中无任何码字是其他码字的前缀. 
+
+					\Example
+						* 0, 10, 1100, 1101, 1110, 1111 ;每个码字的任意前缀都不存在在该码集中.
+
+					\Property
+						* 码树中, 只有叶节点能对应码字, 即中间节点无法作为码字, 从而保证异前置条件.
+
+						* \Theorem{Karft不等式 -- 异前置码存在性} r元异前置码存在$ <=> \sum_{i=0}^{q} r^{-l_i} ≤ 1$. 当码集元素个数q为无穷时, 该定理仍成立. \textit{(本定理只证明存在性, 而非证明该码集是异前置码.)}
+
+							\Proof
+								码长也表示码树中的层数 (根节点为第一层),
+								. $r^l$表示码树的l层中满树时的节点数,
+								只要证, 该码集中的码字能够全部分布在码树的叶节点上,
+								只要证, 该码集中的码字个数$ ≤ $该码树的叶节点个数
+								
+								对码长$l$的码字, 设其在码树的l层的叶节点上, 则其延申至$l_{max}$层最多能在第$l_{max}$层上拥有$r^{l_{max} - l_i}$个子节点. 同时, 第$l_{max}$层最多只有$r^l_{max}$个节点. (码字不在叶节点上没关系, 因为本定理只证明存在性, 而非证明该码集是异前置码.)
+
+								只要证, 所有码字所在节点延申至$l_{max}$层拥有的节点总数$ ≤ $第$l_{max}$层最大节点数
+								只要证, $r^{l_{max} - l_i} ≤ r^l_{max}$
+								只要证, $r^{- l_i} ≤ 1$
+								得证.
+								
+						* \Theorem{最优码长} 
+								最优码是所有异前置码中平均码长最小的异前置码. 随机变量集合X的所有异前置码的平均码长不小于其熵. 但因最优码码长只能取整, 故可能无法等于熵.
+								$\bar l ≥ = \frac{H(X)}{\log_2 r} \quad; l_i = - \log_r p_i \text{时取等}$
+								最优码长的上下界 
+								$ 
+									\frac{H(X)}{\log_2 r} ≤ \bar l^* ≤ \frac{H(X)}{\log_2 r} + 1
+									l_i^* = ⌈ - \log_r p_i ⌉
+								$
+								多符号离散信源每字符最小平均码长 (符号长度为N)
+								$ 
+									\frac{H(X)}{\log_2 r} ≤ \bar l^* ≤ \frac{H(X)}{\log_2 r} + \frac{1}{N}
+								$
+
+							\Proof
+								优化问题形式:
+								$
+									\min \quad& \sum_i p_i l_i
+									s.t. \quad& \sum_i r^{- l_i} ≤ 1
+								$
+								Lagrange乘子法, 得最优码长下界 
+								$
+									L(l, \lambda) = \sum_i p_i l_i + \lambda \sum_i r^{- l_i}
+									\frac{∂ L}{∂ l_i} = p_i - \lambda r^{- l_i} \ln r = 0
+								$
+								$
+									=> \quad& r^{- l_i} = \frac{p_i}{\lambda \ln r}
+									=> \quad& \sum_i r^{- l_i} = \sum_i \frac{p_i}{\lambda \ln r} = \frac{\sum_i p_i}{\lambda \ln r} = \frac{1}{\lambda \ln r} ≤ 1
+									=> \quad& \lambda^* = \frac{1}{\ln r} = p_i = r^{- l_i^*}
+									=> \quad& l_i^* = - \log_r p_i
+									=> \quad& \bar l^* = \sum_i l_i^* p_i = - \sum_i p_i \log_r p_i = \frac{- \sum_i p_i \log_2 p_i}{\log_2 r} = \frac{H(X)}{\log_2 r}
+								$
+
+			* 分组码/非分组码
+				\def{分组码}
+					信源序列进入编码器之前先分成若干信源符号组. 而非分组码, 信源序列连续不断地从编码器的输入端进入. 区别在于分组码中包含码字.
+
+			* 定长码/变长码
+				* 定长码
+					\def{定长码} 所有码字的码长都相同的编码.
+					
+					\Property
+						* \bf{典型序列}: 序列中所有符号出现的次数满足大数定律的序列称为典型序列, 否则为非典型序列。
+						* 编码速率: $R'=\frac{l \log r}{N}$
+						* 编码效率: $\eta=\frac{H(X)}{R'}=\frac{N H(X)}{l \log r}$
+						* 序列长度: $N ≥ \frac{\sigma^2}{\delta^2 \varepsilon}=(\frac{\eta}{1-\eta})^2 \cdot \frac{\sigma^2}{H^2(X) \varepsilon}$
+
+				* 变长码
+					\def{变长码} 各个码字的码长不相同的编码.
+
+					\Property
+						* 编码速率: $R' = \bar l \log r$
+						* 编码效率: $eta = \frac{H(X)} R'}=\frac{H(X)}{\bar l \log r}$
+						* 信息传输速率: $R = \frac{H(X)}{\bar l}$
+
+			* Haffman编码
+				\def{Haffman编码} 
+					\bf{编码方法}:
+					* 将信源概率分布按大小依递减次序排列, 合并两概率最小者, 得到新信源:并分配0, 1符号。
+					* 新信源若包含两个以上符号返回(1),  否则到(3)。
+					* 从最后一级向前,  按顺序写出每个信源符号所对应的码字。
+
+	* 信道
+		\def{信道} 信号传输的通道.
+			
+		\Property
+			* \def{信道容量} 输入与输出平均互信息的最大值. 信道传输中, 最大信息速率能力的度量. $C \equiv \max_{p(x)} I(X;Y)$
+
+		* 离散信道
+			\def{离散信道}
+
+			\Property
+				* 信道容量仅与$\P(y|x)$有关, 与$\P(x)$无关.
+
+				* 算法: 信道容量计算 
+					$
+						\{\mb
+							I(x_i ; Y) = \sum_j p_{i j} \log \frac{p_{i j}}{q_j} = C  \quad ;when\ p_i > 0
+							I(x_i ; Y) = \sum_j p_{i j} \log \frac{p_{i j}}{q_j} ≤ C  \quad ;when\ p_i = 0
+						\me\right.
+					$
+
+					\Proof
+						问题表示为$\P(y|x)$确定且已知, 求$I(X;Y)$的最大值及其$\P(x)$的优化问题,
+						$
+							\max \quad& I(X;Y)
+							s.t. \quad& \P(x) ≥ 0
+										& \sum_x \P(x) = 1
+						$
+						Language乘子法求解该优化问题, 
+						$
+							L(\P(x), \lambda) &= I(X;Y) - \lambda \sum_x \P(x) \tag{Lagrange函数}
+								&= \sum_{x,y} \P(y|x) \P(x) \log \P(y|x)  - \sum_y \P(y) \log \P(y) - \lambda \sum_x \P(x) \tag{平均互信息定义式}
+
+							=> \frac{∂ L}{∂ \P(x_i)} &= \sum_y \P(y|x_i) (\log \P(y|x_i) - \log \P(y) - \log e) - \lambda \tag{求导,$\frac{∂ \P(y)}{∂ \P(x_i)} = \frac{∂ \sum_x \P(x) \P(y|x)}{∂ \P(x_i)} = \P(y|x_i)$}
+								&= \sum_y \P(y|x_i) (\log \P(y|x_i) - \log \P(y)) - (\log e + \lambda) \tag{$\sum_y \P(y|x_i) = 1$}
+								&= 0 
+						$
+						$
+							=> \{\mb
+								\sum_y \P(y|x) (C + \log \P(y)) = \sum_y \P(y|x) \log \P(y|x)
+								\P(x) ≥ 0
+								\sum_y \P(y) = 1
+							\me\right.
+						$
+
+				* 信道连接
+					* \def{级联信道} $P_N = \prod P_i$ 
+					* \def{并联信道} $C = \sum_{i=0}^N C_i$
+					* \def{和信道} 
+							各子信道输入输出均互不相交. 
+							$C = \log_2 \sum_{i=0}^N 2^{C_i}$
+							达到信道容量时, 输入概率:
+							$
+								\gamma_i = \frac{2^{C_i}}{\sum_{i=0}^N 2^{C_i}}
+								\P_{X_{ij}} = \gamma_i \P_{X_j}
+							$
+
+			\Example
+				* \def{离散无噪信道} 
+						无损信道, 每个输出只对应一个输入; 
+						确定信道, 每个输入只对应一个输出; 
+						无损确定信道, 输入输出一一对应. 
+
+					\Property
+						信道容量: $C = \log\ \min(N_x, N_y)$ 
+
+				* \def{离散对称信道} 
+						强对称信道; 
+						弱对称信道
+						
+					\Property
+						信道容量: 
+							强对称信道: $C = \log N_y - H(p_{1i},...)$, 因为强对称信道的输出也是等概率的, 所以$H(Y) = \log N_y$.
+							弱对称信道: $C = H(Y) - H(p_{1i},...)$
+
+				* \bf{信道矩阵可逆的信道} 
+						信道容量:
+						$
+							P^{-1}
+							h = [\mb H(P_{1j}) \\ \vdots \\ H(P_{nj}) \me]
+							\beta = -P^{-1} h
+							=> \{\mb
+								C = \log( \sum_i 2^{\beta_i} )
+								\P_{Yi} = \frac{2^{\beta_i}}{\sum_j 2^{\beta_j}}
+								\P_X^T = \P_Y^T P^{-1}
+							\me\right.
+						$
+
+		* 时间离散连续信道
+
+			* 加性噪声信道
+				\Property
+					* $\P(y|x) = p_Z(y - x)$
+					* 条件熵等于噪音熵 $h(Y|X) = h(Z)$
+					* 信道容量 $C = \max_{p(x)} I(X ; Y) = \max_{p(x)} h(Y) - h(Z)$
+					* 信道容量上下界: 熵功率$\sigma^2$:
+						$\frac{1}{2} \log (1+\frac{\sigma_x^2}{\sigma_z^2}) ≤ C ≤ \frac{1}{2} \log (\frac{\sigma_x^2+\sigma_x^2}{\sigma^2})$
+
+
+				* 加性Gauss噪声信道
+					\Property
+						* 信道容量
+							$C=\frac{1}{2} \log (1+\frac{E}{\sigma_z^2})$
+
+				* 并联加性Gauss噪声信道
+
+					\Property
+						* 算法: 并联加性噪声信道的信道容量计算, 注水定理
+							$
+								\{\mb
+									E_i +\sigma_i^2 =B \quad& ;when\ B ≥ \sigma_i^2 
+									E_i = 0			\quad& ;when\ B < \sigma_i^2 
+									\sum_{i, \sigma_i^2 ≤ B} E_i = E
+								\me\right.
+							$
+							$
+								=> C = \sum_{i, \sigma_i^2 ≤ B} \frac{1}{2} \log \frac{B}{\sigma_i^2} = \frac{1}{2} \sum_{i=1}^{N} \log (1+\frac{E_i}{\sigma_i^2})
+							$
+
+				* 加性Gauss白噪声信道
+
+					\Property
+						* 信道容量 $C = W \log (1+\frac{P}{N_0 W})$
+						* 编码定理 $\frac{R}{W} ≤ \log (1+\frac{E_b}{N_0} \frac{R}{W})$
+
+				* 有色Gauss噪声信道
+					\Property
+						* 信道容量 $C = \frac{1}{2} \int_{f \in F_B} \log \frac{|G(f)|^2 B}{N(f)} \d f$
+							
+
+	* 信道编码
+		\def{信道编码} 通过在信道传输的信号序列中加入冗余信号, 以实现信号检错和纠错的, 并提高信息传输的可靠性的一种方法.
+
+		\Property
+			* \Theorem{有噪信道编码定理} 对于离散无记忆信道, 只要信息传输率小于信道容量$R < C$, 则总存在一种(M,n)码使得当n足够长时, 译码差错率$P_e$任意小; 反之, 当信息传输率$R > C$时, 对任何编码方式, 译码差错率$P_e > 0$.
+
+			* \Theorem{无失真信源信道编码定理} 对于离散无记忆信道, 若离散信源每秒的熵小于信道容量$H < C$, 则总存在一种编码使得信源输出以任意小的差错率通过信道传输; 反之, 若$H > C$时, 对任何编码, 译码差错率$P_e > 0$.
+
+			* 译码
+				* \bf{最大后验译码}: $g(y) = \arg\max_x \P(x|y)$
+				* \bf{最大似然译码}: $g(y) = \arg\max_x \P(y|x)$
+
+			* 输入符号等概率时, 最大后验译码$ <=> $最大似然译码.
+
+			* \def{信道疑义度} 信息传输中丢失的信息量 $H(X|Y)$. \textit{意义: 接收者收到信息Y后, 再给答案 -- 原始信息X, 所能得到的信息量, 也是信道传输中丢掉的信息量.}
+
+				\Property
+					* \Theorem{Fano不等式} 
+							信息传输中丢失的信息量, 称信道疑义度, 用条件熵$H(X|Y)$表示. 其上限由信源、信道、译码规则确定: $H(X|Y) ≤ H(p_E) + p_E \log(N_x - 1)$ 即确定传输是否有错的信息量$H(p_E)$ + 确定传输出错后哪一个出错的信息量$p_E \log(N_x - 1)$.
+
+					* 信道疑义度最大 $ <=> $ 信道输入/输出相互独立.
+
+			* \def{线性分组码} 校验位和信息位是线性关系.
+
+		\Example
+			* Hamming码
+
+				* Hamming距离
+					\def{Hamming距离} $d(x, y) = \sum_k x_k \oplus y_k$
+
+					\Property
+						* 对于无记忆二元对称信道, 最大似然译码准则等价于最小Hamming距离
+
+			* 卷积码
+				
