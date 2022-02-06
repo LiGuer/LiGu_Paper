@@ -5,6 +5,7 @@
 		* 数组
 
 		* 链表
+			* 双向链表
 
 		* 队列
 			* 先进后出
@@ -35,7 +36,7 @@
 				* n元堆的高度为$⌊\lg n⌋$
 					\Proof
 						h深的树, 元素有$\{ 2^h, 2^{h+1} - 1 \}$
-						. $∴ lg n \in [h, h + 1]
+						. $∴ lg n \in [h, h + 1]$
 						故下取整为$ h = ⌊\lg n⌋$
 
 	* 图
@@ -59,43 +60,54 @@
 			
 		* 堆排序
 
+		* 选择排序
+
+		* 冒泡排序
+
+		* 归并排序
+
+		* 希尔排序
+
 	* 图论
+		* 图
 
 		* 最短路径
-			* Dijkstra
+			* Dijkstra算法
 
-			* Floyd
+			* Floyd算法
 				[输入]:	* 图的邻接矩阵Graph
 				[输出]: * 距离矩阵Distance	* 后继节点矩阵Path
-				[数据结构]:
 					* 邻接矩阵Graph, 即.图的权值矩阵
 					* 距离矩阵Distance: i到j最短路径长度
 					* 后继节点矩阵Path: 记录两点间的最短路径, 表示从Vi到Vj需要经过的点
-				[原理]:
+				\bf{原理}
 					* Floyd的本质的动态规划, Dijkstra的本质是贪心
 					* 状态转移方程:
 						Distance[i,j] = min{ Distance[i,k] + Distance[k,j] , Distance[i,j] }
-				[流程]:
+
+				\bf{流程}
 					* 初始化距离矩阵Distance = 权值矩阵Graph
 						初始化后继矩阵Path(i,j) = j
 					* 对于每一对顶点 i 和 j, 看是否存在点 k 使得u->k->v比已知路径更短
 							即. Distance[i,j] = min{ Distance[i,k] + Distance[k,j] , Distance[i,j] }
 						若是,则更新Distance, Path(i,j) = k
-				[时间复杂度]:
-					Floyd	时间复杂度O(V³)【3个for()循环嵌套】,空间复杂度O(V²)【2个矩阵】
-					Dijkstra时间复杂度O(V²)
+				
+			\Property
+				* 时间复杂度:
+					* Floyd	时间复杂度$O(V^3)$, 3个for循环嵌套; 空间复杂度$O(V^2)$, 2个矩阵.
+					* Dijkstra 时间复杂度$O(V^2)$
 
-			* 对比Dijkstra \& Floyd
-				Dijkstra一次只能算出给定两点间的最短路径. 
-				Floyd   一次可以算出任意两点间的最短路径. 
+				* 对比Dijkstra \& Floyd
+					Dijkstra 一次只能算出给定两点间的最短路径. 
+					Floyd 一次可以算出任意两点间的最短路径. 
 
 		* 最小生成树
 			* Prim
 				[输入]: 图的邻接链表[Graph], 节点数量[n]
 				[输出]: 最小生成树,每一条有向边的 起点[TreeU],终点[TreeV],总边数[TreeCur]
 				[原理]: 按点贪心, 每次加入已搜索点集u的最短边(u,v)，其中v不属于已搜索点集的点v
-				[时间复杂度]: O(E·logV)
-				[流程]:
+
+				\bf{流程}
 					* 初始化[已搜点集 VertexNew]
 					* 将第一个图的节点, 加入VertexNew
 					* 开始迭代, 直至所有节点均已搜索完成, 即VertexNew已满
@@ -103,8 +115,7 @@
 						* 将边(u,v)加入最小生成树， 将v加入VertexNew
 
 			* Kruskal
-				[时间复杂度] O(E·logV)
-				[流程]:
+				\bf{流程}
 					* 初始化未搜索边集EdgeNew = E0图边集
 					* 开始迭代,直至未搜索边集为空集
 						* 在边集合,选择最短边(u,v)
@@ -112,9 +123,13 @@
 						* 点集中删(u,v)
 					* 最后剩下的那棵树,就是最小生成树
 
-			* 对比Prim \& Kruskal
-				Kruskal	是按边贪心，适合稀疏图. 
-				Prim	是按点贪心，适合稠密图. 
+			\Property
+				* 时间复杂度:
+					* Prim 时间复杂度 $O(E·logV)$
+					* Kruskal 时间复杂度 $O(E·logV)$
+				* 对比Prim \& Kruskal
+					Kruskal	是按边贪心，适合稀疏图. 
+					Prim 是按点贪心，适合稠密图. 
 
 		* 网络最大流
 			* Dinic

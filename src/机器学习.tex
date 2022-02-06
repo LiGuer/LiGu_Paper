@@ -1,7 +1,7 @@
 * 机器学习
 	* 主成分分析
 			[目标]:
-				数据降维，提取数据的主要特征分量, 满足:
+				数据降维, 提取数据的主要特征分量, 满足:
 					
 					* 最近重构性: 样本点到该超平面的距离都足够近。
 					* 最大可分性: 样本点在该超平面的投影尽可能分开。
@@ -42,7 +42,7 @@
 
 	* K-Means 聚类
 			[目标]:
-				聚类. 对N维分布的数据点，可以将其聚类在 K 个关键簇内.
+				聚类. 对N维分布的数据点, 可以将其聚类在 K 个关键簇内.
 				
 			[步骤]:
 				* 随机选择 K 个簇心点 Center
@@ -53,11 +53,11 @@
 					* 对每个簇,计算其质心 Center'
 					* Center≠Center' , 则更正Center为 Center'
 					* 迭代重新开始
-				* 一轮无更正时，迭代结束
+				* 一轮无更正时, 迭代结束
 
 	* 最小二乘法
 			[目标]:
-				求一条直线，使得所有样本点到该直线的Euclid距离最小.
+				求一条直线, 使得所有样本点到该直线的Euclid距离最小.
 				
 			[优化问题]: 最小化均方误差
 				$
@@ -74,7 +74,7 @@
 						
 				* 计算最优点: 求导, 导数为0时取得极值
 					$
-						\frac{\partial MSE}{\partial w} &= 2·X^T·(\. w^T \. x - y) = 0\\
+						\frac{∂ MSE}{∂ w} &= 2·X^T·(\. w^T \. x - y) = 0\\
 					\Rightarrow	w^* &= (X^T X)^-1 X^T y\\
 						f(x) &= x^T (X^T X)^-1 X^T y
 					$
@@ -83,8 +83,8 @@
 					优化问题:
 					$
 						min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2\\
-						\Rightarrow	\frac{\partial E}{\partial w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
-						\frac{\partial E}{\partial b} = 2( n b + \sum(y_i - w x_i) ) = 0
+						\Rightarrow	\frac{∂ E}{∂ w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
+						\frac{∂ E}{∂ b} = 2( n b + \sum(y_i - w x_i) ) = 0
 					$
 					
 					最优点:
@@ -97,9 +97,9 @@
 						
 	* 核方法
 		\def{核方法}
-			核方法通过核函数将样本从原始空间映射到更高维特征空间,使得其线性可分. 其中, 核函数定义为, 将原始空间中的向量作为输入向量，并返回特征空间（转换后的数据空间,可能是高维）中向量的点积的函数称为核函数。使用内核，不需要显式地将数据嵌入到空间中，因为许多算法只需要图像向量之间的内积（内积是标量）；在特征空间不需要数据的坐标。$\kappa(\. x_i, \. x_j) = \phi(\. x_i)^T \phi(\. x_j)$
+			核方法通过核函数将样本从原始空间映射到更高维特征空间,使得其线性可分. 其中, 核函数定义为, 将原始空间中的向量作为输入向量, 并返回特征空间（转换后的数据空间,可能是高维）中向量的点积的函数称为核函数。使用内核, 不需要显式地将数据嵌入到空间中, 因为许多算法只需要图像向量之间的内积（内积是标量）；在特征空间不需要数据的坐标。$\kappa(\. x_i, \. x_j) = \phi(\. x_i)^T \phi(\. x_j)$
 
-			对偶公式: 将正则化的平⽅和误差函数完全由核函数表示, 因此我们可以直接针对核函数进⾏计算，避免了显式地引⼊特征向	量$\phi(\. x)$，这使得我们可以隐式地使⽤⾼维特征空间，甚⾄⽆限维特征空间
+			对偶公式: 将正则化的平⽅和误差函数完全由核函数表示, 因此我们可以直接针对核函数进⾏计算, 避免了显式地引⼊特征向	量$\phi(\. x)$, 这使得我们可以隐式地使⽤⾼维特征空间, 甚⾄⽆限维特征空间
 			$
 				J(\. a)=\frac{1}{2} \. a^T \. {K} \. {K} \. a-\. a^T \. {K} \. t+\frac{1}{2} \. t^T \. t+\frac{\lambda}{2} \. a^T \. {K} \. a
 			$
@@ -125,7 +125,7 @@
 
 	* 支持向量机
 		\def{支持向量机}
-			是一种二分类模型，目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
+			是一种二分类模型, 目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
 			$
 			\underset{\. w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\. w^T \. x_i + b |}{||\. w||}\\
 			s.t. &\quad y_i (\. w^T \. x_i + b) \le 1
@@ -191,51 +191,58 @@
 			* 计算 w*, b*
 
 	* 神经网络
-		* 前馈神经网络
+ 
+		\Theorem{普遍近似定理}
+			一个前馈神经网络, 如果具有线性输出层, 同时至少存在一层具有任何一种挤压性质的激活函数的隐藏层, 那么只要给予这个网络足够数量的隐藏单元, 它就可以以任意的精度来近似任何从一个有限维空间到另一个有限维空间的Borel可测函数.
+
+		\Theorem
+			设普通的带激活函数的全连接网络 $f_N: R^d \to R, P = \{x \in R^d | f_N(x)>0\}$ 为$f_N$的正等值面,若 N 的每层激活函数都至多只有 d 个神经元, 那么Lebesgue测度$\lambda(P)=0\ or\  \lambda(P)= +\infty$
+
+			因此，即使层数无限加深，整个网络的表现力也受网络的宽度限制而无法近似一个带边界的区域。而对于残差网络来讲, 拟合函数的能力则完全不受网路宽度的影响, 上述命题对于残差网络并不适用。
+
+		* 全连接层
 			* 正向传播
 				$\sigma()$: 激活函数, 使线性拟合非线性化, eg. relu(x), Sigmoid(x)
 				$\. y = \sigma (\. w \. x + \. b)$
-
 
 				误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
 				$E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^{2}$
 
 			* 反向传播 --- 梯度下降最优化
-				$\.{w}^{(\tau+1)}=\.{w}^{(\tau)}-\eta \nabla E(\.{w}^{(\tau)})$
+				$\.w^{\tau+1}=\.w^{\tau}-\eta \nabla E(\.{w}^{(\tau)})$
 				
 				设$z = \. w^T \. x + \. b$
-				$ \{ \begin{array}{lr}
+				$ \{\mb
 					\delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
 					\delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}\\
 					\nabla E(\. w_l) = \delta_l \. x_l^T & \text{(每层参数误差)}
-				\end{array} .$
+				\me\right.$
 
 				\bf{证明}:
 					
 					每层参数误差, 由链式法则得(其中$L$指输出层): 
-						$
-							\frac{\partial E}{\partial w_l} 
-							&= \frac{\partial z_l}{\partial w_l} (\frac{\partial y_l}{\partial z_l}\frac{\partial z_l}{\partial y_{l+1}}) ... (\frac{\partial y_{L-1}}{\partial z_{L-1}} \frac{\partial z_{L-1}}{\partial y_L} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
-							&= \frac{\partial z_l}{\partial w_l}  (\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}
-						$
+					$
+						\frac{∂ E}{∂ w_l} &= \frac{∂ z_l}{∂ w_l} (\frac{∂ y_l}{∂ z_l}\frac{∂ z_l}{∂ y_{l+1}}) ... (\frac{∂ y_{L-1}}{∂ z_{L-1}} \frac{∂ z_{L-1}}{∂ y_L} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+						&= \frac{∂ z_l}{∂ w_l}  (\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+					$
 						
 					其中:
-						$
-							\frac{\partial y_l}{\partial z_l} &= \sigma'(z_l)\\
-							\frac{\partial z_l}{\partial y_{l+1}} &= \. w_{l+1}^T
-						$
+					$
+						\frac{∂ y_l}{∂ z_l} &= \sigma'(z_l)
+						\frac{∂ z_l}{∂ y_{l+1}} &= \. w_{l+1}^T
+					$
 						
 					令$\delta_l$为每层误差:
-						$
-							\delta_l &=(\prod_{i = l}^{L} \frac{\partial y_i}{\partial z_i}\frac{\partial z_i}{\partial y_{i+1}} ) \frac{\partial y_L}{\partial z_L} \frac{\partial E}{\partial y_L}\\
-							&= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{\partial E}{\partial y_L}
-						$
+					$
+						\delta_l &=(\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}\\
+						&= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{∂ E}{∂ y_L}
+					$
 						
 					得到每层参数误差结果:
-						$
-							\Rightarrow \frac{\partial E}{\partial w_l} &= \delta_l \frac{\partial z_l}{\partial w_l} = \delta_l x_l^T\\
-							\delta_L &= \frac{\partial E}{\partial y_L} ·\sigma '(z_L)
-						$
+					$
+						\Rightarrow \frac{∂ E}{∂ w_l} &= \delta_l \frac{∂ z_l}{∂ w_l} = \delta_l x_l^T\\
+						\delta_L &= \frac{∂ E}{∂ y_L} ·\sigma '(z_L)
+					$
 						
 				\bf{附}:
 				
@@ -247,9 +254,93 @@
 							sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
 						$
 
+			* 前馈神经网络
+
+		* 卷积层
+			\def{卷积层}
+				输入/输出: kernel: 卷积核		padding: 加边框宽度		in/outChannelNum: 输入/输出通道数
+				参数
+				$
+					Height_{out} = \frac{Height_{in} - Height_{kernel} + 2 · padding}{stride + 1}
+					Width_{out} = \frac{Width_{in} -  Width_{kernel} + 2 · padding}{stride + 1}
+				$
+			* 正向传播
+				卷积操作
+				$
+					x * k = [y_{ij} | y_{ij} = \sum_{c=1}^{Channel_x} \sum_{p=1}^{Height_x} \sum_{q=1}^{Width_x} x_{c,i+p-1,j+q-1} \times k_{cpq}]
+					y_c = x * k_c + b_c
+					y = {y_1, y_2, ... , y_n}
+				$
+			* 反向传播
+				卷积操作
+				$
+					\frac{∂E}{∂y_l} &= \frac{∂E}{∂y_L}·\frac{∂y_L}{∂y{L-1}}· ... ·\frac{∂y_{l+1}}{∂y_l}
+						&= \delta_l = \delta_{l+1}·\frac{∂y_{l+1}}{∂x_{l+1}} = \delta_{l-1} * Rot_{\pi}(w_l)
+					\frac{∂E}{∂k_l} &= \frac{∂E}{∂y_l} · \frac{∂y_l}{∂k_l} = \delta_l·\frac{∂y_l}{∂k_l} = \delta_l * x_l
+					\frac{∂E}{∂b_l} &= \delta_l · \frac{∂y_l}{∂b_l} = \sum_x \sum_y \delta_l
+				$
+				其中:
+				$
+					\frac{∂y_{lcij}}{∂k_{lcpq}} = x_{l,c,i+p-1,j+q-1}
+					\frac{∂y_{lc}}{∂k_{lcpq}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} x_{l,c,i+p-1,j+q-1}
+					\frac{∂E}{∂k_{lcpq}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} \delta_{lcij} \times x_{l,c,i+p-1,j+q-1}  = \delta_{lc} * x_{lc}
+					\frac{∂E}{∂b_{lc}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} \delta_{lcij} = \sum_x \sum_y \delta_l
+				$
+
+		* 下采样层
+			* 平均采样层
+
+			* 最大采样层
+
+		* 瓶颈层 Bottleneck 
+			\def{瓶颈层 Bottleneck}
+				使用的是1*1的卷积神经网络。之所以称之为瓶颈层, 是因为长得比较像一个瓶颈。一大好处就是可以大幅减少计算量。深度可分离卷积中, 也有这样的设计考虑。
+
+		* Inception模块
+
+		* 残差模块
+			\def{残差模块}
+				* 前向传递
+					$y = x + F(x, \omega)$
+					$
+						x_{l+1} &= x_l + F(x_l, \omega_l)
+						x_{l+2} &= x_{l+1} + F(x_{l+1}, \omega_{l+1}) = x_l + F(x_l, \omega_l) + F(x_{l+1}, \omega_{l+1})
+						x_L &= x_l + \sum_{i=l}^{L-1} F(x_{i+1}, \omega_{i+1})
+					$
+
+				* 反向传递
+					$
+						\frac{∂ \epsilon}{∂ x_l} = \frac{\epsilon}{x_L} \frac{∂ x_L}{x_l} = ∂\frac{∂ \epsilon}{∂ x_L} (1 + \frac{∂}{∂ x_l} \sum_{i=l}^{L-1} F(x_i, w_i))
+					$
+
+			* 由来
+				深度神经网络训练中, 深度增加导致性能反而变差的问题.
+
+			* 优势
+				换句话说, 这样狭窄的全连接网络表示的函数要么没有边界约束, 要么恒为0。因此, 即使层数无限加深, 整个网络的表现力也受网络的宽度限制而无法近似一个带边界的区域。而对于残差网络来讲, 拟合函数的能力则完全不受网路宽度的影响, 上述命题1对于残差网络并不适用。
+
+				经过训练后, 分析网络不同深度下得到的训练边界, 如图3.5可以发现宽度比输入维度小的残差网络的训练边界明显更加接近真实边界, 也不受命题1的限制。事实上对于高维函数, 这一特点依然适用。因此, 当函数的输入维度非常高时, 这一做法就变的非常有意义。尽管在高维空间这一特点很难被可视化, 但是这个理论给了一个很合理的启发, 就是原则上, 带短连接的网络的拟合高维函数的能力比普通连接的网络更强。这部分我们讨论了残差网络有能力拟合更高维的函数, 但是在实际的训练过程中仍然可能存在各种各样的问题使得学习到最优的参数非常困难, 因此下一小节讨论残差在训练过程中的优越性。
+
+			\Code
+				class ResBlock
+					def __init__(input_dim, n_filters, kernel_size, padding, stride)
+						conv1	= Conv(input_dim, n_filters, kernel_size, padding, stride)
+						bn1		= BatchNorm(n_filters)
+						conv2	= Conv(n_filters, n_filters, kernel_size, padding, stride)
+						bn2 	= BatchNorm(n_filters)
+				
+					def forward(x)
+						y1 = bn1(conv1(x))
+						y1 = ReLU(y1)
+						y1 = bn2(conv2(y1))
+				
+						y += y1 + x
+						return y = relu(y)
+
+					def backward(x)
 
 	* 概率图模型
-		在机器学习领域，概率图模型(Graphical Model)是一种将问题抽象成数学模型的高效建模方法，具有很强的表达能力。借助于概率图模型，很多机器学习的方法都可以用概率图模型来表示。 概率图模型是综合了图论和概率论的知识。根据图的不同，概率图模型可以分为三类：
+		在机器学习领域, 概率图模型(Graphical Model)是一种将问题抽象成数学模型的高效建模方法, 具有很强的表达能力。借助于概率图模型, 很多机器学习的方法都可以用概率图模型来表示。 概率图模型是综合了图论和概率论的知识。根据图的不同, 概率图模型可以分为三类：
 
 		* 有向图, 也称Bayesian网
 		* 无向图, 也称Markov随机场
@@ -261,7 +352,7 @@
 		
 		
 		\def{极大团}
-			给定一张图$G=(V,E)$，和顶点集合的一个非空子集合$C \subset V$，如果C中任何两个顶点之间均有边链接，则称C为团(clique)；更进一步，若加入任何一个顶点$V \in G/C$中的顶点，都使得C∪v不再是团,则称C为极大团(maximal clique)。
+			给定一张图$G=(V,E)$, 和顶点集合的一个非空子集合$C \subset V$, 如果C中任何两个顶点之间均有边链接, 则称C为团(clique)；更进一步, 若加入任何一个顶点$V \in G/C$中的顶点, 都使得C∪v不再是团,则称C为极大团(maximal clique)。
 
 
 	* 混合⾼斯分布
@@ -456,7 +547,7 @@
 
 					\bf{优势}:
 					* 利用神经网络的深度学习对强化学习进行提升, Q-Learning + 卷积神经网络. 深度学习的进展使得直接从视觉和语音等高维感官输入的端到端学习成为可能 (eg,直接从电脑屏幕学习到游戏手柄动作), 解决了Q-Learning的Q表中状态、动作数量无法做大的问题.
-					* 经验库回放机制, 解决深度学习训练所需样本独立，但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
+					* 经验库回放机制, 解决深度学习训练所需样本独立, 但强化学习的状态序列具有高度相关性的问题. 将获得的当前信息存入经验库中$<S, A, R>$, 学习更新时随机抽取的经验样本执行经验回放学习, 以打破序列间的相关性, 使其独立分布.
 					* 随机小批量更新
 
 					\bf{劣势}: 只能处理离散和低维的动作空间.
@@ -500,13 +591,13 @@
 					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}\\
 					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}\\
 					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s)+ \P_\pi (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}\\
-					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_{r} \P(s', r | s, a)  \tag{加法性质}\\
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_r \P(s', r | s, a)  \tag{加法性质}\\
 					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}\\
 					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
-					&= \sum_{s' \in S} \sum_{t=0}^{\infty} 
+					&= \sum_{s' \in S} \sum_{t=0}^\infty 
 					\gamma^t \P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}\\
-					&=  (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^{\infty} \P_\pi^{(t)} (s'| s )$归一化}\\
-					&= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^{\infty} \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
+					&=  (\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^\infty \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^\infty \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^\infty \P_\pi^{(t)} (s'| s )$归一化}\\
+					&= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
 					&= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  ] \tag{期望形式}\\
 					&= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} \P_\pi (a | s') Q_\pi(s', a) \frac{\nabla_\theta \P_\pi (a | s')}{\P_\pi (a | s')}  ] \tag{提项$\P_\pi (a | s')$, 方便后面对$a$写期望}\\
 					&= \alpha \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ] \tag{期望形式, 微分公式}\\
@@ -519,7 +610,7 @@
 
 		* 确定性策略梯度方法
 			\def{确定性策略梯度方法}
-				采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
+				采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计, 确定性策略在高维动作空间的表现优于随机性策略方法。而确定性Actor-Critic是其中代表性改进算法.
 
 				\bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
 					$\nabla_\theta J (\mu_\theta ) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]$ 
@@ -528,7 +619,7 @@
 
 				\bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
 
-			\bf{优势}: 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计，确定性策略在高维动作空间的表现优于随机性策略方法。
+			\bf{优势}: 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计, 确定性策略在高维动作空间的表现优于随机性策略方法。
 			
 			\bf{eg.} 策略函数常用形式
 			$
@@ -544,7 +635,7 @@
 		
 				* \bf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_\theta J (\pi_\theta )$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$。}
 				
-				* \bf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样。通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差。然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_\theta J (\pi_\theta )=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_\theta} [\nabla_\theta \log \pi_\theta(a | s) Q^{w}(s, a) ]$. 更直观地说，条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的，$\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解，该线性回归问题根据这些特征估计$Q_\pi(s，a)$。在实践中，条件(2)通常被放宽，以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上，如果同时满足近似值(1)和(2)，则整个算法相当于根本不使用批评家. }
+				* \bf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样。通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差。然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_\theta J (\pi_\theta )=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_\theta} [\nabla_\theta \log \pi_\theta(a | s) Q^{w}(s, a) ]$. 更直观地说, 条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的, $\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解, 该线性回归问题根据这些特征估计$Q_\pi(s, a)$。在实践中, 条件(2)通常被放宽, 以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上, 如果同时满足近似值(1)和(2), 则整个算法相当于根本不使用批评家. }
 
 				Actor 在运用 随机梯度算法 进行 梯度上升 时, 由 Critic 来告诉他, 这次的 梯度上升 是不是一次正确的上升, 如果这次的得分不好, 那么就不要上升那么多. Actor 想要最大化期望的奖励, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做奖励. Critic 的更新很简单, 就是像 Q-learning 那样更新现实和估计的误差 (TD error) 就好了.
 
@@ -584,7 +675,7 @@
 						\theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
 					$
 					
-					随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而，由于确定性策略梯度消除了动作上的积分，我们可以避免在参与者中进行重要抽样；通过使用Q-learning，我们可以避免批评家中的重要抽样
+					随机非策略参与者-批评家算法通常对参与者和批评家都使用重要性抽样。然而, 由于确定性策略梯度消除了动作上的积分, 我们可以避免在参与者中进行重要抽样；通过使用Q-learning, 我们可以避免批评家中的重要抽样
 				
 			
 		* Deep Deterministic Policy Gradient
@@ -607,11 +698,132 @@
 					* \bf{气}: 棋子紧邻的空点(上下左右). 紧邻同色子连成一个整体, 气一并计算且一空点只算一次.
 				
 				* \bf{基本规则}:
-					* \bf{无气提子}: 若棋子无气, 应立即提出棋盘. 下子后，若对方或双方棋子无气, 都只提对方无气子.
-					* \bf{无气禁入}: 棋盘上空点, 若下子后，该子立即无气且同时不能提对方棋子, 则该空点禁止下子.
+					* \bf{无气提子}: 若棋子无气, 应立即提出棋盘. 下子后, 若对方或双方棋子无气, 都只提对方无气子.
+					* \bf{无气禁入}: 棋盘上空点, 若下子后, 该子立即无气且同时不能提对方棋子, 则该空点禁止下子.
 					* \bf{禁止全局同形}: 下子后, 不得使对方重复面临曾出现过的棋局. (全局同形再现是妨碍终局的唯一技术性原因, 应禁止.)
 					* \bf{终局}: 双方交替放弃下子. 双方除了自己的禁入点和眼点(对方禁入点且紧邻皆为自己), 均无空点可下时, 游戏结束.
 					* \bf{输赢判定}: 数子法, 死棋提出, 数棋盘上活棋(不能被提出的棋子)及其围住空点(紧邻皆为同色棋子)数. 黑色先手, 贴3.75子, 黑胜(黑棋数子数 - 184.25)子, 白胜(白棋数子数 - 176.75)子, 正赢负输.
 					
 				* \bf{性质}:
 					* \bf{劫争}: 双方棋子互围, 一方提子, 另一方不得立即回提, 只能在别处下子, 再回提, 以避免全局同形导致死循环.
+
+* 数据挖掘
+	* 关联分析
+		* Apriori
+			[输入/输出]:
+				输入: (1) 初始频繁项集	(2) 最小支持度
+				输出: (1) 关联项集		(2) 关联项集支持度
+			[目的]: 根据频繁项集, 寻找数据集中变量之间的关联规则.
+			[概念]:
+				* 频繁项集: 经常出现在一块的物品的集合.
+				* 关联规则: 两种物品之间可能存在很强的关系.
+				* 支持度P(AB): 数据集中包含该项集的记录所占的比例. P(AB) ≌ num(AB) / num(all)
+				* 置信度P(A→B) = P(B|A) = P(AB) / P(A)
+			[定理]:
+				* 项集频繁, 则其子集频繁. <=> 项集不频繁, 则其超集不频繁.
+				* 若规则X→Y−X低于置信度阈值, 则对于X子集X',规则X'→Y−X'也低于置信度阈值
+				* 频繁项集生成的方法:
+					(1) Fk = Fk-1 × F1
+					(2) Fk = Fk-1 × Fk-1
+				* 频繁项集每一项各不相同,  每一项内部排列有序.
+			[过程]:
+				(1) 频繁项集生成,对于K项的集合
+					(2) 频繁项集子集生成. 生成K项所有可以组合的集合. eg.(frozenset({2, 3}), frozenset({3, 5})) -> (frozenset({2, 3, 5}))
+					(3) 保存满足目标支持度P(AB)的集合.
+				(4)  关联规则生成, 对不同长度(K)的频繁项集依次分析
+					(4.1) 频繁项集只有两个元素{AB}, 直接计算置信度P(A→B),P(B→A)
+					(4.2) 频繁项集超过两个元素{ABC...}, 依次计算置信度P(AC...→B)
+					(5) 保存满足目标置信度的关联规则.
+
+
+					
+* 计算机视觉
+	* 目标检测
+		* 滑动窗口方法
+			其中分类器在整个图像[10]上均匀间隔的位置运行。
+
+		* R-CNN
+			区域建议方法, 首先在图像中生成潜在的边界框, 然后在这些提议的框上运行一个分类器。分类后, 通过后处理对边界框进行细化, 消除重复检测, 并根据场景[13]中的其他对象对边界框进行重核。
+
+		* YOLO
+			* 改进
+				* YOLO将物体检测作为回归问题
+				* end-to-end网络
+				* 训练和检测均是在一个单独网络中进行
+				* 为提高物体定位精准性和召回率, YOLO作者提出了YOLO9000, 提高训练图像的分辨率, 引入了faster rcnn中anchor box的思想, 对各网络结构及各层的设计进行了改进, 输出层使用卷积层替代YOLO的全连接层, 联合使用coco物体检测标注数据和imagenet物体分类标注数据训练物体检测模型。相比YOLO, YOLO9000在识别种类、精度、速度、和定位准确性等方面都有大大提升。（yolo9000详解有空给出）
+
+			* 优缺点
+				* 优点
+					* 快。YOLO将物体检测作为回归问题进行求解, 整个检测网络pipeline简单。在titan x GPU上, 在保证检测准确率的前提下（63.4\% mAP, VOC 2007 test set）, 可以达到45fps的检测速度。
+					* 背景误检率低。YOLO在训练和推理过程中能‘看到’整张图像的整体信息, 而基于region proposal的物体检测方法（如rcnn/fast rcnn）, 在检测过程中, 只‘看到’候选框内的局部图像信息。因此, 若当图像背景（非物体）中的部分数据被包含在候选框中送入检测网络进行检测时, 容易被误检测成物体。测试证明, YOLO对于背景图像的误检率低于fast rcnn误检率的一半。
+					* 通用性强。YOLO对于艺术类作品中的物体检测同样适用。它对非自然图像物体的检测率远远高于DPM和RCNN系列检测方法。
+
+				* 缺点
+					识别物体位置精准性差。召回率低。
+
+			* 网络结构
+				24个卷积层和2个全连接层, 卷积层用来提取图像特征, 全连接层用来预测图像位置和类别概率值。
+
+				# [from, number, module, args]
+				[[-1, 1, Conv, [32, 3, 1]],  # 0
+				 [-1, 1, Conv, [64, 3, 2]],  # 1-P1/2
+				 [-1, 1, Bottleneck, [64]],
+				 [-1, 1, Conv, [128, 3, 2]],  # 3-P2/4
+				 [-1, 2, Bottleneck, [128]],
+				 [-1, 1, Conv, [256, 3, 2]],  # 5-P3/8
+				 [-1, 8, Bottleneck, [256]],
+				 [-1, 1, Conv, [512, 3, 2]],  # 7-P4/16
+				 [-1, 8, Bottleneck, [512]],
+				 [-1, 1, Conv, [1024, 3, 2]],  # 9-P5/32
+				 [-1, 4, Bottleneck, [1024]],  # 10
+				]
+
+				head:
+				[[-1, 1, Bottleneck, [1024, False]],
+				 [-1, 1, Conv, [512, [1, 1]]],
+				 [-1, 1, Conv, [1024, 3, 1]],
+				 [-1, 1, Conv, [512, 1, 1]],
+				 [-1, 1, Conv, [1024, 3, 1]],  # 15 (P5/32-large)
+			  
+				 [-2, 1, Conv, [256, 1, 1]],
+				 [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+				 [[-1, 8], 1, Concat, [1]],  # cat backbone P4
+				 [-1, 1, Bottleneck, [512, False]],
+				 [-1, 1, Bottleneck, [512, False]],
+				 [-1, 1, Conv, [256, 1, 1]],
+				 [-1, 1, Conv, [512, 3, 1]],  # 22 (P4/16-medium)
+			  
+				 [-2, 1, Conv, [128, 1, 1]],
+				 [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+				 [[-1, 6], 1, Concat, [1]],  # cat backbone P3
+				 [-1, 1, Bottleneck, [256, False]],
+				 [-1, 2, Bottleneck, [256, False]],  # 27 (P3/8-small)
+			  
+				 [[27, 22, 15], 1, Detect, [nc, anchors]],   # Detect(P3, P4, P5)
+				]
+			  
+
+				* 输出层
+					输入图像分成SxS个格子, 每个格子负责检测‘落入’该格子的物体。每个格子输出B个bounding box（包含物体的矩形区域）信息, 以及C个物体属于某种类别的概率信息。Bounding box信息包含5个数据值, 分别是x,y,w,h,和confidence。其中x,y是指当前格子预测得到的物体的bounding box的中心位置的坐标。w,h是bounding box的宽度和高度。confidence反映当前bounding box是否包含物体以及物体位置的准确性. YOLO网络最终的全连接层的输出维度是 S*S*(B*5 + C)
+
+					作者训练采用的输入图像分辨率是448x448, S=7, B=2；采用VOC 20类标注物体作为训练数据, C=20。因此输出向量为7*7*(20 + 2*5)=1470维。
+
+					虽然每个格子可以预测B个bounding box, 但是最终只选择只选择IOU最高的bounding box作为物体检测输出, 即每个格子最多只预测出一个物体。当物体占画面比例较小, 如图像中包含畜群或鸟群时, 每个格子包含多个物体, 但却只能检测出其中一个。这是YOLO方法的一个缺陷。
+
+				* 损失函数
+					均方和误差作为loss函数来优化模型参数. 位置相关误差（坐标、IOU）与分类误差对网络loss的贡献值是不同的, 因此YOLO在计算loss时, .
+
+					在计算IOU误差时, 包含物体的格子与不包含物体的格子, 二者的IOU误差对网络loss的贡献值是不同的。若采用相同的权值, 那么不包含物体的格子的confidence值近似为0, 变相放大了包含物体的格子的confidence误差在计算网络参数梯度时的影响。为解决这个问题, YOLO 使用
+
+					对于相等的误差值, 大物体误差对检测的影响应小于小物体误差对检测的影响。这是因为, 相同的位置偏差占大物体的比例远小于同等偏差占小物体的比例。YOLO将物体大小的信息项（w和h）进行求平方根来改进这个问题。
+
+					YOLO方法模型训练依赖于物体识别标注数据, 因此, 对于非常规的物体形状或比例, YOLO的检测效果并不理想。YOLO采用了多个下采样层, 网络学到的物体特征并不精细, 因此也会影响检测效果。
+
+			* 训练
+				* 预训练
+					使用ImageNet 1000类数据训练YOLO网络的前20个卷积层+1个average池化层+1个全连接层。训练图像分辨率resize到224x224。
+				* YOLO模型训练
+					得到的前20个卷积层网络参数来初始化YOLO模型前20个卷积层的网络参数, 然后用VOC 20类标注数据进行YOLO模型训练。为提高图像精度, 在训练检测模型时, 将输入图像分辨率resize到448x448。
+
+			* 实验验证
+				论文中, 作者还给出了YOLO与Fast RCNN在各方面的识别误差比例, 如下图。YOLO对背景内容的误判率（4.75\%）比fast rcnn的误判率（13.6\%）低很多。但是YOLO的定位准确率较差, 占总误差比例的19.0\%, 而fast rcnn仅为8.6\%。
