@@ -47,6 +47,7 @@ def Formulas(Str):
     Str = re.sub(r'≠', r'\\neq ', Str)
     Str = re.sub(r'∂', r'\\partial ', Str)
     Str = re.sub(r'Δ', r'\\Delta ', Str)
+    Str = re.sub(r'π', r'\\pi ', Str)
     Str = re.sub(r' => ', r' \\Rightarrow ', Str)
     Str = re.sub(r' <=> ', r' \\Leftrightarrow ', Str)
     Str = re.sub(r'\\sum_', r'\\sum\\limits_', Str)

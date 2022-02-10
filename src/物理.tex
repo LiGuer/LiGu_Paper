@@ -1,7 +1,6 @@
 
-* Mechanics力学
+* 力学
 	* 力学之描述——运动方程
-
 		\def{广义坐标} 完全刻画其位置的任意s个变量 $q_1,q_2, ... ,q_{s}$. (对于s个自由度的系统,)
 		
 		\def{广义速度} 广义坐标对时间的一阶导$\dot q_1,\dot q_2, ... ,\dot q_{s}$
@@ -17,11 +16,9 @@
 		\def{最小作用量原理}系统在两个时刻的, 位置之间的运动, 使得Lagrange函数积分(作用量S)取最小值.
 			$S = \int_{t1}^{t2} L(q,\dot q,t)dt$
 			$\delta S = \delta \int_{t1}^{t2} L(q,\dot q,t)dt = \int_{t1}^{t2} (\frac{∂ L}{∂ q}\delta q + \frac{∂ L}{∂ \dot q}\delta \dot q) dt = \frac{∂ L}{∂ \dot q} \delta q \arrowvert_{t1}^{t2} + \int_{t1}^{t2} (\frac{∂ L}{∂ q} - \frac{d}{dt} \frac{∂ L}{∂ \dot q}) \delta q dt = 0$
-
 		
 		\def{Lagrange方程}运动微分方程.
 			$ => \frac{d}{dt}\frac{∂ L}{∂ \dot q_i} - \frac{∂ L}{∂ q_i} = 0\quad(i=1,\dots,s)$
-
 
 	* 力学之框架——参考系
 		* 研究力学现象必须选择参考系.
@@ -34,7 +31,6 @@
 		
 		\def{惯性定律} 在惯性参考系中,质点任何自由运动的速度的大小和方向都不改变.
 			$ => \. v = const$
-
 
 	* 力学之框架——参考系间相对性
 		\def{Galilean相对性原理} 存在无穷个相互作匀速直线运动的惯性参考系,这些惯性系之间时空性质相同,所有力学规律等价.
@@ -53,7 +49,6 @@
 		
 		\def{Galilean相对性原理} 力学系统在Galilean变换下具有不变性.
 	
-	
 	* 力学之对象——质点、质点系
 		\bf{质点}:有质量,无体积形状的,理想的点.
 		
@@ -69,71 +64,65 @@
 		\bf{动能 T}: \quad \bf{势能 U}:描述质点之间相互作用,而增加的关于坐标的函数(由相互作用性质决定)(限于经典力学).
 			$L = \sum \frac{m_i v_i^2}{2} - U(\. r_1,\. r_2, ...  ) = T(v_1^2,v_2^2, ... ) - U(\. r_1,\. r_2, ...  )$
 
+	* 力学之不变性——守恒定律
+		* 能量守恒——时间均匀性
+			时间均匀性: 封闭系统Lagrange函数不显含时间.\quad $ => L(\. q,\dot \. q)$
+				$\frac{dL}{dt} = \sum \frac{∂ L}{∂ q_i} \dot q_i + \sum \frac{∂ L}{∂ \dot q_i} \ddot q_i = \sum \frac{d}{dt}(\frac{∂ L}{∂ \dot q_i}\dot q_i) 
+				=> \frac{d}{dt}(\sum \dot q_i \frac{∂ L}{∂ \dot q_i} - L) = 0$
+				
+			\bf{能量E}: 
+			$ => E = \sum \dot q_i \frac{∂ L}{∂ \dot q_i} - L  = T(q,\dot q) + U(q) = const.$
+		* 封闭系统、定常外场系统,即当Lagrange函数不显含时间时,能量守恒成立.
 
-* 力学之不变性——守恒定律
-	* 能量守恒——时间均匀性
-		时间均匀性: 封闭系统Lagrange函数不显含时间.\quad $ => L(\. q,\dot \. q)$
-			$\frac{dL}{dt} = \sum \frac{∂ L}{∂ q_i} \dot q_i + \sum \frac{∂ L}{∂ \dot q_i} \ddot q_i = \sum \frac{d}{dt}(\frac{∂ L}{∂ \dot q_i}\dot q_i) 
-			=> \frac{d}{dt}(\sum \dot q_i \frac{∂ L}{∂ \dot q_i} - L) = 0$
+		* 动量守恒——空间均匀性、力
+			空间均匀性: 空间平移不变性.
+				$\delta L = \sum \frac{∂ L}{∂ \. r_i}\cdot \delta \. r_i = \. \epsilon \cdot \sum \frac{∂ L}{∂ \. r_i} = 0\quad(\forall \. \epsilon)
+				=> \sum \frac{∂ L}{∂ \. r_i} = \sum \frac{d}{dt} \frac{∂ L}{∂ \. v_i} = \frac{d}{dt} \sum \frac{∂ L}{∂ \. v_i} = 0$
+		
+			\bf{动量$\. P$: }
+				$ => \. P = \sum \frac{∂ L}{∂ \. v_i} = \sum m_i \. v_i = const.$
+		
+			\bf{力$\. F$}:动量对时间的一阶导. \quad 封闭系统合外力为零.
+				$ => \sum \frac{∂ L}{∂ \. r_i} = \sum \. F_i = 0 \quad , \quad \. F = \frac{∂ L}{∂ \. r} = \dot{ \. P }$
+		
+			\bf{广义动量、广义力}:
+				$P_i = \frac{∂ L}{∂ \dot q_i},\quad F_i = \frac{∂ L}{∂ \dot q_i} = \dot P_i$
+
+		* 角动量守恒——空间各向同性
+			空间各向同性: 空间旋转不变性.
+				$
+				\delta L = \sum (\frac{∂ L}{∂ \. r_i} \cdot \delta \. r_i + \frac{∂ L}{∂ \. v_i} \cdot \delta \. v_i) = \sum [\dot{\. P_i} \cdot (\delta \. \varphi \times \. r_i) + \. P_i \cdot ( \delta \. \varphi \times \. v_i )]
+				= \delta \. \varphi \cdot \sum (\. r_i \tims \dot{\. P_i} + \. v_i \tims \. P_i) \\
+				\quad\  = \delta \. \varphi \cdot \frac{d}{dt} \sum \. r_i \times \. P_i = 0\quad(\forall \. \varphi) => \frac{d}{dt}\sum \. r_i \times \. P_i = 0
+				$
 			
-		\bf{能量E}: 
-		$ => E = \sum \dot q_i \frac{∂ L}{∂ \dot q_i} - L  = T(q,\dot q) + U(q) = const.$
-	* 封闭系统、定常外场系统,即当Lagrange函数不显含时间时,能量守恒成立.
+			\bf{角动量$\. M$: }
+				$ => \. M = \sum \. r_i \times \. P_i = const.$
 
+		* $E,\. P,\. M$参考系间变换
+			不同惯性参考系中(K'相对K以速度$\. V$运动)(对于$\. M$且K'相对K坐标原点相差$\. R$)\\
+				$ \{
+					E = \frac{1}{2} \sum m_i(\. v_i + \. V)^2 + U = \frac{m_c V^2}{2} + \. V \cdot \sum m_i \. v'_i + \frac{1}{2} \sum m_i v'_i^2 + U = E' + \. V \cdot \. P' + \frac{m_c V^2}{2}\\
+					\. P = \sum m_i (\. v'_i + \. V) = \sum m_i \. v'_i + \. V \sum m_i = \. P' + \. V \sum m_i\\
+					\. M = \sum m_i (\. r'_i + \. R) \times (\. v'_i + \. V) = \sum m_i( \. r'_i \times \. v'_i +  \. R \times \. v'_i + \. r'_i \times \. V + \. R \times \. V)
+					= \. M' + \. R \times \. P'_c + m_c \. r'_c \times \. V + m_c \. R \times \. V\\
+				\right. $
 
-	* 动量守恒——空间均匀性、力
-		空间均匀性: 空间平移不变性.
-			$\delta L = \sum \frac{∂ L}{∂ \. r_i}\cdot \delta \. r_i = \. \epsilon \cdot \sum \frac{∂ L}{∂ \. r_i} = 0\quad(\forall \. \epsilon)
-			=> \sum \frac{∂ L}{∂ \. r_i} = \sum \frac{d}{dt} \frac{∂ L}{∂ \. v_i} = \frac{d}{dt} \sum \frac{∂ L}{∂ \. v_i} = 0$
-	
-		\bf{动量$\. P$: }
-			$ => \. P = \sum \frac{∂ L}{∂ \. v_i} = \sum m_i \. v_i = const.$
-	
-		\bf{力$\. F$}:动量对时间的一阶导. \quad 封闭系统合外力为零.
-			$ => \sum \frac{∂ L}{∂ \. r_i} = \sum \. F_i = 0 \quad , \quad \. F = \frac{∂ L}{∂ \. r} = \dot{ \. P }$
-	
-		\bf{广义动量、广义力}:
-			$P_i = \frac{∂ L}{∂ \dot q_i},\quad F_i = \frac{∂ L}{∂ \dot q_i} = \dot P_i$
-
-
-	* 角动量守恒——空间各向同性
-		空间各向同性: 空间旋转不变性.
-			$
-			\delta L = \sum (\frac{∂ L}{∂ \. r_i} \cdot \delta \. r_i + \frac{∂ L}{∂ \. v_i} \cdot \delta \. v_i) = \sum [\dot{\. P_i} \cdot (\delta \. \varphi \times \. r_i) + \. P_i \cdot ( \delta \. \varphi \times \. v_i )]
-			 = \delta \. \varphi \cdot \sum (\. r_i \tims \dot{\. P_i} + \. v_i \tims \. P_i) \\
-			 \quad\  = \delta \. \varphi \cdot \frac{d}{dt} \sum \. r_i \times \. P_i = 0\quad(\forall \. \varphi) => \frac{d}{dt}\sum \. r_i \times \. P_i = 0
-			$
+	* 力学之相似性
+		* Lagrange函数乘任意常数,不会改变运动方程.
+			$\. r_i \to \alpha \. r_i, t \to \beta t 
+			=> \. v_i = \frac{d\. r_i}{dt} \to \frac{\alpha}{\beta}\. v_i,T \to \frac{\alpha^2}{\beta^2}T,U \to  \alpha^k U$
 		
-		\bf{角动量$\. M$: }
-			$ => \. M = \sum \. r_i \times \. P_i = const.$
-
-
-	* $E,\. P,\. M$参考系间变换
-		不同惯性参考系中(K'相对K以速度$\. V$运动)(对于$\. M$且K'相对K坐标原点相差$\. R$)\\
-			$ \{
-				E = \frac{1}{2} \sum m_i(\. v_i + \. V)^2 + U = \frac{m_c V^2}{2} + \. V \cdot \sum m_i \. v'_i + \frac{1}{2} \sum m_i v'_i^2 + U = E' + \. V \cdot \. P' + \frac{m_c V^2}{2}\\
-				\. P = \sum m_i (\. v'_i + \. V) = \sum m_i \. v'_i + \. V \sum m_i = \. P' + \. V \sum m_i\\
-				\. M = \sum m_i (\. r'_i + \. R) \times (\. v'_i + \. V) = \sum m_i( \. r'_i \times \. v'_i +  \. R \times \. v'_i + \. r'_i \times \. V + \. R \times \. V)
-				= \. M' + \. R \times \. P'_c + m_c \. r'_c \times \. V + m_c \. R \times \. V\\
-			\right. $
-
-
-* 力学之相似性
-	* Lagrange函数乘任意常数,不会改变运动方程.
-		$\. r_i \to \alpha \. r_i, t \to \beta t 
-		=> \. v_i = \frac{d\. r_i}{dt} \to \frac{\alpha}{\beta}\. v_i,T \to \frac{\alpha^2}{\beta^2}T,U \to  \alpha^k U$
-	
-	若$\frac{\alpha^2}{\beta^2} = \alpha ^ k $,即$\beta = \alpha^{1-k/2}$,则Lagrange函数乘const.,运动方程不变.前后运动轨迹相似,只是尺寸不同.
-	
-	且各力学量之比,满足:\quad(l:轨迹线度)
-		$\frac{t'}{t} = (\frac{l'}{l})^{1-k/2},\frac{v'}{v} = (\frac{l'}{l})^{k/2},\frac{E'}{E} = (\frac{l'}{l})^k,\frac{M'}{M} = (\frac{l'}{l})^{1+k/2}$
+		若$\frac{\alpha^2}{\beta^2} = \alpha ^ k $,即$\beta = \alpha^{1-k/2}$,则Lagrange函数乘const.,运动方程不变.前后运动轨迹相似,只是尺寸不同.
 		
-	* 例1: 均匀力场,势能与坐标成线性,$ => k=1,=> \frac{t'}{t} = \sqrt{\frac{l'}{l}}$,重力场自由落体,下落时间平方与初始高度成正比.
-	
-	* 例2: Kepler's第三定律,Newton引力、Coulomb力,势能与两点间距离成反比,$ => k=-1, => \frac{t'}{t} = (\frac{l'}{l})^{3/2}$,轨道运动周期的平方与轨道尺寸的立方成正比.
+		且各力学量之比,满足:\quad(l:轨迹线度)
+			$\frac{t'}{t} = (\frac{l'}{l})^{1-k/2},\frac{v'}{v} = (\frac{l'}{l})^{k/2},\frac{E'}{E} = (\frac{l'}{l})^k,\frac{M'}{M} = (\frac{l'}{l})^{1+k/2}$
+			
+		* 例1: 均匀力场,势能与坐标成线性,$ => k=1,=> \frac{t'}{t} = \sqrt{\frac{l'}{l}}$,重力场自由落体,下落时间平方与初始高度成正比.
+		
+		* 例2: Kepler's第三定律,Newton引力、Coulomb力,势能与两点间距离成反比,$ => k=-1, => \frac{t'}{t} = (\frac{l'}{l})^{3/2}$,轨道运动周期的平方与轨道尺寸的立方成正比.
 
-
-	* 力学之对象——质心
+	* 质心 (力学之对象)
 		\bf{质心系}:\exists 速度$\. V$使得系统相对K'静止($\. P' = 0$),且K'原点为系统质量中心,K'即质心系:
 			$\. V = \frac{\. P}{\sum m_i} = \frac{\sum m_i \. v_i}{\sum m_i}$
 			
@@ -155,7 +144,6 @@
 			
 		\bf{质心组合关系}: 将质点系分成若干小系,各小系质心构成新的质点系之质心即为原质点系的质心.
 
-
 	* 情景: 一维运动
 		一维运动,定常外部条件下,
 		
@@ -169,7 +157,6 @@
 			$\dot x = \frac{dx}{dt} = \sqrt{\frac{2}{m}[E - U(x)]}\quad => \quad t = \sqrt{\frac{m}{2}} \int \frac{dx}{\sqrt{E - U(x)}} + const$
 			$\because$动能恒正,故运动只能发生在$U(x) \leqslant E$的空间区域.
 
-
 	* 情景: 二体问题
 		\bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)\\
 		二体问题Lagrange函数:
@@ -179,8 +166,7 @@
 			$m_1\. r_1 + m_2 \. r_2 =0,\quad \. r_{12} = \. r_1 - \. r_2, \quad => \quad \. r_1 = \frac{m_2}{m_1 + m_2}\. r_{12}, \quad \. r_2 = - \frac{m_1}{m_1 + m_2}\. r_{12} $
 			$ => L = \frac{m_{12} \. \dot r_{12}^2}{2} - U(|\. r_{12}|), \quad m_{12} = \frac{m_1 m_2}{m_1 + m_2}$
 			$ =>$"二体问题"等效为一个质量$m_{12}$的质点,在外场$U(\. r_{12})$下的运动, 而分运动$\. r_1, \. r_2$, 可由$\. r_{12}$分别解出.
-		
-		
+	
 	* 情景: 有心力场
 		\bf{有心力场}: 质点势能只与质点到某一固定点的距离有关的外场.
 		
@@ -211,9 +197,8 @@
 	
 		\bf{离心势能}
 			$U_{centrifuge} = \frac{M^2}{2mr^2}$
-			运动封闭条件:$\Delta \varphi$等于$2\pi$有理数倍.\quad($U(r) \propto \frac{1}{r}\ ,\ r^2$,则运动始终封闭.)
+			运动封闭条件:$\Delta \varphi$等于$2π$有理数倍.\quad($U(r) \propto \frac{1}{r}\ ,\ r^2$,则运动始终封闭.)
 			$\Delta \varphi = \int_{r_{min}} ^{r_{max}} \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
-	
 
 		* 1/r有心力场
 		势能$U(r) \propto \frac{1}{r}$.\quad eg.引力场,库仑电场.
@@ -226,15 +211,13 @@
 		\bf{[2]结果讨论}: \\
 		
 		\bf{[2.1] $\alpha > 0\ and\ e<1, E<0$时,轨道为椭圆}\quad,半长轴a: \quad , 半短轴b: \quad , 周期T:
-		$a = \frac{p}{1-e^2} = \frac{\alpha}{2|E|} \quad , \quad b = \frac{p}{\sqrt{1-e^2}} = \frac{M}{\sqrt{2m|E|}} \quad , \quad T = \frac{2mS_{ellipse}}{M} = \frac{2\pi m \frac{\alpha}{2|E|} \frac{M}{\sqrt{2m|E|}}}{M} = \pi \alpha \sqrt{\frac{m}{2|E|^3}} $
+		$a = \frac{p}{1-e^2} = \frac{\alpha}{2|E|} \quad , \quad b = \frac{p}{\sqrt{1-e^2}} = \frac{M}{\sqrt{2m|E|}} \quad , \quad T = \frac{2mS_{ellipse}}{M} = \frac{2π m \frac{\alpha}{2|E|} \frac{M}{\sqrt{2m|E|}}}{M} = π \alpha \sqrt{\frac{m}{2|E|^3}} $
 		
 		\bf{[2.2] $\alpha > 0\ and\ e=1, E=0$时,轨道为抛物线}
 		
 		\bf{[2.3] $\alpha > 0\ and\ e>1, E>0$时,轨道为双曲线}
 		
 		\bf{[2.4] $\alpha < 0$斥力场时,轨道为双曲线}
-
-
 
 	* 情景: 小振动
 		* 一维小振动
@@ -253,7 +236,6 @@
 			
 			\bf{[2]运动不变性——能量守恒}:
 			$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{m \dot x^2}{2} + \frac{k x^2}{2} = \frac{1}{2} m \omega^2 A^2$
-
 
 		* 一维强迫小振动、共振
 			\bf{强迫振动}:外力下振动系统发生的振动. 对于微小偏移,强迫力势场,Taylor展开,有
@@ -281,153 +263,64 @@
 			\bf{[2.3]} 任意强迫力
 			$let\ \xi = \dot x + i\omega x\ => \dot \xi - i\omega \xi = \frac{F(t)}{m}  \ => x = \frac{1}{\omega}Im\{\int_0^t \frac{F(t)}{m}e^{-i\omega t}dt + const.\}$
 
-
 		* 多自由度小振动
 
-
-	* 力学之对象——刚体
+	* 刚体力学
 		\bf{刚体}:质点间距离保持不变的质点组成的系统.
 		
 		\bf{角速度$\. \omega$}:
 		
 		\bf{惯性张量}:
-	
-	
-	
-	* 力学之对象——理想流体
-		\bf{理想流体}:不可压缩、不计粘性的流体.
-		
-		* 给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
-		
-		\bf{[1] 运动不变性 —— 质量守恒}
-			区域体流出质量 = 区域封闭面流出质量
-			$ => \oint \rho \. v \cdot d \. f = -\frac{∂}{∂ t}\int \rho dV \quad => \int \nabla \cdot (\rho \. v) dV  = -\frac{∂}{∂ t}\int \rho dV =>  \int (\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t}) dV  = 0$
-		
-		\bf{连续性方程}:质量流流出速率 = 流体密度减少速率
-			$ => \nabla \cdot (\rho \. v) +  \frac{∂ \rho}{∂ t} = 0$
-		
-		\bf{质量流密度}:
-			$\. j = \rho \. v$
-		
-		\bf{[2]运动方程}
+
+	* 流体力学
+		* 理想流体
+			\def{理想流体} 不可压缩、不计粘性的流体.
+			
+			给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
+			
+		* 质量守恒
+			区域体流出质量 = 区域封闭面流出质量.
+			$ 
+				& \oint \rho \. v \cdot d \. f = -\frac{∂}{∂ t}\int \rho dV \quad
+				=>\quad & \int \nabla \cdot (\rho \. v) dV  = -\frac{∂}{∂ t}\int \rho dV
+				=>\quad & \int (\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t}) dV  = 0
+			$
+			
+			\Theorem{连续性方程}
+				质量流流出速率 = 流体密度减少速率.
+				$\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t} = 0$
+			
+			\bf{质量流密度}:
+				$\. j = \rho \. v$
+			
+		* 运动方程
 			合力:
-			$-\oint p d \. f = -\int \nabla p\ dV$
-			$\rho \frac{d \. v}{t} = -\nabla p$
-		
-		\bf{Euler方程}:
-			$\frac{∂ \. v}{∂ t} + (\. v \cdot \nabla)\. v = - \frac{1}{\rho}\nabla p$
-
-
-
-
-
-* 电磁学
-	* 电磁场方程
-		* 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.
-	
-		\bf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\. A$:}
-			$A^{i}=(\varphi,\. A)$
-			
-		运动方程:
-			$\frac{d\. P}{dt} = - \frac{e}{c} \frac{∂\. A}{∂ t} - e \nabla \varphi + \frac{e}{c} \. v \times \nabla \times \. A$
-			
-		\bf{电场强度$\. E$:\quad 磁场强度$\. H$:}
 			$
-				\{ \begin{array}{ll}
-				\. E = -\frac{1}{c} \frac{∂ \. A}{∂ t} - \nabla \varphi\\
-				\. H = \nabla \times \. A
-				\end{array} .
-			$
-			$ => \frac{d\. P}{dt} = e \. E + \frac{e}{c} \. v \times \. H$
-			
-		对$\. E,\. H$取旋散度, 有
-		
-		\bf{Maxwell's方程组}:
-			$
-				\{ \begin{array}{ll}
-				\nabla \cdot \. E = 4\pi\rho\\
-				\nabla \cdot \. H = 0\\
-				\nabla \times \. E = - \frac{1}{c} \frac{∂ \. H}{∂ t}\\
-				\nabla \times \. H = - \frac{1}{c} \frac{∂ \. E}{∂ t} + \frac{4\pi}{c}\. j
-				\end{array} .
+				-\oint p d \. f = -\int \nabla p\ dV
+				\rho \frac{d \. v}{t} = -\nabla p
 			$
 
+		* Eular 理想流体方程
+			\Theorem{Eular 理想流体方程}
+				$\frac{∂ \.v}{∂ t} + (\. v · \nabla)\.v = - \frac{1}{\rho}\nabla p$
+				重力场$\. g$下,
+				$\frac{∂ \.v}{∂ t} + (\. v · \nabla)\.v = - \frac{1}{\rho}·\nabla p + \. g$
+				$- \nabla p$: 单位体积流体上的作用力.
 
-	* 特解: 静电场
-		$
-			\nabla^2 A = -\frac{4π}{c} · J			\tag{磁矢势 (恒磁场)}
-			\nabla^2 \phi = -\frac{\rho}{ε_0}		\tag{电  势 (静电场)}
-		$
-		电场强度: E = -\nabla  φ
-		磁场强度: H = -\nabla ×A
-		\nabla ·E = \rho/ε0			(静电场)
-		\nabla ×E = 0
-		\nabla ·H = 0				(恒磁场)
-		\nabla ×H = 4π/c·J
+			\Proof
+				$
+					\rho \frac{\d \.v}{\d t} &=  - \nabla p + \rho \.g  \tag{微元运动方程}
+					\d \.v &= \frac{∂ \.v}{∂t} \d t + (\d \.r · \nabla) \.v    \tag{全导数}
+					=> \frac{\d \.v}{\d t} &= \frac{∂ \.v}{∂t} + (\.v · \nabla) \.v  \tag{除以$\d t$}
+					=> \frac{∂ \.v}{∂t} + (\.v · \nabla) \.v = - \frac{1}{\rho} \nabla p + \.g  \tag{代入}
+				$
 
-		[算法]:	Poisson's方程		
-			当\rho=0时, \nabla^2 φ = 0		Laplace's方程
-			解Poisson's方程, Green's函数, 得 φ(r) = - 4π/ε0 ∫∫∫ f(rt) / |r-rt| d³rt
-		[静电场唯一性定理]:
-			对于各种边界条件, Poisson's方程有许多种解, 但每个解梯度相同.
-			静电场下, 意味边界条件下满足Poisson's方程的势函数, 所解得电场唯一确定.
-
-	* 特解: 恒磁场
-
-
-	* 特解: 真空电磁波
-
-
-
-* 流体力学
-	* Eular 理想流体方程
-		\def{Eular 理想流体方程}
-			$\frac{∂\. u}{∂t} + (\. v·\nabla )\. v = - \frac{1}{\rho}·\nabla p + \. g$
-			分量式:
-			$\frac{∂u_x}{∂t} + v_x· \frac{∂v_x}{∂x} + v_y · \frac{∂v_x}{∂y} + v_z· \frac{∂v_x}{∂z} = - 1/\rho · \frac{∂p}{∂x} + g_x$
-
-	* Navier Stokes 流体方程
-		\def{Navier Stokes 流体方程}
-			$∂\. u/∂t + (\. v·\nabla )\. v =  - \frac{1}{\rho}·\nabla p  + \. g + η/\rho\nabla^2 \. v + (ζ + η/3)/\rho·\nabla (\nabla ·\. v)$
-			η: 粘度	\rho: 密度
-			不可压缩流: $\nabla ·\. v ≡ 0$
-			压强: $\nabla ·\nabla p = \nabla ·v·\rho/ dt$
-
-
-
-
-* Gravitational Field 引力场
-
-
-
-* Quantum Mechanics 量子力学
-	* Schrödinger 方程
-		*	[定义]: iℏ·∂ψ(r,t)/∂t = [-ℏ/2m\nabla^2  + U(r,t)]·ψ(r,t)
-				or	iℏ·d/dt·|ψ(t)> = H |ψ(t)>
-				[符号]:
-					ℏ: 约化Planck常量 = h / 2π	U(r,t): 势
-					H: Hamiltonian算子 = -ℏ/2m\nabla^2  + U(r)
-					ψ: the state vector of the quantum system, letter psi.
-				[* Time-independent Schrödinger]:
-					[-ℏ/2m\nabla^2  + U(r)]·ψ(r)  = Eψ(r)
-				or	H|ψ> = E|ψ>
-				[符号]: E: 系统的能级, 常量.
-				* In the language of linear algebra, this equation is an eigenvalue equation.
-				Therefore, the wave function is an eigenfunction of the Hamiltonian operator
-				with corresponding eigenvalue(s) E.
-		*	[算法]: 有限差分法
-				* ∂ψ/∂x   = [ψ(x+1,...) - ψ(x-1,...)] / 2Δt
-				* ∂^2 ψ/∂x^2  = [ψ(x+1,...) - 2·ψ(x,...) + ψ(x-1,...)] / Δt^2 
-
-
-* Statistical Mechanics 统计力学
-
-
-
-
-
-
-
+		* Navier Stokes 流体方程
+			\Theorem{Navier Stokes 流体方程}
+				$∂\. u/∂t + (\. v·\nabla )\. v =  - \frac{1}{\rho}·\nabla p  + \. g + η/\rho\nabla^2 \. v + (ζ + η/3)/\rho·\nabla (\nabla ·\. v)$
+				η: 粘度	\rho: 密度
+				不可压缩流: $\nabla ·\. v ≡ 0$
+				压强: $\nabla ·\nabla p = \nabla ·v·\rho/ dt$
 
 * 场论
 	* 相对论力学
@@ -543,5 +436,107 @@
 				\Proof 
 					$\. v = \frac{d\. r}{dt},\quad v' = \frac{d\. r'}{dt}$
 
+	* 电磁学
+		* 电磁场方程
+			* 事实表明,粒子同电磁场相互作用的性质,由粒子电荷$q$所决定.
+		
+			\bf{四维势$A_{i}$: \quad 标势$\varphi$: \quad 矢势$\. A$:}
+				$A^{i}=(\varphi,\. A)$
+				
+			运动方程:
+				$\frac{d\. P}{dt} = - \frac{e}{c} \frac{∂\. A}{∂ t} - e \nabla \varphi + \frac{e}{c} \. v \times \nabla \times \. A$
+				
+			\bf{电场强度$\. E$:\quad 磁场强度$\. H$:}
+				$
+					\{ \begin{array}{ll}
+					\. E = -\frac{1}{c} \frac{∂ \. A}{∂ t} - \nabla \varphi\\
+					\. H = \nabla \times \. A
+					\end{array} .
+				$
+				$ => \frac{d\. P}{dt} = e \. E + \frac{e}{c} \. v \times \. H$
+				
+			对$\. E,\. H$取旋散度, 有
+			
+			\bf{Maxwell's方程组}:
+				$
+					\{ \begin{array}{ll}
+					\nabla \cdot \. E = 4π\rho\\
+					\nabla \cdot \. H = 0\\
+					\nabla \times \. E = - \frac{1}{c} \frac{∂ \. H}{∂ t}\\
+					\nabla \times \. H = - \frac{1}{c} \frac{∂ \. E}{∂ t} + \frac{4π}{c}\. j
+					\end{array} .
+				$
+
+		* 特解: 静电场
+			$
+				\nabla^2 A = -\frac{4 π}{c} · J			\tag{磁矢势 (恒磁场)}
+				\nabla^2 \phi = -\frac{\rho}{ε_0}		\tag{电  势 (静电场)}
+			$
+			电场强度: $E = -\nabla \phi$
+			磁场强度: $H = -\nabla \times A$
+			$
+				\nabla · E &= \frac{\rho}{ε_0}			\tag{静电场}
+				\nabla \times E &= 0
+				\nabla · H &= 0				\tag{恒磁场}
+				\nabla \times H &= \frac{4 π}{c} · J
+			$
+			[算法]:	Poisson's方程		
+				当\rho=0时, \nabla^2 \phi = 0		Laplace's方程
+				解Poisson's方程, Green's函数, 得 \phi(r) = - 4π/ε0 ∫∫∫ f(rt) / |r-rt| d³rt
+
+			\Theorem{静电场唯一性定理}
+				对于各种边界条件, Poisson's方程有许多种解, 但每个解梯度相同.
+				静电场下, 意味边界条件下满足Poisson's方程的势函数, 所解得电场唯一确定.
+
+		* 特解: 恒磁场
+
+		* 特解: 真空电磁波
+
+	* 引力场
+
+* 量子力学
+	* Schrödinger 方程
+		\Theorem{Schrödinger 方程}
+			$
+				i \hbar· \frac{∂\psi(r,t)}{∂t} = (-\frac{\hbar}{2m} \nabla^2  + U(r,t)) · \psi(r,t)
+				or\quad	i\hbar · \frac{d}{d t} · |\psi(t)> = H |\psi(t)>
+			$
+			$\hbar = \frac{h}{2 π}$: 约化Planck常量; $U(r,t)$: 势.
+			$H = -\frac{\hbar}{2 m} \nabla^2  + U(r)$: Hamiltonian算子.
+			$\psi$: 量子系统的状态向量, 概率.
+		
+			* 时不变 Schrödinger 方程:
+				$
+					(-\frac{\hbar}{2 m} \nabla^2  + U(r)) · \psi(r)  = E \psi(r)
+					or\quad	H |\psi> = E |\psi>
+				$
+				E: 系统的能级, 常量. 这是一个特征值方程.
+
+* 统计力学
+	* 理想气体
+		\Theorem{理想气体状态方程}
+			$P V = n R T$
+
+	* 热力学
+
+		* \Theorem{热力学第一定律, 能量守恒定律}
+				物体内能的增加等于物体吸收的热量和对物体所作的功的总和.
+				$△U = Q + W$
+				$△U$ 内能的增加; Q 吸收的热量; W 对物体所作的功.
+
+		* 热力学第二定律
+			\Theorem{热力学第二定律}
+				克劳修斯表述为: 热量不能自发地从低温物体转移到高温物体. 
+				开尔文表述为: 不可能从单一热源取热使之完全转换为有用的功而不产生其他影响.
+				
+			* 熵
+
+		* 焓
+
+		* 热力学过程
+			* 等焓过程
+			* 等压过程
+			* 等温过程
+			* 等容过程
 
 

@@ -828,14 +828,19 @@
 			* 实验验证
 				论文中, 作者还给出了YOLO与Fast RCNN在各方面的识别误差比例, 如下图. YOLO对背景内容的误判率(4.75\%)比fast rcnn的误判率(13.6\%)低很多. 但是YOLO的定位准确率较差, 占总误差比例的19.0\%, 而fast rcnn仅为8.6\%. 
 
-	* 去雾算法
+	* 去雾
 		\bf{论文}: Single Image Haze Removal Using Dark Channel Prior
 
 		\Theorem{雾图模型}
 			$I(x)$ 观测到的亮度, $J(x)$ 原始无雾时亮度, $t(x)$ 透射率, $A$大气光亮度.
 			$I(x) = J(x) · t(x) + A · (1 - t(x))$
-			表示当大气中物资是同质的时候, 透射率有,
+			表示当大气密度、成分是均匀同质时, 透射率有,
 			$t(x) = e^{-\beta d(x)}$
+
+			\Notes
+				雾图模型, 即每个原始像素亮度和大气光亮度, 按比例$t : (1-t)$调配(透射率). 大气光的比例越多, 雾感越强. 得到每个像素的透射率和大气光亮度, 即可实现雾化和去雾的功能.
+				* 当大气密度、成分是均匀同质时, 透射率与像素所在的景物深度相关. 景深越深, 大气光占比越大. 
+				* 当像素景深近似无限远时, 可认为该点透射率$t = 0$, 像素亮度全由大气光提供. 可由此得到大气光亮度值$A$.
 
 		\Theorem{先验的暗通道存在性(经验定理)}
 			统计观察发现, 无雾图像的非天空局部区域的像素中, 至少存在一个颜色通道的亮度值接近于0.
@@ -851,7 +856,7 @@
 				当天气是阴天的时候, 太阳光通常都是被忽略的, 在这种情况下大气光是景观中唯一的可照亮来源. 如果有一个图像中, 存在一个很远很远的无限远的距离的像素存在, (这个时候, 此像素的透射率几乎为0). 这个图像中最亮最亮的值所在的像素可以被看做是雾遮盖的程度最大也是其值可以看做是几乎等同于A.
 			* 估计透射率 $t$
 				$t = 1 - \min_{y\in \Omega(x)} ( \min_{c\in \{R,G,B\}} \frac{I_c(y)}{A_c} )$
-			* 折射率柔化 $t$, 导向滤波
+			* 透射率柔化 $t$, 导向滤波
 			
 			* 恢复去雾图像 $J$
 				$J(x) = \frac{I(x) - A}{t(x)} + A$
@@ -860,8 +865,8 @@
 			# 图像去雾
 			Mat HazeRemoval(Mat img, int kernelSize)
 				Mat A = AtmLight(img, DarkChannel(img, kernelSize)) # 估计大气光亮度
-				Mat t = 1 - DarkChannel(img / A, kernelSize)	# 估计折射率 
-				t = Guidedfilter(Gray(img), t, filterSize)		# 折射率柔化, 导向滤波
+				Mat t = 1 - DarkChannel(img / A, kernelSize)	# 估计透射率 
+				t = Guidedfilter(Gray(img), t, filterSize)		# 透射率柔化, 导向滤波
 				Mat ans = (img - A) / t + A						# 图像去雾
 				return ans
 
@@ -899,3 +904,8 @@
 				Mat meanB 	= boxFilter(b, (filterSize, filterSize))
 			
 				return Mat t = meanA * img + meanB
+
+		* 其他算法
+			* 最大对比度    Visibility in bad weather from a single image
+			* 颜色衰减先验    A fast single image haze removal algorithm using color attenuation prior
+			* 色度不一致    A fast semiinverse approach to detect and remove the haze from a single image
