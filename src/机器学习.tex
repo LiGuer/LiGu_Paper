@@ -9,7 +9,7 @@
 				
 			[优化问题]:
 				$
-					\min_W  &\quad	tr( W^T x x^T W )\\
+					\min_W  &\quad	tr( W^T x x^T W )
 					s.t.	&\quad	W^T W = I
 				$
 				
@@ -74,24 +74,24 @@
 						
 				* 计算最优点: 求导, 导数为0时取得极值
 					$
-						\frac{∂ MSE}{∂ w} &= 2·X^T·(\. w^T \. x - y) = 0\\
-					\Rightarrow	w^* &= (X^T X)^-1 X^T y\\
+						\frac{∂ MSE}{∂ w} &= 2·X^T·(\. w^T \. x - y) = 0
+					=>	w^* &= (X^T X)^-1 X^T y
 						f(x) &= x^T (X^T X)^-1 X^T y
 					$
 					
 				* 一维场景:
 					优化问题:
 					$
-						min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2\\
-						\Rightarrow	\frac{∂ E}{∂ w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0\\
+						min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2
+						=>	\frac{∂ E}{∂ w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0
 						\frac{∂ E}{∂ b} = 2( n b + \sum(y_i - w x_i) ) = 0
 					$
 					
 					最优点:
 					$
-						\Rightarrow w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2\\
-						w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}\\
-						b^* &= \frac{1}{n}·\sum(y_i - w x_i)\\
+						=> w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2
+						w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}
+						b^* &= \frac{1}{n}·\sum(y_i - w x_i)
 					$
 
 						
@@ -107,11 +107,11 @@
 			Gram矩阵:
 			$
 				\. K = \. \Phi \. \Phi^T = \left[\begin{array}{ccccc}
-				\kappa(\. x_1, \. x_1) & \cdots & \kappa(\. x_1, \. x_j) & \cdots & \kappa(\. x_1, \. x_m) \\
-				\vdots & \ddots & \vdots & \ddots & \vdots \\
-				\kappa(\. x_i, \. x_1) & \cdots & \kappa(\. x_i, \. x_j) & \cdots & \kappa(\. x_i, \. x_m) \\
-				\vdots & \ddots & \vdots & \ddots & \vdots \\
-				\kappa(\. x_m, \. x_1) & \cdots & \kappa(\. x_m, \. x_j) & \cdots & \kappa(\. x_m, \. x_m)
+				\kappa(\. x_1, \. x_1) & ·s & \kappa(\. x_1, \. x_j) & ·s & \kappa(\. x_1, \. x_m) 
+				\vdots & \ddots & \vdots & \ddots & \vdots 
+				\kappa(\. x_i, \. x_1) & ·s & \kappa(\. x_i, \. x_j) & ·s & \kappa(\. x_i, \. x_m) 
+				\vdots & \ddots & \vdots & \ddots & \vdots 
+				\kappa(\. x_m, \. x_1) & ·s & \kappa(\. x_m, \. x_j) & ·s & \kappa(\. x_m, \. x_m)
 				\end{array}\right]
 			$
 
@@ -127,12 +127,12 @@
 		\def{支持向量机}
 			是一种二分类模型, 目的是找到一个超平面, 使得超平面与任意样本点之间的最小距离最大. 约束条件是超平面能够使得所有样本点正确分类. 支持向量机的优化问题形式(凸二次规划问题)如下. 
 			$
-			\underset{\. w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\. w^T \. x_i + b |}{||\. w||}\\
+			\underset{\. w, b}{\arg\max} &\quad \min\limits_i d_i = \frac{\min\limits_i\ |\. w^T \. x_i + b |}{||\. w||}
 			s.t. &\quad y_i (\. w^T \. x_i + b) \le 1
 			$
-			\qquad \Rightarrow \qquad 
+			\qquad => \qquad 
 			$
-				\underset{\. w, b}{\arg\min}	 &\quad	\frac{||\. w||^2}{2}\\
+				\underset{\. w, b}{\arg\min}	 &\quad	\frac{||\. w||^2}{2}
 				s.t.	&\quad	y_i (\. w^T \. x_i + b) \le 1
 			$
 		
@@ -141,17 +141,17 @@
 			
 			分类
 				$ \{ \begin{array}{cc}
-					\. w^T \. x_i + b \ge +1	&\quad (y_i = +1)\\
-					\. w^T \. x_i + b \le -1	&\quad (y_i = -1)\\
+					\. w^T \. x_i + b \ge +1	&\quad (y_i = +1)
+					\. w^T \. x_i + b \le -1	&\quad (y_i = -1)
 					\end{array} .
-					\quad\Rightarrow\quad y_i (\. w^T \. x_i + b) \ge 1
+					\quad=>\quad y_i (\. w^T \. x_i + b) \ge 1
 				$
 
 			间隔: 离超平面最近的2个异类样本点到超平面的距离之和.
-				$\Delta = \frac{2}{||w||} \tag{间隔}$
+				$Δ = \frac{2}{||w||} \tag{间隔}$
 						
 			优化问题构造: 使间隔最大化. 凸二次规划问题
-				$\max\quad  \frac{2}{||\. w||} \quad \Rightarrow \quad \min\quad  \frac{||\. w||^2}{2}$
+				$\max\quad  \frac{2}{||\. w||} \quad => \quad \min\quad  \frac{||\. w||^2}{2}$
 				$s.t.\quad	y_i (\. w^T \. x_i + b) \ge 1$
 		
 		\bf{解}, 解凸优化问题, 计算最优点: 先求Lagrange函数, Lagrange函数对$\. w, b$求导, 令导数为0取得极值$\. w^*, b^*$, 再求Lagrange对偶函数
@@ -159,22 +159,22 @@
 				L(\. w, b,\. \lambda) = \frac{||\. w||^2}{2} + \sum_i \lambda_i (1 - y_i (\. w^T \. x_i + b)) \tag{Lagrange函数}
 			$
 			$
-				\Rightarrow \{\begin{array}{rl} \. w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}.\tag{$\. w, b$极值}
+				=> \{\begin{array}{rl} \. w^* &= \sum\limits_i \lambda_i y_i x_i\\ 0 &= \sum\limits_i \lambda_i y_i \end{array}.\tag{$\. w, b$极值}
 			$
 			$G(\. \lambda) = L(\. w^*, b^*, \. \lambda) = \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \. x_i^T \. x_j \tag{Lagrange对偶}
 			$
 
 			得到对偶问题, 为二次规划问题形式, 可利用Sequential Minimal Optimization算法求解得到$\. \lambda^*$
 				$
-					\max\limits_{\. \lambda} &\quad G(\. \lambda)\\
-					s.t. &  \quad \lambda_i \ge 0\\
+					\max\limits_{\. \lambda} &\quad G(\. \lambda)
+					s.t. &  \quad \lambda_i \ge 0
 						& \quad \sum_i \lambda_i y_i = 0
 				$
 				
 			其中, KKT条件如下
 				$
-					\lambda &\ge 0\\
-					y_i (\. w^T \. x_i + b) - 1 &\ge 0\\
+					\lambda &\ge 0
+					y_i (\. w^T \. x_i + b) - 1 &\ge 0
 					\lambda_i(y_i(\. w^T \. x_i + b) - 1) &= 0
 				$
 						
@@ -206,15 +206,15 @@
 				$\. y = \sigma (\. w \. x + \. b)$
 
 				误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
-				$E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^{2}$
+				$E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^2$
 
 			* 反向传播 --- 梯度下降最优化
 				$\.w^{\tau+1}=\.w^{\tau}-\eta \nabla E(\.{w}^{(\tau)})$
 				
 				设$z = \. w^T \. x + \. b$
 				$ \{\mb
-					\delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}\\
-					\delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}\\
+					\delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}
+					\delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}
 					\nabla E(\. w_l) = \delta_l \. x_l^T & \text{(每层参数误差)}
 				\me\right.$
 
@@ -234,13 +234,13 @@
 						
 					令$\delta_l$为每层误差:
 					$
-						\delta_l &=(\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}\\
+						\delta_l &=(\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
 						&= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{∂ E}{∂ y_L}
 					$
 						
 					得到每层参数误差结果:
 					$
-						\Rightarrow \frac{∂ E}{∂ w_l} &= \delta_l \frac{∂ z_l}{∂ w_l} = \delta_l x_l^T\\
+						=> \frac{∂ E}{∂ w_l} &= \delta_l \frac{∂ z_l}{∂ w_l} = \delta_l x_l^T
 						\delta_L &= \frac{∂ E}{∂ y_L} ·\sigma '(z_L)
 					$
 						
@@ -248,9 +248,9 @@
 				
 					激活函数的导函数:
 						$
-							relu(x) &= \max(0, x)\\
-							relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}\\
-							sigmoid(x) &= \frac{1}{1+e^{-x}}\\
+							relu(x) &= \max(0, x)
+							relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}
+							sigmoid(x) &= \frac{1}{1+e^{-x}}
 							sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
 						$
 
@@ -275,7 +275,7 @@
 				卷积操作
 				$
 					\frac{∂E}{∂y_l} &= \frac{∂E}{∂y_L}·\frac{∂y_L}{∂y{L-1}}· ... ·\frac{∂y_{l+1}}{∂y_l}
-						&= \delta_l = \delta_{l+1}·\frac{∂y_{l+1}}{∂x_{l+1}} = \delta_{l-1} * Rot_{\pi}(w_l)
+						&= \delta_l = \delta_{l+1}·\frac{∂y_{l+1}}{∂x_{l+1}} = \delta_{l-1} * Rot_{π}(w_l)
 					\frac{∂E}{∂k_l} &= \frac{∂E}{∂y_l} · \frac{∂y_l}{∂k_l} = \delta_l·\frac{∂y_l}{∂k_l} = \delta_l * x_l
 					\frac{∂E}{∂b_l} &= \delta_l · \frac{∂y_l}{∂b_l} = \sum_x \sum_y \delta_l
 				$
@@ -390,8 +390,8 @@
 			监督学习,是从外部监督者提供的"样本-标记对"的训练集中学习的一种方式. 目的是学习如何推断和概括, 以拥有泛化(即, 对未见过的样本也能正确判断)的能力. 异同点: 相似之处,如上式, 但强化学习并没有明确的"样本---标记"对来提供训练. 在交互问题的未知场景中, 不能即时获得当前"状态S---动作A"关联的答案, 也无法即时获得"状态S---动作A"选择的好坏, 其产生的影响只能在未来长期累积奖励中反映出来.因此, 单靠监督学习不足以实现"从互动中学习". 强化学习, 可以看作是一种具有延迟标记信息的监督学习.
 			$
 				\{ 
-				\text{状态 --- 样本}\\
-				\text{动作 --- 标记}\\
+				\text{状态 --- 样本}
+				\text{动作 --- 标记}
 				\text{策略 --- 分类/回归器}
 				.
 			$
@@ -430,7 +430,7 @@
 		* $\epsilon$贪心
 			$
 				A =  \{ 
-					\arg\max_a\ Q(a) & \P(\text{贪心}) = \epsilon\\
+					\arg\max_a\ Q(a) & \P(\text{贪心}) = \epsilon
 					\text{a random action} & \P(\text{随机}) = 1 - \epsilon 
 				. 
 			$
@@ -440,17 +440,17 @@
 			$A_t = \underset{a}{\arg\max} [Q_t(a)+c \sqrt{\frac{\ln t}{N_t(a)}} ]$
 			\Proof{
 				Gauss分布下的Chernoff边界:
-					$\P(\mu \geq \bar{\mu}+\epsilon) \leq \exp  (\frac{-n \epsilon^{2}}{2} )$
+					$\P(\mu \geq \bar{\mu}+\epsilon) \leq \exp  (\frac{-n \epsilon^2}{2} )$
 				令$\delta = e^{-n \epsilon / 2}$, 即 $\epsilon = \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}$
 			$
-				\Rightarrow & \P (\mu \ge \bar{\mu} + \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ) \le \sigma\\
-				\Rightarrow & \P (\bar{\mu} \in  [\mu - \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}, \mu +  \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ]  ) \ge 1 - 2 \sigma
+				=> & \P (\mu \ge \bar{\mu} + \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ) \le \sigma
+				=> & \P (\bar{\mu} \in  [\mu - \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}, \mu +  \sqrt{\frac{2}{n} \ln \frac{1}{\sigma}}  ]  ) \ge 1 - 2 \sigma
 			$
 			}
 				
 		* Softmax算法
 			\bf{soft-max分布}:
-				$\operatorname{Pr} \{A_t=a \} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k} e^{H_t(b)}} = \P_{\pi,t}(a)$
+				$\operatorname{Pr} \{A_t=a \} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k} e^{H_t(b)}} = \P_{π,t}(a)$
 	
 	* Markov决策过程
 
@@ -460,27 +460,27 @@
 			价值函数: 评价智能体在给定状态$S_t$下预期的累计奖励. (Bellman方程)
 			$
 				V(s) 
-				&= \mathbb{E}  [G_t | S_t=s ] \tag{定义}\\
-				&= \mathbb{E}  [R_{t+1} + \gamma G_{t+1} | S_t=s ] \tag{代换}\\
-				&= \sum_{a \in A} \P_\pi(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)\cdot  (r + \gamma \mathbb{E}  [G_{t+1} | S_{t+1} = s' ] )  ) \tag{期望公式}\\
-				&= \sum_{a \in A} \P_\pi(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)\cdot  (r + \gamma V(s')  )  ) \tag{代换}\\
-				&= \mathbb{E}  [R_{t+1} + \gamma V(S_{t+1}) | S_t=s ]
+				&= \E  [G_t | S_t=s ] \tag{定义}
+				&= \E  [R_{t+1} + \gamma G_{t+1} | S_t=s ] \tag{代换}
+				&= \sum_{a \in A} \P_π(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)·  (r + \gamma \E  [G_{t+1} | S_{t+1} = s' ] )  ) \tag{期望公式}
+				&= \sum_{a \in A} \P_π(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a)·  (r + \gamma V(s')  )  ) \tag{代换}
+				&= \E  [R_{t+1} + \gamma V(S_{t+1}) | S_t=s ]
 			$
 
-			(1) 立即回报$R_{t+1}$\\
-			(2) 后继状态的折扣价值函数$\gamma \cdot V(S_{t+1})$
+			(1) 立即回报$R_{t+1}$
+			(2) 后继状态的折扣价值函数$\gamma · V(S_{t+1})$
 		
 		* 动作-价值函数 $R_A = Q(S,A)$
 			$
 				Q(s,a) 
-				&= \mathbb{E} [G_t | S_t=s, A_t = a ]\\
-				&= \mathbb{E} [\sum_{k=0}^\infty \gamma^k R_{t+k+1} | S_t = s, A_t = a ]\\
-				&= \mathbb{E}_{s'} [r+\gamma Q (s', a' ) | s, a ]
+				&= \E [G_t | S_t=s, A_t = a ]
+				&= \E [\sum_{k=0}^\infty \gamma^k R_{t+k+1} | S_t = s, A_t = a ]
+				&= \E_{s'} [r+\gamma Q (s', a' ) | s, a ]
 			$
 			
 		* 策略函数 $A = \Pi(S)$
-			* 确定性策略: $a = \pi(s)$
-			* 随机性策略: $\P_\pi(a | s)$
+			* 确定性策略: $a = π(s)$
+			* 随机性策略: $\P_π(a | s)$
 			
 		* 优化
 	
@@ -490,29 +490,29 @@
 			\def{动态规划方法}
 				完备的环境模型下, 计算最优策略的一种方法.
 
-			* 策略迭代 = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
-				* \bf{策略评估}: 求当前策略下的累计奖励$V_\pi$.
+			* 策略迭代 = 策略评估$V_π$ + 策略改进$π \to π'$
+				* \bf{策略评估}: 求当前策略下的累计奖励$V_π$.
 					解析解: (计算复杂度$|S|^3$)
 					$
-						V_\pi(s)
-						&=\mathbb{E}_\pi [R_{t+1}+\gamma V_\pi (S_{t+1} ) | S_t=s ] \\
-						&= \sum_{a} \pi(a | s) \sum_{s',r} p (s', r | s, a ) [r+\gamma V_\pi (s' ) ]\\
-						\Rightarrow V_\pi &= R_\pi + \gamma P_\piV_\pi \tag{矩阵式}\\
-						\Rightarrow V_\pi &= (I - \gamma P_\pi)^{-1} R_\pi \tag{解析解})
+						V_π(s)
+						&=\E_π [R_{t+1}+\gamma V_π (S_{t+1} ) | S_t=s ] 
+						&= \sum_{a} π(a | s) \sum_{s',r} p (s', r | s, a ) [r+\gamma V_π (s' ) ]
+						=> V_π &= R_π + \gamma P_πV_π	\tag{矩阵式}
+						=> V_π &= (I - \gamma P_π)^{-1} R_π	\tag{解析解})
 					$
 					
-					迭代计算数值解: $\lim_{k \to \infty} V_k = V_\pi$
+					迭代计算数值解: $\lim_{k \to \infty} V_k = V_π$
 					$
-						V_{k+1}(s) & = \mathbb{E}_\pi [R_{t+1}+\gamma V_{k} (S_{t+1} ) | S_t=s ] \\
-						&= \sum_{a} \pi(a | s) \sum_{s' r} p (s', r | s, a ) [r+\gamma V_{k} (s' ) ]
+						V_{k+1}(s) & = \E_π [R_{t+1}+\gamma V_{k} (S_{t+1} ) | S_t=s ] 
+						&= \sum_{a} π(a | s) \sum_{s' r} p (s', r | s, a ) [r+\gamma V_{k} (s') ]
 					$
 					
-				* \bf{策略改进}: 找到累计奖励更多的策略$\pi'$.
-					$\forall s \in S,\ V_\pi(s) \le Q(s, \pi'(s)) \quad \Rightarrow \quad V_\pi(s) \le V_{\pi'}(s)$
-					贪心策略: $\forall s \in S,\ \pi' = \arg\max_a\ q_\pi (s,a)$
+				* \bf{策略改进}: 找到累计奖励更多的策略$π'$.
+					$\forall s \in S,\ V_π(s) \le Q(s, π'(s)) \quad => \quad V_π(s) \le V_{π'}(s)$
+					贪心策略: $\forall s \in S,\ π' = \arg\max_a\ q_π (s,a)$
 					
-				* \bf{策略迭代} = 策略评估$V_\pi$ + 策略改进$\pi \to \pi'$
-					$V_\pi \Rightarrow (\pi \to \pi') \Rightarrow V_\pi \Rightarrow (\pi \to \pi') \Rightarrow ... \Rightarrow \{\pi^*, V^*\}$
+				* \bf{策略迭代} = 策略评估$V_π$ + 策略改进$π \to π'$
+					$V_π => (π \to π') => V_π => (π \to π') => ... => \{π^*, V^*\}$
 			
 			* 广义策略迭代
 				\def{广义策略迭代}{
@@ -533,11 +533,11 @@
 			\Example
 				* \def{Q-Learning}
 					--- off-policy
-					$\Delta Q(s,a) = \alpha\ ( R + \gamma \cdot max\ Q(s',:) - Q(s,a))$
+					$Δ Q(s,a) = \alpha\ ( R + \gamma · max\ Q(s',:) - Q(s,a))$
 
 				* \def{Sarsa}
 					--- on-policy
-					$\Delta Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
+					$Δ Q(S_t,A_t) = \alpha\ ( R_{t+1} + \gamma\ Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t))$
 				
 				* Deep Q Networks
 					\def{Deep Q Networks}{
@@ -554,19 +554,19 @@
 				
 					\bf{更新函数}: 神经网络(Q 网络)对于更新函数, 主要表现在参数$\theta$上
 						$\theta_{t+1} = \theta_t + \alpha \nabla_{\theta_t} J (\theta_t )$
-						$J (\theta_t )=\underset{s, a \sim \rho(\cdot)}{\mathbb{E}}  [ (y_t-Q (s, a ; \theta_t ) )^{2} ]$
-						$\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(\cdot) \atop s' \sim \mathcal{E}}{\mathbb{E}} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
+						$J (\theta_t )=\underset{s, a \sim \rho(·)}{\E}  [ (y_t-Q (s, a ; \theta_t ) )^2 ]$
+						$\nabla_{\theta_t} J (\theta_t )=\underset{s, a \sim \rho(·) \atop s' \sim \mathcal{E}}{\E} [ (r+\gamma \max _{a'} Q (s', a' ; \theta_{t-1} )-Q (s, a ; \theta_t ) ) \nabla_{\theta_t} Q (s, a ; \theta_t ) ]$
 
 
 	* 基于策略函数
 
 		* 策略梯度方法
 			\def{策略梯度方法}
-				是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$\pi(a|s)$应当对$\theta$可导.
+				是一种参数化策略的学习框架, 主要解决连续动作空间的强化学习问题,  通过最大化性能度量$J(\theta)$并梯度上升来更新$\theta$, 且 动作选择由策略函数决定, 而不再直接依赖价值函数, 无论是否同时学习一个近似的价值函数. 其中策略函数$π(a|s)$应当对$\theta$可导.
 
 				\bf{策略梯度}, 
-					$\P_\pi (a | s, \theta)$
-					$ \theta_t = \theta_{t+1} + \alpha  \widehat{\Delta J(\theta_t)}$
+					$\P_π (a | s, \theta)$
+					$ \theta_t = \theta_{t+1} + \alpha  \widehat{Δ J(\theta_t)}$
 
 				\bf{论文}: \textit{Policy Gradient Methods for Reinforcement Learning with Function Approximation (2000)}
 		
@@ -577,30 +577,30 @@
 
 			\bf{性能度量函数}, .设性能度量函数即是价值函数$J(\.\theta) = V(s)$, 则梯度有:
 				$
-					\nabla J(\.\theta) &= \nabla_\theta V(s) \\
-					&\propto \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi(a | s', \.\theta) \\
-					& \propto \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ]
+					\nabla J(\.\theta) &= \nabla_\theta V(s) 
+					&\propto \sum_{s' \in S} \P_{\mu, π}(s') \sum_{a \in A} Q_π(s', a) \nabla_\theta \P_π(a | s', \.\theta) 
+					& \propto \underset{s' \sim \P_{\mu, π} \atop a \sim π}{\E}  [Q_π(s', a)\  \nabla_\theta \ln \P_π (a | s')  ]
 				$
 			
 			\Proof
 				$
 					\nabla_\theta V(s)
-					&= \nabla_\theta\ \E[G_t|S_t = s] \tag{价值函数定义}\\
-					&= \nabla_\theta  (\sum_{a \in A} \P_\pi (a | s)\ Q(s,a)  ) \tag{期望公式}\\
-					&= \sum_{a \in A} \nabla_\theta  ( \P_\pi (a | s)\ Q(s,a)  ) \tag{分配律}\\
-					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}\\
-					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \P_\pi (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}\\
-					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_\pi (a | s)+ \P_\pi (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}\\
-					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_\pi (a | s)\sum_r \P(s', r | s, a)  \tag{加法性质}\\
-					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}\\
-					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_\pi (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}\\
+					&= \nabla_\theta\ \E[G_t|S_t = s] \tag{价值函数定义}
+					&= \nabla_\theta  (\sum_{a \in A} \P_π (a | s)\ Q(s,a)  ) \tag{期望公式}
+					&= \sum_{a \in A} \nabla_\theta  ( \P_π (a | s)\ Q(s,a)  ) \tag{分配律}
+					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_π (a | s) + \P_π (a | s)\ \nabla_\theta Q(s,a)  ) \tag{微分乘法法则}
+					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_π (a | s) + \P_π (a | s)\ \nabla_\theta \sum_{s', r} \P(s', r | s, a)  (r + \gamma V(s')  )  ) \tag{代入}
+					&= \sum_{a \in A}  ( Q(s,a)\ \nabla_\theta \P_π (a | s)+ \P_π (a | s)\ \sum_{s', r} \P(s', r | s, a) \gamma \nabla_\theta V(s')  ) \tag{分配律}
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_π (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P_π (a | s)\sum_r \P(s', r | s, a)  \tag{加法性质}
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_π (a | s) + \sum_{s'} \gamma \nabla_\theta V(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}
+					&= \sum_{a \in A} Q(s,a)\ \nabla_\theta \P_π (a | s) + \sum_{s'} \gamma \P(s'| s)  \nabla_\theta V(s') \tag{概率求和}
 					&= \sum_{s' \in S} \sum_{t=0}^\infty 
-					\gamma^t \P^{(t)}_\pi(s' | s) \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}\\
-					&=  (\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_\pi^{(t)}(s''| s) ) \cdot \sum_{s' \in S} \frac{\sum_{t=0}^\infty \gamma^t \P_\pi^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^\infty \gamma^t \P_\pi^{(t)} (s''| s ) )} \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{提项, 目的是将$\sum_{t=0}^\infty \P_\pi^{(t)} (s'| s )$归一化}\\
-					&= \alpha \sum_{s' \in S} \P_{\mu, \pi}(s') \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_\pi^{(t)}(s''| s) )$简为系数, $\P_{\mu, \pi}(s')$是状态在策略$\pi$下整个时间序列出现的概率}\\
-					&= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} Q_\pi(s', a) \nabla_\theta \P_\pi (a | s')  ] \tag{期望形式}\\
-					&= \alpha \underset{s' \sim \P_{\mu, \pi}}{\E}  [ \sum_{a \in A} \P_\pi (a | s') Q_\pi(s', a) \frac{\nabla_\theta \P_\pi (a | s')}{\P_\pi (a | s')}  ] \tag{提项$\P_\pi (a | s')$, 方便后面对$a$写期望}\\
-					&= \alpha \underset{s' \sim \P_{\mu, \pi} \atop a \sim \pi}{\E}  [Q_\pi(s', a)\  \nabla_\theta \ln \P_\pi (a | s')  ] \tag{期望形式, 微分公式}\\
+					\gamma^t \P^{(t)}_π(s' | s) \sum_{a \in A} Q_π(s', a) \nabla_\theta \P_π (a | s')  \tag{递推$ \nabla_\theta V(s')$展开, $\P^{(t)}$是t步转移概率}
+					&=  (\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_π^{(t)}(s''| s) ) · \sum_{s' \in S} \frac{\sum_{t=0}^\infty \gamma^t \P_π^{(t)} (s'| s )}{\sum_{s''\in S}  (\sum_{t=0}^\infty \gamma^t \P_π^{(t)} (s''| s ) )} \sum_{a \in A} Q_π(s', a) \nabla_\theta \P_π (a | s')  \tag{提项, 目的是将$\sum_{t=0}^\infty \P_π^{(t)} (s'| s )$归一化}
+					&= \alpha \sum_{s' \in S} \P_{\mu, π}(s') \sum_{a \in A} Q_π(s', a) \nabla_\theta \P_π (a | s')  \tag{\small 简写,$ (\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_π^{(t)}(s''| s) )$简为系数, $\P_{\mu, π}(s')$是状态在策略$π$下整个时间序列出现的概率}
+					&= \alpha \underset{s' \sim \P_{\mu, π}}{\E}  [ \sum_{a \in A} Q_π(s', a) \nabla_\theta \P_π (a | s')  ] \tag{期望形式}
+					&= \alpha \underset{s' \sim \P_{\mu, π}}{\E}  [ \sum_{a \in A} \P_π (a | s') Q_π(s', a) \frac{\nabla_\theta \P_π (a | s')}{\P_π (a | s')}  ] \tag{提项$\P_π (a | s')$, 方便后面对$a$写期望}
+					&= \alpha \underset{s' \sim \P_{\mu, π} \atop a \sim π}{\E}  [Q_π(s', a)\  \nabla_\theta \ln \P_π (a | s')  ] \tag{期望形式, 微分公式}
 				$
 				
 			\bf{优点}, 解决连续动作空间的强化学习问题
@@ -612,10 +612,13 @@
 			\def{确定性策略梯度方法}
 				采用确定性策略函数, 将原来\bf{随机性策略 $\to$ 确定性策略}, 解决随机性策略梯度方法需要在动作空间上积分, 而导致计算量消耗过大的问题, 确定性策略梯度可以比它们的随机性策略更有效地进行估计, 确定性策略在高维动作空间的表现优于随机性策略方法. 而确定性Actor-Critic是其中代表性改进算法.
 
-				\bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_\pi(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{\pi(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
-					$\nabla_\theta J (\mu_\theta ) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} \\=\mathbb{E}_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]$ 
+				\bf{确定策略梯度定理}: 采用状态-动作间的直接映射, 即确定性策略函数$a = \mu(s)$,  取代策略梯度中原有的随机性策略函数$\P_π(a|s)$, 原有函数估计给定状态下, 动作选择的概率. 确定性策略梯度, 是随机策略梯度的方差$\sigma \to 0$的极限情况, $\P_{π(\mu_\theta, \sigma \to 0)} \equiv \mu_\theta$. 
+					$
+						\nabla_\theta J (\mu_\theta) = .\int_{\mathcal{S}} \rho^{\mu}(s) \nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)}
+						=\E_{s \sim \rho^{\mu}} [ .\nabla_\theta \mu_\theta(s) \nabla_{a} Q^{\mu}(s, a) |_{a=\mu_\theta(s)} ]
+					$ 
 					
-					$\lim _{\sigma \downarrow 0} \nabla_\theta J (\pi_{\mu_\theta, \sigma} )=\nabla_\theta J (\mu_\theta )$
+					$\lim _{\sigma \to 0} \nabla_\theta J (π_{\mu_\theta, \sigma} )=\nabla_\theta J (\mu_\theta )$
 
 				\bf{论文}: \textit{Deterministic Policy Gradient Algorithms (2014)}
 
@@ -623,8 +626,8 @@
 			
 			\bf{eg.} 策略函数常用形式
 			$
-				a = \pi(s) =  \{
-				\underset{a}{\arg\max}\ Q_\pi(s, a)	& (\text{max})\\
+				a = π(s) =  \{
+				\underset{a}{\arg\max}\ Q_π(s, a)	& (\text{max})
 				\underset{a}{\arg\max}\ \frac{e^{h(s, a, \theta)}}{\sum_{b} e^{h(s, b, \theta)}}	& (\text{soft-max})
 				. 
 			$
@@ -633,9 +636,9 @@
 			\def{Actor-Critic}
 				\textit{是一种基于策略梯度定理的广泛使用的架构}, 结合了策略梯度算法 (Actor) + 时序差分算法 (Critic) . Actor-Critic由两部分组成:
 		
-				* \bf{Actor}: 基于策略函数$\pi_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_\theta J (\pi_\theta )$的随机梯度上升调更新机策略$\pi_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_\pi (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$. }
+				* \bf{Actor}: 基于策略函数$π_\theta(s)$选择行为, 通过Critic 的评分和$\nabla_\theta J (π_\theta )$的随机梯度上升调更新机策略$π_\theta(s)$ 的参数$\theta$. \\ \textit{代替方程2中未知的真作用值函数$Q_π (s, a)$, 使用作用值函数$Q_w (s, a)$, 参数向量为$w$. }
 				
-				* \bf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_\pi (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样. 通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_\pi (s, a)$可能会引入偏差. 然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log \pi_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_\pi, a \sim \pi_\theta} [ (Q_w (s, a)− Q_\pi (s, a))^2]$, 则不存在偏差$\nabla_\theta J (\pi_\theta )=\mathbb{E}_{s \sim \rho^{\pi}, a \sim \pi_\theta} [\nabla_\theta \log \pi_\theta(a | s) Q^{w}(s, a) ]$. 更直观地说, 条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的, $\nabla \theta log \pi_\theta (a | s)$和条件(2)要求参数是线性回归问题的解, 该线性回归问题根据这些特征估计$Q_\pi(s, a)$. 在实践中, 条件(2)通常被放宽, 以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上, 如果同时满足近似值(1)和(2), 则整个算法相当于根本不使用批评家. }
+				* \bf{Critic}: 基于 Actor 的行为评判行为的得分, 估计动作-价值函数$Q_w (s, a) \simeq  Q_π (s, a)$. \\ \textit{使用适当的策略评估算法, 就像时序差分学习一样. 通常, 用函数逼近器$Q_w (s, a)$代替真作用值函数$Q_π (s, a)$可能会引入偏差. 然而, 如果函数逼近器兼容, 使得(1) $Q_w (s, a) = \nabla \theta log π_\theta (a | s)>w$和 (2) 选择参数w以最小化均方误差$\epsilon^2 (w)=E_{s \sim \rho_π, a \sim π_\theta} [ (Q_w (s, a)− Q_π (s, a))^2]$, 则不存在偏差$\nabla_\theta J (π_\theta )=\E_{s \sim \rho^{π}, a \sim π_\theta} [\nabla_\theta \log π_\theta(a | s) Q^{w}(s, a) ]$. 更直观地说, 条件(1)表明相容函数逼近器在随机策略的“特征”中是线性的, $\nabla \theta log π_\theta (a | s)$和条件(2)要求参数是线性回归问题的解, 该线性回归问题根据这些特征估计$Q_π(s, a)$. 在实践中, 条件(2)通常被放宽, 以支持通过时间差分学习更有效地估计价值函数的策略评估算法, 事实上, 如果同时满足近似值(1)和(2), 则整个算法相当于根本不使用批评家. }
 
 				Actor 在运用 随机梯度算法 进行 梯度上升 时, 由 Critic 来告诉他, 这次的 梯度上升 是不是一次正确的上升, 如果这次的得分不好, 那么就不要上升那么多. Actor 想要最大化期望的奖励, 在 Actor Critic 算法中, 我们用 比平时好多少 (TD error) 来当做奖励. Critic 的更新很简单, 就是像 Q-learning 那样更新现实和估计的误差 (TD error) 就好了.
 
@@ -643,8 +646,8 @@
 				$\.\theta_{t+1} = \.\theta_t+\alpha \nabla_\theta J(\theta)$
 				$
 					\nabla_\theta J(\theta)
-					&=  (G_{t: t+1}-\hat{v} (S_t, \mathbf{w} ) )\  \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) \\
-					&=  (R_{t+1}+\gamma \hat{v} (S_{t+1}, \mathbf{w} )-\hat{v} (S_t, \mathbf{w} ) )\ \nabla_\theta \ln \P_\pi (A_t | S_t, \.\theta_t ) 
+					&=  (G_{t: t+1}-\hat{v} (S_t, \mathbf{w} ) )\  \nabla_\theta \ln \P_π (A_t | S_t, \.\theta_t ) 
+					&=  (R_{t+1}+\gamma \hat{v} (S_{t+1}, \mathbf{w} )-\hat{v} (S_t, \mathbf{w} ) )\ \nabla_\theta \ln \P_π (A_t | S_t, \.\theta_t ) 
 				$
 
 			\bf{优势}: 引入了时序差分算法, 因此可以进行单步更新, 比传统 Policy Gradient 训练更快.
@@ -654,24 +657,24 @@
 			\Example: 
 				\bf{Off-Policy Actor Critic}: 
 				$
-					\nabla J(\theta) &= \sum_S  \P_\beta (s) \sum_A Q(s, a)\ \nabla_\theta \P_\pi (a | s) \\
-					&= \underset{s \sim \P_\beta \atop a \sim \beta}{\E}  [ \frac{\P_{\pi,\theta}(a|s)}{\P_{\beta,\theta}(a|s)} Q(s, a)\ \nabla_\theta \P_\pi (a | s) ]
+					\nabla J(\theta) &= \sum_S  \P_\beta (s) \sum_A Q(s, a)\ \nabla_\theta \P_π (a | s) 
+					&= \underset{s \sim \P_\beta \atop a \sim \beta}{\E}  [ \frac{\P_{π,\theta}(a|s)}{\P_{\beta,\theta}(a|s)} Q(s, a)\ \nabla_\theta \P_π (a | s) ]
 				$
 			
 		* 确定性 Actor-Critic
 			\Example: 
 				* On-Policy Deterministic Actor-Critic
 					$
-						\delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) \\
-						w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
+						\delta_t &=r_t+\gamma Q^{w} (s_{t+1}, a_{t+1} )-Q^{w} (s_t, a_t ) 
+						w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) 
 						\theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
 					$
 					
 				
 				* Off-Policy Deterministic Actor-Critic
 					$
-						\delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_\theta (s_{t+1} ) )-Q^{w} (s_t, a_t ) \\
-						w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) \\
+						\delta_t &=r_t+\gamma Q^{w} (s_{t+1}, \mu_\theta (s_{t+1} ) )-Q^{w} (s_t, a_t ) 
+						w_{t+1} &=w_t+\alpha_{w} \delta_t \nabla_{w} Q^{w} (s_t, a_t ) 
 						\theta_{t+1} &=\theta_t+ .\alpha_\theta \nabla_\theta \mu_\theta (s_t ) \nabla_{a} Q^{w} (s_t, a_t ) |_{a=\mu_\theta(s)}
 					$
 					

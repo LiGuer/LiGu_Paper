@@ -128,37 +128,37 @@
 			
 		\bf{质心}: 质点系的质量中心,并将质点系$\Leftrightarrow$位于质心的质点.
 			$\{
-				m_c = \sum m_i\\
-				\. r_c = \frac{\sum m_i \. r_i}{\sum m_i}\\
+				m_c = \sum m_i
+				\. r_c = \frac{\sum m_i \. r_i}{\sum m_i}
 				\. v_c = \frac{\sum m_i \. v_i}{\sum m_i}
 			\right.$
-			
-		\bf{质心力学量}:
-			内能$E_{int}$: 整体静止的(质心系内)力学系统的能量,包括系统内相对运动动能 + 相互作用势能.\\
-			$\{
-				\. P_c = m_c \. v_c\\
-				E_c = \frac{m_c V^2}{2} + \. V \cdot \. P' |_{\. P'=0} + E_{int} = E_{int} + \frac{m_c v_c^2}{2}\\
+
+		\bf{质心力学量}
+			内能$E_{int}$: 整体静止的(质心系内)力学系统的能量,包括系统内相对运动动能 + 相互作用势能.
+			$ \{
+				\. P_c = m_c \. v_c
+				E_c = \frac{m_c V^2}{2} + \. V \cdot \. P' |_{\. P'= 0} + E_{int} = E_{int} + \frac{m_c v_c^2}{2}
 				\. M_c = \. M' + \. R \times \. P'_c + m_c \. r'_c \times \. V + m'_c \. R \times \. V|_{\. P'_c =\. r'_c = 0, \. R =\. r_c, \. V =\. v_c} = \. M_{int} + \. r_c \times \. P_c 
-				\end{array} 
-			\right.$
-			
+				\right.
+			$
+
 		\bf{质心组合关系}: 将质点系分成若干小系,各小系质心构成新的质点系之质心即为原质点系的质心.
 
 	* 情景: 一维运动
 		一维运动,定常外部条件下,
 		
-		\bf{[0] Lagrange函数}:
+		* Lagrange函数:
 			$L = \frac{1}{2} = a(q) \dot q^2 - U(x)\quad (CartesianCoord)=> L = \frac{m \dot x^2}{2} - U(x)$
 		
-		\bf{[1] 运动不变性 —— 能量守恒}: 定常外场下能量守恒,有
+		* 运动不变性 —— 能量守恒: 定常外场下能量守恒,有
 			$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{1}{2}m\cdot 2 \dot x \cdot \dot x - (\frac{m \dot x^2}{2} - U(x)) = \frac{m \dot x^2}{2} + U(x) $
 		
-		\bf{[2] 运动方程}:
+		* 运动方程:
 			$\dot x = \frac{dx}{dt} = \sqrt{\frac{2}{m}[E - U(x)]}\quad => \quad t = \sqrt{\frac{m}{2}} \int \frac{dx}{\sqrt{E - U(x)}} + const$
 			$\because$动能恒正,故运动只能发生在$U(x) \leqslant E$的空间区域.
 
 	* 情景: 二体问题
-		\bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)\\
+		\bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)
 		二体问题Lagrange函数:
 			$L = \frac{m \. \dot r_1^2}{2} + \frac{m \. \dot r_1^2}{2} - U(|\. r_1 - \. r_2|)$
 		
@@ -168,12 +168,13 @@
 			$ =>$"二体问题"等效为一个质量$m_{12}$的质点,在外场$U(\. r_{12})$下的运动, 而分运动$\. r_1, \. r_2$, 可由$\. r_{12}$分别解出.
 	
 	* 情景: 有心力场
-		\bf{有心力场}: 质点势能只与质点到某一固定点的距离有关的外场.
+		\def{有心力场} 质点势能只与质点到某一固定点的距离有关的外场.
 		
-		\bf{有心力}: 始终指向or背离与质点到某一固定点的方向, 且大小只依赖r的力.
+		\def{有心力} 始终指向or背离与质点到某一固定点的方向, 且大小只依赖r的力.
 			$\. F = -\frac{∂ U(r)}{∂ \. r} = -\frac{d U(r)}{d r} \hat r$
 	
-		\bf{[1] 运动不变性 —— 角动量守恒}:中心对称外场下(即势能仅依赖到空间某特定点(中心)距离),系统角动量在任意过中心的轴上投影都守恒.
+		* 运动不变性 —— 角动量守恒
+			中心对称外场下(即势能仅依赖到空间某特定点(中心)距离),系统角动量在任意过中心的轴上投影都守恒.
 			$ => \. M = \. r \times \. P = const.$
 			$ =>$ 质点运动在垂直于$\. M$的平面内.\quad $ =>$ 有心力场,\bf{[0] Lagrange函数}:
 			$L = \frac{1}{2}m v^2 - U(r) = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi^2) - U(r)$
@@ -181,146 +182,182 @@
 			$P_\varphi = \frac{∂ L}{∂ \dot \varphi} = m r^2 \dot \varphi \quad , \quad \frac{d P_\varphi}{d t} = \frac{d}{d t}\frac{∂ L}{∂ \dot \varphi} = \frac{∂ L}{∂ \varphi} \frac{d \frac{d \varphi}{d \varphi / d t}}{d t} = \frac{∂ L}{∂ \varphi} = 0 \quad , \quad |\. M| = M_z = \sum \frac{∂ L}{∂  \dot \varphi} = P_\varphi$
 			$ => |\. M| =| \. r \times \. P |= P_\varphi = m r^2 \dot \varphi = const.$
 	
-		\bf{Kepler's第二定律}:质点矢径在相同时间内扫过的面积相等.
+		\Theorem{Kepler's第二定律}:质点矢径在相同时间内扫过的面积相等.
 			$ => M = m r^2 \dot \varphi = 2 m \dot S_{sector} = const.\quad => \dot S_{sector} = \frac{1}{2} r \cdot r d\varphi = const.$
 	
-		\bf{[2]运动不变性——能量守恒}: 定常外场下能量守恒,有
+		* 运动不变性——能量守恒: 定常外场下能量守恒,有
 			$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi^2) + U(r) = \frac{m \dot r^2}{2} + \frac{M^2}{2mr^2} + U(r)$
 	
-		\bf{[3]运动方程}:
+		* 运动方程:
 			$ => t = \int \frac{d r}{\sqrt{\frac{2}{m}[E-U(r)] - \frac{M^2}{m^2 r^2}}} + const. \quad \varphi = \int \frac{M}{m r^2} d t  + const.= \int \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
 	
-		\bf{[4]结果讨论}: 有心力场径向运动,和一维运动的联系.
+		* 结果讨论: 有心力场径向运动,和一维运动的联系.
 	
-		\bf{等效势能}
+		\def{等效势能}
 			$U_{eff} = U(r) + \frac{M^2}{2mr^2}$
 	
-		\bf{离心势能}
+		\def{离心势能}
 			$U_{centrifuge} = \frac{M^2}{2mr^2}$
-			运动封闭条件:$\Delta \varphi$等于$2π$有理数倍.\quad($U(r) \propto \frac{1}{r}\ ,\ r^2$,则运动始终封闭.)
-			$\Delta \varphi = \int_{r_{min}} ^{r_{max}} \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
+			运动封闭条件:$Δ \varphi$等于$2π$有理数倍.\quad($U(r) \propto \frac{1}{r}\ ,\ r^2$,则运动始终封闭.)
+			$Δ \varphi = \int_{r_{min}} ^{r_{max}} \frac{M/r^2\ dr}{\sqrt{2m [E-U(r)] - M^2/r^2}} + const.$
 
 		* 1/r有心力场
-		势能$U(r) \propto \frac{1}{r}$.\quad eg.引力场,库仑电场.
+			势能$U(r) \propto \frac{1}{r}$.\quad eg.引力场,库仑电场.
 			$U = - \alpha / r$
 			
-		\bf{[1]运动方程}: 焦点位于原点的圆锥曲线方程.\quad 偏心率e.
+			* 运动方程: 焦点位于原点的圆锥曲线方程.\quad 偏心率e.
 			$\varphi = \int \frac{M/r^2\ dr}{\sqrt{2m (E+\frac{\alpha}{r}) - \frac{M^2}{r^2}}} + C. = \int \frac{-dk}{\sqrt{2mE + \frac{2m\alpha}{M}k - k^2}}|_{k = \frac{M}{r}} + C. = arccos\frac{M/r - m\alpha /M}{\sqrt{2mE + m^2 \alpha^2 /M^2}} + C.$
 			$ => p/r = 1 + e \ cos \varphi \quad , \quad p = \frac{M^2}{m\alpha} , e = \sqrt{1 + \frac{2 E M^2}{m \alpha^2}}$
 			
-		\bf{[2]结果讨论}: \\
+			* 结果讨论: 
+				* $\alpha > 0\ and\ e<1, E<0$时,轨道为椭圆}\quad,半长轴a: \quad , 半短轴b: \quad , 周期T:
+					$a = \frac{p}{1-e^2} = \frac{\alpha}{2|E|} \quad , \quad b = \frac{p}{\sqrt{1-e^2}} = \frac{M}{\sqrt{2m|E|}} \quad , \quad T = \frac{2mS_{ellipse}}{M} = \frac{2π m \frac{\alpha}{2|E|} \frac{M}{\sqrt{2m|E|}}}{M} = π \alpha \sqrt{\frac{m}{2|E|^3}} $
 		
-		\bf{[2.1] $\alpha > 0\ and\ e<1, E<0$时,轨道为椭圆}\quad,半长轴a: \quad , 半短轴b: \quad , 周期T:
-		$a = \frac{p}{1-e^2} = \frac{\alpha}{2|E|} \quad , \quad b = \frac{p}{\sqrt{1-e^2}} = \frac{M}{\sqrt{2m|E|}} \quad , \quad T = \frac{2mS_{ellipse}}{M} = \frac{2π m \frac{\alpha}{2|E|} \frac{M}{\sqrt{2m|E|}}}{M} = π \alpha \sqrt{\frac{m}{2|E|^3}} $
-		
-		\bf{[2.2] $\alpha > 0\ and\ e=1, E=0$时,轨道为抛物线}
-		
-		\bf{[2.3] $\alpha > 0\ and\ e>1, E>0$时,轨道为双曲线}
-		
-		\bf{[2.4] $\alpha < 0$斥力场时,轨道为双曲线}
+				* $\alpha > 0\ and\ e=1, E=0$时,轨道为抛物线}
+	
+				* $\alpha > 0\ and\ e>1, E>0$时,轨道为双曲线}
+	
+				* $\alpha < 0$斥力场时,轨道为双曲线}
 
 	* 情景: 小振动
 		* 一维小振动
-			\bf{一维小振动}:
+			\def{一维小振动}
 				设系统在势场$q_0$处平衡,即$F = -\frac{dU(q)}{dq}|_{q=q_0} = 0$,当平衡处发生微小偏移至$q(q\to q_0)$,Taylor展开,
 				$U(q) - U(q_0) = [U(q_0) - U(q_0)] + [\frac{d U(q)}{dq}|_{q=q_0} (q - q_0)]+ [\frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}] + o((q - q_0)^2) \approx \frac{d^2 U(q)}{dq^2}|_{q=q_0} \frac{(q - q_0)^2}{2}$
 			
 			等效势能:
 			$U(x) = - \frac{k x^2}{2} \quad , \quad x = q-q_0 \quad ,\quad k = \frac{d^2 U(q)}{dq^2}|_{q=q_0}$
 			
-			\bf{[0]Lagrange函数}:
-			$L = T - U = \frac{m \dot x^2}{2} - \frac{k x^2}{2}$
+			* Lagrange函数:
+				$L = T - U = \frac{m \dot x^2}{2} - \frac{k x^2}{2}$
 			
-			\bf{[1]运动方程}: 系统在平衡位置附近作正弦振动.
-			$\frac{d}{dt} \frac{∂ L}{∂ \dot x} = \frac{∂ L}{∂ x} = \frac{d m\dot x}{dt} = -kx \quad => m \ddot x = -kx \quad => x = A cos(\omega t + \alpha) \quad , \omega = \sqrt{k/m}$
+			* 运动方程: 系统在平衡位置附近作正弦振动.
+				$\frac{d}{dt} \frac{∂ L}{∂ \dot x} = \frac{∂ L}{∂ x} = \frac{d m\dot x}{dt} = -kx \quad => m \ddot x = -kx \quad => x = A cos(\omega t + \alpha) \quad , \omega = \sqrt{k/m}$
 			
-			\bf{[2]运动不变性——能量守恒}:
-			$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{m \dot x^2}{2} + \frac{k x^2}{2} = \frac{1}{2} m \omega^2 A^2$
+			* 运动不变性——能量守恒:
+				$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{m \dot x^2}{2} + \frac{k x^2}{2} = \frac{1}{2} m \omega^2 A^2$
 
 		* 一维强迫小振动、共振
-			\bf{强迫振动}:外力下振动系统发生的振动. 对于微小偏移,强迫力势场,Taylor展开,有
+			\def{强迫振动} 外力下振动系统发生的振动. 对于微小偏移,强迫力势场,Taylor展开,有
 			
 			\bf{强迫力$F(t)$}:
 				$U_e(x,t) \approx U_e(0,t) + \frac{∂ U_e}{x}|_{x=0}x = U_e(0,t) + xF(t)$
 			
-			\bf{[0]Lagrange函数}:
+			* Lagrange函数:
 				$L = T - (U_0 + U_e) = \frac{m \dot x^2}{2} - \frac{k x^2}{2} + xF(t)$
 			
-			\bf{[1]运动方程}:
+			* 运动方程:
 				$\ddot x + \omega^2 x = \frac{F(t)}{m}$
 			
-			\bf{[2]结果讨论}:
-			
-			\bf{[2.1]} 若强迫力是正弦函数$F(t) = f cos(\gamma t + \beta)$
-				$ => x = A\ cos(\omega t + \alpha) + \frac{f}{m(\omega^2 - \gamma^2)} cos(\gamma t + \beta)$
+			* 结果讨论:
+				* 若强迫力是正弦函数$F(t) = f cos(\gamma t + \beta)$
+					$ => x = A\ cos(\omega t + \alpha) + \frac{f}{m(\omega^2 - \gamma^2)} cos(\gamma t + \beta)$
 				
-			\bf{[2.2]} \bf{共振}:若强迫力是正弦函数,且$\gamma = \omega$.\quad 振幅随时间线性增大,直至不再是小量,理论不再适用为止.
-			$ => \lim_{\gamma \to \omega}x = A'cos(\omega t + \alpha) + \frac{f t}{2m\omega} sin(\omega t + \beta)$
-			
-			\bf{[2.3]} 共振附近:若强迫力是正弦函数,且$\gamma = \omega + \epsilon$.\quad 幅度以频率$\epsilon$变化(\bf{拍频})的小振动.
-			$ => x = (A' + B' e^{i\epsilon t})e^{i\omega t} \quad ,A' = Ae^{i\alpha},B' = Be^{i\beta},|A' + B' e^{i\epsilon t}| \in \{|A-B|,A+B\} $
-			
-			\bf{[2.3]} 任意强迫力
-			$let\ \xi = \dot x + i\omega x\ => \dot \xi - i\omega \xi = \frac{F(t)}{m}  \ => x = \frac{1}{\omega}Im\{\int_0^t \frac{F(t)}{m}e^{-i\omega t}dt + const.\}$
+				* \bf{共振}:若强迫力是正弦函数,且$\gamma = \omega$.\quad 振幅随时间线性增大,直至不再是小量,理论不再适用为止.
+					$ => \lim_{\gamma \to \omega}x = A' \cos(\omega t + \alpha) + \frac{f t}{2m\omega} \sin(\omega t + \beta)$
+		
+				* 共振附近:若强迫力是正弦函数,且$\gamma = \omega + \epsilon$.\quad 幅度以频率$\epsilon$变化(\bf{拍频})的小振动.
+					$ => x = (A' + B' e^{i\epsilon t})e^{i\omega t} \quad ,A' = Ae^{i\alpha},B' = Be^{i\beta},|A' + B' e^{i\epsilon t}| \in \{|A-B|,A+B\} $
+		
+				* 任意强迫力
+					$let\ \xi = \dot x + i\omega x\ => \dot \xi - i\omega \xi = \frac{F(t)}{m}  \ => x = \frac{1}{\omega}Im\{\int_0^t \frac{F(t)}{m}e^{-i\omega t}dt + const.\}$
 
 		* 多自由度小振动
 
 	* 刚体力学
-		\bf{刚体}:质点间距离保持不变的质点组成的系统.
+		\def{刚体}:质点间距离保持不变的质点组成的系统.
 		
-		\bf{角速度$\. \omega$}:
+		\bf{角速度}:
 		
-		\bf{惯性张量}:
+		\def{惯性张量}
 
 	* 流体力学
 		* 理想流体
-			\def{理想流体} 不可压缩、不计粘性的流体.
+			\def{理想流体} 
+				不可压缩、不计粘性的流体. 
+				给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
 			
-			给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
-			
-		* 质量守恒
-			区域体流出质量 = 区域封闭面流出质量.
-			$ 
-				& \oint \rho \. v \cdot d \. f = -\frac{∂}{∂ t}\int \rho dV \quad
-				=>\quad & \int \nabla \cdot (\rho \. v) dV  = -\frac{∂}{∂ t}\int \rho dV
-				=>\quad & \int (\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t}) dV  = 0
-			$
-			
-			\Theorem{连续性方程}
-				质量流流出速率 = 流体密度减少速率.
-				$\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t} = 0$
-			
-			\bf{质量流密度}:
-				$\. j = \rho \. v$
-			
-		* 运动方程
-			合力:
-			$
-				-\oint p d \. f = -\int \nabla p\ dV
-				\rho \frac{d \. v}{t} = -\nabla p
-			$
-
-		* Eular 理想流体方程
-			\Theorem{Eular 理想流体方程}
-				$\frac{∂ \.v}{∂ t} + (\. v · \nabla)\.v = - \frac{1}{\rho}\nabla p$
-				重力场$\. g$下,
-				$\frac{∂ \.v}{∂ t} + (\. v · \nabla)\.v = - \frac{1}{\rho}·\nabla p + \. g$
-				$- \nabla p$: 单位体积流体上的作用力.
-
-			\Proof
+			* 质量守恒
+				区域体流出质量 = 区域封闭面流出质量.
+				$ 
+					& \oint \rho \. v \cdot d \. f = -\frac{∂}{∂ t}\int \rho dV \quad
+					=>\quad & \int \nabla \cdot (\rho \. v) dV  = -\frac{∂}{∂ t}\int \rho dV
+					=>\quad & \int (\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t}) dV  = 0
 				$
-					\rho \frac{\d \.v}{\d t} &=  - \nabla p + \rho \.g  \tag{微元运动方程}
-					\d \.v &= \frac{∂ \.v}{∂t} \d t + (\d \.r · \nabla) \.v    \tag{全导数}
-					=> \frac{\d \.v}{\d t} &= \frac{∂ \.v}{∂t} + (\.v · \nabla) \.v  \tag{除以$\d t$}
-					=> \frac{∂ \.v}{∂t} + (\.v · \nabla) \.v = - \frac{1}{\rho} \nabla p + \.g  \tag{代入}
+				
+				\Theorem{连续性方程}
+					质量流流出速率 = 流体密度减少速率.
+					$\nabla \cdot (\rho \. v) + \frac{∂ \rho}{∂ t} = 0$
+				
+				\bf{质量流密度}:
+					$\. j = \rho \. v$
+				
+			* 运动方程
+				合力:
+				$
+					-\oint p d \. f = -\int \nabla p\ dV
+					\rho \frac{d \. v}{t} = -\nabla p
 				$
 
-		* Navier Stokes 流体方程
-			\Theorem{Navier Stokes 流体方程}
-				$∂\. u/∂t + (\. v·\nabla )\. v =  - \frac{1}{\rho}·\nabla p  + \. g + η/\rho\nabla^2 \. v + (ζ + η/3)/\rho·\nabla (\nabla ·\. v)$
-				η: 粘度	\rho: 密度
-				不可压缩流: $\nabla ·\. v ≡ 0$
-				压强: $\nabla ·\nabla p = \nabla ·v·\rho/ dt$
+			* Eular 理想流体方程
+				\Theorem{Eular 理想流体方程}
+					$\frac{∂ \.v}{∂ t} + (\. v · \nabla)\.v = - \frac{1}{\rho}\nabla p$
+					重力场$\. g$下,
+					$\frac{∂ \.v}{∂ t} + (\. v · \nabla)\.v = - \frac{1}{\rho}·\nabla p + \. g$
+					$- \nabla p$: 单位体积流体上的作用力.
+
+				\Proof
+					$
+						\rho \frac{\d \.v}{\d t} &=  - \nabla p + \rho \.g  \tag{微元运动方程}
+						\d \.v &= \frac{∂ \.v}{∂t} \d t + (\d \.r · \nabla) \.v    \tag{全导数}
+						=> \frac{\d \.v}{\d t} &= \frac{∂ \.v}{∂t} + (\.v · \nabla) \.v  \tag{除以$\d t$}
+						=> \frac{∂ \.v}{∂t} + (\.v · \nabla) \.v = - \frac{1}{\rho} \nabla p + \.g  \tag{代入}
+					$
+
+			\Example
+				* 静止流体 -- 流体静力学
+					\def{静止流体 -- 流体静力学}
+						静止流体的力学分析.
+
+					\Example
+						* 均匀向下重力场$\.g = g \hat{\.z}$中的静止流体, Eular方程有
+							$
+								\nabla p = \rho \.g
+								=> p = -\rho g z + const.  \tag{$\.g = g \hat{\.z}$, 积分}
+								=> p = -\rho g h + p_0  \tag{距液面深度$h$, 大气压$p_0$}
+							$
+
+						* 对于大量液体或气体,一般不能认为密度$\rho$处处相同, 对于气体(例如大气)尤其如此.如果假设流体不仅处于力学平衡, 而且处于热平衡, 则流体中的温度处处相同, $\Phi = \frac{\nabla p}{\rho}$ 质量热力学势
+							$\Phi + gz = const.$
+
+						* 质量极为巨大的一团流体(如恒星), 流体各部分由于万有引力而结合在一起.
+							$
+								Δ \varphi=4 π G \rho  \tag{引力势}
+								\nabla · (\frac{1}{\rho} \nabla p)=-4 π G \rho
+							$
+							如果星体不发生旋转, 则它在平衡状态下星球形, 密度和压强的分布也是球对称的, 方程在球面坐标下的形式为
+							$\frac{1}{r^2} \frac{\d}{\d r} (\frac{r^2}{\rho} \frac{\d p}{\d r})=-4 π G \rho$
+
+				* 定常流体
+					\def{定常流体}
+						流体所在区域任意一点的速度都不随时间变化的流体.
+
+					\Theorem{Bernoulli 方程}
+						$\frac{v^2}{2} + w = const.$
+						重力场中,
+						$\frac{v^2}{2} + w + g z= const.$
+
+		* 黏性流体
+			\def{黏性流体}
+
+			* Navier Stokes 流体方程
+				\Theorem{Navier Stokes 流体方程}
+					$∂\. u/∂t + (\. v·\nabla )\. v =  - \frac{1}{\rho}·\nabla p  + \. g + η/\rho\nabla^2 \. v + (ζ + η/3)/\rho·\nabla (\nabla ·\. v)$
+					η: 粘度	\rho: 密度
+					不可压缩流: $\nabla ·\. v ≡ 0$
+					压强: $\nabla ·\nabla p = \nabla ·v·\rho/ dt$
+
+		* 超流体
 
 * 场论
 	* 相对论力学
@@ -386,7 +423,7 @@
 						=> \quad& \.\eta = \.A^T \.\eta \. A  \tag{矩阵计算}
 					$
 
-				* 能够满足事件间隔不变条件的变换, 只有平移和旋转. 排除平移、三维空间旋转、空间反射、时间反演等已经熟悉的变换, 于是, 我们重点关注的是$(t x, t y, t z)$平面内的旋转. 假设y轴z轴不做变换，只有t轴x轴有变换, 以简化问题并排除三维空间旋转, 可得,
+				* 能够满足事件间隔不变条件的变换, 只有平移和旋转. 排除平移、三维空间旋转、空间反射、时间反演等已经熟悉的变换, 于是, 我们重点关注的是$(t x, t y, t z)$平面内的旋转. 假设y轴z轴不做变换, 只有t轴x轴有变换, 以简化问题并排除三维空间旋转, 可得,
 					$
 						=> \quad& (\mb c Δt' \\ Δx' \me) = \.A_{t,x} (\mb c Δt \\ Δx \me)
 						& (\mb -1 \\ & 1 \me) = \.A_{t,x} (\mb -1 \\ & 1 \me) \.A_{t,x}
@@ -447,11 +484,10 @@
 				$\frac{d\. P}{dt} = - \frac{e}{c} \frac{∂\. A}{∂ t} - e \nabla \varphi + \frac{e}{c} \. v \times \nabla \times \. A$
 				
 			\bf{电场强度$\. E$:\quad 磁场强度$\. H$:}
-				$
-					\{ \begin{array}{ll}
-					\. E = -\frac{1}{c} \frac{∂ \. A}{∂ t} - \nabla \varphi\\
+				$ \{
+					\. E = -\frac{1}{c} \frac{∂ \. A}{∂ t} - \nabla \varphi
 					\. H = \nabla \times \. A
-					\end{array} .
+					\right.
 				$
 				$ => \frac{d\. P}{dt} = e \. E + \frac{e}{c} \. v \times \. H$
 				
@@ -459,12 +495,12 @@
 			
 			\bf{Maxwell's方程组}:
 				$
-					\{ \begin{array}{ll}
-					\nabla \cdot \. E = 4π\rho\\
-					\nabla \cdot \. H = 0\\
-					\nabla \times \. E = - \frac{1}{c} \frac{∂ \. H}{∂ t}\\
+					\{
+					\nabla \cdot \. E = 4π\rho
+					\nabla \cdot \. H = 0
+					\nabla \times \. E = - \frac{1}{c} \frac{∂ \. H}{∂ t}
 					\nabla \times \. H = - \frac{1}{c} \frac{∂ \. E}{∂ t} + \frac{4π}{c}\. j
-					\end{array} .
+					\right.
 				$
 
 		* 特解: 静电场
@@ -495,6 +531,9 @@
 	* 引力场
 
 * 量子力学
+	* 波函数
+		$\int |\Psi_n|^2 \d q = 1$
+		
 	* Schrödinger 方程
 		\Theorem{Schrödinger 方程}
 			$
@@ -503,7 +542,7 @@
 			$
 			$\hbar = \frac{h}{2 π}$: 约化Planck常量; $U(r,t)$: 势.
 			$H = -\frac{\hbar}{2 m} \nabla^2  + U(r)$: Hamiltonian算子.
-			$\psi$: 量子系统的状态向量, 概率.
+			$\psi(r,t)$: 波函数, 粒子t时刻出现在r处的概率.
 		
 			* 时不变 Schrödinger 方程:
 				$
@@ -518,21 +557,29 @@
 			$P V = n R T$
 
 	* 热力学
+		* 熵
 
-		* \Theorem{热力学第一定律, 能量守恒定律}
+		* 热力学第零定律 -- 热平衡定律
+			\Theorem{热力学第零定律 -- 热平衡定律}
+
+			* 温度
+				$\frac{\d S}{\d E} = \frac{1}{T}$
+
+		* 热力学第一定律 -- 能量守恒定律
+			\Theorem{热力学第一定律 -- 能量守恒定律}
 				物体内能的增加等于物体吸收的热量和对物体所作的功的总和.
 				$△U = Q + W$
 				$△U$ 内能的增加; Q 吸收的热量; W 对物体所作的功.
+
+			* 焓
+				\def{焓}
+					$H = U + p V$
 
 		* 热力学第二定律
 			\Theorem{热力学第二定律}
 				克劳修斯表述为: 热量不能自发地从低温物体转移到高温物体. 
 				开尔文表述为: 不可能从单一热源取热使之完全转换为有用的功而不产生其他影响.
 				
-			* 熵
-
-		* 焓
-
 		* 热力学过程
 			* 等焓过程
 			* 等压过程

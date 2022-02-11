@@ -82,18 +82,18 @@
 					
 				\Example 
 					* 离散时间Gauss信源的熵
-						* \bf{1维Gauss-熵}: $h(X) = \frac{1}{2}{\log (2 \pi e \sigma^2)$
-						* \bf{多维独立Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 \pi e (\sigma_1^2 \sigma_2^2 \cdots \sigma_n^2)^{\frac{1}{N}})$
-						* \bf{多维相关Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 \pi e |\Sigma|^{\frac{1}{N}})$
+						* \bf{1维Gauss-熵}: $h(X) = \frac{1}{2}{\log (2 π e \sigma^2)$
+						* \bf{多维独立Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 π e (\sigma_1^2 \sigma_2^2 \cdots \sigma_n^2)^{\frac{1}{N}})$
+						* \bf{多维相关Gauss-熵}: $h(x^N)=\frac{N} 2} \log (2 π e |\Sigma|^{\frac{1}{N}})$
 
 					\Proof
 						\bf{1维Gauss-熵}: 
 						$
 							h(x) &= -E_{\P(x)} [\log \P(x)]
-							&= -E_{\P(x)} [-\frac{1}{2}\log(2\pi\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}]
-							&= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\E_{\P(x)} [(x-\mu)^2]}{2\sigma ^2}
-							&= \frac{1}{2}\log(2\pi\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}
-							&= \frac{1}{2}\log(2\pi e\sigma^2)
+							&= -E_{\P(x)} [-\frac{1}{2}\log(2π\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}]
+							&= \frac{1}{2}\log(2π\sigma^2) + \log e \frac{\E_{\P(x)} [(x-\mu)^2]}{2\sigma ^2}
+							&= \frac{1}{2}\log(2π\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}
+							&= \frac{1}{2}\log(2π e\sigma^2)
 						$
 
 			* 平均互信息
@@ -199,14 +199,14 @@
 
 					* 离散Markov平稳有记忆信源
 						\def{离散Markov平稳有记忆信源} 
-							\bf{Markov平稳分布}: $\pi = (\pi_1 = \P(x = S_1), ..., \pi_n = \P(x = S_n))^T, \text{且} \sum_{i=1}^N \pi_i = 1$是平稳分布.
-								$\pi^T = \pi^T P$
+							\bf{Markov平稳分布}: $π = (π_1 = \P(x = S_1), ..., π_n = \P(x = S_n))^T, \text{且} \sum_{i=1}^N π_i = 1$是平稳分布.
+								$π^T = π^T P$
 
 						\Property 
-							* 一个遍历有限状态Markov链有, $\lim_{k \to \infty} P^k = e \pi^T$
-							* 遍历有限状态Markov链, 当转移步数足够大, 无论任何起始状态, 都能收敛到平稳分布$\pi$. 
-								\Proof{ $\lim_{k \to \infty} p^k = p_0 \lim_{k \to \infty} P^k = p_0 e \pi^T = \pi$ } ???
-							* m阶离散Markov信源的熵: $H(X^N) = H(X_1 ... X_N) = H(\pi) + (N-1) \pi^T h$; 极限符号熵: $H_\infty(X^N) = \pi^T h$
+							* 一个遍历有限状态Markov链有, $\lim_{k \to \infty} P^k = e π^T$
+							* 遍历有限状态Markov链, 当转移步数足够大, 无论任何起始状态, 都能收敛到平稳分布$π$. 
+								\Proof{ $\lim_{k \to \infty} p^k = p_0 \lim_{k \to \infty} P^k = p_0 e π^T = π$ } ???
+							* m阶离散Markov信源的熵: $H(X^N) = H(X_1 ... X_N) = H(π) + (N-1) π^T h$; 极限符号熵: $H_\infty(X^N) = π^T h$
 								\Proof
 									熵:
 									$
@@ -215,14 +215,14 @@
 										&= H(X_1) + \sum_{t=2}^N H(X_t | X_{t-1}) \tag{Markov性}
 										&= H(X_1) + (N-1) H(X_t | X_{t-1}) \tag{平稳性}
 										&= H(X_1) + (N-1) \sum p(X_{t-1}) \sum - \P(X_t | X_{t-1}) \log \P(X_t | X_{t-1}) \tag{条件熵代入}
-										&= H(\pi) + (N-1) \pi^T h \tag{平稳分布$\pi$代入}
+										&= H(π) + (N-1) π^T h \tag{平稳分布$π$代入}
 									$
 									极限符号熵:
 									$
 										H_\infty(X^N) &= \lim_{N \to \infty} \frac{H(X^N)}{N}				   \tag{定义}
-										&= \lim_{N \to \infty} \frac{H(\pi) + (N-1) \pi^T h}{N}   \tag{代入}
-										&= \lim_{N \to \infty} \frac{N \pi^T h}{N}				\tag{省略$\to 0$量}
-										&= \pi^T h
+										&= \lim_{N \to \infty} \frac{H(π) + (N-1) π^T h}{N}   \tag{代入}
+										&= \lim_{N \to \infty} \frac{N π^T h}{N}				\tag{省略$\to 0$量}
+										&= π^T h
 									$
 
 	* 信源编码

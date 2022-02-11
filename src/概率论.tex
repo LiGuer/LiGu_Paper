@@ -31,7 +31,7 @@
 				$\lim_{n \to \infty} \P\{|\frac{f_A}{n}-p|<\varepsilon\} = 1$
 
 		* \Theorem{中心极限定律}
-			$\lim_{n \to\infty} F_n(x) =\lim_{n \to\infty} \P\{\frac{\sum_{k=1}^n X_k - n \mu}{\sqrt{n} \sigma} ≤ x\}=\int_{-\infty}^x \frac{1}{\sqrt{2 \pi}} e^{-t^2 / 2} \d t=\Phi(x)$
+			$\lim_{n \to\infty} F_n(x) =\lim_{n \to\infty} \P\{\frac{\sum_{k=1}^n X_k - n \mu}{\sqrt{n} \sigma} ≤ x\}=\int_{-\infty}^x \frac{1}{\sqrt{2 π}} e^{-t^2 / 2} \d t=\Phi(x)$
 
 	* 概率分布
 
@@ -97,7 +97,7 @@
 				* Normal分布
 					\def{Normal分布} 
 						$
-							f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x - \mu)^2}{2 \sigma^2}} \quad; x \in (-\infty, +\infty)
+							f(x) = \frac{1}{\sqrt{2 π \sigma^2}} e^{-\frac{(x - \mu)^2}{2 \sigma^2}} \quad; x \in (-\infty, +\infty)
 						$
 
 					\Property
@@ -106,7 +106,7 @@
 
 					* 标准Normal分布
 						$
-							f(x) = \frac{1}{\sqrt{2 \pi }} e^{-\frac{x^2}{2}} \quad; x \in (-\infty, +\infty)
+							f(x) = \frac{1}{\sqrt{2 π }} e^{-\frac{x^2}{2}} \quad; x \in (-\infty, +\infty)
 						$
 
 					* 多元Normal分布
@@ -116,12 +116,12 @@
 							* 方差 $\. \Sigma$
 							\Proof
 								$
-									F### &=\frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \sum_{j=1}^D \. u_i \. u_{j}^T \int e^{-\sum_{k=1}^D \frac{\. y_k^2}{2 \lambda_k}} y_i y_{j} \d \. y 
-									&=\frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T \int e^{-\sum_{k=1}^D \frac{y_k^2}{2 \lambda_k}} y_i^2 \d \. y  \tag{$i ≠ j, \.u_i \.u_j^T=0, \.u_i \.u_j$ 正交}
-									&=\frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T \int \prod_{k=1}^D e^{-\frac{y_k^2}{2 \lambda_k}} y_i^2 \d \. y 
-									&=\frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T(\int_{-\infty}^{+\infty} e^{-\frac{y_i^2}{2 \lambda_i}} y_i^2 \d y_i \times \prod_{k=1, k \neq i}^D \int_{-\infty}^{+\infty} e^{-\frac{y_X^2}{2 \lambda_k}} \d y_k)  \tag{积分乘法结合律}
-									&=\frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T((2 \pi \lambda_i)^{1 / 2} · \lambda_i \times \prod_{k=1, k \neq i}^D(2 \pi \lambda_k)^{1 / 2})  \tag{见下面推导}
-									&=\frac{1}{(2 \pi)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}}  · ((2 \pi)^{\frac{D}{2}} \prod_{k=1}^D \lambda_k) · (\sum_{i=1}^D \. u_i \. u_i^T \lambda_i) 
+									F### &=\frac{1}{(2 π)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \sum_{j=1}^D \. u_i \. u_{j}^T \int e^{-\sum_{k=1}^D \frac{\. y_k^2}{2 \lambda_k}} y_i y_{j} \d \. y 
+									&=\frac{1}{(2 π)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T \int e^{-\sum_{k=1}^D \frac{y_k^2}{2 \lambda_k}} y_i^2 \d \. y  \tag{$i ≠ j, \.u_i \.u_j^T=0, \.u_i \.u_j$ 正交}
+									&=\frac{1}{(2 π)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T \int \prod_{k=1}^D e^{-\frac{y_k^2}{2 \lambda_k}} y_i^2 \d \. y 
+									&=\frac{1}{(2 π)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T(\int_{-\infty}^{+\infty} e^{-\frac{y_i^2}{2 \lambda_i}} y_i^2 \d y_i \times \prod_{k=1, k \neq i}^D \int_{-\infty}^{+\infty} e^{-\frac{y_X^2}{2 \lambda_k}} \d y_k)  \tag{积分乘法结合律}
+									&=\frac{1}{(2 π)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}} \sum_{i=1}^D \. u_i \. u_i^T((2 π \lambda_i)^{1 / 2} · \lambda_i \times \prod_{k=1, k \neq i}^D(2 π \lambda_k)^{1 / 2})  \tag{见下面推导}
+									&=\frac{1}{(2 π)^{\frac{D}{2}}} \frac{1}{|\. \Sigma|^{\frac{1}{2}}}  · ((2 π)^{\frac{D}{2}} \prod_{k=1}^D \lambda_k) · (\sum_{i=1}^D \. u_i \. u_i^T \lambda_i) 
 									&=\sum_{i=1}^D \. u_i \. u_i^T \lambda_i  \tag{\prod_{k=1}^D \lambda_k=|\Sigma|^{\frac{1}{2}}}
 									&=\. \Sigma
 								$
@@ -129,13 +129,13 @@
 								$
 									\int_{-\infty}^{+\infty} e^{-\frac{y_\lambda^2}{2 \lambda_i}} y_i^2 \d y_i &=(\lambda_i \sqrt{2 \lambda_i}) · \int_{-\infty}^{+\infty}(\frac{y_i^2}{2 \lambda_i})^{\frac{1}{2}} e^{-\frac{y_\lambda^2}{2 \lambda_i}} \d \frac{y_i^2}{2 \lambda_i} 
 									&= (\lambda_i \sqrt{2 \lambda_i}) · 2 \Gamma(\frac{3}{2})  \tag{$\Gamma(z) = \int_0^{+\infty} x^{z-1} e^{-x} \d x$}
-									&= \sqrt{2 \pi \lambda_i} · \lambda_i  \tag{$\Gamma(\frac{3}{2}) = \frac{\sqrt{\pi}}{2}$}
+									&= \sqrt{2 π \lambda_i} · \lambda_i  \tag{$\Gamma(\frac{3}{2}) = \frac{\sqrt{π}}{2}$}
 								$
 								当$k ≠ i$时,
 								$
 									\int_{-\infty}^{+\infty} e^{-\frac{y_\lambda^2}{2 \lambda_k}} \d y_k &=(\sqrt{\frac{\lambda_k}{2}) · \int_{-\infty}^{+\infty}(\frac{y_k^2}{2 \lambda_k})^{-\frac{1}{2}} e^{-\frac{y_\lambda^2}{2 \lambda_k}} \d \frac{y_k^2}{2 \lambda_k} 
 									&= (\sqrt{\frac{\lambda_k}{2}) · 2 \Gamma(\frac{1}{2})  \tag{$\Gamma(z) = \int_0^{+\infty} x^{z-1} e^{-x} \d x$}
-									&= \sqrt{2 \pi \lambda_k}  \tag{$\Gamma(\frac{1}{2}) = \sqrt{\pi}$}
+									&= \sqrt{2 π \lambda_k}  \tag{$\Gamma(\frac{1}{2}) = \sqrt{π}$}
 								$
 
 				* $\Gamma$分布
