@@ -43,12 +43,11 @@
 
 	* Hash表
 
-
 * 算法
 	* 排序
 		* 快速排序
 			\Property
-				* 时间复杂度: 上限n²，大概率平均值n log(n)
+				* 时间复杂度: 上限n^2，大概率平均值n log(n)
 				*	[流程]: 
 				*		* 最后元素作为参考元素[Ref]，[border]分割比参考元素大或小的界限，指向大的最初段
 						* [ai] 从第一元素开始，直至 Ref 前一元素位置
@@ -146,3 +145,128 @@
 			\def{商旅问题} 遍历所有给定点的最短闭合路径.
 
 	* 动态规划
+
+	* 插值
+		* \Algorithm{Lagrange插值}	
+			$
+				f(x) = \sum_{i=1}^n  y_i · f_i(x)
+				f_i(x) = \prod_{j=1,i≠j}^n  \frac{x - x_j}{x_i - x_j}
+			$
+			第N点y = 基函数1 × 第1点y + 基函数2 × 第2点y + 基函数3 × 第3点y
+			基函数状态2 = (输入X-第1点x)(输入X-第3点x) / (第2点x-第1点x)(第2点x-第3点x)
+
+		* \Algorithm{样条插值}	
+			通过求解三弯矩方程组得出曲线函数组的过程
+
+		* \Algorithm{Kriging插值}
+
+			* \Algorithm{普通Kriging插值}
+				* 目的:
+					空间插值. 满足假设:
+					* 空间属性z是均一的. 对空间任意一点，都有相同期望、方差.
+				* 优化问题:
+					$
+						min \quad&	var = 2\sum w_i \gamma_{i0} - \sum\sum w_i w_j \gamma_{ij} - \gamma_{00}
+						s.t. \quad&	\sum w_i = 1
+							\gamma_{ij} = \sigma^2 - C_{ij} = E[(Z(x_i) - Z(x_j))^2]
+					$
+				* 步骤:
+					* 确定半方差函数$\gamma(xi,xj) = E[(Z(x_i) - Z(x_j))^2]$
+						确定半方差函数与两点间距离的函数关系.
+					* 计算权值
+						权值计算方程:
+						$
+							[\mb w_1 \\ \vdots \\ w_n \\ \mu \me] = [\mb \gamma(x_1,x_1) & ... & \gamma(x_1,x_n) & 1 \\ ... & ... & ... & ... \\  \gamma(x_n,x_n) & ... & \gamma(x_n,x_n) & 1 \\ 1 & ... & 1 & 0 \me]^{-1} [\mb \gamma(x_1,x^*) \\ \vdots \\ \gamma(x_1,x^*) \\ 1 \me]
+						$
+					* 计算插值点结果
+						$f(x) = \sum w_i(x) f(x_i)$
+				* 原理:
+					* $f(x) = \sum w_i(x) f(x_i)$
+						$\tilde z$: 估计值	z : 实际值
+						求解权重系数: 使其为满足插值点处，估计值与真实值差最小的一组系数.
+					* 对空间任意一点，都有相同期望、方差. 即:
+						$
+							E	(z(x,y)) = μ
+							Var	(z(x,y)) = \sigma^2
+							=> z(x,y) = μ + R(x,y)    Var(R(x,y)) = \sigma^2
+						$
+					* 约束方程 —— 无偏估计条件 $E(\tilde z - z) = 0$
+						$
+							=> E(\tilde z - z) = E(\sum w_i z_i - z) = μ\sum w_i - μ = 0
+							=> \sum w_i = 1
+						$
+					* 目标函数 —— 估计误差 $var = Var(\tilde z - z)$
+						$
+							=> var = Var(\sum w_i z_i - z) = \sum\sum w_i w_j Cov(zi,zj) - 2\sum w_i Cov(zi,z) + cov(z,z)
+							=> var = \sum\sum w_i w_j C_{ij} - 2\sum w_i C_i0 + cov_{00} \quad; (C_{ij} = Cov(zi - μ,z - μ))
+						$
+					* 定义 半方差函数$\gamma_{ij} = \sigma^2 - C_{ij}$
+						$
+							=> var = 2\sum w_i \gamma_i0 - \sum\sum w_i w_j \gamma_{ij} - \gamma_{00}
+						$
+					* 凸优化问题构建完成:
+						$
+							min		var = 2\sum w_i \gamma_i0 - \sum\sum w_i w_j \gamma_{ij} - \gamma_{00}
+							s.t.	\sum w_i = 1
+						$
+						Lagrange函数	$L(w_i, \lambda) = var + \lambda(\sum w_i - 1)$
+						Lagrange对偶	$G(\lambda) = inf L(w_i, \lambda)$
+						$L(W,\lambda)$求导, 当导数为0时, 取得极值
+						即. 得到权值计算方程.
+					* 半方差函数$\gamma_{ij} = \sigma^2 - C_{ij} = E[(Z(x_i) - Z(x_j))^2]$
+						∵地理学第一定律: 空间上相近的属性相近.
+						∴$\gamma_{ij}$与两点间距离，存在函数关系
+						将所有d和$\gamma$绘成散点图，寻找最优曲线拟合d与$\gamma$，得到函数关系式.
+
+				\Codes
+					def variogram(x1, y1, x2, y2):
+						return sqrt( (x1 - x2)^2 + (y1 - y2)^2 )^3
+
+					# 普通Kriging插值
+					def Interpolate(x1, y1, z1)
+						for r in range(n)
+							for c in range(n)
+								x = x1[r]
+								y = y1[c]
+								R0 = ones(N+1, N+1)
+								R  = zeros(N+1)
+
+								#R0
+								R0[N, N] = 0
+								for i in range(N):
+									for j in range(N):
+										R0[i, j] = variogram(x0[i], y0[i], x0[j], y0[j])
+
+								#R
+								R[N] = 1
+								for i in range(N)
+									R[i] = variogram(x0[i], y0[i], x, y)
+
+								#lamb
+								lamb = matmul(linalg.inv(R0), R)
+								for i in range(N):
+									z1[r, c] += lamb[i] * z0[i]
+								z1[r, c] += lamb[N]
+
+		* \Algorithm{反距离加权插值}
+		
+			\Codes
+				x1 = arange(-1,1,0.05)
+				y1 = arange(-1,1,0.05)
+				z1 = zeros(40,40)
+				
+				# 反距离加权插值
+				def Interpolate(x1, y1, z1)
+					for r in range(40)
+						for c in range(40)
+							x = x1[r]
+							y = y1[c]
+							d0 = 0
+
+							for i in range(N)
+								d0 += 1 / ((x - x0[i])^2 + (y - y0[i])^2)
+
+							for i in range(N)
+								d = (x - x0[i])^2 + (y - y0[i])^2
+								w = (1 / d) / d0
+								z1[r,c] += w * z0[i]
