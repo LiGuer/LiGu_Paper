@@ -611,8 +611,8 @@
 
 					* 雾
 						\Theorem{雾图模型}
-							$I(x)$ 观测到的亮度, $J(x)$ 原始无雾时亮度, $t(x)$ 透射率, $A$大气光亮度.
-							$I(x) = J(x) · t(x) + A · (1 - t(x))$
+							$L_o(x)$ 观测到的亮度, $L_i(x)$ 原始无雾时亮度, $t(x)$ 透射率, $A$大气光亮度.
+							$L_o(x) = L_i(x) · t(x) + A · (1 - t(x))$
 							表示当大气密度、成分是均匀同质时, 透射率有,
 							$t(x) = e^{-\beta d(x)}$
 
@@ -620,6 +620,101 @@
 								雾图模型, 即每个原始像素亮度和大气光亮度, 按比例$t : (1-t)$调配(透射率). 大气光的比例越多, 雾感越强. 得到每个像素的透射率和大气光亮度, 即可实现雾化和去雾的功能.
 								* 当大气密度、成分是均匀同质时, 透射率与像素所在的景物深度相关. 景深越深, 大气光占比越大. 
 								* 当像素景深近似无限远时, 可认为该点透射率$t = 0$, 像素亮度全由大气光提供. 可由此得到大气光亮度值$A$.
+
+					* \Algorithm{光线追踪}
+						* 步骤:
+							* 计算屏幕矢量、屏幕X,Y向轴
+							* 对屏幕每个像素遍历
+								* 计算像素矢量、光线矢量、光线追踪起点
+								* 光线追踪算法, 计算该像素色彩
+									* 遍历对象集合(对象树)中的每一个对象
+										* 判断光线和该对象是否相交、光线走过距离、交点坐标、光线夹角
+										* 保留光线走过距离最近的对象的相关数据
+									* 如果该光线等级小于设定的阈值等级, 计算对象反射方向，将反射光线为基准重新计算
+								* 基于结果
+
+						\Codes
+							# 光线追踪(主)
+							Mat RayTracingMain(Mat Screen, ObjectTree* objTree, int sampleSt, int sampleEd)
+								//[1]
+								Mat ScreenVec, ScreenXVec, ScreenYVec
+								ScreenVec = gCenter - Eye
+								ScreenYVec = normalize({ScreenVec[0] == 0 ? 0 : -ScreenVec[1] / ScreenVec[0], 1, 0})
+								ScreenXVec = normalize(cross(ScreenVec, ScreenYVec))
+
+								//[2]
+								Mat PixVec, Ray, RaySt, color(3)
+								for sample in range(sampleSt, sampleEd)
+									double rate = 1.0 / (sample + 1), randX = rand(), randY = rand()
+
+									Screen *= 1 - rate
+
+									for x in range(0, Screen.rows)
+										for y in range(0, Screen.cols)
+											//[2.1]
+											PixVec 
+												= (x + randX - Screen.rows / 2 - 0.5) * ScreenXVec 
+												+ (y + randY - Screen.cols / 2 - 0.5) * ScreenYVec
+
+											//[2.2]
+											color = RayTracing(
+												RaySt = gCenter + PixVec, 
+												Ray = normalize(ScreenVec + PixVec), 
+												objTree, zero(color), 0
+											) 
+											Screen(x, y) += rate * color
+
+							# 光线追踪(每像素)
+							Mat RayTracing(Mat RaySt, Mat Ray, ObjectTree* objTree, Mat color, int level) 
+
+								//搜索光线-对象的最近交点距离
+								Object* obj
+								double dis = objTree.seekIntersection(RaySt, Ray, obj) 
+							
+								Material* material = obj->material
+							
+								//无交点
+								if (dis == DBL_MAX || material == NULL) 
+									zero(color)
+							
+								//光源
+								else if (material->rediate)
+									color = {1, 1, 1}
+							
+								//最大追踪层数
+								else if (level > maxRayLevel) 
+									return color
+							
+								else 
+									//计算面矢、交点
+									Mat faceVec ###
+									RaySt += (dis * Ray)
+							
+									//漫反射
+									if (material->diffuseReflect)
+										Ray = diffuseReflect(Ray, faceVec)
+										traceRay(RaySt, Ray, color, level + 1)
+										color *= material->reflectLossRate
+									
+									//反射
+									else if (RAND_DBL < material->reflect)
+										Ray = reflect(Ray, faceVec)
+										traceRay(RaySt, Ray, color, level + 1)
+										color *= material->reflectLossRate
+									
+									//折射
+									else
+										Ray = refract(Ray, faceVec, material->refractRate)
+										traceRay(RaySt += (eps * Ray)), Ray, color, level + 1)
+										color *= material->refractLossRate
+							
+								color = elementMul(color, material->color)
+									
+								// 雾
+								if(haze) 
+									color = Haze(color, airColor, dis, beta)
+
+								return color
 
 	* 引力场
 		* 牛顿万有引力
