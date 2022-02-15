@@ -1,8 +1,8 @@
-\section 随机几何
-	\section 点过程
+* 随机几何
+	* 点过程
 		\bf{注}: “点过程”一词中的“过程”并不意味着随时间的动态演变。从历史上看，该理论的第一批研究人员考虑的是时间事件的随机序列，例如电话交换机的呼叫到达瞬间、排队的客户到达、地震或矿难的发生等。然而，在R2或R3的点过程应用中，时间的概念通常是不存在的。“随机点场”将是一个更精确的术语.
-		$$\text{点过程} = \text{随机点场}$$
-		$$\text{静止} = \text{统计均匀}$$
+		$\text{点过程} = \text{随机点场}$
+		$\text{静止} = \text{统计均匀}$
 		以Poisson点过程为例,
 
 		* \bf{二项过程}$X \sim B(n,p)$, 
@@ -20,63 +20,58 @@
 		* \bf{Poisson点过程}, 是Poisson过程的高维几何空间的延申. Poisson过程是单位时间上的情景, 可看作一维空间下随机点分布; 延申到高维, 即在高维空间中的随机点分布.
 			* 参数: $\lambda$ 单位Lebesgue测度内(eg.长度,面积,体积)随机点的密度.
 			* 意义: 单位Lebesgue测度内, 随机点的个数.
+		
+		* Poisson点过程
+			\bf{Define}: $\forall$紧集$B \set \mathbb{R}^d$, 其内部的点数, 是一个Poisson随机变量, 且不相交集中的点数是独立的.
+			poisson分布概率函数\quad $P(x = k) = \frac{\lambda^k}{k!} e^{-\lambda}$
 			
+		* Neyman–Scott过程
+			* Matern簇过程
 		
+		* 硬核点过程
 		
-		\section Poisson点过程
-			\bf{Define}: $\forall$紧集$B \set \mathbb{R}^d$, 其内部的点数, 是一个Poisson随机变量, 且不相交集中的点数是独立的.\\
-			poisson分布概率函数\quad $P(x = k) = \frac{\lambda^k}{k!} e^{-\lambda}$\\
-			
-		\section Neyman–Scott过程
-			\section Matern簇过程
+		* Gibbs点过程
 		
-		\section 硬核点过程
-		
-		\section Gibbs点过程
-		
-		\section 散粒噪声场
+		* 散粒噪声场
 	
-
-
-\section 随机几何下-无线通信物理量解析解
-	\section 基站的Poisson点过程建模
-		\bf{Example:}\\
-			对一终端的半径r的圆内,除了其指定基站外,没有其它基站的概率为: $P(x = 1) = e^{-\lambda \pi R^2}$\\
-			针对变量r而言,\\
-			概率分布函数, 则有\quad $F(R) = P(r \le R) = 1 - e^{-\lambda \pi R^2}$\\
+* 随机几何下-无线通信物理量解析解
+	* 基站的Poisson点过程建模
+		\Example
+			对一终端的半径r的圆内,除了其指定基站外,没有其它基站的概率为: $P(x = 1) = e^{-\lambda \pi R^2}$
+			针对变量r而言,
+			概率分布函数, 则有\quad $F(R) = P(r \le R) = 1 - e^{-\lambda \pi R^2}$
 			概率密度函数, 则有\quad $f(r) = dF(r) / dr = e^{-\lambda \pi R^2}\ 2 \pi \lambda r$
-	\section 小区平均面积
+	* 小区平均面积
 		随机几何小区内平均面积概率密度,应当符合$\Gamma$分布:
-			$$f(y)=\frac{b^{a}}{\Gamma(a)} y^{a-1} e^{-by}$$
+			$f(y)=\frac{b^{a}}{\Gamma(a)} y^{a-1} e^{-by}$
 		而在二维空间中,有 $a = b = 3.5$:
-			$$f_{2 D}(y)=\frac{3.5^{3.5}}{\Gamma(3.5)} y^{2.5} e^{-3.5 y}$$
-	\section 小区内平均用户数
-		$$P[N=n]=\frac{3.5^{3.5} \Gamma(n+3.5)\left(\lambda_{u} / \lambda_{b}\right)^{n}}{\Gamma(3.5) n !\left(\lambda_{u} / \lambda_{b}+3.5\right)^{n+3.5}}$$
-		Proof:
-		\begin{align*}
+			$f_{2 D}(y)=\frac{3.5^{3.5}}{\Gamma(3.5)} y^{2.5} e^{-3.5 y}$
+	* 小区内平均用户数
+		$P[N=n]=\frac{3.5^{3.5} \Gamma(n+3.5)(\lambda_{u} / \lambda_{b})^{n}}{\Gamma(3.5) n !(\lambda_{u} / \lambda_{b}+3.5)^{n+3.5}}$
+		\Proof
+		$
 		P[N=n]  
-			&=\int_{0}^{\infty} P[N=n \mid S=s] \cdot f_{2D}(s) d s =\int_{0}^{\infty} \frac{\left(\lambda_{u} \frac{s}{\lambda_{b}}\right)^{n}}{n !} e^{-\lambda_{u} \frac{s}{\lambda_{b}}} \cdot f_{2D}(s) d s \\
-			&=\frac{3.5^{3.5}}{\Gamma(3.5)} \frac{\left(\lambda_{u} / \lambda_{b}\right)^{n}}{n !} \int_{0}^{\infty} s^{n+2.5} e^{-\left(\lambda_{u} / \lambda_{b}+3.5\right) s} d s =\frac{3.5^{3.5} \Gamma(n+3.5)\left(\lambda_{u} / \lambda_{b}\right)^{n}}{\Gamma(3.5) n !\left(\lambda_{u} / \lambda_{b}+3.5\right)^{n+3.5}}
-		\end{align*}
+			&=\int_0\infty P[N=n \mid S=s] · f_{2D}(s) d s =\int_0\infty \frac{(\lambda_{u} \frac{s}{\lambda_{b}})^{n}}{n !} e^{-\lambda_{u} \frac{s}{\lambda_{b}}} · f_{2D}(s) d s 
+			&=\frac{3.5^{3.5}}{\Gamma(3.5)} \frac{(\lambda_{u} / \lambda_{b})^{n}}{n !} \int_0\infty s^{n+2.5} e^{-(\lambda_{u} / \lambda_{b}+3.5) s} d s =\frac{3.5^{3.5} \Gamma(n+3.5)(\lambda_{u} / \lambda_{b})^{n}}{\Gamma(3.5) n !(\lambda_{u} / \lambda_{b}+3.5)^{n+3.5}}
+		$
 		(对不同面积下的用户数量求期望, 然后代入Poisson点过程概率$P(N=k)$, 和 小区平均面积概率密度$f_{2D}$)
 
-	\section 信干噪比
+	* 信干噪比
 		Rayleigh衰落信道下,
 		* 信号功率:\quad $p = h r^{-\alpha} \quad ,h\sim exp(\mu)$
 		* 干扰功率:\quad $I_r = \sum h_i r_i^{-\alpha} \quad$
 		* 噪声功率:\quad $\sigma^2$
 		
-
-		信干噪比:\quad $SINR = \frac{h r^{-\alpha}}{\sigma^2 + I_r}$\\
-		SINR分布: ($\mathbb{P}\left(SINR > T\right)$也称, 容量概率)
-		\begin{align*}
+		信干噪比:\quad $SINR = \frac{h r^{-\alpha}}{\sigma^2 + I_r}$
+		SINR分布: ($\P(SINR > T)$也称, 容量概率)
+		$
 			F_{SINR}(T) 
-			&= \mathbb{P}\left(SINR \le T\right) & \text{(定义)}\\
-			&= \mathbb{P}\left(\frac{P h r^{-\alpha}}{I_r +\sigma^{2}} \leq T\right) & (\text{代入}) \\
-			&= \mathbb{P}\left(h \leq \frac{T r^\alpha}{P} (I_r + \sigma^2) \right) & (\text{移项}) \\
-			&= \int_{0}^{\infty} \mathbb{P}\left(h \leq \frac{T r^\alpha}{P} (I_r + \sigma^2) \mid I_r \right) f(I_r) \mathrm{~d} I_r & (\text{对干扰功率$I_r$求期望}) \\
-			&= \int_{0}^{\infty} 1 - e^{- \frac{\mu T r^\alpha}{P}(I_r + \sigma^2)}  f(I_r) \mathrm{~d} I_r & (h \sim exp(\mu))\\
-			&= 1 - e^{- \frac{\mu T r^\alpha \sigma^2}{P}} \int_{0}^{\infty} e^{- \frac{\mu T r^\alpha I_r}{P}} f(I_r) \mathrm{~d} I_r & (\text{移项})\\
-			&= 1 - e^{- \frac{\mu T r^\alpha \sigma^2}{P}} \mathcal{L}_{I_{r}}\left(\frac{\mu T r^{\alpha}}{P}\right) & (\text{简写}\mathcal{L}(s) = \int_0^{\infty} f(t) e^{st} \mathrm{d} t)
-		\end{align*}
+			&= \P(SINR \le T) & \text{(定义)}
+			&= \P(\frac{P h r^{-\alpha}}{I_r +\sigma^{2}} \leq T) & (\text{代入}) 
+			&= \P(h \leq \frac{T r^\alpha}{P} (I_r + \sigma^2) ) & (\text{移项}) 
+			&= \int_0\infty \P(h \leq \frac{T r^\alpha}{P} (I_r + \sigma^2) \mid I_r ) f(I_r) \mathrm{~d} I_r & (\text{对干扰功率$I_r$求期望}) 
+			&= \int_0\infty 1 - e^{- \frac{\mu T r^\alpha}{P}(I_r + \sigma^2)}  f(I_r) \mathrm{~d} I_r & (h \sim exp(\mu))
+			&= 1 - e^{- \frac{\mu T r^\alpha \sigma^2}{P}} \int_0\infty e^{- \frac{\mu T r^\alpha I_r}{P}} f(I_r) \mathrm{~d} I_r & (\text{移项})
+			&= 1 - e^{- \frac{\mu T r^\alpha \sigma^2}{P}} \mathcal{L}_{I_{r}}(\frac{\mu T r^{\alpha}}{P}) & (\text{简写}\mathcal{L}(s) = \int_0\infty f(t) e^{st} \mathrm{d} t)
+		$
 	

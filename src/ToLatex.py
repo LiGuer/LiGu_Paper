@@ -104,9 +104,11 @@ def ToLatex(Str):
     Str = re.sub(r'\\Example', r'\\textbf{Example. }', Str)
     Str = re.sub(r'\\Property', r'\\textbf{Property. }', Str)
     Str = re.sub(r'\\Proof', r'\\textbf{Proof. }', Str)
+    Str = re.sub(r'\\Notes', r'\\textbf{Notes. }', Str)
     Str = re.sub(r'\\def\{([\S]+)\}', lambda m: '\\textbf{Define (' + m.group(1)+ '). }', Str)
     Str = re.sub(r'\\Theorem\{([\S]+)\}', lambda m: '\\textbf{Theorem (' + m.group(1)+ ').} ', Str)
-    Str = re.sub(r'\\Code\{([\S]+)\}', lambda m: '\\textbf{Code (' + m.group(1)+ ').} ', Str)
+    Str = re.sub(r'\\Algorithm\{([\S]+)\}', lambda m: '\\textbf{Algorithm (' + m.group(1)+ ').} ', Str)
+    Str = re.sub(r'\\Codes\{([\S]+)\}', lambda m: '\\textbf{Code (' + m.group(1)+ ').} ', Str)
     # section
     Str = re.sub(r'(\n {8})\*', lambda m:m.group(1) +'\\subsubsection', Str)
     Str = re.sub(r'(\n {4})\*', lambda m:m.group(1) +'\\subsection', Str)

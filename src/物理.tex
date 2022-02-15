@@ -120,9 +120,10 @@
 		且各力学量之比,满足:\quad(l:轨迹线度)
 			$\frac{t'}{t} = (\frac{l'}{l})^{1-k/2},\frac{v'}{v} = (\frac{l'}{l})^{k/2},\frac{E'}{E} = (\frac{l'}{l})^k,\frac{M'}{M} = (\frac{l'}{l})^{1+k/2}$
 			
-		* 例1: 均匀力场,势能与坐标成线性,$ => k=1,=> \frac{t'}{t} = \sqrt{\frac{l'}{l}}$,重力场自由落体,下落时间平方与初始高度成正比.
-		
-		* 例2: Kepler's第三定律,Newton引力、Coulomb力,势能与两点间距离成反比,$ => k=-1, => \frac{t'}{t} = (\frac{l'}{l})^{3/2}$,轨道运动周期的平方与轨道尺寸的立方成正比.
+		\Example
+			* 均匀力场,势能与坐标成线性,$ => k=1,=> \frac{t'}{t} = \sqrt{\frac{l'}{l}}$,重力场自由落体,下落时间平方与初始高度成正比.
+			
+			* Kepler's第三定律,Newton引力、Coulomb力,势能与两点间距离成反比,$ => k=-1, => \frac{t'}{t} = (\frac{l'}{l})^{3/2}$,轨道运动周期的平方与轨道尺寸的立方成正比.
 
 	* 质心 (力学之对象)
 		\bf{质心系}:\exists 速度$\.V$使得系统相对K'静止($\.P' = 0$),且K'原点为系统质量中心,K'即质心系:
@@ -146,36 +147,37 @@
 
 		\bf{质心组合关系}: 将质点系分成若干小系,各小系质心构成新的质点系之质心即为原质点系的质心.
 
-	* 情景: 一维运动
-		一维运动,定常外部条件下,
-		
-		* Lagrange函数:
-			$L = \frac{1}{2} = a(q) \dot q^2 - U(x)\quad (CartesianCoord)=> L = \frac{m \dot x^2}{2} - U(x)$
-		
-		* 运动不变性  --  能量守恒: 定常外场下能量守恒,有
-			$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{1}{2}m· 2 \dot x · \dot x - (\frac{m \dot x^2}{2} - U(x)) = \frac{m \dot x^2}{2} + U(x) $
-		
-		* 运动方程:
-			$\dot x = \frac{dx}{dt} = \sqrt{\frac{2}{m}[E - U(x)]}\quad => \quad t = \sqrt{\frac{m}{2}} \int \frac{dx}{\sqrt{E - U(x)}} + const$
-			$\because$动能恒正,故运动只能发生在$U(x) \leqslant E$的空间区域.
+		\Example
+			* 一维运动
+				一维运动,定常外部条件下,
+				
+				* Lagrange函数:
+					$L = \frac{1}{2} = a(q) \dot q^2 - U(x)\quad (CartesianCoord)=> L = \frac{m \dot x^2}{2} - U(x)$
+				
+				* 运动不变性 -- 能量守恒: 定常外场下能量守恒,有
+					$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{1}{2}m· 2 \dot x · \dot x - (\frac{m \dot x^2}{2} - U(x)) = \frac{m \dot x^2}{2} + U(x) $
+				
+				* 运动方程:
+					$\dot x = \frac{dx}{dt} = \sqrt{\frac{2}{m}[E - U(x)]}\quad => \quad t = \sqrt{\frac{m}{2}} \int \frac{dx}{\sqrt{E - U(x)}} + const$
+					$\because$动能恒正,故运动只能发生在$U(x) \leqslant E$的空间区域.
 
-	* 情景: 二体问题
-		\bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)
-		二体问题Lagrange函数:
-			$L = \frac{m \.\dot r_1^2}{2} + \frac{m \.\dot r_1^2}{2} - U(|\.r_1 - \.r_2|)$
-		
-		\bf{核心思想}: 将问题分解为\bf{质心运动}和\bf{相对质心运动},以质心为原点:
-			$m_1\.r_1 + m_2 \.r_2 =0,\quad \.r_{12} = \.r_1 - \.r_2, \quad => \quad \.r_1 = \frac{m_2}{m_1 + m_2}\.r_{12}, \quad \.r_2 = - \frac{m_1}{m_1 + m_2}\.r_{12} $
-			$ => L = \frac{m_{12} \.\dot r_{12}^2}{2} - U(|\.r_{12}|), \quad m_{12} = \frac{m_1 m_2}{m_1 + m_2}$
-			$ =>$"二体问题"等效为一个质量$m_{12}$的质点,在外场$U(\.r_{12})$下的运动, 而分运动$\.r_1, \.r_2$, 可由$\.r_{12}$分别解出.
+			* 二体问题
+				\bf{二体问题}: 两个相互作用的质点,组成的系统的运动.(相互作用的两个质点的势能仅依赖于它们之间的距离.)
+				二体问题Lagrange函数:
+					$L = \frac{m \.\dot r_1^2}{2} + \frac{m \.\dot r_1^2}{2} - U(|\.r_1 - \.r_2|)$
+				
+				\bf{核心思想}: 将问题分解为\bf{质心运动}和\bf{相对质心运动},以质心为原点:
+					$m_1\.r_1 + m_2 \.r_2 =0,\quad \.r_{12} = \.r_1 - \.r_2, \quad => \quad \.r_1 = \frac{m_2}{m_1 + m_2}\.r_{12}, \quad \.r_2 = - \frac{m_1}{m_1 + m_2}\.r_{12} $
+					$ => L = \frac{m_{12} \.\dot r_{12}^2}{2} - U(|\.r_{12}|), \quad m_{12} = \frac{m_1 m_2}{m_1 + m_2}$
+					$ =>$"二体问题"等效为一个质量$m_{12}$的质点,在外场$U(\.r_{12})$下的运动, 而分运动$\.r_1, \.r_2$, 可由$\.r_{12}$分别解出.
+			
+			* 有心力场
+				\def{有心力场} 质点势能只与质点到某一固定点的距离有关的外场.
+				
+				\def{有心力} 始终指向or背离与质点到某一固定点的方向, 且大小只依赖r的力.
+					$\.F = -\frac{∂ U(r)}{∂ \.r} = -\frac{d U(r)}{d r} \hat r$
 	
-	* 情景: 有心力场
-		\def{有心力场} 质点势能只与质点到某一固定点的距离有关的外场.
-		
-		\def{有心力} 始终指向or背离与质点到某一固定点的方向, 且大小只依赖r的力.
-			$\.F = -\frac{∂ U(r)}{∂ \.r} = -\frac{d U(r)}{d r} \hat r$
-	
-		* 运动不变性  --  角动量守恒
+		* 运动不变性 -- 角动量守恒
 			中心对称外场下(即势能仅依赖到空间某特定点(中心)距离),系统角动量在任意过中心的轴上投影都守恒.
 			$ => \.M = \.r × \.P = const.$
 			$ =>$ 质点运动在垂直于$\.M$的平面内.\quad $ =>$ 有心力场,\bf{[0] Lagrange函数}:
@@ -184,8 +186,8 @@
 			$P_\varphi = \frac{∂ L}{∂ \dot \varphi} = m r^2 \dot \varphi \quad , \quad \frac{d P_\varphi}{d t} = \frac{d}{d t}\frac{∂ L}{∂ \dot \varphi} = \frac{∂ L}{∂ \varphi} \frac{d \frac{d \varphi}{d \varphi / d t}}{d t} = \frac{∂ L}{∂ \varphi} = 0 \quad , \quad |\.M| = M_z = \sum \frac{∂ L}{∂  \dot \varphi} = P_\varphi$
 			$ => |\.M| =| \.r × \.P |= P_\varphi = m r^2 \dot \varphi = const.$
 	
-		\Theorem{Kepler's第二定律}:质点矢径在相同时间内扫过的面积相等.
-			$ => M = m r^2 \dot \varphi = 2 m \dot S_{sector} = const.\quad => \dot S_{sector} = \frac{1}{2} r · r d\varphi = const.$
+			\Theorem{Kepler's第二定律}:质点矢径在相同时间内扫过的面积相等.
+				$ => M = m r^2 \dot \varphi = 2 m \dot S_{sector} = const.\quad => \dot S_{sector} = \frac{1}{2} r · r d\varphi = const.$
 	
 		* 运动不变性 -- 能量守恒: 定常外场下能量守恒,有
 			$E = \frac{∂ L}{∂ \dot q}\dot q - L = \frac{m}{2} (\dot r^2 + r^2 \dot \varphi^2) + U(r) = \frac{m \dot r^2}{2} + \frac{M^2}{2mr^2} + U(r)$
@@ -221,7 +223,7 @@
 	
 				* $\alpha < 0$斥力场时,轨道为双曲线}
 
-	* 情景: 小振动
+	* 小振动
 		* 一维小振动
 			\def{一维小振动}
 				设系统在势场$q_0$处平衡,即$F = -\frac{dU(q)}{dq}|_{q=q_0} = 0$,当平衡处发生微小偏移至$q(q\to q_0)$,Taylor展开,
@@ -381,19 +383,21 @@
 				* 1881年Michelson-Morley干涉实验, 表明光速与其传播方向无关. 而按经典力学,光应在地球速度同方向$(v+c)$,比反方向$(v-c)$更快一点. 因此, Galilean变换的绝对时间假设$(t=t')$错了, 不同参考系下时间流逝的速度不同.
 		
 		* Minkowski时空
-			\bf{事件}, 一个事件由其发生的位置和时间所描述$(t, x, y, z)$.
+			\def{事件} 一个事件由其发生的位置和时间所描述$(t, x, y, z)$.
 
-			\def{Minkowski时空}, 是三维欧几里得空间和时间的组合四维流形$(t, x, y, z)$.
+			\def{Minkowski时空} 是三维欧几里得空间和时间的组合四维流形$(t, x, y, z)$.
 
 			* 事件间隔
-				\bf{事件间隔}, . 两个事件的间隔在任何惯性系下都一样. 这个不变性,就是光速不变的数学表示.
-					$s_{12} = (c^2(t_2-t_1)^2 - (x_2-x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2)^{\frac{1}{2}}$
-					$\d s = (c^2 \d t^2 - \d x^2 - \d y^2 - \d z^2)^{\frac{1}{2}}$
+				\def{事件间隔} 
+					$
+						s_{12} = (c^2 (t_2-t_1)^2 - (x_2-x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2)^{\frac{1}{2}}
+						\d s = (c^2 \d t^2 - \d x^2 - \d y^2 - \d z^2)^{\frac{1}{2}}
+					$
 
-				\Proof
-				
-				* 类时间隔, 仅在时间上有变化的间隔, 故间隔为实数.
-				* 类空间隔, 仅在空间上有变化的间隔, 故间隔为虚数.
+				\Property
+					* 两个事件的间隔在任何惯性系下都一样. 这个不变性,就是光速不变的数学表示.				
+					* 类时间隔, 仅在时间上有变化的间隔, 故间隔为实数.
+					* 类空间隔, 仅在空间上有变化的间隔, 故间隔为虚数.
 
 		* 参考系变换 -- Lorentz变换
 			\Theorem{Lorentz变换} 设两个惯性参考系 $K, K'$, 其中$K'$沿$x$轴以速度$V$相对于$K$作相对运动, 
@@ -514,30 +518,108 @@
 			* 受力
 				$\.F = q (\.E + \.v × \.B)$
 
-		* 特解: 静电场
-			$
-				∇^2 A = -\frac{4 π}{c} · J			\tag{磁矢势 (恒磁场)}
-				∇^2 \phi = -\frac{\rho}{ε_0}		\tag{电  势 (静电场)}
-			$
-			电场强度: $E = -∇ \phi$
-			磁场强度: $H = -∇ × A$
-			$
-				∇ · E &= \frac{\rho}{ε_0}			\tag{静电场}
-				∇ × E &= 0
-				∇ · H &= 0				\tag{恒磁场}
-				∇ × H &= \frac{4 π}{c} · J
-			$
-			[算法]:	Poisson's方程		
-				当\rho=0时, ∇^2 \phi = 0		Laplace's方程
-				解Poisson's方程, Green's函数, 得 \phi(r) = - 4π/ε0 ∫∫∫ f(rt) / |r-rt| d³rt
+		\Example
+			* 静电场
+				$
+					∇^2 A = -\frac{4 π}{c} · J			\tag{磁矢势 (恒磁场)}
+					∇^2 \phi = -\frac{\rho}{ε_0}		\tag{电  势 (静电场)}
+				$
+				电场强度: $E = -∇ \phi$
+				磁场强度: $H = -∇ × A$
+				$
+					∇ · E &= \frac{\rho}{ε_0}			\tag{静电场}
+					∇ × E &= 0
+					∇ · H &= 0				\tag{恒磁场}
+					∇ × H &= \frac{4 π}{c} · J
+				$
+				[算法]:	Poisson's方程		
+					当\rho=0时, ∇^2 \phi = 0		Laplace's方程
+					解Poisson's方程, Green's函数, 得 \phi(r) = - 4π/ε0 ∫∫∫ f(rt) / |r-rt| d³rt
 
-			\Theorem{静电场唯一性定理}
-				对于各种边界条件, Poisson's方程有许多种解, 但每个解梯度相同.
-				静电场下, 意味边界条件下满足Poisson's方程的势函数, 所解得电场唯一确定.
+				\Theorem{静电场唯一性定理}
+					对于各种边界条件, Poisson's方程有许多种解, 但每个解梯度相同.
+					静电场下, 意味边界条件下满足Poisson's方程的势函数, 所解得电场唯一确定.
 
-		* 特解: 恒磁场
+			* 恒磁场
 
-		* 特解: 真空电磁波
+			* 真空电磁波
+
+			* 光学
+				* 几何光学
+					* 基本原理
+						* 光沿直线传播.
+						* 光路可逆.
+						* 两束光传播中互不干扰,会聚于同一点时光强简单相加.
+						* 介质分界面的光传播规律.
+
+					* 介质分界面光传播规律
+						* 反射
+							\Theorem{反射定律} 入射角 = 反射角. $\theta_i = \theta_o$
+							
+							\Algorithm{反射光线}
+								设面矢$\.N$, 入射光$L_i$, 出射光$L_o$
+								$\.L_o = \.L_i - 2 (\.N · \.L_i) \.N$
+
+								\Codes
+									Mat reflect(Mat RayI, Mat N) 
+										return RayO = normalize(RayI - 2 * dot(N, RayI) * N)
+								
+						* 折射
+							\Theorem{折射定律} 
+								$n_i·\sin \theta_i = n_o·\sin \theta_o$
+								全反射,
+								
+							\Algorithm{折射光线}
+								设面矢\.N, 入射光\.L_i, 出射光$L_o$, 折射率 $n = \frac{n_i}{n_o}$, 折射角$ \theta_i = <\.L, \.N>$
+								$\.L_o = \.L_i + \.N· (\cos\theta_i - \frac{\sqrt{1 - n^2·\sin^2\theta_i}}{n})$
+
+								\Proof
+									$
+										\.L_o &= \.L_i + \.N·\frac{\sin(\theta_o - \theta_i)}{\sin\theta_o}
+										&= \.L_i + \.N· \frac{\cos\theta_i·\sin\theta_o - \cos\theta_o·\sin\theta_i}{\sin\theta_o}
+										&= \.L_i + \.N· (\cos\theta_i - \frac{\cos\theta_o}{n})
+										&= \.L_i + \.N· (\cos\theta_i - \frac{\sqrt{1 - n^2·\sin^2\theta_i}}{n})
+									$
+
+								\Codes
+									Mat refract(Mat RayI, Mat N, double nI, double nO) 
+										double n = nI / nO,
+											CosI = dot(N, RayI),
+											CosO = 1 - n^2 * (1 - CosI^2)
+
+										return CosO < 0 ? reflect(RayI, N, RayO) :				//全反射
+											RayO = RayI + normalize((-CosI - (CosI > 0 ? -1 : 1) * sqrt(CosO) / n) * N)
+							
+						* 漫反射
+							在面矢半球内，面积均匀的随机取一射线，作为反射光线.
+
+							\Codes
+								Mat diffuseReflect(Mat RayI, Mat N)
+									double r1 = 2 * PI * Rand(), r2 = Rand()
+									Mat t(3), u, v
+									N *= dot(N, RayI) > 0 ? -1 : 1
+									t[0] = abs(N[0]) > 0.1 ? 0 : 1
+									t[1] = t[0] == 0 ? 1 : 0
+									u = normalize(cos(r1) * sqrt(r2) * cross(t, N))
+									v = normalize(sin(r1) * sqrt(r2) * cross(N, u))
+									return RayO = normalize(sqrt(1 - r2) * N + u + v)
+
+					* 光照模型
+						\Theorem{双向反射分布函数}
+							一个表面上某一点的亮度由以下几部分组成, 表面的自发光$L_e$, 所有射向该表面的入射光线$L_i$经过表面特性作用后的出射光线.
+							$L_o(\.x, \omega_o, \lambda, t) = L_e(\.x, \omega_o, \lambda, t) + \int_{\Omega} f_r(\.x, \omega_i, \omega_0, \lambda, t) L_i(\.x, \omega_i, \lambda, t)(\omega_i · \.n) \d \omega_i$
+
+					* 雾
+						\Theorem{雾图模型}
+							$I(x)$ 观测到的亮度, $J(x)$ 原始无雾时亮度, $t(x)$ 透射率, $A$大气光亮度.
+							$I(x) = J(x) · t(x) + A · (1 - t(x))$
+							表示当大气密度、成分是均匀同质时, 透射率有,
+							$t(x) = e^{-\beta d(x)}$
+
+							\Notes
+								雾图模型, 即每个原始像素亮度和大气光亮度, 按比例$t : (1-t)$调配(透射率). 大气光的比例越多, 雾感越强. 得到每个像素的透射率和大气光亮度, 即可实现雾化和去雾的功能.
+								* 当大气密度、成分是均匀同质时, 透射率与像素所在的景物深度相关. 景深越深, 大气光占比越大. 
+								* 当像素景深近似无限远时, 可认为该点透射率$t = 0$, 像素亮度全由大气光提供. 可由此得到大气光亮度值$A$.
 
 	* 引力场
 		* 牛顿万有引力

@@ -48,14 +48,13 @@
 		* 快速排序
 			\Property
 				* 时间复杂度: 上限n^2，大概率平均值n log(n)
-				*	[流程]: 
-				*		* 最后元素作为参考元素[Ref]，[border]分割比参考元素大或小的界限，指向大的最初段
-						* [ai] 从第一元素开始，直至 Ref 前一元素位置
-						*	1).若 ai >=Ref, 不处理
-							2).若 ai < Ref, 
-								ai 与 border元素交换位置, border++
-						* 遍历结束后, 交换Ref 与 border
-						* Ref 左右比他大/小的两方元素，分别从头开始. 
+				* 流程: 
+					* 最后元素作为参考元素[Ref]，[border]分割比参考元素大或小的界限，指向大的最初段
+					* 从第一元素开始，直至 Ref 前一元素位置
+						* 若 ai >=Ref, 不处理
+						* 若 ai < Ref, ai 与 border元素交换位置, border++
+					* 遍历结束后, 交换Ref 与 border
+					* Ref 左右比他大/小的两方元素，分别从头开始. 
 			
 		* 堆排序
 
@@ -74,17 +73,17 @@
 			* Dijkstra算法
 
 			* Floyd算法
-				[输入]:	* 图的邻接矩阵Graph
-				[输出]: * 距离矩阵Distance	* 后继节点矩阵Path
+				* 输入:	* 图的邻接矩阵Graph
+				* 输出: * 距离矩阵Distance	* 后继节点矩阵Path
 					* 邻接矩阵Graph, 即.图的权值矩阵
 					* 距离矩阵Distance: i到j最短路径长度
 					* 后继节点矩阵Path: 记录两点间的最短路径, 表示从Vi到Vj需要经过的点
-				\bf{原理}
+				* 原理:
 					* Floyd的本质的动态规划, Dijkstra的本质是贪心
 					* 状态转移方程:
 						Distance[i,j] = min{ Distance[i,k] + Distance[k,j] , Distance[i,j] }
 
-				\bf{流程}
+				* 流程:
 					* 初始化距离矩阵Distance = 权值矩阵Graph
 						初始化后继矩阵Path(i,j) = j
 					* 对于每一对顶点 i 和 j, 看是否存在点 k 使得u->k->v比已知路径更短
@@ -102,11 +101,12 @@
 
 		* 最小生成树
 			* Prim
-				[输入]: 图的邻接链表[Graph], 节点数量[n]
-				[输出]: 最小生成树,每一条有向边的 起点[TreeU],终点[TreeV],总边数[TreeCur]
-				[原理]: 按点贪心, 每次加入已搜索点集u的最短边(u,v)，其中v不属于已搜索点集的点v
+				* 输入: 图的邻接链表[Graph], 节点数量[n]
+				* 输出: 最小生成树,每一条有向边的 起点[TreeU],终点[TreeV],总边数[TreeCur]
 
-				\bf{流程}
+				* 原理: 按点贪心, 每次加入已搜索点集u的最短边(u,v)，其中v不属于已搜索点集的点v
+
+				* 流程:
 					* 初始化[已搜点集 VertexNew]
 					* 将第一个图的节点, 加入VertexNew
 					* 开始迭代, 直至所有节点均已搜索完成, 即VertexNew已满
@@ -114,7 +114,7 @@
 						* 将边(u,v)加入最小生成树， 将v加入VertexNew
 
 			* Kruskal
-				\bf{流程}
+				* 流程:
 					* 初始化未搜索边集EdgeNew = E0图边集
 					* 开始迭代,直至未搜索边集为空集
 						* 在边集合,选择最短边(u,v)
@@ -164,12 +164,12 @@
 				* 目的:
 					空间插值. 满足假设:
 					* 空间属性z是均一的. 对空间任意一点，都有相同期望、方差.
-				* 优化问题:
 					$
 						min \quad&	var = 2\sum w_i \gamma_{i0} - \sum\sum w_i w_j \gamma_{ij} - \gamma_{00}
 						s.t. \quad&	\sum w_i = 1
 							\gamma_{ij} = \sigma^2 - C_{ij} = E[(Z(x_i) - Z(x_j))^2]
 					$
+
 				* 步骤:
 					* 确定半方差函数$\gamma(xi,xj) = E[(Z(x_i) - Z(x_j))^2]$
 						确定半方差函数与两点间距离的函数关系.
@@ -180,25 +180,26 @@
 						$
 					* 计算插值点结果
 						$f(x) = \sum w_i(x) f(x_i)$
+
 				* 原理:
 					* $f(x) = \sum w_i(x) f(x_i)$
 						$\tilde z$: 估计值	z : 实际值
 						求解权重系数: 使其为满足插值点处，估计值与真实值差最小的一组系数.
 					* 对空间任意一点，都有相同期望、方差. 即:
 						$
-							E	(z(x,y)) = μ
+							E	(z(x,y)) = \mu
 							Var	(z(x,y)) = \sigma^2
-							=> z(x,y) = μ + R(x,y)    Var(R(x,y)) = \sigma^2
+							=> z(x,y) = \mu + R(x,y)    Var(R(x,y)) = \sigma^2
 						$
 					* 约束方程 —— 无偏估计条件 $E(\tilde z - z) = 0$
 						$
-							=> E(\tilde z - z) = E(\sum w_i z_i - z) = μ\sum w_i - μ = 0
+							=> E(\tilde z - z) = E(\sum w_i z_i - z) = \mu\sum w_i - \mu = 0
 							=> \sum w_i = 1
 						$
 					* 目标函数 —— 估计误差 $var = Var(\tilde z - z)$
 						$
-							=> var = Var(\sum w_i z_i - z) = \sum\sum w_i w_j Cov(zi,zj) - 2\sum w_i Cov(zi,z) + cov(z,z)
-							=> var = \sum\sum w_i w_j C_{ij} - 2\sum w_i C_i0 + cov_{00} \quad; (C_{ij} = Cov(zi - μ,z - μ))
+							=> var = Var(\sum w_i z_i - z) = \sum\sum w_i w_j Cov(z_i,zj) - 2\sum w_i Cov(z_i,z) + cov(z,z)
+							=> var = \sum\sum w_i w_j C_{ij} - 2\sum w_i C_i0 + cov_{00} \quad; (C_{ij} = Cov(z_i - \mu, z - \mu))
 						$
 					* 定义 半方差函数$\gamma_{ij} = \sigma^2 - C_{ij}$
 						$
