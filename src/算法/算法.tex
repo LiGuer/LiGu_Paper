@@ -47,22 +47,105 @@
 	* 排序
 		* 快速排序
 			\Property
-				* 时间复杂度: 上限n^2，大概率平均值n log(n)
+				* 时间复杂度: 上限n^2, 大概率平均值n log(n)
 				* 流程: 
-					* 最后元素作为参考元素[Ref]，[border]分割比参考元素大或小的界限，指向大的最初段
-					* 从第一元素开始，直至 Ref 前一元素位置
+					* 最后元素作为参考元素[Ref], [border]分割比参考元素大或小的界限, 指向大的最初段
+					* 从第一元素开始, 直至 Ref 前一元素位置
 						* 若 ai >=Ref, 不处理
 						* 若 ai < Ref, ai 与 border元素交换位置, border++
 					* 遍历结束后, 交换Ref 与 border
-					* Ref 左右比他大/小的两方元素，分别从头开始. 
+					* Ref 左右比他大/小的两方元素, 分别从头开始. 
 			
 		* 堆排序
+			\Codes
+				int parent(int i)
+					return i/2
+
+				int left(int i)
+					return 2 * i
+
+				int right(int i)
+					return 2*i+1
+
+				void MaxHeapify(int a[], int i, int n)
+					int l = left(i), r = right(i), largest = i
+
+					if(l <= n)
+						largest = a[l] > a[i] ? l:i
+
+					if(r <= n)
+						largest = a[r] > a[largest] ? r:largest
+
+					if(i!=largest)
+						swap(a[i], a[largest])
+						MaxHeapify(a, largest, n)
+
+				# 建最大堆
+				void BuildMaxHeap(int a[], int n)
+					for i in range(n/2, 0, -1)
+						MaxHeapify(a, i, n)
+
+				# 堆排序 (主)
+				void HeapSort(int a[], int n)
+					BuildMaxHeap(a, n)
+					for i in range(n, 1, -1)
+						swap(a[i], a[1])
+						MaxHeapify(a, 1, --n)
 
 		* 选择排序
 
+		* 插入排序
+			\Codes
+				void Sort(a[])
+					for j in range(2, size(a))
+						int tmp = a[j]
+						for j in range(j-1, -2, -1)
+							if(a[i] < tmp || i == -1)
+								a[i+1] = tmp
+								break
+							a[i+1] = a[i]
+
 		* 冒泡排序
+			\Codes
+				void bubblesort(a[])
+					for i in range(0, size(a))
+						for i in range(size(a) - 1, i, -1)
+							if(a[j] < a[j-1])
+								swap(a[j], a[j-1])
 
 		* 归并排序
+			\Codes
+				void Merge(a[], int p, int q, int r)
+					int n1 = q-p+1, n2 = r-q
+					int L[n1+1], R[n2+1]
+				
+					for i in range(0, n1)
+						L[i] = a[i+p]
+				
+					for i in range(0, n2)
+						R[i] = a[i+q+1]
+						
+					L[n1+1] = INF, R[n2+1] = INF
+					int i = 0, j = 0
+				
+					for k in range(p, r+1)
+						if(L[i] > R[j])
+							a[k] = R[j]
+							j++
+						else if(L[i] < R[j])
+							a[k] = L[i]
+							i++
+				
+				# 归并排序(主)
+				void MergeSort(a[], int p, int r)
+					if(p<r)
+						int q = (p+r)/2
+						MergeSort(a, p, q)
+						MergeSort(a, q+1, r)
+						Merge(a, p, q, r)
+					
+				int main()
+					merge_sort(a, 0, size(a)-1)
 
 		* 希尔排序
 
@@ -104,14 +187,14 @@
 				* 输入: 图的邻接链表[Graph], 节点数量[n]
 				* 输出: 最小生成树,每一条有向边的 起点[TreeU],终点[TreeV],总边数[TreeCur]
 
-				* 原理: 按点贪心, 每次加入已搜索点集u的最短边(u,v)，其中v不属于已搜索点集的点v
+				* 原理: 按点贪心, 每次加入已搜索点集u的最短边(u,v), 其中v不属于已搜索点集的点v
 
 				* 流程:
 					* 初始化[已搜点集 VertexNew]
 					* 将第一个图的节点, 加入VertexNew
 					* 开始迭代, 直至所有节点均已搜索完成, 即VertexNew已满
 						* 在已搜点集, 寻找最短边(u,v), 其中u∈VertexNew, v ∉ VertexNew
-						* 将边(u,v)加入最小生成树， 将v加入VertexNew
+						* 将边(u,v)加入最小生成树,  将v加入VertexNew
 
 			* Kruskal
 				* 流程:
@@ -127,19 +210,19 @@
 					* Prim 时间复杂度 $O(E·logV)$
 					* Kruskal 时间复杂度 $O(E·logV)$
 				* 对比Prim \& Kruskal
-					Kruskal	是按边贪心，适合稀疏图. 
-					Prim 是按点贪心，适合稠密图. 
+					Kruskal	是按边贪心, 适合稀疏图. 
+					Prim 是按点贪心, 适合稠密图. 
 
 		* 网络最大流
 			* Dinic
 				[原理]: 贪心 + "反悔"机制
 				增广路: 就是源->汇的一条路径. 
-					利用深搜DFS，找增广路. 
-					利用广搜BFS，确定此时各顶点的层次. 
-					利用添加反向边，协助"反悔". 
+					利用深搜DFS, 找增广路. 
+					利用广搜BFS, 确定此时各顶点的层次. 
+					利用添加反向边, 协助"反悔". 
 					广搜BFS是Dinic对于EK的优化. 
-					广搜BFS，用队列queue. 
-					深搜BFS，用递归or栈stack. 
+					广搜BFS, 用队列queue. 
+					深搜BFS, 用递归or栈stack. 
 
 		* 商旅问题
 			\def{商旅问题} 遍历所有给定点的最短闭合路径.
@@ -163,7 +246,7 @@
 			* \Algorithm{普通Kriging插值}
 				* 目的:
 					空间插值. 满足假设:
-					* 空间属性z是均一的. 对空间任意一点，都有相同期望、方差.
+					* 空间属性z是均一的. 对空间任意一点, 都有相同期望、方差.
 					$
 						min \quad&	var = 2\sum w_i \gamma_{i0} - \sum\sum w_i w_j \gamma_{ij} - \gamma_{00}
 						s.t. \quad&	\sum w_i = 1
@@ -184,8 +267,8 @@
 				* 原理:
 					* $f(x) = \sum w_i(x) f(x_i)$
 						$\tilde z$: 估计值	z : 实际值
-						求解权重系数: 使其为满足插值点处，估计值与真实值差最小的一组系数.
-					* 对空间任意一点，都有相同期望、方差. 即:
+						求解权重系数: 使其为满足插值点处, 估计值与真实值差最小的一组系数.
+					* 对空间任意一点, 都有相同期望、方差. 即:
 						$
 							E	(z(x,y)) = \mu
 							Var	(z(x,y)) = \sigma^2
@@ -216,8 +299,8 @@
 						即. 得到权值计算方程.
 					* 半方差函数$\gamma_{ij} = \sigma^2 - C_{ij} = E[(Z(x_i) - Z(x_j))^2]$
 						∵地理学第一定律: 空间上相近的属性相近.
-						∴$\gamma_{ij}$与两点间距离，存在函数关系
-						将所有d和$\gamma$绘成散点图，寻找最优曲线拟合d与$\gamma$，得到函数关系式.
+						∴$\gamma_{ij}$与两点间距离, 存在函数关系
+						将所有d和$\gamma$绘成散点图, 寻找最优曲线拟合d与$\gamma$, 得到函数关系式.
 
 				\Codes
 					def variogram(x1, y1, x2, y2):

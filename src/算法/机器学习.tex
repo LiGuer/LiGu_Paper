@@ -1,0 +1,328 @@
+* 机器学习
+	* 主成分分析
+			[目标]:
+				数据降维, 提取数据的主要特征分量, 满足:
+					
+					* 最近重构性: 样本点到该超平面的距离都足够近. 
+					* 最大可分性: 样本点在该超平面的投影尽可能分开. 
+					
+				
+			[优化问题]:
+				$
+					\min_W  &\quad	tr( W^T x x^T W )
+					s.t.	&\quad	W^T W = I
+				$
+				
+			[流程]:
+				* 数据中心化, $\sum \vec x_i = 0$
+				* 计算协方差矩阵 C = X X^T
+				* 对协方差矩阵C 特征值分解
+				* 取最大d'个特征值所对应的特征向量{w1,w2,...,wd'},投影矩阵 W = (w1,w2,...,wd')
+				* 样本点在超平面投影: y_i = W^T x_i
+				
+			[原理]:
+					分别从目标(1, 2)可以推得同样的结果
+				*	目标函数: 样本点到超空间投影 y = WT x 尽可能分开, 即.方差最大:$\max \sum W^T x x^T W$
+					协方差矩阵:
+						$D = 1/m Y Y^T = 1/m (PX) (PX)^T = 1/m P X X^T P^T = 1/m P C P^T$
+					协方差矩阵对角化
+				* 优化问题构造:
+				$
+					min_W		tr( W^T x x^T W )
+					s.t.		W^T W = I
+				$
+				* 计算最优点:
+					Lagrange函数 $L(W,λ) = W^T x x^T W + λ( W^T W - I )$
+					Lagrange对偶 $G(λ) = inf L(W,λ) = inf (W^T x x^T W + λ( W^T W - I ))$
+					L(W,λ)求导, 当导数为0时, 取得极值
+					=>	$X X^T ω_i = λ_i ω_i$
+					即.对协方差X XT, 特征值求解
+				*	取特征值最大的yDim个特征向量, 即目标投影矩阵W
+
+
+	* K-Means 聚类
+			[目标]:
+				聚类. 对N维分布的数据点, 可以将其聚类在 K 个关键簇内.
+				
+			[步骤]:
+				* 随机选择 K 个簇心点 Center
+				* 迭代开始
+					* 归零 Cluster , Cluster: 簇,记录ith簇内的数据指针. 
+					* 计算每个xi到簇心μj的距离
+						* 选择距离最小的簇心, 将该点加入其簇内
+					* 对每个簇,计算其质心 Center'
+					* Center≠Center' , 则更正Center为 Center'
+					* 迭代重新开始
+				* 一轮无更正时, 迭代结束
+
+	* 最小二乘法
+			[目标]:
+				求一条直线, 使得所有样本点到该直线的Euclid距离最小.
+				
+			[优化问题]: 最小化均方误差
+				$
+					\min_w  &\quad MSE(\tilde{\. y}) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2
+				$
+				
+			[原理]:
+				* 直线方程: $f(x) = \. w^T \. x	\quad (\. x = [1, \. x_0])$
+				* 均方误差:
+						$MSE(\tilde y) · n = \sum (\tilde {\. y} -\. y)^2 = \sum (\. w^T \. x - \. y)^2 = (X w - y)^T (X w - y)$
+						
+				* 优化问题构造: 无约束凸优化问题
+						$\min_W	\sum (\. w^T \. x - y)^2 = (X w - y)^T (X w - y)$
+						
+				* 计算最优点: 求导, 导数为0时取得极值
+					$
+						\frac{∂ MSE}{∂ w} &= 2·X^T·(\. w^T \. x - y) = 0
+					=>	w^* &= (X^T X)^-1 X^T y
+						f(x) &= x^T (X^T X)^-1 X^T y
+					$
+					
+				* 一维场景:
+					优化问题:
+					$
+						min_{w,b}	\sum (\. w^T \. x_i + b - y_i)^2
+						=>	\frac{∂ E}{∂ w} = 2( w^T \sumx_i^2 + \sum(x_i(b - y_i)) )	= 0
+						\frac{∂ E}{∂ b} = 2( n b + \sum(y_i - w x_i) ) = 0
+					$
+					
+					最优点:
+					$
+						=> w \sum x_i^2 &= \sum_i x_i y_i - \frac{1}{n} (\sum_i x_i ) (\sum_i y_i) + \frac{w}{n} (\sum_i x_i)^2
+						w^* &= \frac{\sum y_i(x_i - \bar x)}{\sum x_i^2 - \frac{1}{n} (\sum x_i)^2}
+						b^* &= \frac{1}{n}·\sum(y_i - w x_i)
+					$
+
+	* 概率图模型
+		在机器学习领域, 概率图模型(Graphical Model)是一种将问题抽象成数学模型的高效建模方法, 具有很强的表达能力. 借助于概率图模型, 很多机器学习的方法都可以用概率图模型来表示.  概率图模型是综合了图论和概率论的知识. 根据图的不同, 概率图模型可以分为三类:
+
+		* 有向图, 也称Bayesian网
+		* 无向图, 也称Markov随机场
+		* 因子图
+
+	* Markov随机场
+		\def{Markov随机场}
+			这是一种著名的无向图模型, 图中每个结点表示一个或一组变量, 结点之间的边表示两个变量之间的依赖关系.马尔可夫随机场有一组势函数(potential functions),亦称“因子”(factor), 这是定义在变量子集上的非负实函数,主要用于定义概率分布函数.
+		
+		\def{极大团}
+			给定一张图$G=(V,E)$, 和顶点集合的一个非空子集合$C \subset V$, 如果C中任何两个顶点之间均有边链接, 则称C为团(clique); 更进一步, 若加入任何一个顶点$V \in G/C$中的顶点, 都使得C∪v不再是团,则称C为极大团(maximal clique). 
+
+
+	* 混合⾼斯分布
+		\def{混合⾼斯分布}
+			$
+				\P(x) = \sum_{k=0}^K N(x | \mu_k, \Sigma_k)
+			$
+
+	* 期望最大化算法
+		\def{隐变量}
+			未观测的变量, 
+
+		\def{期望最大化算法}
+			EM算法的⽬标是找到具有潜在变量的模型的最⼤似然解. 基本思想是, 
+			* E步骤: 若参数$\Theta$已知, 则可根据训练数据推断最优隐变量Z的值. 以当前参数$\Theta_t$ 推断隐变量分布$\P (Z | X, \Theta_t)$, 并计算对数似然函数关于Z的期望,
+			$
+				Q(\Theta | \Theta_t) = \E_{Z|X,\Thetat_t}[ln\ L(\Theta | X, Z)]
+			$
+			* M步骤: 若Z的值已知, 则可以方便地对参数$\Theta$做极大似然估计. 
+			$
+				\Theta_{t+1} = \arg\max_\Theta Q(\Theta | \Theta_t)
+			$
+			于是以初始值$\Theta_0$作为起点, 迭代执行上述步骤直至收敛.
+
+			EM算法可以看作是一种非梯度优化方法, 避免了梯度下降方法由于求和的项数随着隐变量数目而指数上升的问题.
+
+* 数据挖掘
+	* 关联分析
+		* Apriori
+			[输入/输出]:
+				输入: (1) 初始频繁项集	(2) 最小支持度
+				输出: (1) 关联项集		(2) 关联项集支持度
+			[目的]: 根据频繁项集, 寻找数据集中变量之间的关联规则.
+			[概念]:
+				* 频繁项集: 经常出现在一块的物品的集合.
+				* 关联规则: 两种物品之间可能存在很强的关系.
+				* 支持度P(AB): 数据集中包含该项集的记录所占的比例. P(AB) ≌ num(AB) / num(all)
+				* 置信度P(A→B) = P(B|A) = P(AB) / P(A)
+			[定理]:
+				* 项集频繁, 则其子集频繁. <=> 项集不频繁, 则其超集不频繁.
+				* 若规则X→Y−X低于置信度阈值, 则对于X子集X',规则X'→Y−X'也低于置信度阈值
+				* 频繁项集生成的方法:
+					(1) Fk = Fk-1 × F1
+					(2) Fk = Fk-1 × Fk-1
+				* 频繁项集每一项各不相同,  每一项内部排列有序.
+			[过程]:
+				(1) 频繁项集生成,对于K项的集合
+					(2) 频繁项集子集生成. 生成K项所有可以组合的集合. eg.(frozenset({2, 3}), frozenset({3, 5})) -> (frozenset({2, 3, 5}))
+					(3) 保存满足目标支持度P(AB)的集合.
+				(4)  关联规则生成, 对不同长度(K)的频繁项集依次分析
+					(4.1) 频繁项集只有两个元素{AB}, 直接计算置信度P(A→B),P(B→A)
+					(4.2) 频繁项集超过两个元素{ABC...}, 依次计算置信度P(AC...→B)
+					(5) 保存满足目标置信度的关联规则.
+
+
+					
+* 计算机视觉
+	* 目标检测
+		* 滑动窗口方法
+			其中分类器在整个图像[10]上均匀间隔的位置运行. 
+
+		* R-CNN
+			区域建议方法, 首先在图像中生成潜在的边界框, 然后在这些提议的框上运行一个分类器. 分类后, 通过后处理对边界框进行细化, 消除重复检测, 并根据场景[13]中的其他对象对边界框进行重核. 
+
+		* YOLO
+			* 改进
+				* YOLO将物体检测作为回归问题
+				* end-to-end网络
+				* 训练和检测均是在一个单独网络中进行
+				* 为提高物体定位精准性和召回率, YOLO作者提出了YOLO9000, 提高训练图像的分辨率, 引入了faster rcnn中anchor box的思想, 对各网络结构及各层的设计进行了改进, 输出层使用卷积层替代YOLO的全连接层, 联合使用coco物体检测标注数据和imagenet物体分类标注数据训练物体检测模型. 相比YOLO, YOLO9000在识别种类、精度、速度、和定位准确性等方面都有大大提升. (yolo9000详解有空给出)
+
+			* 优缺点
+				* 优点
+					* 快. YOLO将物体检测作为回归问题进行求解, 整个检测网络pipeline简单. 在titan x GPU上, 在保证检测准确率的前提下(63.4\% mAP, VOC 2007 test set), 可以达到45fps的检测速度. 
+					* 背景误检率低. YOLO在训练和推理过程中能‘看到’整张图像的整体信息, 而基于region proposal的物体检测方法(如rcnn/fast rcnn), 在检测过程中, 只‘看到’候选框内的局部图像信息. 因此, 若当图像背景(非物体)中的部分数据被包含在候选框中送入检测网络进行检测时, 容易被误检测成物体. 测试证明, YOLO对于背景图像的误检率低于fast rcnn误检率的一半. 
+					* 通用性强. YOLO对于艺术类作品中的物体检测同样适用. 它对非自然图像物体的检测率远远高于DPM和RCNN系列检测方法. 
+
+				* 缺点
+					识别物体位置精准性差. 召回率低. 
+
+			* 网络结构
+				24个卷积层和2个全连接层, 卷积层用来提取图像特征, 全连接层用来预测图像位置和类别概率值. 
+
+				# [from, number, module, args]
+				[[-1, 1, Conv, [32, 3, 1]],  # 0
+				 [-1, 1, Conv, [64, 3, 2]],  # 1-P1/2
+				 [-1, 1, Bottleneck, [64]],
+				 [-1, 1, Conv, [128, 3, 2]],  # 3-P2/4
+				 [-1, 2, Bottleneck, [128]],
+				 [-1, 1, Conv, [256, 3, 2]],  # 5-P3/8
+				 [-1, 8, Bottleneck, [256]],
+				 [-1, 1, Conv, [512, 3, 2]],  # 7-P4/16
+				 [-1, 8, Bottleneck, [512]],
+				 [-1, 1, Conv, [1024, 3, 2]],  # 9-P5/32
+				 [-1, 4, Bottleneck, [1024]],  # 10
+				]
+
+				head:
+				[[-1, 1, Bottleneck, [1024, False]],
+				 [-1, 1, Conv, [512, [1, 1]]],
+				 [-1, 1, Conv, [1024, 3, 1]],
+				 [-1, 1, Conv, [512, 1, 1]],
+				 [-1, 1, Conv, [1024, 3, 1]],  # 15 (P5/32-large)
+			  
+				 [-2, 1, Conv, [256, 1, 1]],
+				 [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+				 [[-1, 8], 1, Concat, [1]],  # cat backbone P4
+				 [-1, 1, Bottleneck, [512, False]],
+				 [-1, 1, Bottleneck, [512, False]],
+				 [-1, 1, Conv, [256, 1, 1]],
+				 [-1, 1, Conv, [512, 3, 1]],  # 22 (P4/16-medium)
+			  
+				 [-2, 1, Conv, [128, 1, 1]],
+				 [-1, 1, nn.Upsample, [None, 2, 'nearest']],
+				 [[-1, 6], 1, Concat, [1]],  # cat backbone P3
+				 [-1, 1, Bottleneck, [256, False]],
+				 [-1, 2, Bottleneck, [256, False]],  # 27 (P3/8-small)
+			  
+				 [[27, 22, 15], 1, Detect, [nc, anchors]],   # Detect(P3, P4, P5)
+				]
+			  
+
+				* 输出层
+					输入图像分成SxS个格子, 每个格子负责检测‘落入’该格子的物体. 每个格子输出B个bounding box(包含物体的矩形区域)信息, 以及C个物体属于某种类别的概率信息. Bounding box信息包含5个数据值, 分别是x,y,w,h,和confidence. 其中x,y是指当前格子预测得到的物体的bounding box的中心位置的坐标. w,h是bounding box的宽度和高度. confidence反映当前bounding box是否包含物体以及物体位置的准确性. YOLO网络最终的全连接层的输出维度是 S*S*(B*5 + C)
+
+					作者训练采用的输入图像分辨率是448x448, S=7, B=2; 采用VOC 20类标注物体作为训练数据, C=20. 因此输出向量为7*7*(20 + 2*5)=1470维. 
+
+					虽然每个格子可以预测B个bounding box, 但是最终只选择只选择IOU最高的bounding box作为物体检测输出, 即每个格子最多只预测出一个物体. 当物体占画面比例较小, 如图像中包含畜群或鸟群时, 每个格子包含多个物体, 但却只能检测出其中一个. 这是YOLO方法的一个缺陷. 
+
+				* 损失函数
+					均方和误差作为loss函数来优化模型参数. 位置相关误差(坐标、IOU)与分类误差对网络loss的贡献值是不同的, 因此YOLO在计算loss时, .
+
+					在计算IOU误差时, 包含物体的格子与不包含物体的格子, 二者的IOU误差对网络loss的贡献值是不同的. 若采用相同的权值, 那么不包含物体的格子的confidence值近似为0, 变相放大了包含物体的格子的confidence误差在计算网络参数梯度时的影响. 为解决这个问题, YOLO 使用
+
+					对于相等的误差值, 大物体误差对检测的影响应小于小物体误差对检测的影响. 这是因为, 相同的位置偏差占大物体的比例远小于同等偏差占小物体的比例. YOLO将物体大小的信息项(w和h)进行求平方根来改进这个问题. 
+
+					YOLO方法模型训练依赖于物体识别标注数据, 因此, 对于非常规的物体形状或比例, YOLO的检测效果并不理想. YOLO采用了多个下采样层, 网络学到的物体特征并不精细, 因此也会影响检测效果. 
+
+			* 训练
+				* 预训练
+					使用ImageNet 1000类数据训练YOLO网络的前20个卷积层+1个average池化层+1个全连接层. 训练图像分辨率resize到224x224. 
+				* YOLO模型训练
+					得到的前20个卷积层网络参数来初始化YOLO模型前20个卷积层的网络参数, 然后用VOC 20类标注数据进行YOLO模型训练. 为提高图像精度, 在训练检测模型时, 将输入图像分辨率resize到448x448. 
+
+			* 实验验证
+				论文中, 作者还给出了YOLO与Fast RCNN在各方面的识别误差比例, 如下图. YOLO对背景内容的误判率(4.75\%)比fast rcnn的误判率(13.6\%)低很多. 但是YOLO的定位准确率较差, 占总误差比例的19.0\%, 而fast rcnn仅为8.6\%. 
+
+	* 去雾
+		\bf{论文}: Single Image Haze Removal Using Dark Channel Prior
+
+		* 雾图模型
+
+		\Theorem{先验的暗通道存在性(经验定理)}
+			统计观察发现, 无雾图像的非天空局部区域的像素中, 至少存在一个颜色通道的亮度值接近于0.
+			$J_{dark}(x) = \min_{y\in \Omega(x)} (\min_{c\in \{R,G,B\}} J_c(y)) \to 0$
+
+			暗通道存在的原因:
+				* 汽车、建筑物和城市中玻璃窗户的阴影, 或者是树叶、树与岩石等自然景观的投影.
+				* 色彩鲜艳的物体或表面, 在RGB的三个通道中有些通道的值很低(如, 绿色的草地/树/植物, 红色或黄色的花朵/叶子, 或者蓝色的水面).
+				* 颜色较暗的物体或者表面, 例如灰暗色的树干和石头. 
+
+		* 步骤
+			* 估计大气光亮度 $A$
+				当天气是阴天的时候, 太阳光通常都是被忽略的, 在这种情况下大气光是景观中唯一的可照亮来源. 如果有一个图像中, 存在一个很远很远的无限远的距离的像素存在, (这个时候, 此像素的透射率几乎为0). 这个图像中最亮最亮的值所在的像素可以被看做是雾遮盖的程度最大也是其值可以看做是几乎等同于A.
+			* 估计透射率 $t$
+				$t = 1 - \min_{y\in \Omega(x)} ( \min_{c\in \{R,G,B\}} \frac{I_c(y)}{A_c} )$
+			* 透射率柔化 $t$, 导向滤波
+			
+			* 恢复去雾图像 $J$
+				$J(x) = \frac{I(x) - A}{t(x)} + A$
+
+		\Code
+			# 图像去雾
+			Mat HazeRemoval(Mat img, int kernelSize)
+				Mat A = AtmLight(img, DarkChannel(img, kernelSize)) # 估计大气光亮度
+				Mat t = 1 - DarkChannel(img / A, kernelSize)	# 估计透射率 
+				t = Guidedfilter(Gray(img), t, filterSize)		# 透射率柔化, 导向滤波
+				Mat ans = (img - A) / t + A						# 图像去雾
+				return ans
+
+			# 计算区域最暗通道值 \min_{y\in \Omega(x)} ( \min_{c\in \{R,G,B\}} I_c(y)
+			Mat DarkChannel(Mat img, int kernelSize)
+				Mat darkChannel = min(img.r, img.g, img.b)		# 取RGB最暗值
+				Mat kernel  = ones(kernelSize, kernelSize))		# 局部核(全1矩阵)
+				Mat darkImg = erode(darkChannel, kernel)		# 求局部最小值
+				return darkImg
+
+			# 估计大气光亮度
+			Mat AtmLight(Mat img, Mat darkImg)			
+				num   = int(max(math.floor(imgSize * imgSize / 1000), 1))
+				index = sort(darkImg)
+				index = index[imgSize * imgSize - num::]
+			
+				Mat A(1, 3)
+				for i in range(1, num)
+					A = A + img[index[i]]
+			
+				return A = A / num
+
+			# 导向滤波
+			Mat Guidedfilter(Mat img, Mat p, int filterSize)
+				Mat meanI  = boxFilter(img, (filterSize, filterSize))
+				Mat meanP  = boxFilter(p,   (filterSize, filterSize))
+				Mat meanIP = boxFilter(img * p,   (filterSize, filterSize))
+				Mat meanII = boxFilter(img * img, (filterSize, filterSize))
+				Mat covIP  = meanIP - meanI * meanP
+				Mat varI   = meanII - meanI * meanI
+
+				Mat a = covIP / (varI + eps)
+				Mat b = meanp - a * meanI
+				Mat meanA 	= boxFilter(a, (filterSize, filterSize))
+				Mat meanB 	= boxFilter(b, (filterSize, filterSize))
+			
+				return Mat t = meanA * img + meanB
+
+		* 其他算法
+			* 最大对比度    Visibility in bad weather from a single image
+			* 颜色衰减先验    A fast single image haze removal algorithm using color attenuation prior
+			* 色度不一致    A fast semiinverse approach to detect and remove the haze from a single image

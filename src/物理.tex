@@ -589,6 +589,20 @@
 
 										return CosO < 0 ? reflect(RayI, N, RayO) :				//全反射
 											RayO = RayI + normalize((-CosI - (CosI > 0 ? -1 : 1) * sqrt(CosO) / n) * N)
+
+							\Example
+								* 凸透镜
+									\def{凸透镜} 
+										边缘薄、中间厚的透镜. 主要对光起会聚的作用.
+
+									\Property
+										* 物距 $u > 2 F$, 像距$v \in (F, 2F)$, 倒立缩小的实像, 物像异侧.
+										* 物距 $u = 2 F$, 像距$v = 2 F$, 倒立等大的实像, 物像异侧.
+										* 物距 $u \in (F, 2F)$, 像距$v > 2 F$, 倒立放大的实像, 物像异侧.
+										* 物距 $u = F$, 不成像.
+										* 物距 $u < f$, 像距$v > F$, 正立放大的虚像, 物像同侧.
+
+								* 凹透镜
 							
 						* 漫反射
 							在面矢半球内，面积均匀的随机取一射线，作为反射光线.
@@ -621,7 +635,7 @@
 								* 当大气密度、成分是均匀同质时, 透射率与像素所在的景物深度相关. 景深越深, 大气光占比越大. 
 								* 当像素景深近似无限远时, 可认为该点透射率$t = 0$, 像素亮度全由大气光提供. 可由此得到大气光亮度值$A$.
 
-					* \Algorithm{光线追踪}
+					\Algorithm{光线追踪}
 						* 步骤:
 							* 计算屏幕矢量、屏幕X,Y向轴
 							* 对屏幕每个像素遍历
@@ -670,22 +684,22 @@
 								//搜索光线-对象的最近交点距离
 								Object* obj
 								double dis = objTree.seekIntersection(RaySt, Ray, obj) 
-							
-								Material* material = obj->material
-							
+
 								//无交点
-								if (dis == DBL_MAX || material == NULL) 
+								if (dis == DBL_MAX) 
 									zero(color)
 							
 								//光源
-								else if (material->rediate)
-									color = {1, 1, 1}
+								else if (obj->material->rediate)
+									color = obj->material->color
 							
 								//最大追踪层数
 								else if (level > maxRayLevel) 
 									return color
 							
 								else 
+									Material* material = obj->material
+
 									//计算面矢、交点
 									Mat faceVec ###
 									RaySt += (dis * Ray)
@@ -708,7 +722,7 @@
 										traceRay(RaySt += (eps * Ray)), Ray, color, level + 1)
 										color *= material->refractLossRate
 							
-								color = elementMul(color, material->color)
+									color = elementMul(color, material->color)
 									
 								// 雾
 								if(haze) 

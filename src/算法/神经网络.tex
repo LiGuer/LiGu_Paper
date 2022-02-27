@@ -1,0 +1,148 @@
+* 神经网络
+
+	\Theorem{普遍近似定理}
+		一个前馈神经网络, 如果具有线性输出层, 同时至少存在一层具有任何一种挤压性质的激活函数的隐藏层, 那么只要给予这个网络足够数量的隐藏单元, 它就可以以任意的精度来近似任何从一个有限维空间到另一个有限维空间的Borel可测函数.
+
+	\Theorem
+		设普通的带激活函数的全连接网络 $f_N: R^d \to R, P = \{x \in R^d | f_N(x)>0\}$ 为$f_N$的正等值面,若 N 的每层激活函数都至多只有 d 个神经元, 那么Lebesgue测度$\lambda(P)=0\ or\  \lambda(P)= +\infty$
+
+		因此, 即使层数无限加深, 整个网络的表现力也受网络的宽度限制而无法近似一个带边界的区域. 而对于残差网络来讲, 拟合函数的能力则完全不受网路宽度的影响, 上述命题对于残差网络并不适用. 
+
+	* 全连接层
+		* 正向传播
+			$\sigma()$: 激活函数, 使线性拟合非线性化, eg. relu(x), Sigmoid(x)
+			$\. y = \sigma (\. w \. x + \. b)$
+
+			误差·损失函数: $E_{total} = \sum (target_i - out_i)^2$
+			$E(\.{w})=\frac{1}{2} \sum_{n=1}^{N}\|\.{y}(\. x_{n}, \.{w})-\.{t}_{n}\|^2$
+
+		* 反向传播 --- 梯度下降最优化
+			$\.w^{\tau+1}=\.w^{\tau}-\eta \nabla E(\.{w}^{(\tau)})$
+			
+			设$z = \. w^T \. x + \. b$
+			$ \{\mb
+				\delta_l = (\. w_{l+1}^T·\delta_{l+1})·\sigma'(z_l) & \text{(每层误差)}
+				\delta_L = \nabla E · \sigma'(z_{outl}) & \text{(输出层误差)}
+				\nabla E(\. w_l) = \delta_l \. x_l^T & \text{(每层参数误差)}
+			\me\right.$
+
+			\bf{证明}:
+				
+				每层参数误差, 由链式法则得(其中$L$指输出层): 
+				$
+					\frac{∂ E}{∂ w_l} &= \frac{∂ z_l}{∂ w_l} (\frac{∂ y_l}{∂ z_l}\frac{∂ z_l}{∂ y_{l+1}}) ... (\frac{∂ y_{L-1}}{∂ z_{L-1}} \frac{∂ z_{L-1}}{∂ y_L} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+					&= \frac{∂ z_l}{∂ w_l}  (\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+				$
+					
+				其中:
+				$
+					\frac{∂ y_l}{∂ z_l} &= \sigma'(z_l)
+					\frac{∂ z_l}{∂ y_{l+1}} &= \. w_{l+1}^T
+				$
+					
+				令$\delta_l$为每层误差:
+				$
+					\delta_l &=(\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+					&= (\prod_{i = l}^{L} \sigma'(z_i)\. w_{i+1}^T) \sigma '(z_L)\frac{∂ E}{∂ y_L}
+				$
+					
+				得到每层参数误差结果:
+				$
+					=> \frac{∂ E}{∂ w_l} &= \delta_l \frac{∂ z_l}{∂ w_l} = \delta_l x_l^T
+					\delta_L &= \frac{∂ E}{∂ y_L} ·\sigma '(z_L)
+				$
+					
+			\bf{附}:
+			
+				激活函数的导函数:
+					$
+						relu(x) &= \max(0, x)
+						relu'(x) &= x > 0 ? 1 : 0 = step(x) \quad \text{阶跃函数}
+						sigmoid(x) &= \frac{1}{1+e^{-x}}
+						sigmoid'(x) &= sigmoid(x) · (1 - sigmoid(x))
+					$
+
+		* 前馈神经网络
+
+	* 卷积层
+		\def{卷积层}
+			输入/输出: kernel: 卷积核		padding: 加边框宽度		in/outChannelNum: 输入/输出通道数
+			参数
+			$
+				Height_{out} = \frac{Height_{in} - Height_{kernel} + 2 · padding}{stride + 1}
+				Width_{out} = \frac{Width_{in} -  Width_{kernel} + 2 · padding}{stride + 1}
+			$
+		* 正向传播
+			卷积操作
+			$
+				x * k = [y_{ij} | y_{ij} = \sum_{c=1}^{Channel_x} \sum_{p=1}^{Height_x} \sum_{q=1}^{Width_x} x_{c,i+p-1,j+q-1} \times k_{cpq}]
+				y_c = x * k_c + b_c
+				y = {y_1, y_2, ... , y_n}
+			$
+		* 反向传播
+			卷积操作
+			$
+				\frac{∂E}{∂y_l} &= \frac{∂E}{∂y_L}·\frac{∂y_L}{∂y{L-1}}· ... ·\frac{∂y_{l+1}}{∂y_l}
+					&= \delta_l = \delta_{l+1}·\frac{∂y_{l+1}}{∂x_{l+1}} = \delta_{l-1} * Rot_{π}(w_l)
+				\frac{∂E}{∂k_l} &= \frac{∂E}{∂y_l} · \frac{∂y_l}{∂k_l} = \delta_l·\frac{∂y_l}{∂k_l} = \delta_l * x_l
+				\frac{∂E}{∂b_l} &= \delta_l · \frac{∂y_l}{∂b_l} = \sum_x \sum_y \delta_l
+			$
+			其中:
+			$
+				\frac{∂y_{lcij}}{∂k_{lcpq}} = x_{l,c,i+p-1,j+q-1}
+				\frac{∂y_{lc}}{∂k_{lcpq}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} x_{l,c,i+p-1,j+q-1}
+				\frac{∂E}{∂k_{lcpq}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} \delta_{lcij} \times x_{l,c,i+p-1,j+q-1}  = \delta_{lc} * x_{lc}
+				\frac{∂E}{∂b_{lc}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} \delta_{lcij} = \sum_x \sum_y \delta_l
+			$
+
+	* 下采样层
+		* 平均采样层
+
+		* 最大采样层
+
+	* 瓶颈层 Bottleneck 
+		\def{瓶颈层 Bottleneck}
+			使用的是1*1的卷积神经网络. 之所以称之为瓶颈层, 是因为长得比较像一个瓶颈. 一大好处就是可以大幅减少计算量. 深度可分离卷积中, 也有这样的设计考虑. 
+
+	* Inception模块
+
+	* 残差模块
+		\def{残差模块}
+			* 前向传递
+				$y = x + F(x, \omega)$
+				$
+					x_{l+1} &= x_l + F(x_l, \omega_l)
+					x_{l+2} &= x_{l+1} + F(x_{l+1}, \omega_{l+1}) = x_l + F(x_l, \omega_l) + F(x_{l+1}, \omega_{l+1})
+					x_L &= x_l + \sum_{i=l}^{L-1} F(x_{i+1}, \omega_{i+1})
+				$
+
+			* 反向传递
+				$
+					\frac{∂ \epsilon}{∂ x_l} = \frac{\epsilon}{x_L} \frac{∂ x_L}{x_l} = ∂\frac{∂ \epsilon}{∂ x_L} (1 + \frac{∂}{∂ x_l} \sum_{i=l}^{L-1} F(x_i, w_i))
+				$
+
+		* 由来
+			深度神经网络训练中, 深度增加导致性能反而变差的问题.
+
+		* 优势
+			换句话说, 这样狭窄的全连接网络表示的函数要么没有边界约束, 要么恒为0. 因此, 即使层数无限加深, 整个网络的表现力也受网络的宽度限制而无法近似一个带边界的区域. 而对于残差网络来讲, 拟合函数的能力则完全不受网路宽度的影响, 上述命题1对于残差网络并不适用. 
+
+			经过训练后, 分析网络不同深度下得到的训练边界, 如图3.5可以发现宽度比输入维度小的残差网络的训练边界明显更加接近真实边界, 也不受命题1的限制. 事实上对于高维函数, 这一特点依然适用. 因此, 当函数的输入维度非常高时, 这一做法就变的非常有意义. 尽管在高维空间这一特点很难被可视化, 但是这个理论给了一个很合理的启发, 就是原则上, 带短连接的网络的拟合高维函数的能力比普通连接的网络更强. 这部分我们讨论了残差网络有能力拟合更高维的函数, 但是在实际的训练过程中仍然可能存在各种各样的问题使得学习到最优的参数非常困难, 因此下一小节讨论残差在训练过程中的优越性. 
+
+		\Code
+			class ResBlock
+				def __init__(input_dim, n_filters, kernel_size, padding, stride)
+					conv1	= Conv(input_dim, n_filters, kernel_size, padding, stride)
+					bn1		= BatchNorm(n_filters)
+					conv2	= Conv(n_filters, n_filters, kernel_size, padding, stride)
+					bn2 	= BatchNorm(n_filters)
+			
+				def forward(x)
+					y1 = bn1(conv1(x))
+					y1 = ReLU(y1)
+					y1 = bn2(conv2(y1))
+			
+					y = y1 + x
+					return y = relu(y)
+
+				def backward(x)
