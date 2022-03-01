@@ -1,0 +1,61 @@
+* 流体力学
+	* 理想流体
+			\def
+				不可压缩、不计粘性的流体.
+			\Property 
+				给定5个量:速度$(v_x,v_y,v_z)$,压强$p$,密度$\rho$,可完全确定运动流体的状态.
+		\Theorem{质量守恒}
+			区域体流出质量 = 区域封闭面流出质量.
+			$ 
+				& \oint \rho \.v · d \.f = -\frac{∂}{∂ t}\int \rho dV \quad
+				=>\quad & \int ∇ · (\rho \.v) dV  = -\frac{∂}{∂ t}\int \rho dV
+				=>\quad & \int (∇ · (\rho \.v) + \frac{∂ \rho}{∂ t}) dV  = 0
+			$
+			\Theorem{连续性方程}
+				$∇ · (\rho \.v) + \frac{∂ \rho}{∂ t} = 0$
+				质量流流出速率 = 流体密度减少速率.
+			- 质量流密度:
+				$\.j = \rho \.v$
+		\Theorem{运动方程}
+			$
+				-\oint p d \.f = -\int ∇ p\ dV
+				\rho \frac{d \.v}{t} = -∇ p
+			$
+		\Theorem{Eular 理想流体方程}
+			$\frac{∂ \.v}{∂ t} + (\.v · ∇)\.v = - \frac{1}{\rho}∇ p$
+			$\frac{∂ \.v}{∂ t} + (\.v · ∇)\.v = - \frac{1}{\rho}·∇ p + \.g  \tag{重力场$\.g$下}$
+			$- ∇ p$: 单位体积流体上的作用力.
+			\Proof
+				$
+					\rho \frac{\d \.v}{\d t} &=  - ∇ p + \rho \.g  \tag{微元运动方程}
+					\d \.v &= \frac{∂ \.v}{∂t} \d t + (\d \.r · ∇) \.v    \tag{全导数}
+					=> \frac{\d \.v}{\d t} &= \frac{∂ \.v}{∂t} + (\.v · ∇) \.v  \tag{除以$\d t$}
+					=> \frac{∂ \.v}{∂t} + (\.v · ∇) \.v = - \frac{1}{\rho} ∇ p + \.g  \tag{代入}
+				$
+		\Example
+			* 静止流体 -- 流体静力学
+				\def
+					静止流体的力学分析.
+				\Example
+					- 均匀向下重力场$\.g = g \hat{\.z}$中的静止流体.
+						$
+							∇ p = \rho \.g
+							=> p = -\rho g z + const.  \tag{$\.g = g \hat{\.z}$, 积分}
+							=> p = -\rho g h + p_0  \tag{距液面深度$h$, 大气压$p_0$}
+						$
+					- 质量极大的由于万有引力而结合在一起的一团流体 (如, 恒星).
+						$
+							Δ \varphi=4 π G \rho  \tag{引力势}
+							∇ · (\frac{1}{\rho} ∇ p)=-4 π G \rho
+						$
+			* 定常流体
+				\def
+					流体所在区域任意一点的速度都不随时间变化的流体.
+				\Theorem{Bernoulli 方程}
+					$\frac{v^2}{2} + w = const.$
+					$\frac{v^2}{2} + w + g z= const.  \tag{重力场中}$
+	* 黏性流体
+		\Theorem{Navier Stokes 流体方程}
+			$\rho (\frac{∂\.v}{∂t} + (\.v · ∇) \.v) =  - ∇ p  + \rho \.g + \eta ∇^2 \.v + (\zeta + \frac{\eta}{3}) ∇ (∇ · \.v)$
+			$\frac{∂\.v}{∂t} + (\.v·∇) \.v = \frac{1}{\rho} ∇ p  + \rho \.g + \frac{\eta}{\rho} ∇^2 \.v  \tag{若是不可压缩流体$∇ ·\.v ≡ 0$}$
+			$\eta$: 粘度;	$\rho$: 密度;	压强: $∇ ·∇ p = ∇ ·v·\rho/ dt$

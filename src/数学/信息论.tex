@@ -1,0 +1,172 @@
+* 信息
+	\def
+		信息是认识主体所感受的和所表达的事物运动状态及运动状态变化的方式. 
+		\Note 
+			构成客观世界的三大基本物质之一(物质,能量,信息).
+	* 信息的度量
+		* 事件的信息度量
+			* 自信息
+				\def
+					$I(x) = -\log \P(x)$
+					事件发生前, 事件发生的不确定性; 
+					事件发生后, 事件包含的信息量, 即解除不确定性所需的信息量.
+				* 联合自信息	
+					\def
+						$I(x, y) = -\log \P(x, y)$
+						事件x, y同时发生后提供的信息量.
+				* 条件自信息
+					\def
+						$I(x|y) = -\log \P(x|y)$
+						事件y已经发生的情况下, 事件x发生后所能提供的信息量.
+			* 互信息
+				\def
+					$I(x;y) = \log\frac{\P(x|y)}{\P(x)}$
+					两个随机事件之间的统计关联程度, 事件y发生后所能提供的关于事件x的信息量, 即事件y发生后事件x不确定性的变化.
+				* 条件互信息
+					\def
+						$I(x;y|z) = -\log\frac{\P(x|y, z)}{\P(x|z)}$
+					\Property
+						- $I(x;y) = I(x) - I(x|y)$, 事件y发生后所能提供的关于事件x的信息量 = 事件x单独发生后提供的信息量 - 事件y已经发生的情况下, 事件x发生后所能提供的信息量.
+		* 事件集合的信息度量
+			* 信息熵(平均自信息)
+				\def
+					离散集合下,
+					$H(X) = \E_{\P(x)} [I(x)] = -\sum_x \P(x)\log \P(x)$ 
+					平均自信息, 信源输出前, 表示信源的平均不确定性; 信源输出后, 表示每个信源符号所提供的平均信息量, 解除信源不确定性平均所需的信息量; 表示信源随机性大小, H(X) 大的信源, 随机性大. 
+					连续集合下, 取差熵.
+					$h(X)=-E_{\P(x)}[\log \P(x)]=-\int \P(x) \log \P(x) \d x$
+				\Theorem{连续最大熵定理}
+					- 限峰值最大熵: 幅度受限的随机变量, 当均匀分布时有最大的熵.
+					- 限功率最大熵: 平均功率受限的随机变量, 当高斯分布时有最大的熵.
+				* 联合信息熵
+					\def
+						离散集合下,
+						$H(XY) = \E_{\P(xy)} [I(xy)] = -\sum_x \sum_y \P(xy) \log \P(xy)$
+						连续集合下, 联合差熵
+						$h(x^N)=-E_{\P(x)}[\log \P(x)]=-\int_{x} \P(x) \log \P(x) \d x$
+				* 条件信息熵
+					\def
+						离散集合下,
+						$H(Y|X) = \E_{\P(xy)} [I(y|x)] = -\sum_x \sum_y \P(xy) \log \P(y|x) = \sum_x \P(x) H(Y|x)$
+						连续集合下, 条件差熵
+						$h(X|Y)=-E_{\P(xy)}[\log \P(x|y)]=-\iint \P(xy) \log \P(x|y) \d x \d y$
+				* 交叉熵
+					\def
+						离散集合下,
+						若P和Q为定义在同一概率空间的两个概率测度, 定义P相对于Q的散度为: $D(\P || \mathbb Q)=\sum_x \P(x) \log \frac{\P(x)}{\mathbb Q(x)}$
+						连续集合下,
+						$D(\P || \mathbb Q)=\int \P(x) \log \frac{\P(x)}{\mathbb Q(x)}\d x$
+				\Example 
+					* 离散时间Gauss信源的熵
+						- 1维Gauss-熵: $h(X) = \frac{1}{2}{\log (2 π e \sigma^2)$
+						- 多维独立Gauss-熵: $h(x^N)=\frac{N} 2} \log (2 π e (\sigma_1^2 \sigma_2^2 \cdots \sigma_n^2)^{\frac{1}{N}})$
+						- 多维相关Gauss-熵: $h(x^N)=\frac{N} 2} \log (2 π e |\Sigma|^{\frac{1}{N}})$
+						\Proof
+							- 1维Gauss-熵: 
+							$
+								h(x) &= -E_{\P(x)} [\log \P(x)]
+								&= -E_{\P(x)} [-\frac{1}{2}\log(2π\sigma^2) - \log e · \frac{(x-\mu)^2}{2\sigma ^2}]
+								&= \frac{1}{2}\log(2π\sigma^2) + \log e \frac{\E_{\P(x)} [(x-\mu)^2]}{2\sigma ^2}
+								&= \frac{1}{2}\log(2π\sigma^2) + \log e \frac{\sigma ^2}{2\sigma ^2}
+								&= \frac{1}{2}\log(2π e\sigma^2)
+							$
+			* 平均互信息
+				\def
+					离散集合下,
+					$I(X;Y) = \E_{\P(xy)} [I(x;y)] = \sum_{x,y} \P(xy) I(x;y)=\sum_{x, y} \P(x) \P(y|x) \log \frac{\P(y|x)}{\P(y)}$, 从整体上表示一个随机变量Y所给出的关于另一一个随机变量X的信息量.
+					连续集合下,
+					$I(X;Y) = Sup_{P, Q} I([X]_{P} ;[Y]_{Q})$
+				* 集合、事件互信息
+					\def
+						$I(X;Y) = \E_{\P(y|x)}[I(x;y)] = \sum_y \P(y|x) \log \frac{\P(y|x)}{\P(y)}$
+						由事件x提供的关于集合Y的信息量.
+				* 平均条件互信息
+					\def
+						$I(X;Y|Z) = \E_{\P(xyz)} [I(x;y|z)]=\sum_{x,y,z} \P(xyz) \log \frac{\P(x|yz)}{\P(x|z)}$
+			* 离散集、连续集的互信息
+				* 离散集、连续集的互信息
+					$I(X;Y)=\log \frac{q(x|y)}{p(x)}=\log \frac{p(y|x)}{q(y)}$
+				* 离散集、连续集的平均互信息
+					$I(X;Y)=\E_{p(x) p(y|x)}[\log \frac{p(y|x)}{q(y)}] = \sum_x p(x) \int p(y|x) \log \frac{p(y|x)}{q(y)}\d y$			
+
+	* 信息的传输
+		* 信源
+		* 信源编码
+		* 信道
+			\Property
+				* 信道容量
+					\def
+						$C ≡ \max_{p(x)} I(X;Y)$
+						输入与输出平均互信息的最大值; 信道传输中, 最大信息速率能力的度量. 
+			\Example
+				* 离散信道
+					\Example
+						* 离散无噪信道
+							- 无损信道, 每个输出只对应一个输入.
+							- 确定信道, 每个输入只对应一个输出.
+							- 无损确定信道, 输入输出一一对应. 
+							\Property
+								信道容量: $C = \log\ \min(N_x, N_y)$ 
+						* 离散对称信道
+							- 强对称信道
+							- 弱对称信道
+						* 信道矩阵可逆的信道
+				* 时间离散连续信道
+					* 并联加性Gauss噪声信道
+						\Algorithm{并联独立加性Gauss噪声信道 - 信道容量计算}
+							- 并联独立加性Gauss噪声信道下, 达到信道容量的功率分配
+								$
+									E_i &= \max\{ 0, \frac{1}{\nu^*} - \sigma_i^2 \}
+									\sum E_i^* &= E
+								$
+								$E_i$是第i个独立子信道的信号功率, $\sigma_i^2$是子信道的噪声功率, \frac{1}{\nu^*}是一常数. 方程组可求出$E_i$.
+							- 计算信道容量
+								$ C = \frac{1}{2} \sum_{i=1}^{N} \log (1+\frac{E_i}{\sigma_i^2}) $
+							\Proof
+								(解凸优化)
+								原问题形式,
+								$
+									\max \quad& C = \sum C_i = \frac{1}{2} \sum \log(1 + \frac{E_i}{\sigma_i^2})
+									s.t. \quad& E_i ≥ 0
+									& \sum E_i^* &= E
+								$
+								将问题简化, 令$\frac{E_i}{E}$写作$x_i$, $\sigma_i^2$写作$\alpha_i$, 
+								$
+									\min \quad& - \sum \log(\alpha_i + x_i)
+									s.t. \quad& x ⪰ 0
+									& 1^T x = 1
+								$
+								Lagrange 函数,
+								$ L(x, \lambda, \nu) = - \sum \log (\alpha_i + x_i) + \sum \lambda_i (- x_i) + \nu (1^T x - 1) $
+								KKT 条件,
+								$
+									x^* &⪰ 0
+									1^T x^* &= 1
+									\lambda &⪰ 0
+									\lambda_i x_i = 0
+									\frac{∂ L}{∂ x_i} |_{x_i = x_i^*} = - \frac{1}{\alpha_i + x_i^*} - \lambda_i^* + \nu^* = 0
+								$
+								第5式得$\lambda_i = \nu^* - \frac{1}{\alpha_i + x_i^*}$, 回代消去$\lambda$, 
+								$
+									x^* &⪰ 0
+									1^T x^* &= 1
+									\nu^* ≥ \frac{1}{\alpha_i + x_i^*}
+									(\nu^* - \frac{1}{\alpha_i + x_i^*}) x_i^* = 0
+								$
+								(1) 当$x_i^* ≠ 0$时, 即$x_i^* > 0$
+									$
+										=> \quad& \nu^* = \frac{1}{\alpha_i + x_i^*}
+										=> \quad& x_i^* = \frac{1}{\nu^*} - \alpha_i > 0
+										=> \quad& \nu^* < \frac{1}{\alpha_i}
+									$
+								(2) 当$x_i^* = 0$时, 
+									$ => \quad& \nu^* ≥ \frac{1}{\alpha_i}$
+								(综上)
+									$
+										x_i &= \max\{ 0, \frac{1}{\nu^*} - \alpha_i \}
+										1^T x^* &= 1
+									$
+								\Note
+									结果称为注水方法, $\alpha_i$ 为第i区域的池底高度, 向整个区域注水, 注水总量为$\sum x_i^* = 1$, 则水面高度为$\frac{1}{\nu} = \alpha_i + x_i^*$, 每个区域的水深$x_i^*$即是其最优解.
+		* 信道编码
+		
