@@ -1,0 +1,96 @@
+* 强化学习
+	- 目的
+		让智能体去和未知的环境互动, 在交互中学习如何动作, 以找到能获得最大累计收益的策略.
+	* 基本概念
+		* 状态, 动作, 收益
+		* 累计收益
+			\def
+				$G_t= \sum_{i = t+1}^{T} R_i$
+				为了免$T \to \infty, G_t \to \infty$, 引入折扣$\gamma \in [0,1]$,
+				$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}$
+	\Example
+		* 单状态强化学习
+		* Markov型强化学习
+			\def
+				满足Markov性的强化学习问题. 
+				- 转移概率
+					$\P(s', r | s, a)$
+					$s'$ 下步一状态; $s$ 当前状态.
+			* 概念间的函数关系
+				* 价值函数
+					\def
+						$V_π(s) = \E_π(G_t | S_t=s) $
+						评价智能体在当前状态$S_t$和策略$π$下的期望累计收益.
+					\Theorem{Bellman 方程}
+						$V_π(s) = \E_π(R_{t+1} + \gamma V_π(s') | S_t = s) = \sum_a \P_π(a | s) \sum_{s',r} \P(s', r | s, a) (r + \gamma V_π (s'))$
+						其中, $V_π(s') = \E_π(G_{t+1} | S_{t+1} = s')$
+						\Proof
+							$
+								V(s) &= \E(G_t | S_t=s)  \tag{定义}
+								&= \E(R_{t+1} + \gamma G_{t+1} | S_t=s)  \tag{代换}
+								&= \sum_{a \in A} \P_π(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a) · (r + \gamma \E(G_{t+1} | S_{t+1} = s')))  \tag{期望公式}
+								&= \sum_{a \in A} \P_π(a | s)  ( \sum_{s' \in S} \sum_{r \in R} \P(s', r | s, a) · (r + \gamma V(s')))  \tag{代换}
+								&= \E(R_{t+1} + \gamma V(S_{t+1}) | S_t=s)
+							$
+					* 动作-价值函数
+						\def
+							$Q_π(s,a) = \E_π((G_t | S_t = s, A_t = a)$
+							$V_π(s) = \sum_{a \in A} Q_π(s,a)$
+							评价智能体在当前状态$S_t$和策略$π$下, 在做出动作$A$后的期望累计收益.
+							$
+								Q(s,a) &= \E(G_t | S_t = s, A_t = a)
+								&= \E(\sum_{k=0}^\infty \gamma^k R_{t+k+1} | S_t = s, A_t = a)
+								&= \E_{s'}(r+\gamma Q (s', a') | s, a)
+							$
+					\Algorithm{价值函数估计}
+						- 迭代寻找不动点
+							$V_{k+1} (s) = \sum_a \P_π(a | s) \sum_{s',r} \P(s', r | s, a) (r + \gamma V_k (s'))$
+							$V_π$即是迭代寻找的不动点
+						- 随机采样估计 (Monte Carlo法)
+								当环境转移概率$\P(s', r | s, a)$不知道时, 通过随机采样$G_t$以估计$V_π(s)$.
+								$V_π(s) = V_π(s) + \alpha (G_t - V_π(s))$
+						- 时序差分学习
+								$V_π(s) = V_π(s) + \alpha (r + \gamma V_π(s') - V_π(s))$
+								- off policy方法
+									$Q(s, a) = Q(s, a) + \alpha (r + \gamma · \max_{a_i' \in A} Q(s', a_i') - Q(s, a))$
+								- on policy方法
+									$Q(s, a) = Q(s, a) + \alpha (r + \gamma Q(s', a') - Q(s, a))$
+				* 策略函数 $A = \Pi(S)$
+					- 确定性策略 $a = π(s)$
+					- 随机性策略 $\P_π(a | s)$
+					\Algorithm{最优策略搜索}
+						- 策略梯度上升方法
+							- 原理
+								$
+									\P_π (a | s, \theta)
+									\theta_{t+1} = \theta_{t+1} + \alpha \widehat{∇ J(\theta_t)}
+								$
+								通过策略梯度上升更新随机性策略的参数$\theta$. $J(\theta)$是对策略的性能度量函数, 可定义为$J(\theta) = V_{\pi_\thata} (s_{t=0})$.
+							- \Theorem{策略梯度定理}
+								$
+									\nabla J(\.\theta) &= \nabla_\theta V(s) 
+									&\propto \sum_{s' \in S} \P_{\mu,π}(s') \sum_{a \in A} Q_π(s', a) \nabla_\theta \P_π(a | s', \.\theta) 
+									&\propto \E_{s' ~ \P_{\mu,π}, a ~ π}(Q_π(s', a) \nabla_\theta \ln \P_π (a | s'))
+								$
+								\Proof
+									$
+										∇_\theta V_π(s) &= ∇_\theta\ \E(G_t|S_t = s)  \tag{价值函数定义}
+										&= ∇_\theta(\sum_{a \in A} \P_π(a|s)\ Q(s,a))  \tag{期望公式}
+										&= \sum_{a \in A} ∇_\theta(\P_π(a|s)\ Q(s,a))  \tag{分配律}
+										&= \sum_{a \in A}(Q(s,a)\ ∇_\theta \P_π(a|s) + \P_π(a|s)\ ∇_\theta Q(s,a))  \tag{微分乘法法则}
+										&= \sum_{a \in A}(Q(s,a)\ ∇_\theta \P_π(a|s) + \P_π(a|s)\ ∇_\theta \sum_{s', r} \P(s', r | s, a)(r + \gamma V_π(s')))  \tag{代入}
+										&= \sum_{a \in A}(Q(s,a)\ ∇_\theta \P_π(a|s) + \P_π(a|s)\ \sum_{s', r} \P(s', r | s, a) \gamma ∇_\theta V_π(s'))  \tag{分配律}
+										&= \sum_{a \in A} Q(s,a)\ ∇_\theta \P_π(a|s) + \sum_{s'} \gamma ∇_\theta V_π(s') \sum_{a \in A} \P_π(a|s)\sum_r \P(s', r | s, a)  \tag{加法性质}
+										&= \sum_{a \in A} Q(s,a)\ ∇_\theta \P_π(a|s) + \sum_{s'} \gamma ∇_\theta V_π(s') \sum_{a \in A} \P(s', a| s)  \tag{条件概率公式}
+										&= \sum_{a \in A} Q(s,a)\ ∇_\theta \P_π(a|s) + \sum_{s'} \gamma \P(s'| s) ∇_\theta V_π(s')  \tag{概率求和}
+										&= \sum_{s' \in S} \sum_{t=0}^\infty \gamma^t \P^{(t)}_π(s' | s) \sum_{a \in A} Q_π(s', a) ∇_\theta \P_π(a|s')  \tag{递推$ ∇_\theta V_π(s')$展开, $\P^{(t)}$是t步转移概率}
+										&=(\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_π^{(t)}(s''| s)) · \sum_{s' \in S} \frac{\sum_{t=0}^\infty \gamma^t \P_π^{(t)}(s'| s)}{\sum_{s''\in S}(\sum_{t=0}^\infty \gamma^t \P_π^{(t)}(s''| s))} \sum_{a \in A} Q_π(s', a) ∇_\theta \P_π(a|s')  \tag{提项, 目的是将$\sum_{t=0}^\infty \P_π^{(t)}(s'| s)$归一化}
+										&= \alpha \sum_{s' \in S} \P_{\mu,π}(s') \sum_{a \in A} Q_π(s', a) ∇_\theta \P_π(a|s')  \tag{\small 简写,$(\sum_{s''\in S} \sum_{t=0}^\infty \gamma^t \P_π^{(t)}(s''| s))$简为系数, $\P_{\mu,π}(s')$是状态在策略$π$下整个时间序列出现的概率}
+										&= \alpha \E_{s' ~ \P_{\mu,π}}(\sum_{a \in A} Q_π(s', a) ∇_\theta \P_π(a|s'))  \tag{期望形式}
+										&= \alpha \E_{s' ~ \P_{\mu,π}}(\sum_{a \in A} \P_π(a|s') Q_π(s', a) \frac{∇_\theta \P_π(a|s')}{\P_π(a|s')})  \tag{提项$\P_π(a|s')$, 方便后面对$a$写期望}
+										&= \alpha \E_{s' ~ \P_{\mu,π}, a ~ π}(Q_π(s', a)\ ∇_\theta \ln \P_π(a|s'))  \tag{期望形式, 微分公式}
+									$
+
+
+
+
