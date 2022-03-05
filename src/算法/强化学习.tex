@@ -51,10 +51,10 @@
 								$V_π(s) = V_π(s) + \alpha (G_t - V_π(s))$
 						- 时序差分学习
 								$V_π(s) = V_π(s) + \alpha (r + \gamma V_π(s') - V_π(s))$
-								- off policy方法
-									$Q(s, a) = Q(s, a) + \alpha (r + \gamma · \max_{a_i' \in A} Q(s', a_i') - Q(s, a))$
 								- on policy方法
 									$Q(s, a) = Q(s, a) + \alpha (r + \gamma Q(s', a') - Q(s, a))$
+								- off policy方法
+									$Q(s, a) = Q(s, a) + \alpha (r + \gamma · \max_{a_i' \in A} Q(s', a_i') - Q(s, a))$
 				* 策略函数 $A = \Pi(S)$
 					- 确定性策略 $a = π(s)$
 					- 随机性策略 $\P_π(a | s)$

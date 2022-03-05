@@ -1,0 +1,63 @@
+* 支持向量机
+	\Algorithm
+		- 目的
+			$
+				\max_{\.w, b} \quad& \min_i d_i = \frac{1}{||\.w||} \min_i |\.w^T \.x_i + b|
+				s.t. \quad& y_i (\.w^T \.x_i + b) ≤ 1
+			$
+			找到一个超平面, 最大化样本点与超平面的最小距离, 且使得不同类别$y_i \in \{-1,1\}$的点分居超平面的两侧. 
+		- 解法
+			$
+				\max_{\.\lambda} \quad& \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \.x_i^T \.x_j  \tag{对偶问题}
+				s.t. \quad& \sum_i \lambda_i^* y_i = 0
+					& \lambda_i &≥ 0
+			$
+			利用Sequential Minimal Optimization算法求解$\lambda_i^*$, 代入解出$\.w^*, b^*$.
+			\Proof
+				优化问题简化, 可令$\min_i |\.w^T \.x_i + b| = 1$, 且$ \arg\max_{\.w, b} \frac{1}{||\.w||} => \arg\min_{\.w, b} \frac{||\.w||^2}{2}$
+				$
+					\max_{\.w, b} \quad& \frac{||\.w||^2}{2}
+					s.t. \quad&	y_i (\.w^T \.x_i + b) ≤ 1
+				$
+				Lagrange函数,
+				$
+					L(\.w, b,\.\lambda) &= \frac{||\.w||^2}{2} + \sum_i \lambda_i (1 - y_i (\.w^T \.x_i + b)) \tag{Lagrange函数}
+					\frac{∂ L(\.w, b,\.\lambda)}{∂ \.w} |_{\.w = \.w^*} &= \.w^* - \sum_i \lambda_i x_i y_i = 0
+					\frac{∂ L(\.w, b,\.\lambda)}{∂ b} |_{b = b^*} &= - \sum_i \lambda_i y_i = 0
+				$
+				$
+					=>\quad& \.w^* = \sum_i \lambda_i y_i x_i
+					& \sum_i \lambda_i^* y_i = 0
+				$
+				Lagrange对偶函数, 对偶问题,
+				$
+					G(\.\lambda) &= \inf_{\.w, b} L(\.w, b, \.\lambda)  \tag{Lagrange对偶函数}
+						&= L(\.w^*, b^*, \.\lambda)
+						&= \frac{1}{2} (\sum_i \lambda_i y_i x_i)^T (\sum_j \lambda_j y_j x_j) + (-\sum_i \lambda_i y_i (\sum_j \lambda_j y_j x_j)^T x_i + \sum_i \lambda_i)  \tag{$\.w^*, b^*$代入}
+						&= \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \.x_i^T \.x_j
+				$
+				$
+					\max_{\.\lambda} \quad& \sum \lambda_i - \frac{1}{2} \sum_i \sum_j \lambda_i \lambda_j y_i y_j \.x_i^T \.x_j  \tag{对偶问题}
+					s.t. \quad& \sum_i \lambda_i^* y_i = 0
+						& \lambda_i &≥ 0
+				$
+				对偶问题是凸二次规划问题, 可利用Sequential Minimal Optimization算法求解$\lambda_i^*$, 代入解出$\.w^*, b^*$.
+				KKT条件,
+				$
+					y_i (\.w^{*T} \.x_i + b^*) &≤ 1
+					\lambda_i^* &≥ 0
+					\lambda_i^* (1 - y_i (\.w^{*T} \.x_i + b^*)) = 0
+					\.w^* &= \sum_i \lambda_i^* x_i y_i
+					\sum_i \lambda_i^* y_i &= 0
+				$
+* 核方法
+	* 核函数
+		\def
+			$\kappa(\.x_i, \.x_j) = \phi(\.x_i)^T \phi(\.x_j)$
+		\Example
+			- 线性核: $\kappa(\.x_i, \.x_j) = \.x_i^T \.x_j$
+			- 高斯核: $\kappa(\.x_i, \.x_j) = e^{-\frac{1}{2}(\.x_i - \.x_j)^T \Sigma^{-1} (\.x_i - \.x_j)}$
+			- 多项式核: $\kappa(\.x_i, \.x_j) = (\.x_i^T \.x_j)^d$
+			- Laplace核: $\kappa(\.x_i, \.x_j) = e^{-\frac{\|\.x_i-\.x_j\|}{\sigma}}$
+			- Sigmoid核: $\kappa(\.x_i, \.x_j) = \tanh (\beta \.x_i^T \.x_j + \theta)$
+

@@ -20,6 +20,11 @@
 		\def
 			线性空间$V$到自身的一类映射, 对于所有$x \in V$都有唯一的$y \in V$与之对应, 且满足
 			$T(k x + l y) = k(T x) + l(T y)$
+		\Property
+			* 特征值、特征向量
+				\def
+					$T x = \lambda x$
+					$x$ 特征向量, 是线性变换前后方向不改变的向量; $\lambda$ 特征值, 是特征向量在线性变换后长度变化的倍率.
 		\Example
 			* 恒等变换
 				\def $T x = x \quad ;(\forall x \in V)$
@@ -27,8 +32,8 @@
 				\def $T x = 0 \quad ;(\forall x \in V)$
 			* 正交变换
 				\def
-					在内积空间中, 保持任意向量的长度不变的一种变换. Euclid空间中称正交变换, Unitary空间中称Unitary变换.
 					$<x, x> = <T x, T x>$
+					内积空间中, 保持任意向量的长度不变的线性变换.
 					正交矩阵:
 						$A A^T = I$
 						$A A^H = I$
@@ -39,7 +44,8 @@
 							\. I \\ & cos\theta|_{(i,i)}&  & \sin\theta|_{(i,j)} \\ & & \. I \\ & -\sin\theta|_{(j,i)} & & \cos\theta|_{(j,j)} \\ & & & & \. I
 						\me)$
 				* 初等反射变换
-					\def $y = H x = (I - 2 e_2 e_2^T) x$
+					\def
+						$y = H x = (I - 2 e_2 e_2^T) x$
 						\Proof
 							$
 								x - y &= e_2 · (e_2^T x)
@@ -47,14 +53,13 @@
 							$
 			* 对称变换
 				\def
-					一种变换. Euclid空间中称对称变换, Unitary空间中称Hermite变换.
 					$<T x, y> = <x, T y>$
 					对称矩阵:
 						$A^T = A$
 						$A^H = A$
 			* 投影变换
 				\def
-					令线性空间分为不交的子空间L,M, 将线性空间沿M到L的投影的变换, 称投影变换.
+					令线性空间分为不交的子空间L,M, 投影变换是将线性空间沿M到L的投影的变换.
 					投影矩阵: 
 						$P_{L,M} = (X & 0)\ (X & Y)^{-1}$
 				* 正交投影变换
