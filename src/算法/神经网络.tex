@@ -1,0 +1,72 @@
+* 神经网络
+	* 全连接层
+		- 正向传播
+			$\.y = \sigma (\.w \.x + \.b)$
+			$\sigma()$ 激活函数.
+		- 反向传播 -- 梯度下降最优化
+			$ \{\mb
+				δ_l = (\.w_{l+1}^T·δ_{l+1})·\sigma'(z_l)  \tag{每层误差}
+				δ_L = ∇ E · \sigma'(z_{outl})  \tag{输出层误差}
+				∇ E(\.w_l) = δ_l \.x_l^T  \tag{每层参数误差}
+			\me\right.$
+			$\.w^{τ+1} = \.w^τ - \eta ∇ E(\.w^τ)$
+			其中, $z = \.w^T \.x + \.b$; $E_{total} = \sum (target_i - out_i)^2$ 误差·损失函数; $E(\.w)=\frac{1}{2} \sum_{n=1}^N ||\.y(\.x_n, \.w)-\.t_n||^2$; 
+			\Proof
+				每层参数误差, 由链式法则得(其中$L$指输出层),
+				$
+					\frac{∂ E}{∂ w_l} &= \frac{∂ z_l}{∂ w_l} (\frac{∂ y_l}{∂ z_l}\frac{∂ z_l}{∂ y_{l+1}}) ... (\frac{∂ y_{L-1}}{∂ z_{L-1}} \frac{∂ z_{L-1}}{∂ y_L} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+					&= \frac{∂ z_l}{∂ w_l}  (\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+				$
+				其中,
+				$
+					\frac{∂ y_l}{∂ z_l} &= \sigma'(z_l)
+					\frac{∂ z_l}{∂ y_{l+1}} &= \.w_{l+1}^T
+				$
+				令$δ_l$为每层误差,
+				$
+					δ_l &=(\prod_{i = l}^{L} \frac{∂ y_i}{∂ z_i}\frac{∂ z_i}{∂ y_{i+1}} ) \frac{∂ y_L}{∂ z_L} \frac{∂ E}{∂ y_L}
+					&= (\prod_{i = l}^{L} \sigma'(z_i)\.w_{i+1}^T) \sigma '(z_L)\frac{∂ E}{∂ y_L}
+				$
+				得到每层参数误差结果,
+				$
+					=> \frac{∂ E}{∂ w_l} &= δ_l \frac{∂ z_l}{∂ w_l} = δ_l x_l^T
+					δ_L &= \frac{∂ E}{∂ y_L} ·\sigma '(z_L)
+				$
+	* 卷积层
+		- 正向传播 -- 卷积操作
+			$
+				x * k = [y_{ij} | y_{ij} = \sum_{c=1}^{C_x} \sum_{p=1}^{H_x} \sum_{q=1}^{W_x} x_{c,i+p-1,j+q-1} × k_{cpq}]
+				y_c = x * k_c + b_c
+				y = {y_1, y_2, ... , y_n}
+			$
+			其中, $\{H, W, C\}$ 张量高度、宽度、通道数, kernel 卷积核; padding 加边框宽度;
+			$
+				H_{out} = \frac{H_{in} - H_{kernel} + 2 · padding}{stride + 1}
+				W_{out} = \frac{W_{in} -  W_{kernel} + 2 · padding}{stride + 1}
+			$
+		- 反向传播 -- 卷积操作
+			$
+				\frac{∂E}{∂y_l} &= \frac{∂E}{∂y_L}·\frac{∂y_L}{∂y{L-1}}· ... ·\frac{∂y_{l+1}}{∂y_l}
+					&= \delta_l = \delta_{l+1}·\frac{∂y_{l+1}}{∂x_{l+1}} = \delta_{l-1} * Rot_{π}(w_l)
+				\frac{∂E}{∂k_l} &= \frac{∂E}{∂y_l} · \frac{∂y_l}{∂k_l} = \delta_l·\frac{∂y_l}{∂k_l} = \delta_l * x_l
+				\frac{∂E}{∂b_l} &= \delta_l · \frac{∂y_l}{∂b_l} = \sum_x \sum_y \delta_l
+			$
+			其中,
+			$
+				\frac{∂y_{lcij}}{∂k_{lcpq}} = x_{l,c,i+p-1,j+q-1}
+				\frac{∂y_{lc}}{∂k_{lcpq}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} x_{l,c,i+p-1,j+q-1}
+				\frac{∂E}{∂k_{lcpq}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} \delta_{lcij} × x_{l,c,i+p-1,j+q-1}  = \delta_{lc} * x_{lc}
+				\frac{∂E}{∂b_{lc}} = \sum_{i=1}^{H_y} \sum_{j=1}^{W_y} \delta_{lcij} = \sum_x \sum_y \delta_l
+			$
+	* 残差模块
+		- 前向传递
+			$y = x + F(x, \omega)$
+			$
+				x_{l+1} &= x_l + F(x_l, \omega_l)
+				x_{l+2} &= x_{l+1} + F(x_{l+1}, \omega_{l+1}) = x_l + F(x_l, \omega_l) + F(x_{l+1}, \omega_{l+1})
+				x_L &= x_l + \sum_{i=l}^{L-1} F(x_{i+1}, \omega_{i+1})
+			$
+		- 反向传递
+			$
+				\frac{∂ \epsilon}{∂ x_l} = \frac{\epsilon}{x_L} \frac{∂ x_L}{x_l} = ∂\frac{∂ \epsilon}{∂ x_L} (1 + \frac{∂}{∂ x_l} \sum_{i=l}^{L-1} F(x_i, w_i))
+			$
